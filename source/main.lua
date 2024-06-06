@@ -41,7 +41,7 @@ end
 function playdate.update()
 	-- Gets input from crank and changes water height and boat y position
 	local change, acceleratedChange = playdate.getCrankChange()
-	WaterHeight += change//10
+	WaterHeight += change/10
 
 	-- Limit the Water to a specific range
 	local WaterLimit = 20
@@ -49,7 +49,7 @@ function playdate.update()
 
 	-- Set the boat's height to match the water
 	local WaterYPosition = playdate.display.getHeight() - WaterHeight
-	playerSprite:moveTo(playerSprite.x, WaterYPosition - 16)
+	playerSprite:moveTo(playerSprite.x, WaterYPosition - 13)
 
 	if playdate.buttonIsPressed(playdate.kButtonLeft) then
 		playerSprite:moveBy(-BoatSpeed, 0)
