@@ -1,0 +1,17 @@
+{
+  "telemetry.enable": false,
+  "runtime.version": "Lua 5.4",
+  "runtime.special": {
+    "import": "require"
+  },
+  "runtime.nonstandardSymbol": ["+=", "-=", "*=", "/="],
+  "diagnostics.globals": [
+    "playdate",
+    "json"
+  ],
+  "diagnostics.disable": ["redefined-local"],
+  "diagnostics.libraryFiles": "Disable",
+  "completion.callSnippet": "Replace",
+  "workspace.library": ["$PLAYDATE_SDK_PATH/CoreLibs"],
+  "workspace.ignoreDir": ["Source/external"]
+}
