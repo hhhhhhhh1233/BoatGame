@@ -9,6 +9,7 @@ class('Player').extends(gfx.sprite)
 function Player:init(x, y, image, speed)
 	self:moveTo(x,y)
 	self:setImage(image)
+	self:setCollideRect(0, 0, self:getSize())
 	self.Speed = speed
 end
 
