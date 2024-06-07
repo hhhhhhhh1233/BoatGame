@@ -4,66 +4,47 @@ import "CoreLibs/sprites"
 import "CoreLibs/timer"
 import "CoreLibs/crank"
 
-local gfx <const> = playdate.graphics
+import "player"
+import "water"
 
-local playerSprite = nil
+local pd <const> = playdate
+local gfx <const> = pd.graphics
 
-local function myGameSetUp()
-	local playerImage = gfx.image.new("images/Boat")
-	assert(playerImage)
+-- local WaterHeight = 100
 
-	playerSprite = gfx.sprite.new(playerImage)
-	playerSprite:moveTo(200,120)
-	playerSprite:add()
-end
+PlayerInstance = Player(200, 120, gfx.image.new("images/Boat"), 1)
+PlayerInstance:add()
 
-myGameSetUp()
+WaterInstance = Water(100, 20, 0.05)
 
-local BoatSpeed = 5
-local WaterHeight = 100
+-- local function clamp(value, min, max)
+-- 	return math.min(math.max(value, min), max)
+-- end
 
-function Max(a, b)
-	if a > b then
-		return a
-	else
-		return b
-	end
-end
+-- local DisplayHeight = pd.display.getHeight()
+-- local DisplayWidth = pd.display.getWidth()
 
-function Min(a, b)
-	if a > b then
-		return b
-	else
-		return a
-	end
-end
+-- How close the water can get to the edge of the screen
+-- local WaterBound = 20
 
-function playdate.update()
+function pd.update()
 	-- Gets input from crank and changes water height and boat y position
-	local change, acceleratedChange = playdate.getCrankChange()
-	WaterHeight += change/10
+	-- local change, acceleratedChange = pd.getCrankChange()
+	-- WaterHeight += change/10
 
 	-- Limit the Water to a specific range
-	local WaterLimit = 20
-	WaterHeight = Min(Max(WaterHeight, WaterLimit), playdate.display.getHeight() - WaterLimit)
+	-- WaterHeight = clamp(WaterHeight, WaterBound, DisplayHeight - WaterBound)
+	-- local WaterLevelYPosition = DisplayHeight - WaterHeight
 
 	-- Set the boat's height to match the water
-	local WaterYPosition = playdate.display.getHeight() - WaterHeight
-	playerSprite:moveTo(playerSprite.x, WaterYPosition - 13)
-
-	if playdate.buttonIsPressed(playdate.kButtonLeft) then
-		playerSprite:moveBy(-BoatSpeed, 0)
-		playerSprite:setImageFlip(gfx.kImageFlippedX)
-	end
-	if playdate.buttonIsPressed(playdate.kButtonRight) then
-		playerSprite:moveBy(BoatSpeed, 0)
-		playerSprite:setImageFlip(gfx.kImageUnflipped)
-	end
+	WaterInstance:Update()
+	PlayerInstance:moveTo(PlayerInstance.x, WaterInstance.HeightY - 13)
 
 	gfx.sprite.update()
-	playdate.timer.updateTimers()
+	pd.timer.updateTimers()
+
+	WaterInstance:Draw()
 
 	-- Draws the water
-	local WaterWidth = playdate.display.getWidth()
-	gfx.fillRect(0, WaterYPosition, WaterWidth, WaterHeight)
+	-- gfx.fillRect(0, WaterLevelYPosition, DisplayWidth, WaterHeight)
 end
