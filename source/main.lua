@@ -17,7 +17,7 @@ PlayerInstance:add()
 MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
 MineInstance:add()
 
-WaterInstance = Water(100, 20, 0.05)
+WaterInstance = Water(100, 20, pd.display.getHeight() - 20, 0.05)
 
 function pd.update()
 	-- Check the crank and move the water based on input
@@ -25,6 +25,9 @@ function pd.update()
 
 	-- Set the boat's height to match the water
 	PlayerInstance:moveTo(PlayerInstance.x, WaterInstance.HeightY - 13)
+
+	-- Make the camera track the boat
+	gfx.setDrawOffset(-PlayerInstance.x + pd.display.getWidth()/2, -PlayerInstance.y + pd.display.getHeight()/2)
 
 	gfx.sprite.update()
 	pd.timer.updateTimers()

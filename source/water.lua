@@ -12,9 +12,10 @@ local function clamp(value, min, max)
 	return math.min(math.max(value, min), max)
 end
 
-function Water:init(Height, Bound, RateOfChange)
+function Water:init(Height, LowerBound, UpperBound, RateOfChange)
 	self.Height = Height
-	self.Bound = Bound
+	self.LowerBound = LowerBound
+	self.UpperBound = UpperBound
 	self.HeightY = DisplayHeight - self.Height
 	self.RateOfChange = RateOfChange
 end
@@ -23,7 +24,7 @@ end
 function Water:Update()
 	local change, acceleratedChange = pd.getCrankChange()
 	self.Height += change * self.RateOfChange
-	self.Height = clamp(self.Height, self.Bound, DisplayHeight - self.Bound)
+	self.Height = clamp(self.Height, self.LowerBound, self.UpperBound)
 end
 
 function Water:Draw()
