@@ -24,8 +24,6 @@ function Water:Update()
 	local change, acceleratedChange = pd.getCrankChange()
 	self.Height += change * self.RateOfChange
 	self.Height = clamp(self.Height, self.Bound, DisplayHeight - self.Bound)
-
-
 end
 
 function Water:Draw()

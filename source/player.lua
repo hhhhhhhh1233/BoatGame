@@ -18,6 +18,7 @@ function Player:update()
 		self:moveBy(-self.Speed, 0)
 		self:setImageFlip(gfx.kImageFlippedX)
 	end
+
 	if pd.buttonIsPressed(pd.kButtonRight) then
 		self:moveBy(self.Speed, 0)
 		self:setImageFlip(gfx.kImageUnflipped)
