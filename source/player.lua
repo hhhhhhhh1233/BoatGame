@@ -7,9 +7,8 @@ local gfx <const> = pd.graphics
 class('Player').extends(gfx.sprite)
 
 function Player:init(x, y, image, speed)
-	self:setImage(image)
 	self:moveTo(x,y)
-
+	self:setImage(image)
 	self.Speed = speed
 end
 

@@ -6,12 +6,16 @@ import "CoreLibs/crank"
 
 import "player"
 import "water"
+import "mine"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 PlayerInstance = Player(200, 120, gfx.image.new("images/Boat"), 1)
 PlayerInstance:add()
+
+MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
+MineInstance:add()
 
 WaterInstance = Water(100, 20, 0.05)
 
