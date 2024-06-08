@@ -12,7 +12,7 @@ import "mine"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-PlayerInstance = Player(200, 120, gfx.image.new("images/Boat"), 1)
+PlayerInstance = Player(200, 120, gfx.image.new("images/Boat"), 5)
 PlayerInstance:add()
 
 MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
@@ -28,11 +28,19 @@ tilemap:setImageTable(tileset)
 
 -- TILE MAP OF MY OWN DESIGN
 local data = {
-	1,2,3,4,5,
-	6,7,8,9,10,
-	11,12,13,0,0
+	4,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,5,
+	8,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,
+	8,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,
+	8,6,0,0,0,0,0,0,0,0,0,0,4,5,0,0,0,0,0,0,8,6,
+	8,6,0,0,0,0,0,0,0,0,0,0,8,6,0,0,0,0,0,0,8,6,
+	8,6,0,0,0,0,0,0,0,0,0,0,8,6,0,0,0,0,0,0,8,6,
+	8,11,12,12,12,12,12,12,12,12,12,12,13,6,0,0,0,0,0,0,8,6,
+	9,2,2,2,2,2,2,2,2,2,2,2,3,6,0,0,0,0,0,0,8,6,
+	0,0,0,0,0,0,0,0,0,0,0,0,8,6,0,0,0,0,0,0,8,6,
+	0,0,0,0,0,0,0,0,0,0,0,0,8,11,12,12,12,12,12,12,13,6,
+	0,0,0,0,0,0,0,0,0,0,0,0,9,2,2,2,2,2,2,2,2,10,
 }
-tilemap:setTiles(data, 5)
+tilemap:setTiles(data, 22)
 
 -- Adds collisions for the tilemap
 gfx.sprite.addWallSprites(tilemap, {})
