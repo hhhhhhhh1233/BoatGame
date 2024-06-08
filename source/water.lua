@@ -29,6 +29,6 @@ end
 
 function Water:Draw()
 	self.HeightY = DisplayHeight - self.Height
-	gfx.fillRect(0, self.HeightY, DisplayWidth, self.Height)
+	gfx.fillRect(0, self.HeightY, DisplayWidth * 1.6, self.Height)
 end
 

@@ -18,7 +18,7 @@ PlayerInstance:add()
 MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
 MineInstance:add()
 
-WaterInstance = Water(100, 20, pd.display.getHeight() - 20, 0.05)
+WaterInstance = Water(100, -60, pd.display.getHeight() - 20, 0.05)
 
 -- Playing around with a tilemap
 local tileset,err = gfx.imagetable.new("images/tileset")
