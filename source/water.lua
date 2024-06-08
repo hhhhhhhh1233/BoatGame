@@ -3,6 +3,7 @@ import "CoreLibs/crank"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+-- TODO: MAKE THE WATER NOT RELATIVE TO THE SCREEN
 class('Water').extends()
 
 local DisplayHeight = pd.display.getHeight()
