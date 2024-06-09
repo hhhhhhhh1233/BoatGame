@@ -15,12 +15,12 @@ end
 
 function Player:update()
 	if pd.buttonIsPressed(pd.kButtonLeft) then
-		self:moveBy(-self.Speed, 0)
+		self:moveWithCollisions(self.x - self.Speed, self.y)
 		self:setImageFlip(gfx.kImageFlippedX)
 	end
 
 	if pd.buttonIsPressed(pd.kButtonRight) then
-		self:moveBy(self.Speed, 0)
+		self:moveWithCollisions(self.x + self.Speed, self.y)
 		self:setImageFlip(gfx.kImageUnflipped)
 	end
 end
