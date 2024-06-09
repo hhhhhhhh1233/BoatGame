@@ -55,7 +55,7 @@ function pd.update()
 
 	-- Set the boat's height to match the water
 	-- TODO: Add gravity and make the water push the boat up
-	PlayerInstance:moveTo(PlayerInstance.x, WaterInstance.HeightY - 13)
+	PlayerInstance:moveWithCollisions(PlayerInstance.x, WaterInstance.HeightY - 13)
 
 	-- Make the camera track the boat
 	gfx.setDrawOffset(pd.display.getWidth()/2 - PlayerInstance.x, pd.display.getHeight()/2 - PlayerInstance.y)
