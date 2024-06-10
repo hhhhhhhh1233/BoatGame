@@ -12,7 +12,7 @@ import "mine"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-PlayerInstance = Player(200, 120, gfx.image.new("images/Boat"), 5)
+PlayerInstance = Player(200, 120, gfx.image.new("images/Boat"), 2)
 PlayerInstance:add()
 
 MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
@@ -45,21 +45,31 @@ tilemap:setTiles(data, 22)
 -- Adds collisions for the tilemap
 gfx.sprite.addWallSprites(tilemap, {})
 
+local function clamp(value, min, max)
+	return math.min(math.max(value, min), max)
+end
+
 function pd.update()
 	-- Check the crank and move the water based on input
 	WaterInstance:Update()
 
-	-- Set the boat's height to match the water
-	-- TODO: Add gravity and make the water push the boat up
-	DesiredHeight = WaterInstance.Height - 13
-	DirectionToWater = (PlayerInstance.y - DesiredHeight)
-	if -2 < DirectionToWater and DirectionToWater < 2 then
+	local DesiredHeight = WaterInstance.Height - 13
+	local DirectionToWater = (PlayerInstance.y - DesiredHeight)
+	local DirectionToWaterNormalized = DirectionToWater / math.abs(DirectionToWater)
+	if DirectionToWater == 0 then
 		DirectionToWaterNormalized = 0
-	else
-		DirectionToWaterNormalized = DirectionToWater / math.abs(DirectionToWater)
 	end
-	VerticalMovementSpeed = 2
-	PlayerInstance:moveWithCollisions(PlayerInstance.x, PlayerInstance.y - DirectionToWaterNormalized * VerticalMovementSpeed)
+	local Gravity = 0.5
+	PlayerInstance:AddForce(pd.geometry.vector2D.new(0, Gravity))
+
+	local displacementNum = clamp(math.abs(DirectionToWater), 0, 50) / 50
+	local WaterDrag = 0.3
+	local buoyantForce = 5.5
+
+	if DirectionToWater > 0 then
+		PlayerInstance:AddForce(pd.geometry.vector2D.new(0, -DirectionToWaterNormalized * buoyantForce * displacementNum))
+		PlayerInstance:AddForce(pd.geometry.vector2D.new(0, -PlayerInstance.Velocity.y * WaterDrag))
+	end
 
 	-- Make the camera track the boat
 	gfx.setDrawOffset(pd.display.getWidth()/2 - PlayerInstance.x, pd.display.getHeight()/2 - PlayerInstance.y)
