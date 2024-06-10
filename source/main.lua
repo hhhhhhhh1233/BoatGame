@@ -45,17 +45,21 @@ tilemap:setTiles(data, 22)
 -- Adds collisions for the tilemap
 gfx.sprite.addWallSprites(tilemap, {})
 
--- DEBUG
-local width, height = tilemap:getSize()
-print(width .. ", " .. height)
-
 function pd.update()
 	-- Check the crank and move the water based on input
 	WaterInstance:Update()
 
 	-- Set the boat's height to match the water
 	-- TODO: Add gravity and make the water push the boat up
-	PlayerInstance:moveWithCollisions(PlayerInstance.x, WaterInstance.Height - 13)
+	DesiredHeight = WaterInstance.Height - 13
+	DirectionToWater = (PlayerInstance.y - DesiredHeight)
+	if -2 < DirectionToWater and DirectionToWater < 2 then
+		DirectionToWaterNormalized = 0
+	else
+		DirectionToWaterNormalized = DirectionToWater / math.abs(DirectionToWater)
+	end
+	VerticalMovementSpeed = 2
+	PlayerInstance:moveWithCollisions(PlayerInstance.x, PlayerInstance.y - DirectionToWaterNormalized * VerticalMovementSpeed)
 
 	-- Make the camera track the boat
 	gfx.setDrawOffset(pd.display.getWidth()/2 - PlayerInstance.x, pd.display.getHeight()/2 - PlayerInstance.y)
