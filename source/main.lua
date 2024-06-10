@@ -18,7 +18,7 @@ PlayerInstance:add()
 MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
 MineInstance:add()
 
-WaterInstance = Water(100, -60, pd.display.getHeight() - 20, 0.05)
+WaterInstance = Water(100, 0, pd.display.getHeight() + 120, 0.05)
 
 -- Playing around with a tilemap
 local tileset,err = gfx.imagetable.new("images/tileset")
@@ -55,7 +55,7 @@ function pd.update()
 
 	-- Set the boat's height to match the water
 	-- TODO: Add gravity and make the water push the boat up
-	PlayerInstance:moveWithCollisions(PlayerInstance.x, WaterInstance.HeightY - 13)
+	PlayerInstance:moveWithCollisions(PlayerInstance.x, WaterInstance.Height - 13)
 
 	-- Make the camera track the boat
 	gfx.setDrawOffset(pd.display.getWidth()/2 - PlayerInstance.x, pd.display.getHeight()/2 - PlayerInstance.y)
