@@ -5,6 +5,7 @@ import "CoreLibs/timer"
 import "CoreLibs/crank"
 import "CoreLibs/math"
 
+import "camera"
 import "player"
 import "water"
 import "mine"
@@ -19,6 +20,8 @@ MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
 MineInstance:add()
 
 WaterInstance = Water(100, 0, pd.display.getHeight() + 120, 0.05)
+
+CameraInstance = Camera(PlayerInstance.x, PlayerInstance.y, 0, 0, 300, 300)
 
 -- Playing around with a tilemap
 local tileset,err = gfx.imagetable.new("images/tileset")
@@ -49,30 +52,38 @@ local function clamp(value, min, max)
 	return math.min(math.max(value, min), max)
 end
 
+local CameraPosition = pd.geometry.vector2D.new(PlayerInstance.x, PlayerInstance.y)
+
 function pd.update()
 	-- Check the crank and move the water based on input
 	WaterInstance:Update()
 
+	-- Player Gravity
+	local Gravity = 0.5
+	PlayerInstance:AddForce(pd.geometry.vector2D.new(0, Gravity))
+
+	-- Deals with player buoyancy
 	local DesiredHeight = WaterInstance.Height - 13
 	local DirectionToWater = (PlayerInstance.y - DesiredHeight)
 	local DirectionToWaterNormalized = DirectionToWater / math.abs(DirectionToWater)
 	if DirectionToWater == 0 then
 		DirectionToWaterNormalized = 0
 	end
-	local Gravity = 0.5
-	PlayerInstance:AddForce(pd.geometry.vector2D.new(0, Gravity))
 
+	-- Buoyancy values
 	local displacementNum = clamp(math.abs(DirectionToWater), 0, 50) / 50
 	local WaterDrag = 0.3
 	local buoyantForce = 5.5
 
+	-- Applies buoyancy forces and water drag
 	if DirectionToWater > 0 then
 		PlayerInstance:AddForce(pd.geometry.vector2D.new(0, -DirectionToWaterNormalized * buoyantForce * displacementNum))
 		PlayerInstance:AddForce(pd.geometry.vector2D.new(0, -PlayerInstance.Velocity.y * WaterDrag))
 	end
 
 	-- Make the camera track the boat
-	gfx.setDrawOffset(pd.display.getWidth()/2 - PlayerInstance.x, pd.display.getHeight()/2 - PlayerInstance.y)
+	-- CameraInstance:center(PlayerInstance.x, PlayerInstance.y)
+	CameraInstance:lerp(PlayerInstance.x, PlayerInstance.y, 0.3)
 
 	gfx.sprite.update()
 	pd.timer.updateTimers()
