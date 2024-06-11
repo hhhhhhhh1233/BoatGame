@@ -27,6 +27,6 @@ function Water:Update()
 end
 
 function Water:Draw()
-	gfx.fillRect(0, self.Height, DisplayWidth * 1.6, (self.UpperBound - self.LowerBound) - self.Height)
+	gfx.fillRect(0, self.Height, DisplayWidth * 1.6, 2)
 end
 
