@@ -54,8 +54,9 @@ function Player:update()
 	self.Position.x, self.Position.y, collisions, length = self:moveWithCollisions(self.Position.x, self.Position.y)
 
 	-- If we hit a surface set our velocity to zero in that direction
+	-- NOTE: Kinda hacky, this only works so long as there are no slanted normals, feel free to be more cleverer
 	for i = 1, length, 1 do
-		self.Velocity.x *= -collisions[i]["normal"].y
-		self.Velocity.y *= -collisions[i]["normal"].x
+		self.Velocity.x *= math.abs(collisions[i]["normal"].y)
+		self.Velocity.y *= math.abs(collisions[i]["normal"].x)
 	end
 end
