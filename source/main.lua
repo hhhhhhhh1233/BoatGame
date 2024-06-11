@@ -19,9 +19,8 @@ PlayerInstance:add()
 MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
 MineInstance:add()
 
-WaterInstance = Water(100, 0, pd.display.getHeight() + 120, 0.05)
+WaterInstance = Water(100, 20, pd.display.getHeight() + 120, 0.05)
 
-CameraInstance = Camera(PlayerInstance.x, PlayerInstance.y, 0, 0, 300, 300)
 
 -- Playing around with a tilemap
 local tileset,err = gfx.imagetable.new("images/tileset")
@@ -44,6 +43,10 @@ local data = {
 	0,0,0,0,0,0,0,0,0,0,0,0,9,2,2,2,2,2,2,2,2,10,
 }
 tilemap:setTiles(data, 22)
+
+-- Limit camera to the map size
+local mapPixelWidth, mapPixelHeight = tilemap:getPixelSize()
+CameraInstance = Camera(PlayerInstance.x, PlayerInstance.y, 0, 0, mapPixelWidth, mapPixelHeight)
 
 -- Adds collisions for the tilemap
 gfx.sprite.addWallSprites(tilemap, {})

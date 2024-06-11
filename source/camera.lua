@@ -22,16 +22,14 @@ end
 local screenHalfWidth = pd.display.getWidth()/2
 local screenHalfHeight = pd.display.getHeight()/2
 
--- TODO: Incorporate the camera bounds
 function Camera:center(x, y)
-	-- local targetX = clamp(screenHalfWidth - x, self.xMin, self.xMax)
-	-- local targetY = clamp(screenHalfHeight - y, self.yMin, self.yMax)
+	local targetX = clamp(x, self.xMin + screenHalfWidth, self.xMax - screenHalfWidth)
+	local targetY = clamp(y, self.yMin + screenHalfHeight, self.yMax - screenHalfHeight)
 
-	gfx.setDrawOffset(screenHalfWidth - x, screenHalfHeight - y)
-	-- gfx.setDrawOffset(targetX, targetY)
+	gfx.setDrawOffset(screenHalfWidth - targetX, screenHalfHeight - targetY)
 
-	self.x = x
-	self.y = y
+	self.x = targetX
+	self.y = targetY
 end
 
 function Camera:lerp(x, y, speed)
