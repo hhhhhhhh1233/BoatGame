@@ -12,7 +12,8 @@ class('Player').extends(gfx.sprite)
 function Player:init(x, y, image, speed)
 	self:moveTo(x,y)
 	self:setImage(image)
-	self:setCollideRect(0, 0, self:getSize())
+	-- NOTE: Smaller collision size to cover the boat more snugly
+	self:setCollideRect(0, 10, 32, 22)
 	self.Speed = speed
 
 	self.PhysicsComponent = PhysicsComponent(x, y)
