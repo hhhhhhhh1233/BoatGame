@@ -1,12 +1,9 @@
+import "utils"
+
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 class('Camera').extends()
-
--- TODO: DEFINITELY MAKE THIS IN A GENERAL FILE INSTEAD OF DEFINING IT ALL OVER THE PLACE
-local function clamp(value, min, max)
-	return math.min(math.max(value, min), max)
-end
 
 function Camera:init(x, y, xMin, yMin, xMax, yMax)
 	self.x = x
@@ -23,8 +20,8 @@ local screenHalfWidth = pd.display.getWidth()/2
 local screenHalfHeight = pd.display.getHeight()/2
 
 function Camera:center(x, y)
-	local targetX = clamp(x, self.xMin + screenHalfWidth, self.xMax - screenHalfWidth)
-	local targetY = clamp(y, self.yMin + screenHalfHeight, self.yMax - screenHalfHeight)
+	local targetX = Clamp(x, self.xMin + screenHalfWidth, self.xMax - screenHalfWidth)
+	local targetY = Clamp(y, self.yMin + screenHalfHeight, self.yMax - screenHalfHeight)
 
 	gfx.setDrawOffset(screenHalfWidth - targetX, screenHalfHeight - targetY)
 
