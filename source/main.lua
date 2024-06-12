@@ -55,7 +55,26 @@ local function clamp(value, min, max)
 	return math.min(math.max(value, min), max)
 end
 
-local CameraPosition = pd.geometry.vector2D.new(PlayerInstance.x, PlayerInstance.y)
+-- NOTE: Returns the buoyancy force and the water drag in that order
+local function CalculateBuoyancy(WaterHeight, ObjectHeight, WaterPixelDepth, WaterDrag, buoyantForce)
+	-- Deals with player buoyancy
+	local DesiredHeight = WaterHeight - 13
+	local DirectionToWater = (ObjectHeight - DesiredHeight)
+	local DirectionToWaterNormalized = DirectionToWater / math.abs(DirectionToWater)
+	if DirectionToWater == 0 then
+		DirectionToWaterNormalized = 0
+	end
+
+	-- Buoyancy values
+	local displacementNum = clamp(math.abs(DirectionToWater), 0, WaterPixelDepth) / WaterPixelDepth
+
+	-- Applies buoyancy forces and water drag
+	if DirectionToWater > 0 then
+		return pd.geometry.vector2D.new(0, -DirectionToWaterNormalized * buoyantForce * displacementNum), pd.geometry.vector2D.new(0, -PlayerInstance.Velocity.y * WaterDrag)
+	end
+
+	return pd.geometry.vector2D.new(0, 0), pd.geometry.vector2D.new(0, 0)
+end
 
 function pd.update()
 	-- Check the crank and move the water based on input
@@ -65,28 +84,12 @@ function pd.update()
 	local Gravity = 0.5
 	PlayerInstance:AddForce(pd.geometry.vector2D.new(0, Gravity))
 
-	-- Deals with player buoyancy
-	local DesiredHeight = WaterInstance.Height - 13
-	local DirectionToWater = (PlayerInstance.y - DesiredHeight)
-	local DirectionToWaterNormalized = DirectionToWater / math.abs(DirectionToWater)
-	if DirectionToWater == 0 then
-		DirectionToWaterNormalized = 0
-	end
+	local buoyancyForce, waterDrag =  CalculateBuoyancy(WaterInstance.Height, PlayerInstance.y, 50, 0.3, 5.5)
+	PlayerInstance:AddForce(buoyancyForce + waterDrag)
 
-	-- Buoyancy values
-	local displacementNum = clamp(math.abs(DirectionToWater), 0, 50) / 50
-	local WaterDrag = 0.3
-	local buoyantForce = 5.5
-
-	-- Applies buoyancy forces and water drag
-	if DirectionToWater > 0 then
-		PlayerInstance:AddForce(pd.geometry.vector2D.new(0, -DirectionToWaterNormalized * buoyantForce * displacementNum))
-		PlayerInstance:AddForce(pd.geometry.vector2D.new(0, -PlayerInstance.Velocity.y * WaterDrag))
-	end
 
 	-- Make the camera track the boat
-	-- CameraInstance:center(PlayerInstance.x, PlayerInstance.y)
-	CameraInstance:lerp(PlayerInstance.x, PlayerInstance.y, 0.3)
+	CameraInstance:lerp(PlayerInstance.x, PlayerInstance.y, 0.2)
 
 	gfx.sprite.update()
 	pd.timer.updateTimers()
