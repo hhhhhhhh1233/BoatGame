@@ -1,6 +1,7 @@
 import "CoreLibs/sprites"
 import "CoreLibs/graphics"
 
+import "mine"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -31,7 +32,11 @@ function Player:HandleForces()
 end
 
 function Player:collisionResponse(other)
-	return "slide"
+	if other:isa(Mine) then
+		return "overlap"
+	else
+		return "slide"
+	end
 end
 
 function Player:update()
@@ -56,7 +61,10 @@ function Player:update()
 	-- If we hit a surface set our velocity to zero in that direction
 	-- NOTE: Kinda hacky, this only works so long as there are no slanted normals, feel free to be more cleverer
 	for i = 1, length, 1 do
-		self.Velocity.x *= math.abs(collisions[i]["normal"].y)
-		self.Velocity.y *= math.abs(collisions[i]["normal"].x)
+		-- NOTE: So that it allows the player to go through overlap collisions
+		if not collisions[i]["type"] == 2 then
+			self.Velocity.x *= math.abs(collisions[i]["normal"].y)
+			self.Velocity.y *= math.abs(collisions[i]["normal"].x)
+		end
 	end
 end

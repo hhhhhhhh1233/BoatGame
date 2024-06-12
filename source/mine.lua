@@ -11,4 +11,3 @@ function Mine:init(x, y, image)
 	self:setImage(image)
 	self:setCollideRect(0, 0, self:getSize())
 end
-
