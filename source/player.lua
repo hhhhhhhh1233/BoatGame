@@ -43,18 +43,5 @@ function Player:update()
 
 	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(-self.PhysicsComponent.Velocity.x * 0.2, 0))
 
-	self.PhysicsComponent:Update()
-
-	local collisions, length
-	collisions, length = self.PhysicsComponent:Move(self)
-
-	-- If we hit a surface set our velocity to zero in that direction
-	-- NOTE: Kinda hacky, this only works so long as there are no slanted normals, feel free to be more cleverer
-	for i = 1, length, 1 do
-		-- NOTE: So that it allows the player to go through overlap collisions
-		if not (collisions[i].type == 2) then
-			self.PhysicsComponent.Velocity.x *= math.abs(collisions[i].normal.y)
-			self.PhysicsComponent.Velocity.y *= math.abs(collisions[i].normal.x)
-		end
-	end
+	self.PhysicsComponent:Move(self)
 end

@@ -19,7 +19,6 @@ end
 
 function Mine:update()
 	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(0, 0.5))
-	self.PhysicsComponent:Update()
 	self.PhysicsComponent:Move(self)
 end
 
