@@ -39,7 +39,7 @@ function Player:update()
 		self.bCanJump = true
 	end
 
-	if pd.buttonIsPressed(pd.kButtonB) and self.bCanJump then
+	if pd.buttonJustPressed(pd.kButtonB) then
 		self:AddForce(pd.geometry.vector2D.new(0, -8))
 		self.bCanJump = false
 	end
