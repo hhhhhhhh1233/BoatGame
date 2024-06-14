@@ -9,8 +9,9 @@ class('Water').extends()
 
 local DisplayWidth = pd.display.getWidth()
 
-function Water:init(Height, LowerBound, UpperBound, RateOfChange)
+function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange)
 	self.Height = Height
+	self.Width = Width
 	self.LowerBound = LowerBound
 	self.UpperBound = UpperBound
 	self.RateOfChange = RateOfChange

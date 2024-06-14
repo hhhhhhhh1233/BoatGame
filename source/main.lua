@@ -21,14 +21,6 @@ local vector2D_new <const> = pd.geometry.vector2D.new
 local sprite_update <const> = gfx.sprite.update
 local update_timers <const> = pd.timer.updateTimers
 
-PlayerInstance = Player(200, 120, gfx.image.new("images/Boat"), 2)
-PlayerInstance:add()
-
-MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
-MineInstance:add()
-
-WaterInstance = Water(100, 20, pd.display.getHeight() + 120, 0.05)
-
 -- Playing around with a tilemap
 local tileset,err = gfx.imagetable.new("images/tileset")
 assert(err == nil)
@@ -51,8 +43,16 @@ local data = {
 }
 tilemap:setTiles(data, 22)
 
--- Limit camera to the map size
+PlayerInstance = Player(200, 120, gfx.image.new("images/Boat"), 2)
+PlayerInstance:add()
+
+MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
+MineInstance:add()
+
 local mapPixelWidth, mapPixelHeight = tilemap:getPixelSize()
+WaterInstance = Water(100, mapPixelWidth, 20, mapPixelHeight, 0.05)
+
+-- Limit camera to the map size
 CameraInstance = Camera(PlayerInstance.x, PlayerInstance.y, 0, 0, mapPixelWidth, mapPixelHeight)
 
 -- Adds collisions for the tilemap
@@ -71,6 +71,10 @@ function pd.update()
 
 	buoyancyForces = CalculateBuoyancy(WaterInstance.Height, MineInstance.y, 50, 0.5, 3.5, MineInstance.PhysicsComponent, 0)
 	MineInstance.PhysicsComponent:AddForce(buoyancyForces)
+
+	-- NOTE: This sucks
+	PlayerInstance.bUnderwater = (PlayerInstance.PhysicsComponent.Position.y) > WaterInstance.Height
+	print(PlayerInstance.bUnderwater)
 
 	-- Make the camera track the boat
 	CameraInstance:lerp(PlayerInstance.x, PlayerInstance.y, 0.2)

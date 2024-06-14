@@ -17,6 +17,9 @@ function Player:init(x, y, image, speed)
 	self.Speed = speed
 
 	self.PhysicsComponent = PhysicsComponent(x, y)
+
+	self.bUnderwater = false
+	self.bCanJump = true
 end
 
 function Player:AddForce(Force)
@@ -32,6 +35,15 @@ function Player:collisionResponse(other)
 end
 
 function Player:update()
+	if self.bUnderwater then
+		self.bCanJump = true
+	end
+
+	if pd.buttonIsPressed(pd.kButtonB) and self.bCanJump then
+		self:AddForce(pd.geometry.vector2D.new(0, -8))
+		self.bCanJump = false
+	end
+
 	if pd.buttonIsPressed(pd.kButtonLeft) then
 		self:setImageFlip(gfx.kImageFlippedX)
 		self:AddForce(pd.geometry.vector2D.new(-self.Speed, 0))
