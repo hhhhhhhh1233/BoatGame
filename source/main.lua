@@ -1,3 +1,11 @@
+COLLISION_GROUPS = {
+	PLAYER = 1,
+	ENEMY = 2,
+	PROJECTILE = 3,
+	WALL = 4,
+	EXPLOSIVE = 5
+}
+
 import "CoreLibs/object"
 import "CoreLibs/graphics"
 import "CoreLibs/sprites"
@@ -56,7 +64,11 @@ WaterInstance = Water(100, mapPixelWidth, 20, mapPixelHeight, 0.05)
 CameraInstance = Camera(PlayerInstance.x, PlayerInstance.y, 0, 0, mapPixelWidth, mapPixelHeight)
 
 -- Adds collisions for the tilemap
-gfx.sprite.addWallSprites(tilemap, {})
+local tileSprites = gfx.sprite.addWallSprites(tilemap, {})
+
+for i = 1, #tileSprites do
+	tileSprites[i]:setGroups({COLLISION_GROUPS.WALL})
+end
 
 function pd.update()
 	-- Check the crank and move the water based on input
