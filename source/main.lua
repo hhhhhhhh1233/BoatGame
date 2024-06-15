@@ -65,7 +65,6 @@ CameraInstance = Camera(PlayerInstance.x, PlayerInstance.y, 0, 0, mapPixelWidth,
 
 -- Adds collisions for the tilemap
 local tileSprites = gfx.sprite.addWallSprites(tilemap, {})
-
 for i = 1, #tileSprites do
 	tileSprites[i]:setGroups({COLLISION_GROUPS.WALL})
 end
@@ -78,10 +77,10 @@ function pd.update()
 	local Gravity = 0.5
 	PlayerInstance:AddForce(vector2D_new(0, Gravity))
 
-	local buoyancyForces = CalculateBuoyancy(WaterInstance.Height, PlayerInstance.y, 50, 0.3, 5.5, PlayerInstance.PhysicsComponent, 13)
+	local buoyancyForces = CalculateBuoyancy(WaterInstance.Height, PlayerInstance.y, 50, 0.3, 5.5, PlayerInstance.PhysicsComponent)
 	PlayerInstance:AddForce(buoyancyForces)
 
-	buoyancyForces = CalculateBuoyancy(WaterInstance.Height, MineInstance.y, 50, 0.5, 3.5, MineInstance.PhysicsComponent, 0)
+	buoyancyForces = CalculateBuoyancy(WaterInstance.Height, MineInstance.y, 50, 0.5, 3.5, MineInstance.PhysicsComponent)
 	MineInstance.PhysicsComponent:AddForce(buoyancyForces)
 
 	-- NOTE: This sucks

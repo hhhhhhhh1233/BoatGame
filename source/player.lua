@@ -21,6 +21,8 @@ function Player:init(x, y, image, speed)
 	self.bUnderwater = false
 	self.bCanJump = true
 
+	self:setCenter(0.5,1)
+
 	self:setGroups(COLLISION_GROUPS.PLAYER)
 	self:setCollidesWithGroups({COLLISION_GROUPS.WALL, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.EXPLOSIVE})
 end

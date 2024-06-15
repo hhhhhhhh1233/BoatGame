@@ -5,12 +5,12 @@ local pd <const> = playdate
 local vector2D_new <const> = pd.geometry.vector2D.new
 local abs <const> = math.abs
 
--- NOTE: Returns the buoyancy force and the water drag in that order
-function CalculateBuoyancy(WaterHeight, ObjectHeight, WaterPixelDepth, WaterDrag, buoyantForce, physicsObject, waterDepth)
-	local DesiredHeight = WaterHeight - waterDepth
+-- NOTE: Returns the buoyancy force and the water drag as a sum
+function CalculateBuoyancy(WaterHeight, ObjectHeight, WaterPixelDepth, WaterDrag, buoyantForce, physicsObject)
+	local DesiredHeight = WaterHeight
 	local DirectionToWater = (ObjectHeight - DesiredHeight)
 
-	-- Return early if we know there will be no forces
+	-- Return early if we aren't in the water
 	if DirectionToWater <= 0 then
 		return vector2D_new(0, 0)
 	end
