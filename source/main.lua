@@ -21,6 +21,7 @@ import "buoyancy"
 import "player"
 import "water"
 import "mine"
+import "scene"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -32,8 +33,6 @@ local update_timers <const> = pd.timer.updateTimers
 -- Playing around with a tilemap
 local tileset,err = gfx.imagetable.new("images/tileset")
 assert(err == nil)
-local tilemap = gfx.tilemap.new()
-tilemap:setImageTable(tileset)
 
 -- TILE MAP OF MY OWN DESIGN
 local data = {
@@ -49,25 +48,28 @@ local data = {
 	7,7,7,7,7,7,7,7,7,7,7,7,7,11,12,12,12,12,12,12,13,7,
 	7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,
 }
-tilemap:setTiles(data, 22)
 
-PlayerInstance = Player(200, 120, gfx.image.new("images/Boat"), 2)
-PlayerInstance:add()
+local data2 = {
+	7,7,0,0,0,0,0,0,0,0,0,7,7,
+	7,7,0,0,0,0,0,0,0,0,0,7,7,
+	7,7,0,0,0,0,0,0,0,0,0,7,7,
+	7,7,0,0,0,0,0,0,0,0,0,7,7,
+	7,7,0,0,0,0,0,0,0,0,0,7,7,
+	7,7,7,7,7,7,7,7,7,7,7,7,7,
+	7,7,7,7,7,7,7,7,7,7,7,7,7
+}
+
+local scene = Scene(tileset, data, 22, 200, 120)
+local PlayerInstance = scene.player
 
 MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
 MineInstance:add()
 
-local mapPixelWidth, mapPixelHeight = tilemap:getPixelSize()
+local mapPixelWidth, mapPixelHeight = scene.tilemap:getPixelSize()
 WaterInstance = Water(100, mapPixelWidth, 20, mapPixelHeight, 0.05)
 
 -- Limit camera to the map size
-CameraInstance = Camera(PlayerInstance.x, PlayerInstance.y, 0, 0, mapPixelWidth, mapPixelHeight)
-
--- Adds collisions for the tilemap
-local tileSprites = gfx.sprite.addWallSprites(tilemap, {})
-for i = 1, #tileSprites do
-	tileSprites[i]:setGroups({COLLISION_GROUPS.WALL})
-end
+-- CameraInstance = Camera(PlayerInstance.x, PlayerInstance.y, 0, 0, mapPixelWidth, mapPixelHeight)
 
 gfx.setBackgroundColor(gfx.kColorClear)
 
@@ -90,10 +92,17 @@ function pd.update()
 	PlayerInstance.bUnderwater = (PlayerInstance.PhysicsComponent.Position.y) > WaterInstance.Height
 
 	-- Make the camera track the boat
-	CameraInstance:lerp(PlayerInstance.x, PlayerInstance.y, 0.2)
+	scene.camera:lerp(PlayerInstance.x, PlayerInstance.y, 0.2)
 
 	sprite_update()
 	update_timers()
 
-	tilemap:draw(0, 0)
+	if pd.buttonJustPressed(pd.kButtonB) then
+		scene:loadLevel(data2, 13)
+	end
+	if pd.buttonJustPressed(pd.kButtonA) then
+		scene:loadLevel(data, 22)
+	end
+
+	scene:draw()
 end
