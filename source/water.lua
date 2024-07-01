@@ -22,9 +22,6 @@ function Water:Update()
 	local change, acceleratedChange = pd.getCrankChange()
 	self.Height -= change * self.RateOfChange
 	self.Height = Clamp(self.Height, self.LowerBound, self.UpperBound)
+	-- Draw the water height to screen
+	gfx.fillRect(0, self.Height, self.Width, 2)
 end
-
-function Water:Draw()
-	gfx.fillRect(0, self.Height, DisplayWidth * 1.6, 2)
-end
-

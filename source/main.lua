@@ -69,7 +69,10 @@ for i = 1, #tileSprites do
 	tileSprites[i]:setGroups({COLLISION_GROUPS.WALL})
 end
 
+gfx.setBackgroundColor(gfx.kColorClear)
+
 function pd.update()
+	gfx.clear(gfx.kColorWhite)
 	-- Check the crank and move the water based on input
 	WaterInstance:Update()
 
@@ -85,15 +88,12 @@ function pd.update()
 
 	-- NOTE: This sucks
 	PlayerInstance.bUnderwater = (PlayerInstance.PhysicsComponent.Position.y) > WaterInstance.Height
-	print(PlayerInstance.bUnderwater)
 
 	-- Make the camera track the boat
 	CameraInstance:lerp(PlayerInstance.x, PlayerInstance.y, 0.2)
 
 	sprite_update()
 	update_timers()
-
-	WaterInstance:Draw()
 
 	tilemap:draw(0, 0)
 end

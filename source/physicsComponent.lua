@@ -27,7 +27,7 @@ function PhysicsComponent:Move(owner)
 	-- NOTE: Kinda hacky, this only works so long as there are no slanted normals, feel free to be more cleverer
 	for i = 1, length, 1 do
 		-- NOTE: So that it allows the player to go through overlap collisions
-		if not (collisions[i].type == 2) then
+		if collisions[i].type ~= 2 then
 			self.Velocity.x *= math.abs(collisions[i].normal.y)
 			self.Velocity.y *= math.abs(collisions[i].normal.x)
 		end
