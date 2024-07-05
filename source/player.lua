@@ -62,10 +62,10 @@ function Player:update()
 		Bullet(self.PhysicsComponent.Position.x +  direction * 20, self.PhysicsComponent.Position.y - 5, direction * 15)
 	end
 
-	if pd.buttonJustPressed(pd.kButtonB) then
-		self:AddForce(pd.geometry.vector2D.new(0, -8))
-		self.bCanJump = false
-	end
+	-- if pd.buttonJustPressed(pd.kButtonB) then
+	-- 	self:AddForce(pd.geometry.vector2D.new(0, -8))
+	-- 	self.bCanJump = false
+	-- end
 
 	if pd.buttonIsPressed(pd.kButtonLeft) then
 		self:setImageFlip(gfx.kImageFlippedX)
