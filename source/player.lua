@@ -11,7 +11,9 @@ local gfx <const> = pd.graphics
 
 class('Player').extends(gfx.sprite)
 
-function Player:init(x, y, image, speed)
+function Player:init(x, y, image, speed, gameManager)
+	self.GameManager = gameManager
+
 	self:moveTo(x,y)
 	self:setImage(image)
 	-- NOTE: Smaller collision size to cover the boat more snugly
@@ -26,7 +28,7 @@ function Player:init(x, y, image, speed)
 	self:setCenter(0.5,1)
 
 	self:setGroups(COLLISION_GROUPS.PLAYER)
-	self:setCollidesWithGroups({COLLISION_GROUPS.WALL, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE})
+	self:setCollidesWithGroups({COLLISION_GROUPS.WALL, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.TRIGGER})
 
 	local frameTime = 200
 	local animationImageTable = gfx.imagetable.new("images/Basic-Attack")
@@ -38,6 +40,11 @@ function Player:AddForce(Force)
 end
 
 function Player:collisionResponse(other)
+	if other:isa(DoorTrigger) then
+		self.Door = other
+		return "overlap"
+	end
+
 	if other:isa(Mine) then
 		return "overlap"
 	else
@@ -48,6 +55,18 @@ end
 local direction = 1
 
 function Player:update()
+	-- NOTE: Since I moved the center of the player it checks from the bottom of the sprite, should probably check from center
+	if self.x > self.GameManager.LevelWidth then
+		self.Door:Act(self.GameManager, "EAST")
+	elseif self.x < 0 then
+		self.Door:Act(self.GameManager, "WEST")
+	elseif self.y - 16 > self.GameManager.LevelHeight then
+		self.Door:Act(self.GameManager, "SOUTH")
+	elseif self.y - 16 < 0 then
+		self.Door:Act(self.GameManager, "NORTH")
+	end
+
+
 	if self.bUnderwater then
 		self.bCanJump = true
 	end
@@ -62,10 +81,11 @@ function Player:update()
 		Bullet(self.PhysicsComponent.Position.x +  direction * 20, self.PhysicsComponent.Position.y - 5, direction * 15)
 	end
 
-	-- if pd.buttonJustPressed(pd.kButtonB) then
+	if pd.buttonJustPressed(pd.kButtonB) then
+		print(self.x, self.y)
 	-- 	self:AddForce(pd.geometry.vector2D.new(0, -8))
 	-- 	self.bCanJump = false
-	-- end
+	end
 
 	if pd.buttonIsPressed(pd.kButtonLeft) then
 		self:setImageFlip(gfx.kImageFlippedX)
