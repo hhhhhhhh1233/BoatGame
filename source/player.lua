@@ -57,13 +57,13 @@ local direction = 1
 function Player:update()
 	-- NOTE: Since I moved the center of the player it checks from the bottom of the sprite, should probably check from center
 	if self.x > self.GameManager.LevelWidth then
-		self.Door:Act(self.GameManager, "EAST")
+		self.GameManager:enterRoom(self.Door, "EAST")
 	elseif self.x < 0 then
-		self.Door:Act(self.GameManager, "WEST")
+		self.GameManager:enterRoom(self.Door, "WEST")
 	elseif self.y - 16 > self.GameManager.LevelHeight then
-		self.Door:Act(self.GameManager, "SOUTH")
+		self.GameManager:enterRoom(self.Door, "SOUTH")
 	elseif self.y - 16 < 0 then
-		self.Door:Act(self.GameManager, "NORTH")
+		self.GameManager:enterRoom(self.Door, "NORTH")
 	end
 
 

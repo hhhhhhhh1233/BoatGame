@@ -17,15 +17,44 @@ function Scene:init(spawnX, spawnY)
 	self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1)
 end
 
-function Scene:enterRoom(direction)
-	print("HEHEREHRHE")
-	local level = LDtk.get_neighbours(self.currentLevel, direction)[1]
+function Scene:enterRoom(door, direction)
+
+	local xDiff, yDiff
+	if direction == "EAST" or direction == "WEST" then
+		xDiff = 0
+		yDiff = door.TargetY - door.y
+		self.player:moveTo(door.TargetX, self.player.y + yDiff)
+		self.water.Height += yDiff
+	elseif direction == "NORTH" or direction == "SOUTH" then
+		xDiff = door.TargetX - door.x
+		yDiff = 0
+		self.player:moveTo(self.player.x + xDiff, door.TargetY)
+	end
+
+
 	local WaterPlayerDiff = self.water.Height - self.player.y
-	self:goToLevel(level)
-	self.water.Height = WaterPlayerDiff + self.player.y
-	-- NOTE: The water should always cover the level width-wise
-	self.water.width = self.LevelWidth
+
+	self:goToLevel(door.TargetLevel)
+	-- self.player:moveTo(door.TargetX, self.player.y + yDiff)
 	self.player.PhysicsComponent.velocity = playdate.geometry.vector2D.new(0, 0)
+	print(yDiff)
+
+	-- self.water.Height = WaterPlayerDiff + self.player.y + 16
+	if direction == "NORTH" then
+		self.water.Height = self.LevelHeight - 32
+	elseif direction == "SOUTH" then
+		self.water.Height = 32
+	else
+		self.water.Height += yDiff
+	end
+	self.water.Width = self.LevelWidth
+
+	-- NOTE: Updating the physics component's position so it doesn't get confused and freak out
+	self.player.PhysicsComponent.Position = playdate.geometry.vector2D.new(door.TargetX, door.TargetY)
+	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
+	self.camera:center(door.TargetX, door.TargetY)
+
+	print("Warped to ", door.TargetX, door.TargetY)
 end
 
 function Scene:goToLevel(level_name)
@@ -59,8 +88,6 @@ function Scene:goToLevel(level_name)
 		local entityX, entityY = entity.position.x, entity.position.y
 		local entityName = entity.name
 		if entityName == "RoomTransition" then
-			-- TODO: IMPLEMENT THIS CLASS FORREAL, AND FETCH WHICH ROOM THE TARGET IS IN
-			-- printTable(entity)
 			DoorTrigger(entityX, entityY, entity)
 		end
 	end

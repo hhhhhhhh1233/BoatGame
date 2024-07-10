@@ -21,19 +21,3 @@ function DoorTrigger:init(x, y, entity)
 		end
 	end
 end
-
-function DoorTrigger:Act(GameManager, direction)
-	local WaterPlayerDiff = GameManager.water.Height - GameManager.player.y
-
-	GameManager:goToLevel(self.TargetLevel)
-	GameManager.player:moveTo(self.TargetX, self.TargetY)
-
-	GameManager.water.Height = WaterPlayerDiff + GameManager.player.y + 16
-
-	-- NOTE: Updating the physics component's position so it doesn't get confused and freak out
-	GameManager.player.PhysicsComponent.Position = playdate.geometry.vector2D.new(self.TargetX, self.TargetY)
-	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
-	GameManager.camera:center(self.TargetX, self.TargetY)
-
-	print("Warped to ", self.TargetX, self.TargetY)
-end
