@@ -31,34 +31,28 @@ local vector2D_new <const> = pd.geometry.vector2D.new
 local sprite_update <const> = gfx.sprite.update
 local update_timers <const> = pd.timer.updateTimers
 
-local scene = Scene(200, 120)
-local PlayerInstance = scene.player
-
-MineInstance = Mine(300, 120, gfx.image.new("images/Mine"))
-MineInstance:add()
+local SceneManager = Scene(200, 120)
+local PlayerInstance = SceneManager.player
 
 gfx.setBackgroundColor(gfx.kColorClear)
 
 function pd.update()
 	gfx.clear(gfx.kColorWhite)
+
 	-- Check the crank and move the water based on input
-	scene.water:Update()
+	SceneManager.water:Update()
 
 	-- Player Gravity
 	local Gravity = 0.5
 	PlayerInstance:AddForce(vector2D_new(0, Gravity))
 
-	local buoyancyForces = CalculateBuoyancy(scene.water.Height, PlayerInstance.y, 50, 0.3, 5.5, PlayerInstance.PhysicsComponent)
-	PlayerInstance:AddForce(buoyancyForces)
-
-	buoyancyForces = CalculateBuoyancy(scene.water.Height, MineInstance.y, 50, 0.5, 3.5, MineInstance.PhysicsComponent)
-	MineInstance.PhysicsComponent:AddForce(buoyancyForces)
+	SceneManager:UpdatePhysicsComponentsBuoyancy()
 
 	-- NOTE: This sucks
-	PlayerInstance.bUnderwater = (PlayerInstance.PhysicsComponent.Position.y) > scene.water.Height
+	PlayerInstance.bUnderwater = (PlayerInstance.PhysicsComponent.Position.y) > SceneManager.water.Height
 
 	-- Make the camera track the boat
-	scene.camera:lerp(PlayerInstance.x, PlayerInstance.y, 0.2)
+	SceneManager.camera:lerp(PlayerInstance.x, PlayerInstance.y, 0.2)
 
 	sprite_update()
 	update_timers()

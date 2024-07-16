@@ -18,6 +18,7 @@ function Mine:init(x, y, image)
 
 	self:setGroups(COLLISION_GROUPS.EXPLOSIVE)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.WALL, COLLISION_GROUPS.PLAYER})
+	self:add()
 end
 
 function Mine:update()

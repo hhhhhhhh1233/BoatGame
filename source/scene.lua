@@ -1,6 +1,7 @@
 import "player"
 import "libraries/LDtk"
 import "DoorTrigger"
+import "mine"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -18,32 +19,24 @@ function Scene:init(spawnX, spawnY)
 end
 
 function Scene:enterRoom(door, direction)
-
 	local xDiff, yDiff
 	if direction == "EAST" or direction == "WEST" then
 		xDiff = 0
 		yDiff = door.TargetY - door.y
 		self.player:moveTo(door.TargetX, self.player.y + yDiff)
-		self.water.Height += yDiff
 	elseif direction == "NORTH" or direction == "SOUTH" then
 		xDiff = door.TargetX - door.x
 		yDiff = 0
 		self.player:moveTo(self.player.x + xDiff, door.TargetY)
 	end
 
-
-	local WaterPlayerDiff = self.water.Height - self.player.y
-
 	self:goToLevel(door.TargetLevel)
-	-- self.player:moveTo(door.TargetX, self.player.y + yDiff)
 	self.player.PhysicsComponent.velocity = playdate.geometry.vector2D.new(0, 0)
-	print(yDiff)
 
-	-- self.water.Height = WaterPlayerDiff + self.player.y + 16
 	if direction == "NORTH" then
-		self.water.Height = self.LevelHeight - 32
+		self.water.Height = self.LevelHeight - 16
 	elseif direction == "SOUTH" then
-		self.water.Height = 32
+		self.water.Height = 16
 	else
 		self.water.Height += yDiff
 	end
@@ -51,16 +44,18 @@ function Scene:enterRoom(door, direction)
 
 	-- NOTE: Updating the physics component's position so it doesn't get confused and freak out
 	self.player.PhysicsComponent.Position = playdate.geometry.vector2D.new(door.TargetX, door.TargetY)
+
 	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
 	self.camera:center(door.TargetX, door.TargetY)
-
-	print("Warped to ", door.TargetX, door.TargetY)
 end
 
 function Scene:goToLevel(level_name)
 	self.currentLevel = level_name
 	gfx.sprite.removeAll()
 	self.player:add()
+
+	self.ActivePhysicsComponents = {}
+	table.insert(self.ActivePhysicsComponents, self.player.PhysicsComponent)
 
 	-- NOTE: This adds in all of the tiles and their collisions
 	for layer_name, layer in pairs(LDtk.get_layers(level_name)) do
@@ -87,8 +82,12 @@ function Scene:goToLevel(level_name)
 	for _, entity in ipairs(LDtk.get_entities(level_name)) do
 		local entityX, entityY = entity.position.x, entity.position.y
 		local entityName = entity.name
+
 		if entityName == "RoomTransition" then
 			DoorTrigger(entityX, entityY, entity)
+		elseif entityName == "Mine" then
+			local MineInstance = Mine(entityX, entityY, gfx.image.new("images/Mine"))
+			table.insert(self.ActivePhysicsComponents, MineInstance.PhysicsComponent)
 		end
 	end
 
@@ -96,4 +95,11 @@ function Scene:goToLevel(level_name)
 	local level_rect = LDtk.get_rect(level_name)
 	self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
 	self.camera = Camera(self.player.x, self.player.y, 0, 0, self.LevelWidth, self.LevelHeight)
+end
+
+function Scene:UpdatePhysicsComponentsBuoyancy()
+	for i = 1, #self.ActivePhysicsComponents do
+		local buoyancyForces = CalculateBuoyancy(self.water.Height, self.ActivePhysicsComponents[i].Position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
+		self.ActivePhysicsComponents[i]:AddForce(buoyancyForces)
+	end
 end
