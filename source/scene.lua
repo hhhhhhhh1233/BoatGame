@@ -43,7 +43,7 @@ function Scene:enterRoom(door, direction)
 	self.water.Width = self.LevelWidth
 
 	-- NOTE: Updating the physics component's position so it doesn't get confused and freak out
-	self.player.PhysicsComponent.Position = playdate.geometry.vector2D.new(door.TargetX, door.TargetY)
+	self.player.PhysicsComponent.Position = playdate.geometry.vector2D.new(self.player.x, self.player.y)
 
 	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
 	self.camera:center(door.TargetX, door.TargetY)
