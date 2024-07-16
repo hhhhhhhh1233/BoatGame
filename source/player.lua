@@ -54,12 +54,16 @@ function Player:Respawn()
 
 	self:moveTo(self.GameManager.SpawnX, self.GameManager.SpawnY)
 	self.PhysicsComponent.Position = pd.geometry.vector2D.new(self.x, self.y)
+	self.PhysicsComponent.Velocity = pd.geometry.vector2D.new(0, 0)
 
 	self.GameManager.water.Height = self.y
 
 	self.GameManager.camera:center(self.x, self.y)
 
+
 	self:setVisible(true)
+
+	-- self.GameManager:reloadLevel()
 end
 
 function Player:DrawHealthBar()
