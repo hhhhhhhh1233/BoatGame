@@ -62,6 +62,21 @@ function Player:Respawn()
 	self:setVisible(true)
 end
 
+function Player:DrawHealthBar()
+	local aX, aY = gfx.getDrawOffset()
+
+	-- TODO: This should be used instead of the magic numbers below
+	local textWidth = gfx.getSystemFont():getTextWidth(self.Health)
+
+	gfx.setColor(gfx.kColorWhite)
+	gfx.fillRect(-aX + 10 - 3, -aY + 10 - 3, 30 + 3 * 2, 20 + 3 * 2)
+	gfx.setColor(gfx.kColorBlack)
+	gfx.fillRect(-aX + 10 - 2, -aY + 10 - 2, 30 + 2 * 2, 20 + 2 * 2)
+	gfx.setColor(gfx.kColorWhite)
+	gfx.fillRect(-aX + 10, -aY + 10, 30, 20)
+	gfx.drawText(self.Health, -aX + 13, -aY + 12)
+end
+
 function Player:AddForce(Force)
 	self.PhysicsComponent:AddForce(Force)
 end
@@ -126,10 +141,4 @@ function Player:update()
 		self.Invincible -= 1
 	end
 
-	local aX, aY = gfx.getDrawOffset()
-	gfx.setColor(gfx.kColorBlack)
-	gfx.fillRect(-aX + 10 - 2, -aY + 10 - 2, 30 + 2 * 2, 20 + 2 * 2)
-	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(-aX + 10, -aY + 10, 30, 20)
-	gfx.drawText(self.Health, -aX + 13, -aY + 12)
 end

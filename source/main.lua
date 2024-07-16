@@ -56,4 +56,6 @@ function pd.update()
 
 	sprite_update()
 	update_timers()
+
+	SceneManager.player:DrawHealthBar()
 end
