@@ -44,8 +44,22 @@ function Player:Damage(amount, iFrames)
 	print(self.Health)
 	self.Invincible = iFrames
 	if self.Health <= 0 then
-		self:remove()
+		self:setVisible(false)
+		self:Respawn()
 	end
+end
+
+function Player:Respawn()
+	self.Health = 100
+
+	self:moveTo(self.GameManager.SpawnX, self.GameManager.SpawnY)
+	self.PhysicsComponent.Position = pd.geometry.vector2D.new(self.x, self.y)
+
+	self.GameManager.water.Height = self.y
+
+	self.GameManager.camera:center(self.x, self.y)
+
+	self:setVisible(true)
 end
 
 function Player:AddForce(Force)
@@ -111,4 +125,11 @@ function Player:update()
 	if self.Invincible > 0 then
 		self.Invincible -= 1
 	end
+
+	local aX, aY = gfx.getDrawOffset()
+	gfx.setColor(gfx.kColorBlack)
+	gfx.fillRect(-aX + 10 - 2, -aY + 10 - 2, 30 + 2 * 2, 20 + 2 * 2)
+	gfx.setColor(gfx.kColorWhite)
+	gfx.fillRect(-aX + 10, -aY + 10, 30, 20)
+	gfx.drawText(self.Health, -aX + 13, -aY + 12)
 end

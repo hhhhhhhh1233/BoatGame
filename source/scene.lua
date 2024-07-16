@@ -92,6 +92,9 @@ function Scene:goToLevel(level_name)
 		elseif entityName == "Mine" then
 			local MineInstance = Mine(entityX, entityY, gfx.image.new("images/Mine"))
 			table.insert(self.ActivePhysicsComponents, MineInstance.PhysicsComponent)
+		elseif entityName == "SpawnPoint" then
+			self.SpawnX = entityX
+			self.SpawnY = entityY
 		end
 	end
 

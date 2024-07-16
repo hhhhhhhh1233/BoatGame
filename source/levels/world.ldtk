@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 125,
+	"nextUid": 128,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -918,6 +918,41 @@
 			"pivotX": 0.5,
 			"pivotY": 0.5,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "SpawnPoint",
+			"uid": 127,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 32,
+			"height": 32,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#EAD4AA",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0.5,
+			"pivotY": 0.5,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -1100,6 +1135,22 @@
 							"fieldInstances": [],
 							"__worldX": 208,
 							"__worldY": 240
+						},
+						{
+							"__identifier": "SpawnPoint",
+							"__grid": [5,3],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#EAD4AA",
+							"iid": "8d8dea70-25d0-11ef-b002-55dd3e047856",
+							"width": 32,
+							"height": 32,
+							"defUid": 127,
+							"px": [176,112],
+							"fieldInstances": [],
+							"__worldX": 176,
+							"__worldY": 112
 						}
 					]
 				},
@@ -1531,6 +1582,22 @@
 							"fieldInstances": [],
 							"__worldX": 880,
 							"__worldY": 176
+						},
+						{
+							"__identifier": "SpawnPoint",
+							"__grid": [2,8],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#EAD4AA",
+							"iid": "8c063900-25d0-11ef-b002-2b077c2c0504",
+							"width": 32,
+							"height": 32,
+							"defUid": 127,
+							"px": [80,272],
+							"fieldInstances": [],
+							"__worldX": 688,
+							"__worldY": 112
 						}
 					]
 				},
@@ -1959,6 +2026,22 @@
 							}] }],
 							"__worldX": 176,
 							"__worldY": -16
+						},
+						{
+							"__identifier": "SpawnPoint",
+							"__grid": [4,7],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#EAD4AA",
+							"iid": "8fd54260-25d0-11ef-b002-7f6626de5726",
+							"width": 32,
+							"height": 32,
+							"defUid": 127,
+							"px": [144,240],
+							"fieldInstances": [],
+							"__worldX": 144,
+							"__worldY": -80
 						}
 					]
 				},

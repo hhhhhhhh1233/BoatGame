@@ -21,5 +21,6 @@ function Water:Update()
 	self.Height -= change * self.RateOfChange
 	self.Height = Clamp(self.Height, self.LowerBound, self.UpperBound)
 	-- Draw the water height to screen
+	gfx.setColor(gfx.kColorBlack)
 	gfx.fillRect(0, self.Height, self.Width, 2)
 end
