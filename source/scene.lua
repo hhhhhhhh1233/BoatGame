@@ -31,7 +31,7 @@ function Scene:enterRoom(door, direction)
 	end
 
 	self:goToLevel(door.TargetLevel)
-	self.player.PhysicsComponent.velocity = playdate.geometry.vector2D.new(0, 0)
+	self.player.PhysicsComponent.Velocity = playdate.geometry.vector2D.new(0, 0)
 
 	if direction == "NORTH" then
 		self.water.Height = self.LevelHeight - 16
@@ -51,6 +51,11 @@ function Scene:enterRoom(door, direction)
 	local level_rect = LDtk.get_rect(door.TargetLevel)
 	self.water.LowerBound = 0 - 10
 	self.water.UpperBound = level_rect.height + 10
+end
+
+-- TODO: This is broken, should probably make a entity list and just recreate them and leave the tiles as is
+function Scene:reloadLevel()
+	self:goToLevel(self.currentLevel)
 end
 
 function Scene:goToLevel(level_name)
