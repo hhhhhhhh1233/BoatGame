@@ -16,6 +16,7 @@ function Player:init(x, y, image, speed, gameManager)
 
 	self:moveTo(x,y)
 	self:setImage(image)
+
 	-- NOTE: Smaller collision size to cover the boat more snugly
 	self:setCollideRect(4, 10, 26, 22)
 	self.Speed = speed
@@ -29,10 +30,6 @@ function Player:init(x, y, image, speed, gameManager)
 
 	self:setGroups(COLLISION_GROUPS.PLAYER)
 	self:setCollidesWithGroups({COLLISION_GROUPS.WALL, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.TRIGGER})
-
-	local frameTime = 200
-	local animationImageTable = gfx.imagetable.new("images/Basic-Attack")
-	self.animationLoop = gfx.animation.loop.new(frameTime, animationImageTable, true)
 end
 
 function Player:AddForce(Force)
@@ -66,25 +63,17 @@ function Player:update()
 		self.GameManager:enterRoom(self.Door, "NORTH")
 	end
 
-
 	if self.bUnderwater then
 		self.bCanJump = true
 	end
-
-	self.animationLoop:draw(100, 20)
-
-	-- gfx.fillRect(100, 20, 5, 5)
-
-	-- print(self.animationLoop:isValid())
 
 	if pd.buttonJustPressed(pd.kButtonA) then
 		Bullet(self.PhysicsComponent.Position.x +  direction * 20, self.PhysicsComponent.Position.y - 5, direction * 15)
 	end
 
 	if pd.buttonJustPressed(pd.kButtonB) then
-		print(self.x, self.y)
-	-- 	self:AddForce(pd.geometry.vector2D.new(0, -8))
-	-- 	self.bCanJump = false
+		self:AddForce(pd.geometry.vector2D.new(0, -8))
+		self.bCanJump = false
 	end
 
 	if pd.buttonIsPressed(pd.kButtonLeft) then
