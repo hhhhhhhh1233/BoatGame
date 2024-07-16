@@ -47,6 +47,10 @@ function Scene:enterRoom(door, direction)
 
 	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
 	self.camera:center(door.TargetX, door.TargetY)
+
+	local level_rect = LDtk.get_rect(door.TargetLevel)
+	self.water.LowerBound = 0 - 10
+	self.water.UpperBound = level_rect.height + 10
 end
 
 function Scene:goToLevel(level_name)

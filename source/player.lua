@@ -17,7 +17,7 @@ function Player:init(x, y, image, speed, gameManager)
 	self:moveTo(x,y)
 	self:setImage(image)
 	-- NOTE: Smaller collision size to cover the boat more snugly
-	self:setCollideRect(0, 10, 32, 22)
+	self:setCollideRect(4, 10, 26, 22)
 	self.Speed = speed
 
 	self.PhysicsComponent = PhysicsComponent(x, y)
@@ -56,13 +56,13 @@ local direction = 1
 
 function Player:update()
 	-- NOTE: Since I moved the center of the player it checks from the bottom of the sprite, should probably check from center
-	if self.x > self.GameManager.LevelWidth then
+	if self.x > self.GameManager.LevelWidth and self.PhysicsComponent.Velocity.x > 0 then
 		self.GameManager:enterRoom(self.Door, "EAST")
-	elseif self.x < 0 then
+	elseif self.x < 0 and self.PhysicsComponent.Velocity.x < 0 then
 		self.GameManager:enterRoom(self.Door, "WEST")
-	elseif self.y - 16 > self.GameManager.LevelHeight then
+	elseif self.y - 16 > self.GameManager.LevelHeight and self.PhysicsComponent.Velocity.y > 0 then
 		self.GameManager:enterRoom(self.Door, "SOUTH")
-	elseif self.y - 16 < 0 then
+	elseif self.y - 16 < 0 and self.PhysicsComponent.Velocity.y < 0 then
 		self.GameManager:enterRoom(self.Door, "NORTH")
 	end
 

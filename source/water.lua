@@ -7,8 +7,6 @@ local gfx <const> = pd.graphics
 
 class('Water').extends()
 
-local DisplayWidth = pd.display.getWidth()
-
 function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange)
 	self.Height = Height
 	self.Width = Width
