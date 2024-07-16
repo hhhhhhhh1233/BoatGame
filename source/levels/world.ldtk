@@ -1121,22 +1121,6 @@
 							"__worldY": 16
 						},
 						{
-							"__identifier": "Mine",
-							"__grid": [6,7],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#D77643",
-							"iid": "4033fe90-25d0-11ef-b002-5fbb2f113fcc",
-							"width": 32,
-							"height": 32,
-							"defUid": 124,
-							"px": [208,240],
-							"fieldInstances": [],
-							"__worldX": 208,
-							"__worldY": 240
-						},
-						{
 							"__identifier": "SpawnPoint",
 							"__grid": [5,3],
 							"__pivot": [0.5,0.5],
@@ -1151,6 +1135,22 @@
 							"fieldInstances": [],
 							"__worldX": 176,
 							"__worldY": 112
+						},
+						{
+							"__identifier": "Mine",
+							"__grid": [6,6],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#D77643",
+							"iid": "94266cb0-25d0-11ef-b002-8d1fe7ed3dcf",
+							"width": 32,
+							"height": 32,
+							"defUid": 124,
+							"px": [208,208],
+							"fieldInstances": [],
+							"__worldX": 208,
+							"__worldY": 208
 						}
 					]
 				},
@@ -1553,22 +1553,6 @@
 						},
 						{
 							"__identifier": "Mine",
-							"__grid": [5,16],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#D77643",
-							"iid": "5a249000-25d0-11ef-b002-f7994a54a084",
-							"width": 32,
-							"height": 32,
-							"defUid": 124,
-							"px": [176,528],
-							"fieldInstances": [],
-							"__worldX": 784,
-							"__worldY": 368
-						},
-						{
-							"__identifier": "Mine",
 							"__grid": [8,10],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
@@ -1598,6 +1582,22 @@
 							"fieldInstances": [],
 							"__worldX": 688,
 							"__worldY": 112
+						},
+						{
+							"__identifier": "Mine",
+							"__grid": [5,15],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#D77643",
+							"iid": "969745a0-25d0-11ef-b002-f7ce65c495d3",
+							"width": 32,
+							"height": 32,
+							"defUid": 124,
+							"px": [176,496],
+							"fieldInstances": [],
+							"__worldX": 784,
+							"__worldY": 336
 						}
 					]
 				},
