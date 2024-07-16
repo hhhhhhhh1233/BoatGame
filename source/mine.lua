@@ -28,6 +28,7 @@ end
 
 function Mine:collisionResponse(other)
 	if other:isa(Player) then
+		other:Damage(1000, 10)
 		return "overlap"
 	end
 	return "slide"

@@ -30,6 +30,22 @@ function Player:init(x, y, image, speed, gameManager)
 
 	self:setGroups(COLLISION_GROUPS.PLAYER)
 	self:setCollidesWithGroups({COLLISION_GROUPS.WALL, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.TRIGGER})
+
+	self.Health = 100
+	self.Invincible = 0
+end
+
+function Player:Damage(amount, iFrames)
+	if self.Invincible > 0 then
+		return
+	end
+
+	self.Health -= amount
+	print(self.Health)
+	self.Invincible = iFrames
+	if self.Health <= 0 then
+		self:remove()
+	end
 end
 
 function Player:AddForce(Force)
@@ -91,4 +107,8 @@ function Player:update()
 	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(-self.PhysicsComponent.Velocity.x * 0.2, 0))
 
 	self.PhysicsComponent:Move(self)
+
+	if self.Invincible > 0 then
+		self.Invincible -= 1
+	end
 end
