@@ -26,6 +26,10 @@ function Mine:update()
 	self.PhysicsComponent:Move(self)
 end
 
+function Mine:Damage(amount)
+	self:remove()
+end
+
 function Mine:collisionResponse(other)
 	if other:isa(Player) then
 		other:Damage(1000, 10)

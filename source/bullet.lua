@@ -16,16 +16,20 @@ function Bullet:init(x, y, direction)
 	self.direction = direction
 
 	self:setGroups(COLLISION_GROUPS.PROJECTILE)
-	self:setCollidesWithGroups({COLLISION_GROUPS.WALL, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.ENEMY})
+	self:setCollidesWithGroups({COLLISION_GROUPS.PLAYER, COLLISION_GROUPS.WALL, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.ENEMY})
 
 	self:add()
 end
 
 function Bullet:update()
-	local x, y, c, n = self:moveWithCollisions(self.x + self.direction, self.y)
+	local x, y, c, n = self:moveWithCollisions(self.x + self.direction.x, self.y + self.direction.y)
 
 	if n >= 1 then
-		print("Hit")
+		for i = 1, #c do
+			if c[i].other.Damage ~= nil then
+				c[i].other:Damage(10, 10)
+			end
+		end
 		self:remove()
 	end
 end
