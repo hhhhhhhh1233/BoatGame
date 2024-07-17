@@ -38,6 +38,8 @@ function Scene:enterRoom(door, direction)
 		self.water.Height = self.LevelHeight - 16
 	elseif direction == "SOUTH" then
 		self.water.Height = 16
+		self.player.y += 16
+		self.player.PhysicsComponent.Position.y += 16
 	else
 		self.water.Height += yDiff
 	end
@@ -47,11 +49,11 @@ function Scene:enterRoom(door, direction)
 	self.player.PhysicsComponent.Position = playdate.geometry.vector2D.new(self.player.x, self.player.y)
 
 	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
-	self.camera:center(door.TargetX, door.TargetY)
+	self.camera:center(self.player.x, self.player.y)
 
 	local level_rect = LDtk.get_rect(door.TargetLevel)
-	self.water.LowerBound = 0 - 10
-	self.water.UpperBound = level_rect.height + 10
+	self.water.LowerBound = 0 - 20
+	self.water.UpperBound = level_rect.height + 20
 end
 
 -- TODO: This is broken, should probably make a entity list and just recreate them and leave the tiles as is
