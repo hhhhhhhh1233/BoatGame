@@ -27,7 +27,7 @@ function Bullet:update()
 	if n >= 1 then
 		for i = 1, #c do
 			if c[i].other.Damage ~= nil then
-				c[i].other:Damage(10, 10)
+				c[i].other:Damage(10, 5)
 			end
 		end
 		self:remove()

@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 128,
+	"nextUid": 129,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -953,6 +953,41 @@
 			"pivotX": 0.5,
 			"pivotY": 0.5,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "SimpleEnemy",
+			"uid": 128,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 32,
+			"height": 32,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#E4A672",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0.5,
+			"pivotY": 0.5,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -1151,6 +1186,22 @@
 							"fieldInstances": [],
 							"__worldX": 208,
 							"__worldY": 208
+						},
+						{
+							"__identifier": "SimpleEnemy",
+							"__grid": [12,10],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#E4A672",
+							"iid": "59af6790-25d0-11ef-b002-d143df31efb4",
+							"width": 32,
+							"height": 32,
+							"defUid": 128,
+							"px": [400,336],
+							"fieldInstances": [],
+							"__worldX": 400,
+							"__worldY": 336
 						}
 					]
 				},
@@ -1598,6 +1649,22 @@
 							"fieldInstances": [],
 							"__worldX": 784,
 							"__worldY": 336
+						},
+						{
+							"__identifier": "SimpleEnemy",
+							"__grid": [6,3],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#E4A672",
+							"iid": "28fe46f0-25d0-11ef-b002-c901dc37a3dd",
+							"width": 32,
+							"height": 32,
+							"defUid": 128,
+							"px": [208,112],
+							"fieldInstances": [],
+							"__worldX": 816,
+							"__worldY": -48
 						}
 					]
 				},
@@ -2042,6 +2109,22 @@
 							"fieldInstances": [],
 							"__worldX": 144,
 							"__worldY": -80
+						},
+						{
+							"__identifier": "SimpleEnemy",
+							"__grid": [11,4],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#E4A672",
+							"iid": "2b6275b0-25d0-11ef-b002-79f2816d15ef",
+							"width": 32,
+							"height": 32,
+							"defUid": 128,
+							"px": [368,144],
+							"fieldInstances": [],
+							"__worldX": 368,
+							"__worldY": -176
 						}
 					]
 				},

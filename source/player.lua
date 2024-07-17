@@ -117,7 +117,7 @@ function Player:update()
 	end
 
 	if pd.buttonJustPressed(pd.kButtonA) then
-		Bullet(self.PhysicsComponent.Position.x +  direction * 40, self.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(direction * 15, 0))
+		Bullet(self.PhysicsComponent.Position.x + direction * 40, self.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(direction * 15, 0))
 	end
 
 	if pd.buttonJustPressed(pd.kButtonB) then

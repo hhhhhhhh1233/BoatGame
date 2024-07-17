@@ -2,6 +2,7 @@ import "player"
 import "libraries/LDtk"
 import "DoorTrigger"
 import "mine"
+import "simpleEnemy"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -100,6 +101,8 @@ function Scene:goToLevel(level_name)
 		elseif entityName == "SpawnPoint" then
 			self.SpawnX = entityX
 			self.SpawnY = entityY
+		elseif entityName == "SimpleEnemy" then
+			SimpleEnemy(entityX, entityY, self.player)
 		end
 	end
 
