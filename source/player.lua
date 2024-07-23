@@ -33,6 +33,8 @@ function Player:init(x, y, image, speed, gameManager)
 
 	self.Health = 100
 	self.Invincible = 0
+
+	self.bActive = true
 end
 
 function Player:Damage(amount, iFrames)
@@ -116,25 +118,27 @@ function Player:update()
 		self.bCanJump = true
 	end
 
-	if pd.buttonJustPressed(pd.kButtonA) then
-		Bullet(self.PhysicsComponent.Position.x + direction * 40, self.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(direction * 15, 0))
-	end
+	if self.bActive then
+		if pd.buttonJustPressed(pd.kButtonA) then
+			Bullet(self.PhysicsComponent.Position.x + direction * 40, self.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(direction * 15, 0))
+		end
 
-	if pd.buttonJustPressed(pd.kButtonB) then
-		self:AddForce(pd.geometry.vector2D.new(0, -8))
-		self.bCanJump = false
-	end
+		if pd.buttonJustPressed(pd.kButtonB) then
+			self:AddForce(pd.geometry.vector2D.new(0, -8))
+			self.bCanJump = false
+		end
 
-	if pd.buttonIsPressed(pd.kButtonLeft) then
-		self:setImageFlip(gfx.kImageFlippedX)
-		self:AddForce(pd.geometry.vector2D.new(-self.Speed, 0))
-		direction = -1
-	end
+		if pd.buttonIsPressed(pd.kButtonLeft) then
+			self:setImageFlip(gfx.kImageFlippedX)
+			self:AddForce(pd.geometry.vector2D.new(-self.Speed, 0))
+			direction = -1
+		end
 
-	if pd.buttonIsPressed(pd.kButtonRight) then
-		self:setImageFlip(gfx.kImageUnflipped)
-		self:AddForce(pd.geometry.vector2D.new(self.Speed, 0))
-		direction = 1
+		if pd.buttonIsPressed(pd.kButtonRight) then
+			self:setImageFlip(gfx.kImageUnflipped)
+			self:AddForce(pd.geometry.vector2D.new(self.Speed, 0))
+			direction = 1
+		end
 	end
 
 	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(-self.PhysicsComponent.Velocity.x * 0.2, 0))
