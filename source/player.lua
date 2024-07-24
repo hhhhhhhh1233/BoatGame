@@ -29,7 +29,7 @@ function Player:init(x, y, image, speed, gameManager)
 	self:setCenter(0.5,1)
 
 	self:setGroups(COLLISION_GROUPS.PLAYER)
-	self:setCollidesWithGroups({COLLISION_GROUPS.WALL, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.TRIGGER})
+	self:setCollidesWithGroups({COLLISION_GROUPS.WALL, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.TRIGGER, COLLISION_GROUPS.PICKUPS})
 
 	self.Health = 100
 	self.Invincible = 0
@@ -91,6 +91,10 @@ function Player:collisionResponse(other)
 	if other:isa(DoorTrigger) then
 		self.Door = other
 		return "overlap"
+	end
+
+	if other:isa(AbilityPickup) then
+		other:pickup(self)
 	end
 
 	if other:isa(Mine) then

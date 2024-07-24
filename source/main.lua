@@ -4,7 +4,8 @@ COLLISION_GROUPS = {
 	PROJECTILE = 3,
 	WALL = 4,
 	EXPLOSIVE = 5,
-	TRIGGER = 6
+	TRIGGER = 6,
+	PICKUPS = 7
 }
 
 import "CoreLibs/object"
@@ -13,6 +14,7 @@ import "CoreLibs/sprites"
 import "CoreLibs/timer"
 import "CoreLibs/crank"
 import "CoreLibs/math"
+import "CoreLibs/ui"
 
 -- Utilities
 import "camera"
@@ -58,4 +60,15 @@ function pd.update()
 	update_timers()
 
 	SceneManager.player:DrawHealthBar()
+
+	-- NOTE: This blurs the image at the bottom, but I think this might have terrible performance on the actual playdate so keep that in mind if you ever get your hands on one
+	local ox, oy = gfx.getDrawOffset()
+	local blurred = gfx.getWorkingImage():blurredImage(1, 1, gfx.image.kDitherTypeBayer4x4, true)
+	local ix, iy = blurred:getSize()
+	local waterMask = gfx.image.new(ix, iy)
+	gfx.pushContext(waterMask)
+	gfx.fillRect(0, SceneManager.water.Height + oy + 2, 400, 400)
+	gfx.popContext()
+	blurred:setMaskImage(waterMask)
+	blurred:drawAnchored(-ox, -oy, 0, 0)
 end

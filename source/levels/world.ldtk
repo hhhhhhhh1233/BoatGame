@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 129,
+	"nextUid": 133,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -988,6 +988,79 @@
 			"pivotX": 0.5,
 			"pivotY": 0.5,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "AbilityPickup",
+			"uid": 129,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 32,
+			"height": 32,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#733E39",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0.5,
+			"pivotY": 0.5,
+			"fieldDefs": [
+				{
+					"identifier": "Abilities",
+					"doc": null,
+					"__type": "Array<LocalEnum.Abilities>",
+					"uid": 132,
+					"type": "F_Enum(130)",
+					"isArray": true,
+					"canBeNull": false,
+					"arrayMinLength": 2,
+					"arrayMaxLength": 4,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -1012,7 +1085,10 @@
 				"averageColors": "f666f555f666f666f555f111f444f111f555f555f444f000f444f555f555f111f444f111f777f666f999ffff000000000000"
 			}
 		}
-	], "enums": [{ "identifier": "TileEnum", "uid": 3, "values": [{ "id": "Solid", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }], "externalEnums": [], "levelFields": [] },
+	], "enums": [
+		{ "identifier": "TileEnum", "uid": 3, "values": [{ "id": "Solid", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
+		{ "identifier": "Abilities", "uid": 130, "values": [ { "id": "Jumping", "tileRect": null, "color": 12470831 }, { "id": "Shooting", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
+	], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "Level_0",
@@ -2125,6 +2201,28 @@
 							"fieldInstances": [],
 							"__worldX": 368,
 							"__worldY": -176
+						},
+						{
+							"__identifier": "AbilityPickup",
+							"__grid": [10,7],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#733E39",
+							"iid": "ff5ad920-25d0-11ef-9851-7f7b63b594c6",
+							"width": 32,
+							"height": 32,
+							"defUid": 129,
+							"px": [336,240],
+							"fieldInstances": [{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Jumping", "Shooting" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
+								"id": "V_String",
+								"params": ["Jumping"]
+							}, {
+								"id": "V_String",
+								"params": ["Shooting"]
+							} ] }],
+							"__worldX": 336,
+							"__worldY": -80
 						}
 					]
 				},
