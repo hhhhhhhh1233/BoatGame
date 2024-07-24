@@ -38,6 +38,14 @@ local PlayerInstance = SceneManager.player
 
 gfx.setBackgroundColor(gfx.kColorClear)
 
+local i = 0
+pd.timer.keyRepeatTimerWithDelay(0, 800, function ()
+	i += 1
+	if i > 1 then
+		i = 0
+	end
+end)
+
 function pd.update()
 	gfx.clear(gfx.kColorWhite)
 
@@ -70,5 +78,5 @@ function pd.update()
 	gfx.fillRect(0, SceneManager.water.Height + oy + 2, 400, 400)
 	gfx.popContext()
 	blurred:setMaskImage(waterMask)
-	blurred:drawAnchored(-ox, -oy, 0, 0)
+	blurred:drawAnchored(-ox, -oy + i, 0, 0)
 end
