@@ -78,5 +78,7 @@ function pd.update()
 	gfx.fillRect(0, SceneManager.water.Height + oy + 2, 400, 400)
 	gfx.popContext()
 	blurred:setMaskImage(waterMask)
-	blurred:drawAnchored(-ox, -oy + i, 0, 0)
+	local width = pd.display.getWidth()
+	local xOffset = (ix - width) / 2
+	blurred:drawAnchored(-ox - xOffset, -oy - i, 0, 0)
 end

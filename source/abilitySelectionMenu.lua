@@ -5,10 +5,16 @@ class('AbilitySelectionMenu').extends(gfx.sprite)
 
 function AbilitySelectionMenu:init(player)
 	self.grid = pd.ui.gridview.new(100, 200)
-	self.grid:setNumberOfColumns(3)
+	self.grid:setNumberOfColumns(2)
 	self.grid:setNumberOfRows(1)
 	self.grid:setCellPadding(2, 2, 2, 2)
-	local Upgrades = {"Jumping", "Shooting", "Flying"}
+	local Upgrades = {"Jumping", "Shooting"}
+	self.Upgrades = {function ()
+		self.player:AddForce(pd.geometry.vector2D.new(0, -8))
+		self.player.bCanJump = false
+	end, function ()
+		Bullet(self.player.PhysicsComponent.Position.x + self.player.direction * 40, self.player.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(self.player.direction * 15, 0))
+	end}
 	function self.grid:drawCell(section, row, column, selected, x, y, width, height)
 		local offsetX, offsetY = gfx.getDrawOffset()
 		gfx.setColor(gfx.kColorBlack)
@@ -33,7 +39,9 @@ function AbilitySelectionMenu:update()
 	elseif pd.buttonJustPressed(pd.kButtonLeft) then
 		self.grid:selectPreviousColumn(false)
 	elseif pd.buttonJustPressed(pd.kButtonA) then
+		local _, _, column = self.grid:getSelection()
 		self.player.bActive = true
+		self.player:setAbilityA(self.Upgrades[column])
 		self:remove()
 	end
 	self.grid:drawInRect(30,30,1000,1000)

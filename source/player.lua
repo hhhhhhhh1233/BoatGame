@@ -35,6 +35,12 @@ function Player:init(x, y, image, speed, gameManager)
 	self.Invincible = 0
 
 	self.bActive = true
+
+	self.direction = 1
+
+	self.AbilityA = nil
+	self.AbilityB = nil
+	self.PassiveAbility = nil
 end
 
 function Player:Damage(amount, iFrames)
@@ -104,8 +110,6 @@ function Player:collisionResponse(other)
 	end
 end
 
-local direction = 1
-
 function Player:update()
 	-- NOTE: Since I moved the center of the player it checks from the bottom of the sprite, should probably check from center
 	if self.x > self.GameManager.LevelWidth and self.PhysicsComponent.Velocity.x > 0 then
@@ -124,24 +128,27 @@ function Player:update()
 
 	if self.bActive then
 		if pd.buttonJustPressed(pd.kButtonA) then
-			Bullet(self.PhysicsComponent.Position.x + direction * 40, self.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(direction * 15, 0))
+			if self.AbilityA then
+				self:AbilityA()
+			end
 		end
 
 		if pd.buttonJustPressed(pd.kButtonB) then
-			self:AddForce(pd.geometry.vector2D.new(0, -8))
-			self.bCanJump = false
+			if self.AbilityB then
+				self:AbilityB()
+			end
 		end
 
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:setImageFlip(gfx.kImageFlippedX)
 			self:AddForce(pd.geometry.vector2D.new(-self.Speed, 0))
-			direction = -1
+			self.direction = -1
 		end
 
 		if pd.buttonIsPressed(pd.kButtonRight) then
 			self:setImageFlip(gfx.kImageUnflipped)
 			self:AddForce(pd.geometry.vector2D.new(self.Speed, 0))
-			direction = 1
+			self.direction = 1
 		end
 	end
 
@@ -152,5 +159,12 @@ function Player:update()
 	if self.Invincible > 0 then
 		self.Invincible -= 1
 	end
+end
 
+function Player:setAbilityA(func)
+	self.AbilityA = func
+end
+
+function Player:setAbilityB(func)
+	self.AbilityB = func
 end
