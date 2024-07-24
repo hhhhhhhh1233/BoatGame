@@ -129,13 +129,13 @@ function Player:update()
 	if self.bActive then
 		if pd.buttonJustPressed(pd.kButtonA) then
 			if self.AbilityA then
-				self:AbilityA()
+				self.AbilityA(self)
 			end
 		end
 
 		if pd.buttonJustPressed(pd.kButtonB) then
 			if self.AbilityB then
-				self:AbilityB()
+				self.AbilityB(self)
 			end
 		end
 

@@ -9,11 +9,11 @@ function AbilitySelectionMenu:init(player)
 	self.grid:setNumberOfRows(1)
 	self.grid:setCellPadding(2, 2, 2, 2)
 	local Upgrades = {"Jumping", "Shooting"}
-	self.Upgrades = {function ()
-		self.player:AddForce(pd.geometry.vector2D.new(0, -8))
-		self.player.bCanJump = false
-	end, function ()
-		Bullet(self.player.PhysicsComponent.Position.x + self.player.direction * 40, self.player.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(self.player.direction * 15, 0))
+	self.Upgrades = {function (player)
+		player:AddForce(pd.geometry.vector2D.new(0, -8))
+		player.bCanJump = false
+	end, function (player)
+		Bullet(player.PhysicsComponent.Position.x + player.direction * 40, player.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(player.direction * 15, 0))
 	end}
 	function self.grid:drawCell(section, row, column, selected, x, y, width, height)
 		local offsetX, offsetY = gfx.getDrawOffset()
