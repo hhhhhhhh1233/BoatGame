@@ -75,10 +75,10 @@ function pd.update()
 	local ix, iy = blurred:getSize()
 	local waterMask = gfx.image.new(ix, iy)
 	gfx.pushContext(waterMask)
-	gfx.fillRect(0, SceneManager.water.Height + oy + 2, 400, 400)
+	gfx.fillRect(2, SceneManager.water.Height + oy + 2 - i, 400 - 2, 400)
 	gfx.popContext()
 	blurred:setMaskImage(waterMask)
 	local width = pd.display.getWidth()
 	local xOffset = (ix - width) / 2
-	blurred:drawAnchored(-ox - xOffset, -oy - i, 0, 0)
+	blurred:drawAnchored(-ox - xOffset, -oy + i, 0, 0)
 end
