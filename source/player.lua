@@ -78,7 +78,7 @@ function Player:DrawHealthBar()
 	local aX, aY = gfx.getDrawOffset()
 
 	-- TODO: This should be used instead of the magic numbers below
-	local textWidth = gfx.getSystemFont():getTextWidth(self.Health)
+	-- local textWidth = gfx.getSystemFont():getTextWidth(self.Health)
 
 	gfx.setColor(gfx.kColorWhite)
 	gfx.fillRect(-aX + 10 - 3, -aY + 10 - 3, 30 + 3 * 2, 20 + 3 * 2)
@@ -139,6 +139,10 @@ function Player:update()
 			end
 		end
 
+		if self.PassiveAbility then
+			self:PassiveAbility()
+		end
+
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:setImageFlip(gfx.kImageFlippedX)
 			self:AddForce(pd.geometry.vector2D.new(-self.Speed, 0))
@@ -163,8 +167,15 @@ end
 
 function Player:setAbilityA(func)
 	self.AbilityA = func
+	print(self.AbilityA)
 end
 
 function Player:setAbilityB(func)
 	self.AbilityB = func
+	print(self.AbilityB)
+end
+
+function Player:setPassive(func)
+	self.PassiveAbility = func
+	print(self.PassiveAbility)
 end

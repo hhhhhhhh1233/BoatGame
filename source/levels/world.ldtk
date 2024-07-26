@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 133,
+	"nextUid": 135,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -1059,6 +1059,43 @@
 					"allowedRefsEntityUid": null,
 					"allowedRefTags": [],
 					"tilesetUid": null
+				},
+				{
+					"identifier": "AbilityType",
+					"doc": null,
+					"__type": "LocalEnum.AbilityType",
+					"uid": 134,
+					"type": "F_Enum(133)",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
 				}
 			]
 		}
@@ -1087,7 +1124,12 @@
 		}
 	], "enums": [
 		{ "identifier": "TileEnum", "uid": 3, "values": [{ "id": "Solid", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
-		{ "identifier": "Abilities", "uid": 130, "values": [ { "id": "Jumping", "tileRect": null, "color": 12470831 }, { "id": "Shooting", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
+		{ "identifier": "Abilities", "uid": 130, "values": [ { "id": "Jump", "tileRect": null, "color": 12470831 }, { "id": "Shoot", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
+		{ "identifier": "AbilityType", "uid": 133, "values": [
+			{ "id": "AButton", "tileRect": null, "color": 12470831 },
+			{ "id": "BButton", "tileRect": null, "color": 14120515 },
+			{ "id": "Passive", "tileRect": null, "color": 15389866 }
+		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
@@ -2187,22 +2229,6 @@
 							"__worldY": -80
 						},
 						{
-							"__identifier": "SimpleEnemy",
-							"__grid": [11,4],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#E4A672",
-							"iid": "2b6275b0-25d0-11ef-b002-79f2816d15ef",
-							"width": 32,
-							"height": 32,
-							"defUid": 128,
-							"px": [368,144],
-							"fieldInstances": [],
-							"__worldX": 368,
-							"__worldY": -176
-						},
-						{
 							"__identifier": "AbilityPickup",
 							"__grid": [10,7],
 							"__pivot": [0.5,0.5],
@@ -2214,13 +2240,22 @@
 							"height": 32,
 							"defUid": 129,
 							"px": [336,240],
-							"fieldInstances": [{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Jumping", "Shooting" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
-								"id": "V_String",
-								"params": ["Jumping"]
-							}, {
-								"id": "V_String",
-								"params": ["Shooting"]
-							} ] }],
+							"fieldInstances": [
+								{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Jump", "Shoot", "Jump" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
+									"id": "V_String",
+									"params": ["Jump"]
+								}, {
+									"id": "V_String",
+									"params": ["Shoot"]
+								}, {
+									"id": "V_String",
+									"params": ["Jump"]
+								} ] },
+								{ "__identifier": "AbilityType", "__type": "LocalEnum.AbilityType", "__value": "AButton", "__tile": null, "defUid": 134, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["AButton"]
+								}] }
+							],
 							"__worldX": 336,
 							"__worldY": -80
 						}

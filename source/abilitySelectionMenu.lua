@@ -1,20 +1,26 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
+import "abilities"
 
 class('AbilitySelectionMenu').extends(gfx.sprite)
 
-function AbilitySelectionMenu:init(player)
+function AbilitySelectionMenu:init(player, entity)
+	self.fields = entity.fields
+	self.upgrades = self.fields.Abilities
+
+	if self.fields.AbilityType == "AButton" then
+		self.func = player.setAbilityA
+	elseif self.fields.AbilityType == "BButton" then
+		self.func = player.setAbilityB
+	elseif self.fields.AbilityType == "Passive" then
+		self.func = player.setPassive
+	end
+
 	self.grid = pd.ui.gridview.new(100, 200)
-	self.grid:setNumberOfColumns(2)
+	self.grid:setNumberOfColumns(#self.upgrades)
 	self.grid:setNumberOfRows(1)
 	self.grid:setCellPadding(2, 2, 2, 2)
-	local Upgrades = {"Jumping", "Shooting"}
-	self.Upgrades = {function (player)
-		player:AddForce(pd.geometry.vector2D.new(0, -8))
-		player.bCanJump = false
-	end, function (player)
-		Bullet(player.PhysicsComponent.Position.x + player.direction * 40, player.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(player.direction * 15, 0))
-	end}
+	local upgrades = self.upgrades
 	function self.grid:drawCell(section, row, column, selected, x, y, width, height)
 		local offsetX, offsetY = gfx.getDrawOffset()
 		gfx.setColor(gfx.kColorBlack)
@@ -26,9 +32,9 @@ function AbilitySelectionMenu:init(player)
 			gfx.setImageDrawMode(gfx.kDrawModeCopy)
 			gfx.drawRect(x - offsetX, y - offsetY, width, height)
 		end
-		gfx.drawTextInRect(Upgrades[column], x - offsetX, y + (height/2) - offsetY, width, height, nil, nil, kTextAlignment.center)
+		gfx.drawTextInRect(upgrades[column], x - offsetX, y + (height/2) - offsetY, width, height, nil, nil, kTextAlignment.center)
 	end
-	self:setZIndex(1000)
+	self:setZIndex(-1000)
 	self:add()
 	self.player = player
 end
@@ -40,8 +46,8 @@ function AbilitySelectionMenu:update()
 		self.grid:selectPreviousColumn(false)
 	elseif pd.buttonJustPressed(pd.kButtonA) then
 		local _, _, column = self.grid:getSelection()
+		self.func(self.player, Abilities[self.upgrades[column]])
 		self.player.bActive = true
-		self.player:setAbilityA(self.Upgrades[column])
 		self:remove()
 	end
 	self.grid:drawInRect(30,30,1000,1000)
