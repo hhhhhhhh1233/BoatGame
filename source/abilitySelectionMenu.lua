@@ -16,7 +16,8 @@ function AbilitySelectionMenu:init(player, entity)
 	elseif self.fields.AbilityType == "Passive" then
 		self.func = player.setPassive
 	end
-	self.image = gfx.image.new(200, 100)
+	self:setImage(gfx.image.new(400 - 60, 240 - 60))
+	self:setCenter(0, 0)
 
 	self.grid = pd.ui.gridview.new((400 - 60 - 20 - 4 * #self.upgrades)/#self.upgrades, 156)
 	self.grid:setNumberOfColumns(#self.upgrades)
@@ -31,13 +32,14 @@ function AbilitySelectionMenu:init(player, entity)
 			gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
 			gfx.fillRect(x, y, width, height)
 			gfx.setColor(gfx.kColorWhite)
+			gfx.drawTextInRect(upgrades[column], x, y + (height/2) + 3 * math.sin(7 * pd.getElapsedTime()), width, height, nil, nil, kTextAlignment.center)
 		else
 			gfx.setImageDrawMode(gfx.kDrawModeCopy)
 			gfx.drawRect(x, y, width, height)
+			gfx.drawTextInRect(upgrades[column], x, y + (height/2), width, height, nil, nil, kTextAlignment.center)
 		end
-		gfx.drawTextInRect(upgrades[column], x, y + (height/2), width, height, nil, nil, kTextAlignment.center)
 	end
-	self:setZIndex(1000)
+	self:setZIndex(10)
 	self:add()
 	self.player = player
 end
@@ -53,9 +55,13 @@ function AbilitySelectionMenu:update()
 		self.player.bActive = true
 		self:remove()
 	end
-	gfx.pushContext(self)
 	local offsetX, offsetY = gfx.getDrawOffset()
+	self:moveTo(30 - offsetX, 30 - offsetY)
+
+	gfx.lockFocus(self:getImage())
 	gfx.setColor(gfx.kColorWhite)
-	self.grid:drawInRect(30 - offsetX, 30 - offsetY, 400 - 60, 240 - 60)
-	gfx.popContext()
+	gfx.fillRect(0, 0, 400 - 60, 240 - 60)
+	self.grid:drawInRect(0, 0, 400 - 60, 240 - 60)
+	-- self.grid:drawInRect(30 - offsetX, 30 - offsetY, 400 - 60, 240 - 60)
+	gfx.unlockFocus()
 end
