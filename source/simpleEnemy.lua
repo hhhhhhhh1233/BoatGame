@@ -26,7 +26,7 @@ function SimpleEnemy:update()
 	local toPlayer = self.player.PhysicsComponent.Position - self.position
 	if toPlayer:magnitude() < 250 and self.cooldown >= 15 then
 		local _, _, _, n = self:checkCollisions(self.player.x, self.player.y)
-		if n < 1 then
+		if n < 1 and self.player.bActive then
 			Bullet(self.x + toPlayer:normalized().x * 30, self.y + toPlayer:normalized().y * 30, toPlayer:normalized() * 5)
 			self.cooldown = 0
 		end
