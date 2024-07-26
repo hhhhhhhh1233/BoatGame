@@ -21,7 +21,7 @@ function Player:init(x, y, image, speed, gameManager)
 	self:setCollideRect(4, 10, 26, 22)
 	self.Speed = speed
 
-	self.PhysicsComponent = PhysicsComponent(x, y)
+	self.PhysicsComponent = PhysicsComponent(x, y, 10)
 
 	self.bUnderwater = false
 	self.bCanJump = true

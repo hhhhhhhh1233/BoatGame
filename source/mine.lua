@@ -14,7 +14,7 @@ function Mine:init(x, y, image)
 	self:moveTo(x, y)
 	self:setImage(image)
 	self:setCollideRect(0, 0, self:getSize())
-	self.PhysicsComponent = PhysicsComponent(x, y)
+	self.PhysicsComponent = PhysicsComponent(x, y, 10)
 
 	self:setGroups(COLLISION_GROUPS.EXPLOSIVE)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.WALL, COLLISION_GROUPS.PLAYER})

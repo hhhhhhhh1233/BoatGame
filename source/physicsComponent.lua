@@ -3,10 +3,11 @@ local gfx <const> = pd.graphics
 
 class('PhysicsComponent').extends()
 
-function PhysicsComponent:init(x, y)
+function PhysicsComponent:init(x, y, maxVelocity)
 	self.Position = pd.geometry.vector2D.new(x, y)
 	self.Velocity = pd.geometry.vector2D.new(0, 0)
 	self.Acceleration = pd.geometry.vector2D.new(0, 0)
+	self.maxVelocity = maxVelocity
 end
 
 function PhysicsComponent:AddForce(Force)
@@ -18,6 +19,11 @@ function PhysicsComponent:Move(owner)
 	self.Velocity += self.Acceleration
 	self.Position += self.Velocity
 	self.Acceleration = pd.geometry.vector2D.new(0, 0)
+
+	-- Limits the velocity of the object
+	if self.Velocity:magnitude() > self.maxVelocity then
+		self.Velocity = self.Velocity:normalized() * self.maxVelocity
+	end
 
 	-- Actual moving
 	local collisions, length
