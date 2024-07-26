@@ -1,6 +1,7 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 import "abilities"
+import "CoreLibs/nineslice"
 
 class('AbilitySelectionMenu').extends(gfx.sprite)
 
@@ -15,26 +16,28 @@ function AbilitySelectionMenu:init(player, entity)
 	elseif self.fields.AbilityType == "Passive" then
 		self.func = player.setPassive
 	end
+	self.image = gfx.image.new(200, 100)
 
-	self.grid = pd.ui.gridview.new(100, 200)
+	self.grid = pd.ui.gridview.new((400 - 60 - 20 - 4 * #self.upgrades)/#self.upgrades, 156)
 	self.grid:setNumberOfColumns(#self.upgrades)
 	self.grid:setNumberOfRows(1)
 	self.grid:setCellPadding(2, 2, 2, 2)
+	self.grid.backgroundImage = gfx.nineSlice.new("images/gridBackground", 8, 8, 47, 47)
+	self.grid:setContentInset(10, 10, 10, 10)
 	local upgrades = self.upgrades
 	function self.grid:drawCell(section, row, column, selected, x, y, width, height)
-		local offsetX, offsetY = gfx.getDrawOffset()
 		gfx.setColor(gfx.kColorBlack)
 		if selected then
 			gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
-			gfx.fillRect(x - offsetX, y - offsetY, width, height)
+			gfx.fillRect(x, y, width, height)
 			gfx.setColor(gfx.kColorWhite)
 		else
 			gfx.setImageDrawMode(gfx.kDrawModeCopy)
-			gfx.drawRect(x - offsetX, y - offsetY, width, height)
+			gfx.drawRect(x, y, width, height)
 		end
-		gfx.drawTextInRect(upgrades[column], x - offsetX, y + (height/2) - offsetY, width, height, nil, nil, kTextAlignment.center)
+		gfx.drawTextInRect(upgrades[column], x, y + (height/2), width, height, nil, nil, kTextAlignment.center)
 	end
-	self:setZIndex(-1000)
+	self:setZIndex(1000)
 	self:add()
 	self.player = player
 end
@@ -50,5 +53,9 @@ function AbilitySelectionMenu:update()
 		self.player.bActive = true
 		self:remove()
 	end
-	self.grid:drawInRect(30,30,1000,1000)
+	gfx.pushContext(self)
+	local offsetX, offsetY = gfx.getDrawOffset()
+	gfx.setColor(gfx.kColorWhite)
+	self.grid:drawInRect(30 - offsetX, 30 - offsetY, 400 - 60, 240 - 60)
+	gfx.popContext()
 end

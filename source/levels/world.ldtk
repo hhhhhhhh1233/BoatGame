@@ -1320,6 +1320,34 @@
 							"fieldInstances": [],
 							"__worldX": 400,
 							"__worldY": 336
+						},
+						{
+							"__identifier": "AbilityPickup",
+							"__grid": [10,3],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#733E39",
+							"iid": "415d3b10-25d0-11ef-b6e3-391edca1b6c8",
+							"width": 32,
+							"height": 32,
+							"defUid": 129,
+							"px": [336,112],
+							"fieldInstances": [
+								{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Jump", "Shoot" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
+									"id": "V_String",
+									"params": ["Jump"]
+								}, {
+									"id": "V_String",
+									"params": ["Shoot"]
+								} ] },
+								{ "__identifier": "AbilityType", "__type": "LocalEnum.AbilityType", "__value": "AButton", "__tile": null, "defUid": 134, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["AButton"]
+								}] }
+							],
+							"__worldX": 336,
+							"__worldY": 112
 						}
 					]
 				},
@@ -2226,37 +2254,6 @@
 							"px": [144,240],
 							"fieldInstances": [],
 							"__worldX": 144,
-							"__worldY": -80
-						},
-						{
-							"__identifier": "AbilityPickup",
-							"__grid": [10,7],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#733E39",
-							"iid": "ff5ad920-25d0-11ef-9851-7f7b63b594c6",
-							"width": 32,
-							"height": 32,
-							"defUid": 129,
-							"px": [336,240],
-							"fieldInstances": [
-								{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Jump", "Shoot", "Jump" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
-									"id": "V_String",
-									"params": ["Jump"]
-								}, {
-									"id": "V_String",
-									"params": ["Shoot"]
-								}, {
-									"id": "V_String",
-									"params": ["Jump"]
-								} ] },
-								{ "__identifier": "AbilityType", "__type": "LocalEnum.AbilityType", "__value": "AButton", "__tile": null, "defUid": 134, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["AButton"]
-								}] }
-							],
-							"__worldX": 336,
 							"__worldY": -80
 						}
 					]
