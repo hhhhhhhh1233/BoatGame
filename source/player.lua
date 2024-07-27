@@ -111,6 +111,7 @@ function Player:collisionResponse(other)
 end
 
 function Player:update()
+	print(self.PhysicsComponent.Velocity:magnitude())
 	-- NOTE: Since I moved the center of the player it checks from the bottom of the sprite, should probably check from center
 	if self.x > self.GameManager.LevelWidth and self.PhysicsComponent.Velocity.x > 0 then
 		self.GameManager:enterRoom(self.Door, "EAST")
@@ -145,13 +146,15 @@ function Player:update()
 
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:setImageFlip(gfx.kImageFlippedX)
-			self:AddForce(pd.geometry.vector2D.new(-self.Speed, 0))
+			-- self:AddForce(pd.geometry.vector2D.new(-self.Speed, 0))
+			self.PhysicsComponent.Velocity.x = -self.Speed
 			self.direction = -1
 		end
 
 		if pd.buttonIsPressed(pd.kButtonRight) then
 			self:setImageFlip(gfx.kImageUnflipped)
-			self:AddForce(pd.geometry.vector2D.new(self.Speed, 0))
+			-- self:AddForce(pd.geometry.vector2D.new(self.Speed, 0))
+			self.PhysicsComponent.Velocity.x = self.Speed
 			self.direction = 1
 		end
 	end

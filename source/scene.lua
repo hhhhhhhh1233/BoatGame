@@ -13,7 +13,7 @@ LDtk.load("levels/world.ldtk", false)
 class('Scene').extends()
 
 function Scene:init(spawnX, spawnY)
-	self.player = Player(spawnX, spawnY, gfx.image.new("images/Boat"), 2, self)
+	self.player = Player(spawnX, spawnY, gfx.image.new("images/Boat"), 5, self)
 	self:goToLevel("Level_0")
 	local level_rect = LDtk.get_rect("Level_0")
 	self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
@@ -119,7 +119,9 @@ end
 
 function Scene:UpdatePhysicsComponentsBuoyancy()
 	for i = 1, #self.ActivePhysicsComponents do
-		local buoyancyForces = CalculateBuoyancy(self.water.Height, self.ActivePhysicsComponents[i].Position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
-		self.ActivePhysicsComponents[i]:AddForce(buoyancyForces)
+		if self.ActivePhysicsComponents[i].bBuoyant then
+			local buoyancyForces = CalculateBuoyancy(self.water.Height, self.ActivePhysicsComponents[i].Position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
+			self.ActivePhysicsComponents[i]:AddForce(buoyancyForces)
+		end
 	end
 end

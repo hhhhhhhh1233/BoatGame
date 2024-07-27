@@ -8,6 +8,7 @@ function PhysicsComponent:init(x, y, maxVelocity)
 	self.Velocity = pd.geometry.vector2D.new(0, 0)
 	self.Acceleration = pd.geometry.vector2D.new(0, 0)
 	self.maxVelocity = maxVelocity
+	self.bBuoyant = true
 end
 
 function PhysicsComponent:AddForce(Force)

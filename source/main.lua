@@ -58,7 +58,9 @@ function pd.update()
 
 	-- Player Gravity
 	local Gravity = 0.5
-	PlayerInstance:AddForce(vector2D_new(0, Gravity))
+	if PlayerInstance.PhysicsComponent.bBuoyant or not PlayerInstance.bUnderwater then
+		PlayerInstance:AddForce(vector2D_new(0, Gravity))
+	end
 
 	SceneManager:UpdatePhysicsComponentsBuoyancy()
 

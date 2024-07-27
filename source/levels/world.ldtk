@@ -1031,7 +1031,7 @@
 					"type": "F_Enum(130)",
 					"isArray": true,
 					"canBeNull": false,
-					"arrayMinLength": 2,
+					"arrayMinLength": 1,
 					"arrayMaxLength": 4,
 					"editorDisplayMode": "Hidden",
 					"editorDisplayScale": 1,
@@ -1164,7 +1164,11 @@
 		}
 	], "enums": [
 		{ "identifier": "TileEnum", "uid": 3, "values": [{ "id": "Solid", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
-		{ "identifier": "Abilities", "uid": 130, "values": [ { "id": "Jump", "tileRect": null, "color": 12470831 }, { "id": "Shoot", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
+		{ "identifier": "Abilities", "uid": 130, "values": [
+			{ "id": "Jump", "tileRect": null, "color": 12470831 },
+			{ "id": "Shoot", "tileRect": null, "color": 14120515 },
+			{ "id": "Submerge", "tileRect": null, "color": 15389866 }
+		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
 		{ "identifier": "AbilityType", "uid": 133, "values": [
 			{ "id": "AButton", "tileRect": null, "color": 12470831 },
 			{ "id": "BButton", "tileRect": null, "color": 14120515 },
@@ -1823,6 +1827,32 @@
 							"fieldInstances": [],
 							"__worldX": 816,
 							"__worldY": -48
+						},
+						{
+							"__identifier": "AbilityPickup",
+							"__grid": [9,18],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#733E39",
+							"iid": "add25490-25d0-11ef-b6e3-4daafce01a82",
+							"width": 32,
+							"height": 32,
+							"defUid": 129,
+							"px": [304,592],
+							"fieldInstances": [
+								{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": ["Submerge"], "__tile": null, "defUid": 132, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Submerge"]
+								}] },
+								{ "__identifier": "AbilityType", "__type": "LocalEnum.AbilityType", "__value": "Passive", "__tile": null, "defUid": 134, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["Passive"]
+								}] },
+								{ "__identifier": "PickedUp", "__type": "Bool", "__value": false, "__tile": null, "defUid": 135, "realEditorValues": [] }
+							],
+							"__worldX": 912,
+							"__worldY": 432
 						}
 					]
 				},
