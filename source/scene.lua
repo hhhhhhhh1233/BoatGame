@@ -3,6 +3,7 @@ import "libraries/LDtk"
 import "DoorTrigger"
 import "mine"
 import "simpleEnemy"
+import "floatingEnemy"
 import "abilityPickup"
 
 local pd <const> = playdate
@@ -101,6 +102,9 @@ function Scene:goToLevel(level_name)
 		elseif entityName == "Mine" then
 			local MineInstance = Mine(entityX, entityY, gfx.image.new("images/Mine"))
 			table.insert(self.ActivePhysicsComponents, MineInstance.PhysicsComponent)
+		elseif entityName == "FloatingEnemy" then
+			local FloaterInstance = FloatingEnemy(entityX, entityY, self.player)
+			table.insert(self.ActivePhysicsComponents, FloaterInstance.PhysicsComponent)
 		elseif entityName == "SpawnPoint" then
 			self.SpawnX = entityX
 			self.SpawnY = entityY

@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 136,
+	"nextUid": 137,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -1138,6 +1138,41 @@
 					"tilesetUid": null
 				}
 			]
+		},
+		{
+			"identifier": "FloatingEnemy",
+			"uid": 136,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 32,
+			"height": 32,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#3E2731",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -1364,6 +1399,22 @@
 							"fieldInstances": [],
 							"__worldX": 400,
 							"__worldY": 336
+						},
+						{
+							"__identifier": "FloatingEnemy",
+							"__grid": [9,4],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#3E2731",
+							"iid": "e19556d0-25d0-11ef-b6e3-3bc53d2af0b4",
+							"width": 32,
+							"height": 32,
+							"defUid": 136,
+							"px": [288,128],
+							"fieldInstances": [],
+							"__worldX": 288,
+							"__worldY": 128
 						}
 					]
 				},
