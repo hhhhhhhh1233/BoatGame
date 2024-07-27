@@ -58,7 +58,6 @@ function Scene:enterRoom(door, direction)
 	self.water.UpperBound = level_rect.height + 20
 end
 
--- TODO: This is broken, should probably make a entity list and just recreate them and leave the tiles as is
 function Scene:reloadLevel()
 	self:goToLevel(self.currentLevel)
 end

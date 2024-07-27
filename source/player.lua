@@ -74,7 +74,7 @@ function Player:Respawn()
 	self:setVisible(true)
 	self.bActive = true
 
-	-- self.GameManager:reloadLevel()
+	self.GameManager:reloadLevel()
 end
 
 function Player:DrawHealthBar()
