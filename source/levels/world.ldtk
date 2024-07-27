@@ -1399,22 +1399,6 @@
 							"fieldInstances": [],
 							"__worldX": 400,
 							"__worldY": 336
-						},
-						{
-							"__identifier": "FloatingEnemy",
-							"__grid": [9,4],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#3E2731",
-							"iid": "e19556d0-25d0-11ef-b6e3-3bc53d2af0b4",
-							"width": 32,
-							"height": 32,
-							"defUid": 136,
-							"px": [288,128],
-							"fieldInstances": [],
-							"__worldX": 288,
-							"__worldY": 128
 						}
 					]
 				},
@@ -1904,6 +1888,22 @@
 							],
 							"__worldX": 912,
 							"__worldY": 432
+						},
+						{
+							"__identifier": "FloatingEnemy",
+							"__grid": [8,7],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#3E2731",
+							"iid": "e2d05a20-25d0-11ef-b6e3-cf2fd6e6f394",
+							"width": 32,
+							"height": 32,
+							"defUid": 136,
+							"px": [256,224],
+							"fieldInstances": [],
+							"__worldX": 864,
+							"__worldY": 64
 						}
 					]
 				},

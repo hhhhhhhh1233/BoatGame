@@ -49,11 +49,13 @@ function Player:Damage(amount, iFrames)
 	end
 
 	self.Health -= amount
-	print(self.Health)
 	self.Invincible = iFrames
 	if self.Health <= 0 then
 		self:setVisible(false)
-		self:Respawn()
+		self.bActive = false
+		pd.timer.performAfterDelay(1000, function ()
+			self:Respawn()
+		end)
 	end
 end
 
@@ -70,6 +72,7 @@ function Player:Respawn()
 
 
 	self:setVisible(true)
+	self.bActive = true
 
 	-- self.GameManager:reloadLevel()
 end
@@ -111,7 +114,6 @@ function Player:collisionResponse(other)
 end
 
 function Player:update()
-	print(self.PhysicsComponent.Velocity:magnitude())
 	-- NOTE: Since I moved the center of the player it checks from the bottom of the sprite, should probably check from center
 	if self.x > self.GameManager.LevelWidth and self.PhysicsComponent.Velocity.x > 0 then
 		self.GameManager:enterRoom(self.Door, "EAST")

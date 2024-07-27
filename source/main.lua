@@ -46,10 +46,6 @@ pd.timer.keyRepeatTimerWithDelay(0, 800, function ()
 	end
 end)
 
-for index, value in ipairs(gfx.sprite.getAllSprites()) do
-	print(value.className..", z-index: "..value:getZIndex())
-end
-
 function pd.update()
 	gfx.clear(gfx.kColorWhite)
 

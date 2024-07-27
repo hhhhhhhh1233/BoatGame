@@ -26,7 +26,6 @@ end
 function FloatingEnemy:update()
 	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(0, 0.5))
 	self.PhysicsComponent:Move(self)
-	printTable(self.player)
 	local toPlayer = self.player.PhysicsComponent.Position - self.PhysicsComponent.Position
 	if toPlayer:magnitude() < 250 and self.cooldown >= 15 then
 		local _, _, _, n = self:checkCollisions(self.player.x, self.player.y)
