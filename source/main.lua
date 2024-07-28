@@ -46,6 +46,10 @@ pd.timer.keyRepeatTimerWithDelay(0, 800, function ()
 	end
 end)
 
+local song = pd.sound.fileplayer.new("sounds/song")
+song:play(0)
+
+
 function pd.update()
 	gfx.clear(gfx.kColorWhite)
 

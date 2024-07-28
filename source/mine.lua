@@ -29,7 +29,7 @@ function Mine:update()
 end
 
 function Mine:Damage(amount)
-	self:remove()
+	self:Explode()
 end
 
 function Mine:Explode()
