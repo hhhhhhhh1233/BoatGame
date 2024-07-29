@@ -48,6 +48,10 @@ function Player:Damage(amount, iFrames)
 		return
 	end
 
+	self:getImage():setInverted(true)
+	pd.timer.performAfterDelay(75, function ()
+		self:getImage():setInverted(false)
+	end)
 	self.Health -= amount
 	self.Invincible = iFrames
 	if self.Health <= 0 then
