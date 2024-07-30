@@ -33,6 +33,7 @@ function Player:init(x, y, image, speed, gameManager)
 
 	self.Health = 100
 	self.Invincible = 0
+	self.coins = 0
 
 	self.bActive = true
 
@@ -110,6 +111,9 @@ function Player:collisionResponse(other)
 		other:pickup(self)
 	end
 	if other:isa(WaterWheel) then
+		other:pickup(self)
+	end
+	if other:isa(Coin) then
 		other:pickup(self)
 	end
 

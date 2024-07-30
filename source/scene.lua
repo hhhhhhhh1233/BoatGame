@@ -6,6 +6,7 @@ import "simpleEnemy"
 import "floatingEnemy"
 import "abilityPickup"
 import "waterWheel"
+import "coin"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -114,6 +115,8 @@ function Scene:goToLevel(level_name)
 			AbilityPickup(entityX, entityY, entity)
 		elseif entityName == "WaterWheel" and not entity.fields.PickedUp then
 			WaterWheel(entityX, entityY, entity, self.water)
+		elseif entityName == "Coin" and not entity.fields.Collected then
+			Coin(entityX, entityY, entity)
 		end
 	end
 
