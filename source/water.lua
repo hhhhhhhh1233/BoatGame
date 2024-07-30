@@ -13,13 +13,16 @@ function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange)
 	self.LowerBound = LowerBound
 	self.UpperBound = UpperBound
 	self.RateOfChange = RateOfChange
+	self.bActive = false
 end
 
-
 function Water:Update()
-	local change, _ = pd.getCrankChange()
-	self.Height -= change * self.RateOfChange
-	self.Height = Clamp(self.Height, self.LowerBound, self.UpperBound)
+	if self.bActive then
+		local change, _ = pd.getCrankChange()
+		self.Height -= change * self.RateOfChange
+		self.Height = Clamp(self.Height, self.LowerBound, self.UpperBound)
+	end
+
 	-- Draw the water height to screen
 	gfx.setColor(gfx.kColorBlack)
 	gfx.fillRect(0, self.Height, self.Width, 2)

@@ -109,6 +109,9 @@ function Player:collisionResponse(other)
 	if other:isa(AbilityPickup) then
 		other:pickup(self)
 	end
+	if other:isa(WaterWheel) then
+		other:pickup(self)
+	end
 
 	if other:isa(Mine) then
 		return "overlap"

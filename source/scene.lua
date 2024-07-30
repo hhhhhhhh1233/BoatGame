@@ -5,6 +5,7 @@ import "mine"
 import "simpleEnemy"
 import "floatingEnemy"
 import "abilityPickup"
+import "waterWheel"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -15,10 +16,10 @@ class('Scene').extends()
 
 function Scene:init(spawnX, spawnY)
 	self.player = Player(spawnX, spawnY, gfx.image.new("images/Boat"), 5, self)
-	self:goToLevel("Level_0")
 	local level_rect = LDtk.get_rect("Level_0")
 	self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
 	self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1)
+	self:goToLevel("Level_0")
 end
 
 function Scene:enterRoom(door, direction)
@@ -111,6 +112,8 @@ function Scene:goToLevel(level_name)
 			SimpleEnemy(entityX, entityY, self.player)
 		elseif entityName == "AbilityPickup" and not entity.fields.PickedUp then
 			AbilityPickup(entityX, entityY, entity)
+		elseif entityName == "WaterWheel" and not entity.fields.PickedUp then
+			WaterWheel(entityX, entityY, entity, self.water)
 		end
 	end
 
