@@ -116,6 +116,9 @@ function Player:collisionResponse(other)
 	if other:isa(Coin) then
 		other:pickup(self)
 	end
+	if other:isa(BlockedWall) then
+		other:clear(self)
+	end
 
 	if other:isa(Mine) then
 		return "overlap"

@@ -7,6 +7,7 @@ import "floatingEnemy"
 import "abilityPickup"
 import "waterWheel"
 import "coin"
+import "blockedWall"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -117,6 +118,8 @@ function Scene:goToLevel(level_name)
 			WaterWheel(entityX, entityY, entity, self.water)
 		elseif entityName == "Coin" and not entity.fields.Collected then
 			Coin(entityX, entityY, entity)
+		elseif entityName == "BlockedWall" and not entity.fields.Cleared then
+			BlockedWall(entityX, entityY, entity)
 		end
 	end
 
