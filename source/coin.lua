@@ -13,6 +13,11 @@ function Coin:init(x, y, entity)
 	self:add()
 end
 
+function Coin:update()
+	self:moveTo(self.x, self.y + 0.1 * math.cos(5 * pd.getElapsedTime()))
+
+end
+
 function Coin:pickup(player)
 	player.coins += 1
 	self.entity.fields.Collected = true
