@@ -17,14 +17,14 @@ import "CoreLibs/math"
 import "CoreLibs/ui"
 
 -- Utilities
-import "camera"
-import "buoyancy"
+import "scripts/camera"
+import "scripts/buoyancy"
 
 -- Game Objects
-import "player"
-import "water"
-import "mine"
-import "scene"
+import "scripts/entities/player"
+import "scripts/water"
+import "scripts/entities/mine"
+import "scripts/scene"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics

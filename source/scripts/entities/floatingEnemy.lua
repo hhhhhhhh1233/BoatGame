@@ -1,29 +1,32 @@
 import "CoreLibs/sprites"
 import "CoreLibs/graphics"
 
-import "bullet"
+import "scripts/bullet"
+import "scripts/physicsComponent"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-class("SimpleEnemy").extends(gfx.sprite)
+class("FloatingEnemy").extends(gfx.sprite)
 
-function SimpleEnemy:init(x, y, player)
+function FloatingEnemy:init(x, y, player)
 	self.player = player
 	self:moveTo(x, y)
-	self:setImage(gfx.image.new("images/SimpleEnemy"))
+	self:setImage(gfx.image.new("images/FloatingEnemy"))
 	self:setCollideRect(0, 0, self:getSize())
 
 	self:setGroups(COLLISION_GROUPS.ENEMY)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.WALL})
 	self:add()
+	self.PhysicsComponent = PhysicsComponent(x, y, 10)
 
 	self.cooldown = 0
 end
 
-function SimpleEnemy:update()
-	self.position = pd.geometry.vector2D.new(self.x, self.y)
-	local toPlayer = self.player.PhysicsComponent.Position - self.position
+function FloatingEnemy:update()
+	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(0, 0.5))
+	self.PhysicsComponent:Move(self)
+	local toPlayer = self.player.PhysicsComponent.Position - self.PhysicsComponent.Position
 	if toPlayer:magnitude() < 250 and self.cooldown >= 15 then
 		local _, _, _, n = self:checkCollisions(self.player.x, self.player.y)
 		if n < 1 and self.player.bActive then
@@ -34,6 +37,6 @@ function SimpleEnemy:update()
 	self.cooldown += 1
 end
 
-function SimpleEnemy:Damage(amount, iFrame)
+function FloatingEnemy:Damage(amount, iFrame)
 	self:remove()
 end

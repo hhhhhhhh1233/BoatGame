@@ -1,13 +1,13 @@
-import "player"
+import "scripts/entities/player"
 import "libraries/LDtk"
-import "DoorTrigger"
-import "mine"
-import "simpleEnemy"
-import "floatingEnemy"
-import "abilityPickup"
-import "waterWheel"
-import "coin"
-import "blockedWall"
+import "scripts/entities/DoorTrigger"
+import "scripts/entities/mine"
+import "scripts/entities/simpleEnemy"
+import "scripts/entities/floatingEnemy"
+import "scripts/entities/abilityPickup"
+import "scripts/entities/waterWheel"
+import "scripts/entities/coin"
+import "scripts/entities/blockedWall"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics

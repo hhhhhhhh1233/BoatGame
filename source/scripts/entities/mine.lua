@@ -1,10 +1,10 @@
 import "CoreLibs/sprites"
 import "CoreLibs/graphics"
 
-import "physicsComponent"
-import "buoyancy"
-import "player"
-import "explosion"
+import "scripts/physicsComponent"
+import "scripts/buoyancy"
+import "scripts/entities/player"
+import "scripts/explosion"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics

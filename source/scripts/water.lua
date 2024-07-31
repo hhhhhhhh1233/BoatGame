@@ -1,6 +1,6 @@
 import "CoreLibs/crank"
 
-import "utils"
+import "scripts/utils"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics

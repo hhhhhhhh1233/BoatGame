@@ -1,5 +1,5 @@
 local pd <const> = playdate
-import "bullet"
+import "scripts/bullet"
 
 function Jump(player)
 	player:AddForce(pd.geometry.vector2D.new(0, -8))

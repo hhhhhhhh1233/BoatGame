@@ -1,6 +1,6 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
-import "abilitySelectionMenu"
+import "scripts/abilitySelectionMenu"
 
 class('AbilityPickup').extends(gfx.sprite)
 

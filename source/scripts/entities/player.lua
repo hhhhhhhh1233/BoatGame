@@ -2,9 +2,7 @@ import "CoreLibs/sprites"
 import "CoreLibs/graphics"
 import "CoreLibs/animation"
 
-import "physicsComponent"
-import "mine"
-import "bullet"
+import "scripts/physicsComponent"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics

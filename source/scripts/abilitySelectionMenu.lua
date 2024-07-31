@@ -1,6 +1,6 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
-import "abilities"
+import "scripts/abilities"
 import "CoreLibs/nineslice"
 
 class('AbilitySelectionMenu').extends(gfx.sprite)
