@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 146,
+	"nextUid": 149,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -48,7 +48,7 @@
 			"uid": 116,
 			"doc": null,
 			"uiColor": null,
-			"gridSize": 32,
+			"gridSize": 16,
 			"guideGridWid": 0,
 			"guideGridHei": 0,
 			"displayOpacity": 1,
@@ -842,8 +842,8 @@
 			"maxCount": 0,
 			"limitScope": "PerLevel",
 			"limitBehavior": "MoveLastOne",
-			"pivotX": 0.5,
-			"pivotY": 0.5,
+			"pivotX": 0,
+			"pivotY": 0,
 			"fieldDefs": [
 				{
 					"identifier": "Target",
@@ -1402,13 +1402,13 @@
 			"exportToToc": false,
 			"allowOutOfBounds": false,
 			"doc": null,
-			"width": 32,
+			"width": 16,
 			"height": 16,
 			"resizableX": true,
-			"resizableY": false,
-			"minWidth": 32,
+			"resizableY": true,
+			"minWidth": 16,
 			"maxWidth": null,
-			"minHeight": null,
+			"minHeight": 16,
 			"maxHeight": null,
 			"keepAspectRatio": false,
 			"tileOpacity": 1,
@@ -1428,7 +1428,45 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0,
 			"pivotY": 0,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "Blocking",
+					"doc": null,
+					"__type": "LocalEnum.Direction",
+					"uid": 147,
+					"type": "F_Enum(146)",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -1464,6 +1502,12 @@
 			{ "id": "AButton", "tileRect": null, "color": 12470831 },
 			{ "id": "BButton", "tileRect": null, "color": 14120515 },
 			{ "id": "Passive", "tileRect": null, "color": 15389866 }
+		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
+		{ "identifier": "Direction", "uid": 146, "values": [
+			{ "id": "North", "tileRect": null, "color": 12470831 },
+			{ "id": "East", "tileRect": null, "color": 14120515 },
+			{ "id": "South", "tileRect": null, "color": 15389866 },
+			{ "id": "West", "tileRect": null, "color": 14984818 }
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [], "levelFields": [] },
 	"levels": [
@@ -1491,9 +1535,9 @@
 				{
 					"__identifier": "Entities",
 					"__type": "Entities",
-					"__cWid": 19,
-					"__cHei": 8,
-					"__gridSize": 32,
+					"__cWid": 38,
+					"__cHei": 16,
+					"__gridSize": 16,
 					"__opacity": 1,
 					"__pxTotalOffsetX": 0,
 					"__pxTotalOffsetY": 0,
@@ -1514,8 +1558,8 @@
 					"entityInstances": [
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [18,2],
-							"__pivot": [0.5,0.5],
+							"__grid": [36,4],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -1523,7 +1567,7 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [592,80],
+							"px": [576,64],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
 								"entityIid": "bc5f0f80-25d0-11ef-a820-47b22c03959c",
 								"layerIid": "d109ec00-25d0-11ef-a820-f575bed591ec",
@@ -1533,13 +1577,13 @@
 								"id": "V_String",
 								"params": ["bc5f0f80-25d0-11ef-a820-47b22c03959c"]
 							}] }],
-							"__worldX": 592,
-							"__worldY": 80
+							"__worldX": 576,
+							"__worldY": 64
 						},
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [18,3],
-							"__pivot": [0.5,0.5],
+							"__grid": [36,6],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -1547,7 +1591,7 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [592,112],
+							"px": [576,96],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
 								"entityIid": "c068b0e0-25d0-11ef-a820-e9f6496fd53f",
 								"layerIid": "d109ec00-25d0-11ef-a820-f575bed591ec",
@@ -1557,13 +1601,13 @@
 								"id": "V_String",
 								"params": ["c068b0e0-25d0-11ef-a820-e9f6496fd53f"]
 							}] }],
-							"__worldX": 592,
-							"__worldY": 112
+							"__worldX": 576,
+							"__worldY": 96
 						},
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [4,0],
-							"__pivot": [0.5,0.5],
+							"__grid": [8,0],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -1571,23 +1615,23 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [144,16],
+							"px": [128,0],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
-								"entityIid": "456290c0-25d0-11ef-b3ff-9b1a90a1e0e5",
+								"entityIid": "ea738100-4ce0-11ef-8bf5-c57550175887",
 								"layerIid": "2cb0d961-25d0-11ef-b3ff-c12db24abe75",
 								"levelIid": "2cb0d960-25d0-11ef-b3ff-03224707b521",
 								"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166"
 							}, "__tile": null, "defUid": 117, "realEditorValues": [{
 								"id": "V_String",
-								"params": ["456290c0-25d0-11ef-b3ff-9b1a90a1e0e5"]
+								"params": ["ea738100-4ce0-11ef-8bf5-c57550175887"]
 							}] }],
-							"__worldX": 144,
-							"__worldY": 16
+							"__worldX": 128,
+							"__worldY": 0
 						},
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [5,0],
-							"__pivot": [0.5,0.5],
+							"__grid": [10,0],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -1595,22 +1639,22 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [176,16],
+							"px": [160,0],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
-								"entityIid": "48ec53c0-25d0-11ef-b3ff-f997df488b96",
+								"entityIid": "eb03b310-4ce0-11ef-8bf5-690eeb774e31",
 								"layerIid": "2cb0d961-25d0-11ef-b3ff-c12db24abe75",
 								"levelIid": "2cb0d960-25d0-11ef-b3ff-03224707b521",
 								"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166"
 							}, "__tile": null, "defUid": 117, "realEditorValues": [{
 								"id": "V_String",
-								"params": ["48ec53c0-25d0-11ef-b3ff-f997df488b96"]
+								"params": ["eb03b310-4ce0-11ef-8bf5-690eeb774e31"]
 							}] }],
-							"__worldX": 176,
-							"__worldY": 16
+							"__worldX": 160,
+							"__worldY": 0
 						},
 						{
 							"__identifier": "SpawnPoint",
-							"__grid": [5,3],
+							"__grid": [11,7],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1626,8 +1670,8 @@
 						},
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [0,2],
-							"__pivot": [0.5,0.5],
+							"__grid": [0,4],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -1635,7 +1679,7 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [16,80],
+							"px": [0,64],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
 								"entityIid": "bc79ef20-4ce0-11ef-abab-1974449e96df",
 								"layerIid": "968aa161-4ce0-11ef-abab-810686d3bd96",
@@ -1645,13 +1689,13 @@
 								"id": "V_String",
 								"params": ["bc79ef20-4ce0-11ef-abab-1974449e96df"]
 							}] }],
-							"__worldX": 16,
-							"__worldY": 80
+							"__worldX": 0,
+							"__worldY": 64
 						},
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [0,3],
-							"__pivot": [0.5,0.5],
+							"__grid": [0,6],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -1659,7 +1703,7 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [16,112],
+							"px": [0,96],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
 								"entityIid": "bf691fd0-4ce0-11ef-abab-29deb159cf50",
 								"layerIid": "968aa161-4ce0-11ef-abab-810686d3bd96",
@@ -1669,12 +1713,12 @@
 								"id": "V_String",
 								"params": ["bf691fd0-4ce0-11ef-abab-29deb159cf50"]
 							}] }],
-							"__worldX": 16,
-							"__worldY": 112
+							"__worldX": 0,
+							"__worldY": 96
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [15,4],
+							"__grid": [31,9],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1690,7 +1734,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [16,4],
+							"__grid": [33,9],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1706,7 +1750,7 @@
 						},
 						{
 							"__identifier": "BlockedWall",
-							"__grid": [12,4],
+							"__grid": [25,9],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1725,7 +1769,7 @@
 						},
 						{
 							"__identifier": "BlockedWall",
-							"__grid": [12,5],
+							"__grid": [25,11],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1744,7 +1788,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [10,3],
+							"__grid": [21,7],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1759,24 +1803,8 @@
 							"__worldY": 112
 						},
 						{
-							"__identifier": "WaterWheel",
-							"__grid": [7,3],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#FEAE34",
-							"iid": "b8a603c0-4ce0-11ef-abab-9f214ea2c616",
-							"width": 64,
-							"height": 64,
-							"defUid": 138,
-							"px": [240,112],
-							"fieldInstances": [],
-							"__worldX": 240,
-							"__worldY": 112
-						},
-						{
 							"__identifier": "OneWayDoor",
-							"__grid": [7,5],
+							"__grid": [14,11],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -1785,14 +1813,17 @@
 							"width": 64,
 							"height": 16,
 							"defUid": 145,
-							"px": [224,160],
-							"fieldInstances": [],
+							"px": [224,176],
+							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 147, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["North"]
+							}] }],
 							"__worldX": 224,
-							"__worldY": 160
+							"__worldY": 176
 						},
 						{
 							"__identifier": "Mine",
-							"__grid": [8,2],
+							"__grid": [17,5],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -1808,7 +1839,7 @@
 						},
 						{
 							"__identifier": "OneWayDoor",
-							"__grid": [2,5],
+							"__grid": [4,10],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -1818,25 +1849,47 @@
 							"height": 16,
 							"defUid": 145,
 							"px": [64,160],
-							"fieldInstances": [],
+							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 147, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["North"]
+							}] }],
 							"__worldX": 64,
 							"__worldY": 160
 						},
 						{
+							"__identifier": "WaterWheel",
+							"__grid": [13,6],
+							"__pivot": [0.5,0.5],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#FEAE34",
+							"iid": "c6361710-4ce0-11ef-8bf5-dd5e0e70bf1f",
+							"width": 64,
+							"height": 64,
+							"defUid": 138,
+							"px": [216,104],
+							"fieldInstances": [],
+							"__worldX": 216,
+							"__worldY": 104
+						},
+						{
 							"__identifier": "OneWayDoor",
-							"__grid": [10,5],
+							"__grid": [27,8],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#3E8948",
-							"iid": "42caf590-4ce0-11ef-a854-17135bc026e2",
-							"width": 32,
-							"height": 16,
+							"iid": "aec06cb0-4ce0-11ef-8bf5-3ba7ce799d70",
+							"width": 16,
+							"height": 64,
 							"defUid": 145,
-							"px": [320,160],
-							"fieldInstances": [],
-							"__worldX": 320,
-							"__worldY": 160
+							"px": [432,128],
+							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 147, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["North"]
+							}] }],
+							"__worldX": 432,
+							"__worldY": 128
 						}
 					]
 				},
@@ -2051,9 +2104,9 @@
 				{
 					"__identifier": "Entities",
 					"__type": "Entities",
-					"__cWid": 14,
-					"__cHei": 21,
-					"__gridSize": 32,
+					"__cWid": 28,
+					"__cHei": 42,
+					"__gridSize": 16,
 					"__opacity": 1,
 					"__pxTotalOffsetX": 0,
 					"__pxTotalOffsetY": 0,
@@ -2074,8 +2127,8 @@
 					"entityInstances": [
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [0,7],
-							"__pivot": [0.5,0.5],
+							"__grid": [0,14],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -2083,7 +2136,7 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [16,240],
+							"px": [0,224],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
 								"entityIid": "bd6052e0-25d0-11ef-a820-53a2355cc70b",
 								"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
@@ -2093,13 +2146,13 @@
 								"id": "V_String",
 								"params": ["bd6052e0-25d0-11ef-a820-53a2355cc70b"]
 							}] }],
-							"__worldX": 624,
-							"__worldY": 80
+							"__worldX": 608,
+							"__worldY": 64
 						},
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [0,8],
-							"__pivot": [0.5,0.5],
+							"__grid": [0,16],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -2107,7 +2160,7 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [16,272],
+							"px": [0,256],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
 								"entityIid": "bfdfaac0-25d0-11ef-a820-e19832758212",
 								"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
@@ -2117,12 +2170,12 @@
 								"id": "V_String",
 								"params": ["bfdfaac0-25d0-11ef-a820-e19832758212"]
 							}] }],
-							"__worldX": 624,
-							"__worldY": 112
+							"__worldX": 608,
+							"__worldY": 96
 						},
 						{
 							"__identifier": "Mine",
-							"__grid": [8,10],
+							"__grid": [17,21],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2138,7 +2191,7 @@
 						},
 						{
 							"__identifier": "SpawnPoint",
-							"__grid": [2,8],
+							"__grid": [5,17],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2154,7 +2207,7 @@
 						},
 						{
 							"__identifier": "Mine",
-							"__grid": [5,15],
+							"__grid": [11,31],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2170,7 +2223,7 @@
 						},
 						{
 							"__identifier": "SimpleEnemy",
-							"__grid": [6,3],
+							"__grid": [13,7],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2186,7 +2239,7 @@
 						},
 						{
 							"__identifier": "AbilityPickup",
-							"__grid": [9,18],
+							"__grid": [19,37],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2212,7 +2265,7 @@
 						},
 						{
 							"__identifier": "FloatingEnemy",
-							"__grid": [8,7],
+							"__grid": [16,14],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2228,7 +2281,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [6,12],
+							"__grid": [13,25],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2244,7 +2297,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [6,6],
+							"__grid": [13,13],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2260,7 +2313,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [5,6],
+							"__grid": [11,13],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2276,7 +2329,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [4,6],
+							"__grid": [8,14],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2285,14 +2338,14 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [144,208],
+							"px": [128,224],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
-							"__worldX": 752,
-							"__worldY": 48
+							"__worldX": 736,
+							"__worldY": 64
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [6,12],
+							"__grid": [13,25],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2308,7 +2361,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [5,12],
+							"__grid": [11,25],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2324,7 +2377,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [4,12],
+							"__grid": [9,25],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -2697,9 +2750,9 @@
 				{
 					"__identifier": "Entities",
 					"__type": "Entities",
-					"__cWid": 15,
-					"__cHei": 10,
-					"__gridSize": 32,
+					"__cWid": 30,
+					"__cHei": 20,
+					"__gridSize": 16,
 					"__opacity": 1,
 					"__pxTotalOffsetX": 0,
 					"__pxTotalOffsetY": 0,
@@ -2719,54 +2772,6 @@
 					"gridTiles": [],
 					"entityInstances": [
 						{
-							"__identifier": "RoomTransition",
-							"__grid": [4,9],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "456290c0-25d0-11ef-b3ff-9b1a90a1e0e5",
-							"width": 32,
-							"height": 32,
-							"defUid": 113,
-							"px": [144,304],
-							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
-								"entityIid": "462d5ad0-25d0-11ef-b3ff-0377711df136",
-								"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
-								"levelIid": "8b012660-25d0-11ef-a820-1369997bd924",
-								"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166"
-							}, "__tile": null, "defUid": 117, "realEditorValues": [{
-								"id": "V_String",
-								"params": ["462d5ad0-25d0-11ef-b3ff-0377711df136"]
-							}] }],
-							"__worldX": 144,
-							"__worldY": -16
-						},
-						{
-							"__identifier": "RoomTransition",
-							"__grid": [5,9],
-							"__pivot": [0.5,0.5],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#BE4A2F",
-							"iid": "48ec53c0-25d0-11ef-b3ff-f997df488b96",
-							"width": 32,
-							"height": 32,
-							"defUid": 113,
-							"px": [176,304],
-							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
-								"entityIid": "485c21b0-25d0-11ef-b3ff-f9074d3424fe",
-								"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
-								"levelIid": "8b012660-25d0-11ef-a820-1369997bd924",
-								"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166"
-							}, "__tile": null, "defUid": 117, "realEditorValues": [{
-								"id": "V_String",
-								"params": ["485c21b0-25d0-11ef-b3ff-f9074d3424fe"]
-							}] }],
-							"__worldX": 176,
-							"__worldY": -16
-						},
-						{
 							"__identifier": "SpawnPoint",
 							"__grid": [4,7],
 							"__pivot": [0.5,0.5],
@@ -2777,10 +2782,10 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 127,
-							"px": [144,240],
+							"px": [72,120],
 							"fieldInstances": [],
-							"__worldX": 144,
-							"__worldY": -80
+							"__worldX": 72,
+							"__worldY": -200
 						},
 						{
 							"__identifier": "SimpleEnemy",
@@ -2793,10 +2798,10 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 128,
-							"px": [336,112],
+							"px": [168,56],
 							"fieldInstances": [],
-							"__worldX": 336,
-							"__worldY": -208
+							"__worldX": 168,
+							"__worldY": -264
 						},
 						{
 							"__identifier": "AbilityPickup",
@@ -2809,7 +2814,7 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 129,
-							"px": [336,240],
+							"px": [168,120],
 							"fieldInstances": [
 								{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Jump", "Shoot" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
 									"id": "V_String",
@@ -2824,8 +2829,8 @@
 								}] },
 								{ "__identifier": "PickedUp", "__type": "Bool", "__value": false, "__tile": null, "defUid": 135, "realEditorValues": [null] }
 							],
-							"__worldX": 336,
-							"__worldY": -80
+							"__worldX": 168,
+							"__worldY": -200
 						},
 						{
 							"__identifier": "Coin",
@@ -2838,10 +2843,10 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [368,144],
+							"px": [184,72],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
-							"__worldX": 368,
-							"__worldY": -176
+							"__worldX": 184,
+							"__worldY": -248
 						},
 						{
 							"__identifier": "Coin",
@@ -2854,10 +2859,10 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [208,80],
+							"px": [104,40],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
-							"__worldX": 208,
-							"__worldY": -240
+							"__worldX": 104,
+							"__worldY": -280
 						},
 						{
 							"__identifier": "Coin",
@@ -2870,10 +2875,58 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [176,80],
+							"px": [88,40],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
-							"__worldX": 176,
-							"__worldY": -240
+							"__worldX": 88,
+							"__worldY": -280
+						},
+						{
+							"__identifier": "RoomTransition",
+							"__grid": [8,18],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "ea738100-4ce0-11ef-8bf5-c57550175887",
+							"width": 32,
+							"height": 32,
+							"defUid": 113,
+							"px": [128,288],
+							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
+								"entityIid": "462d5ad0-25d0-11ef-b3ff-0377711df136",
+								"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
+								"levelIid": "8b012660-25d0-11ef-a820-1369997bd924",
+								"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166"
+							}, "__tile": null, "defUid": 117, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["462d5ad0-25d0-11ef-b3ff-0377711df136"]
+							}] }],
+							"__worldX": 128,
+							"__worldY": -32
+						},
+						{
+							"__identifier": "RoomTransition",
+							"__grid": [10,18],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#BE4A2F",
+							"iid": "eb03b310-4ce0-11ef-8bf5-690eeb774e31",
+							"width": 32,
+							"height": 32,
+							"defUid": 113,
+							"px": [160,288],
+							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
+								"entityIid": "485c21b0-25d0-11ef-b3ff-f9074d3424fe",
+								"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
+								"levelIid": "8b012660-25d0-11ef-a820-1369997bd924",
+								"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166"
+							}, "__tile": null, "defUid": 117, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["485c21b0-25d0-11ef-b3ff-f9074d3424fe"]
+							}] }],
+							"__worldX": 160,
+							"__worldY": -32
 						}
 					]
 				},
@@ -3086,9 +3139,9 @@
 				{
 					"__identifier": "Entities",
 					"__type": "Entities",
-					"__cWid": 25,
-					"__cHei": 20,
-					"__gridSize": 32,
+					"__cWid": 50,
+					"__cHei": 40,
+					"__gridSize": 16,
 					"__opacity": 1,
 					"__pxTotalOffsetX": 0,
 					"__pxTotalOffsetY": 0,
@@ -3109,8 +3162,8 @@
 					"entityInstances": [
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [24,8],
-							"__pivot": [0.5,0.5],
+							"__grid": [48,16],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3118,7 +3171,7 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [784,272],
+							"px": [768,256],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
 								"entityIid": "bd51ffa0-4ce0-11ef-abab-1db296b0ffb7",
 								"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
@@ -3128,13 +3181,13 @@
 								"id": "V_String",
 								"params": ["bd51ffa0-4ce0-11ef-abab-1db296b0ffb7"]
 							}] }],
-							"__worldX": -16,
-							"__worldY": 80
+							"__worldX": -32,
+							"__worldY": 64
 						},
 						{
 							"__identifier": "RoomTransition",
-							"__grid": [24,9],
-							"__pivot": [0.5,0.5],
+							"__grid": [48,18],
+							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
 							"__smartColor": "#BE4A2F",
@@ -3142,7 +3195,7 @@
 							"width": 32,
 							"height": 32,
 							"defUid": 113,
-							"px": [784,304],
+							"px": [768,288],
 							"fieldInstances": [{ "__identifier": "Target", "__type": "EntityRef", "__value": {
 								"entityIid": "bee12b20-4ce0-11ef-abab-3bb2a8f40e15",
 								"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
@@ -3152,12 +3205,12 @@
 								"id": "V_String",
 								"params": ["bee12b20-4ce0-11ef-abab-3bb2a8f40e15"]
 							}] }],
-							"__worldX": -16,
-							"__worldY": 112
+							"__worldX": -32,
+							"__worldY": 96
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [4,3],
+							"__grid": [9,7],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3173,7 +3226,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [4,4],
+							"__grid": [9,9],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3189,7 +3242,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [3,4],
+							"__grid": [7,9],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3205,7 +3258,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [5,4],
+							"__grid": [11,9],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3221,7 +3274,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [3,16],
+							"__grid": [7,33],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3237,7 +3290,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [3,17],
+							"__grid": [7,35],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3253,7 +3306,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [4,17],
+							"__grid": [9,35],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3269,7 +3322,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [5,16],
+							"__grid": [11,33],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3285,7 +3338,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [14,12],
+							"__grid": [29,25],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3301,7 +3354,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [15,12],
+							"__grid": [31,25],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3317,7 +3370,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [13,6],
+							"__grid": [27,13],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3333,7 +3386,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [14,6],
+							"__grid": [29,13],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3349,7 +3402,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [15,6],
+							"__grid": [31,13],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
@@ -3365,7 +3418,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [20,11],
+							"__grid": [41,23],
 							"__pivot": [0.5,0.5],
 							"__tags": [],
 							"__tile": null,
