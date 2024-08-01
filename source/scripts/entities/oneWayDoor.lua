@@ -7,10 +7,10 @@ import "CoreLibs/nineslice"
 class('OneWayDoor').extends(gfx.sprite)
 
 local Orientation = {
-	["North"] = 2,
-	["East"] = 2,
-	["South"] = 2,
-	["West"] = 2,
+	["South"] = {["minX"] = 0, ["minY"] = 0, ["maxX"] = 1, ["maxY"] = 0},
+	["West"]  = {["minX"] = 1, ["minY"] = 0, ["maxX"] = 1, ["maxY"] = 1},
+	["North"] = {["minX"] = 0, ["minY"] = 1, ["maxX"] = 1, ["maxY"] = 1},
+	["East"]  = {["minX"] = 0, ["minY"] = 0, ["maxX"] = 0, ["maxY"] = 1}
 }
 
 function OneWayDoor:init(x, y, entity, orientation)
@@ -27,10 +27,10 @@ function OneWayDoor:init(x, y, entity, orientation)
 end
 
 function OneWayDoor:open()
-	local sprite = gfx.image.new(self.entity.size.width, 32)
+	local sprite = gfx.image.new(self.entity.size.width, self.entity.size.height)
 	gfx.lockFocus(sprite)
 	local ns = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 21, 21)
-	ns:drawInRect(0, 0, self.entity.size.width, 16)
+	ns:drawInRect(0, 0, self.entity.size.width, 6)
 	gfx.unlockFocus()
 	self:setImage(sprite)
 	self:clearCollideRect()
@@ -38,16 +38,13 @@ function OneWayDoor:open()
 end
 
 function OneWayDoor:close()
-	local sprite = gfx.image.new(self.entity.size.width, 32)
+	local sprite = gfx.image.new(self.entity.size.width, self.entity.size.height)
 	gfx.lockFocus(sprite)
 	local ns = gfx.nineSlice.new("images/OneWayDoorSmall", 3, 3, 25, 25)
-	if self.bBottomUp then
-		ns:drawInRect(0, 16, self.entity.size.width, 5)
-	else
-		ns:drawInRect(0, 0, self.entity.size.width, 5)
-	end
+	ns:drawInRect(0, 0, self.entity.size.width, 6)
 	gfx.unlockFocus()
 	self:setImage(sprite)
+	-- NOTE: USE VARIABLES HERE
 	self:setCollideRect(0, 6, self.entity.size.width, 1)
 	self.bOpen = false
 end
@@ -55,11 +52,14 @@ end
 function OneWayDoor:update()
 	local width, _ = self:getSize()
 	if not self.bOpen then
-		local collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y, width, 6)
+		-- NOTE: USE VARIABLES HERE
+		local collisionsInOpen
+		collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y, width, 6)
 		if #collisionsInOpen > 0 then
 			self:open()
 		end
 	else
+		-- NOTE: USE VARIABLES HERE
 		local collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y, width, 12)
 		if #collisionsInOpen == 0 then
 			self:close()

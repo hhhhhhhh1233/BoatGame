@@ -9,6 +9,7 @@ import "scripts/entities/waterWheel"
 import "scripts/entities/coin"
 import "scripts/entities/blockedWall"
 import "scripts/entities/oneWayDoor"
+import "scripts/entities/button"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -123,6 +124,8 @@ function Scene:goToLevel(level_name)
 			BlockedWall(entityX, entityY, entity)
 		elseif entityName == "OneWayDoor" then
 			OneWayDoor(entityX, entityY, entity, 0)
+		elseif entityName == "Button" then
+			Button(entityX, entityY, entity)
 		end
 	end
 

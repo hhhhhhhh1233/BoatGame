@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 149,
+	"nextUid": 150,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -1467,6 +1467,41 @@
 					"tilesetUid": null
 				}
 			]
+		},
+		{
+			"identifier": "Button",
+			"uid": 149,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 32,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#124E89",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -1890,6 +1925,38 @@
 							}] }],
 							"__worldX": 432,
 							"__worldY": 128
+						},
+						{
+							"__identifier": "Button",
+							"__grid": [18,9],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#124E89",
+							"iid": "50297c00-4ce0-11ef-8bf5-fb84cc549bd0",
+							"width": 32,
+							"height": 16,
+							"defUid": 149,
+							"px": [288,144],
+							"fieldInstances": [],
+							"__worldX": 288,
+							"__worldY": 144
+						},
+						{
+							"__identifier": "OneWayDoor",
+							"__grid": [5,4],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#3E8948",
+							"iid": "1f2cde00-4ce0-11ef-8bf5-1ff4d4b5ff18",
+							"width": 48,
+							"height": 32,
+							"defUid": 145,
+							"px": [80,64],
+							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": null, "__tile": null, "defUid": 147, "realEditorValues": [] }],
+							"__worldX": 80,
+							"__worldY": 64
 						}
 					]
 				},
