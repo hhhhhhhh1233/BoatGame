@@ -19,7 +19,9 @@ function BlockedWall:clear(player)
 		player.coins -= self.entity.fields.Cost
 		self.entity.fields.Cleared = true
 		self:remove()
+		return true
 	else
 		print("Come back when you're a little, mmm... richer")
+		return false
 	end
 end

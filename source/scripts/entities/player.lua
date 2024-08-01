@@ -118,7 +118,11 @@ function Player:collisionResponse(other)
 		return "overlap"
 	end
 	if other:isa(BlockedWall) then
-		other:clear(self)
+		if other:clear(self) then
+			return "overlap"
+		else
+			return "slide"
+		end
 	end
 
 	if other:isa(Mine) then

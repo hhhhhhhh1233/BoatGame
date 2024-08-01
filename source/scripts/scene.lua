@@ -8,6 +8,7 @@ import "scripts/entities/abilityPickup"
 import "scripts/entities/waterWheel"
 import "scripts/entities/coin"
 import "scripts/entities/blockedWall"
+import "scripts/entities/oneWayDoor"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -120,6 +121,8 @@ function Scene:goToLevel(level_name)
 			Coin(entityX, entityY, entity)
 		elseif entityName == "BlockedWall" and not entity.fields.Cleared then
 			BlockedWall(entityX, entityY, entity)
+		elseif entityName == "OneWayDoor" then
+			OneWayDoor(entityX, entityY, entity, 0)
 		end
 	end
 
