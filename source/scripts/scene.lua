@@ -100,6 +100,7 @@ function Scene:goToLevel(level_name)
 	end
 
 	-- NOTE: Spawns in all of the entities in the level
+	-- TODO: THE DOOR RELIES ON THE BUTTON BEING ALREADY SPAWNED IN; MAKE IT SO THAT THE ORDER DOESN'T MATTER
 	for _, entity in ipairs(LDtk.get_entities(level_name)) do
 		local entityX, entityY = entity.position.x, entity.position.y
 		local entityName = entity.name

@@ -6,18 +6,9 @@ import "CoreLibs/nineslice"
 
 class('OneWayDoor').extends(gfx.sprite)
 
-local Orientation = {
-	["South"] = {["minX"] = 0, ["minY"] = 0, ["maxX"] = 1, ["maxY"] = 0},
-	["West"]  = {["minX"] = 1, ["minY"] = 0, ["maxX"] = 1, ["maxY"] = 1},
-	["North"] = {["minX"] = 0, ["minY"] = 1, ["maxX"] = 1, ["maxY"] = 1},
-	["East"]  = {["minX"] = 0, ["minY"] = 0, ["maxX"] = 0, ["maxY"] = 1}
-}
-
-function OneWayDoor:init(x, y, entity, orientation)
+function OneWayDoor:init(x, y, entity)
 	self.entity = entity
 	self.Blocking = entity.fields.Blocking
-	printTable(entity)
-	-- NOTE: This says which way the one way door is oriented
 	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setGroups(COLLISION_GROUPS.WALL)
@@ -30,7 +21,16 @@ function OneWayDoor:open()
 	local sprite = gfx.image.new(self.entity.size.width, self.entity.size.height)
 	gfx.lockFocus(sprite)
 	local ns = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 21, 21)
-	ns:drawInRect(0, 0, self.entity.size.width, 6)
+	-- NOTE: THE DOOR IMAGE
+	if self.Blocking == "South" then
+		ns:drawInRect(0, 0, self.entity.size.width, 6)
+	elseif self.Blocking == "North" then
+		ns:drawInRect(0, 4, self.entity.size.width, 6)
+	elseif self.Blocking == "West" then
+		ns:drawInRect(4, 0, 6, self.entity.size.height)
+	elseif self.Blocking == "East" then
+		ns:drawInRect(0, 0, 6, self.entity.size.height)
+	end
 	gfx.unlockFocus()
 	self:setImage(sprite)
 	self:clearCollideRect()
@@ -41,26 +41,60 @@ function OneWayDoor:close()
 	local sprite = gfx.image.new(self.entity.size.width, self.entity.size.height)
 	gfx.lockFocus(sprite)
 	local ns = gfx.nineSlice.new("images/OneWayDoorSmall", 3, 3, 25, 25)
-	ns:drawInRect(0, 0, self.entity.size.width, 6)
+	-- NOTE: THE DOOR IMAGE
+	if self.Blocking == "South" then
+		ns:drawInRect(0, 0, self.entity.size.width, 6)
+	elseif self.Blocking == "North" then
+		ns:drawInRect(0, 8, self.entity.size.width, 6)
+	elseif self.Blocking == "West" then
+		ns:drawInRect(8, 0, 6, self.entity.size.height)
+	elseif self.Blocking == "East" then
+		ns:drawInRect(0, 0, 6, self.entity.size.height)
+	end
 	gfx.unlockFocus()
 	self:setImage(sprite)
-	-- NOTE: USE VARIABLES HERE
-	self:setCollideRect(0, 6, self.entity.size.width, 1)
+	-- NOTE: THE DOOR BLOCKING SHAPE
+	if self.Blocking == "South" then
+		self:setCollideRect(0, 6, self.entity.size.width, 1)
+	elseif self.Blocking == "North" then
+		self:setCollideRect(0, 7, self.entity.size.width, 1)
+	elseif self.Blocking == "West" then
+		self:setCollideRect(7, 0, 1, self.entity.size.height)
+	elseif self.Blocking == "East" then
+		self:setCollideRect(6, 0, 1, self.entity.size.height)
+	end
 	self.bOpen = false
 end
 
 function OneWayDoor:update()
-	local width, _ = self:getSize()
+	local width, height = self:getSize()
 	if not self.bOpen then
-		-- NOTE: USE VARIABLES HERE
 		local collisionsInOpen
-		collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y, width, 6)
+		-- NOTE: THE DOOR OPENING ZONE
+		if self.Blocking == "South" then
+			collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y, width, 6)
+		elseif self.Blocking == "North" then
+			collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y + 8, width, 6)
+		elseif self.Blocking == "West" then
+			collisionsInOpen = gfx.sprite.querySpritesInRect(self.x + 8, self.y, 6, height)
+		elseif self.Blocking == "East" then
+			collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y, 6, height)
+		end
 		if #collisionsInOpen > 0 then
 			self:open()
 		end
 	else
-		-- NOTE: USE VARIABLES HERE
-		local collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y, width, 12)
+		-- NOTE: THE DOOR STAY OPEN ZONE
+		local collisionsInOpen
+		if self.Blocking == "South" then
+			collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y, width, 12)
+		elseif self.Blocking == "North" then
+			collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y + height - 8 - 6, width, 12)
+		elseif self.Blocking == "West" then
+			collisionsInOpen = gfx.sprite.querySpritesInRect(self.x + 8 - 6, self.y, 12, height)
+		elseif self.Blocking == "East" then
+			collisionsInOpen = gfx.sprite.querySpritesInRect(self.x, self.y, 12, height)
+		end
 		if #collisionsInOpen == 0 then
 			self:close()
 		end

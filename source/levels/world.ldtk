@@ -1934,7 +1934,7 @@
 						},
 						{
 							"__identifier": "OneWayDoor",
-							"__grid": [14,11],
+							"__grid": [14,10],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -1943,13 +1943,13 @@
 							"width": 64,
 							"height": 16,
 							"defUid": 145,
-							"px": [224,176],
-							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 147, "realEditorValues": [{
+							"px": [224,160],
+							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "South", "__tile": null, "defUid": 147, "realEditorValues": [{
 								"id": "V_String",
-								"params": ["North"]
+								"params": ["South"]
 							}] }],
 							"__worldX": 224,
-							"__worldY": 176
+							"__worldY": 160
 						},
 						{
 							"__identifier": "Mine",
@@ -1969,7 +1969,7 @@
 						},
 						{
 							"__identifier": "OneWayDoor",
-							"__grid": [4,10],
+							"__grid": [4,11],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -1978,13 +1978,13 @@
 							"width": 96,
 							"height": 16,
 							"defUid": 145,
-							"px": [64,160],
+							"px": [64,176],
 							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 147, "realEditorValues": [{
 								"id": "V_String",
 								"params": ["North"]
 							}] }],
 							"__worldX": 64,
-							"__worldY": 160
+							"__worldY": 176
 						},
 						{
 							"__identifier": "WaterWheel",
@@ -2023,7 +2023,7 @@
 						},
 						{
 							"__identifier": "Button",
-							"__grid": [18,9],
+							"__grid": [20,11],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -2032,10 +2032,10 @@
 							"width": 32,
 							"height": 16,
 							"defUid": 149,
-							"px": [288,144],
+							"px": [320,176],
 							"fieldInstances": [],
-							"__worldX": 288,
-							"__worldY": 144
+							"__worldX": 320,
+							"__worldY": 176
 						},
 						{
 							"__identifier": "Door",
@@ -2060,6 +2060,44 @@
 							}] }],
 							"__worldX": 352,
 							"__worldY": 96
+						},
+						{
+							"__identifier": "OneWayDoor",
+							"__grid": [3,4],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#3E8948",
+							"iid": "1af47690-4ce0-11ef-85f0-812347e86ffc",
+							"width": 16,
+							"height": 96,
+							"defUid": 145,
+							"px": [48,64],
+							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "West", "__tile": null, "defUid": 147, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["West"]
+							}] }],
+							"__worldX": 48,
+							"__worldY": 64
+						},
+						{
+							"__identifier": "OneWayDoor",
+							"__grid": [18,4],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#3E8948",
+							"iid": "6b8b7490-4ce0-11ef-85f0-6fe9748372fe",
+							"width": 16,
+							"height": 96,
+							"defUid": 145,
+							"px": [288,64],
+							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "East", "__tile": null, "defUid": 147, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["East"]
+							}] }],
+							"__worldX": 288,
+							"__worldY": 64
 						}
 					]
 				},
