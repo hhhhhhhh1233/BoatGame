@@ -6,6 +6,7 @@ class('WaterWheel').extends(gfx.sprite)
 function WaterWheel:init(x, y, entity, water)
 	self.water = water
 	self.entity = entity
+	self:setCenter(0, 0)
 	self:moveTo(x, y)
 	self:setImage(gfx.image.new("images/WaterWheel"))
 	self:setCollideRect(0, 0, 64, 64)

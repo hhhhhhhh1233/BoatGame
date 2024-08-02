@@ -13,6 +13,7 @@ class('Mine').extends(gfx.sprite)
 
 function Mine:init(x, y, image)
 	self:moveTo(x, y)
+	self:setCenter(0, 0)
 	self:setImage(image)
 	self:setCollideRect(0, 0, self:getSize())
 	self.PhysicsComponent = PhysicsComponent(x, y, 10)

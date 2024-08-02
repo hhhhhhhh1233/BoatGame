@@ -24,7 +24,11 @@ end
 function Door:update()
 	if self.button then
 		if self.button.bPressed then
-			self:remove()
+			self:setVisible(false)
+			self:clearCollideRect()
+		else
+			self:setVisible(true)
+			self:setCollideRect(0, 0, self.entity.size.width, self.entity.size.height)
 		end
 	end
 end
