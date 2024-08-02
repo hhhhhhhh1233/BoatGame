@@ -73,6 +73,8 @@ function Scene:goToLevel(level_name)
 	gfx.sprite.removeAll()
 	self.player:add()
 
+	self.entityInstance = {}
+
 	self.ActivePhysicsComponents = {}
 	table.insert(self.ActivePhysicsComponents, self.player.PhysicsComponent)
 
@@ -103,34 +105,37 @@ function Scene:goToLevel(level_name)
 		local entityName = entity.name
 
 		if entityName == "RoomTransition" then
-			DoorTrigger(entityX, entityY, entity)
+			self.entityInstance[entity.iid] = DoorTrigger(entityX, entityY, entity)
 		elseif entityName == "Mine" then
 			local MineInstance = Mine(entityX, entityY, gfx.image.new("images/Mine"))
 			table.insert(self.ActivePhysicsComponents, MineInstance.PhysicsComponent)
+			self.entityInstance[entity.iid] = MineInstance
 		elseif entityName == "FloatingEnemy" then
 			local FloaterInstance = FloatingEnemy(entityX, entityY, self.player)
 			table.insert(self.ActivePhysicsComponents, FloaterInstance.PhysicsComponent)
+			self.entityInstance[entity.iid] = FloaterInstance
 		elseif entityName == "SpawnPoint" then
 			self.SpawnX = entityX
 			self.SpawnY = entityY
 		elseif entityName == "SimpleEnemy" then
-			SimpleEnemy(entityX, entityY, self.player)
+			self.entityInstance[entity.iid] = SimpleEnemy(entityX, entityY, self.player)
 		elseif entityName == "AbilityPickup" and not entity.fields.PickedUp then
-			AbilityPickup(entityX, entityY, entity)
+			self.entityInstance[entity.iid] = AbilityPickup(entityX, entityY, entity)
 		elseif entityName == "WaterWheel" and not entity.fields.PickedUp then
-			WaterWheel(entityX, entityY, entity, self.water)
+			self.entityInstance[entity.iid] = WaterWheel(entityX, entityY, entity, self.water)
 		elseif entityName == "Coin" and not entity.fields.Collected then
-			Coin(entityX, entityY, entity)
+			self.entityInstance[entity.iid] = Coin(entityX, entityY, entity)
 		elseif entityName == "BlockedWall" and not entity.fields.Cleared then
-			BlockedWall(entityX, entityY, entity)
+			self.entityInstance[entity.iid] = BlockedWall(entityX, entityY, entity)
 		elseif entityName == "OneWayDoor" then
-			OneWayDoor(entityX, entityY, entity, 0)
+			self.entityInstance[entity.iid] = OneWayDoor(entityX, entityY, entity, 0)
 		elseif entityName == "Button" then
-			Button(entityX, entityY, entity)
+			self.entityInstance[entity.iid] = Button(entityX, entityY, entity)
 		elseif entityName == "Door" then
-			Door(entityX, entityY, entity)
+			self.entityInstance[entity.iid] = Door(entityX, entityY, entity, self.entityInstance[entity.fields.Button.entityIid])
 		end
 	end
+	printTable(self.entityInstance)
 
 	-- NOTE: Keeps the camera in the level bounds
 	local level_rect = LDtk.get_rect(level_name)

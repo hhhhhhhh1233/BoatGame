@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 152,
+	"nextUid": 153,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -1536,7 +1536,45 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0,
 			"pivotY": 0,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "Button",
+					"doc": null,
+					"__type": "EntityRef",
+					"uid": 152,
+					"type": "F_EntityRef",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "RefLinkBetweenCenters",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "CurvedArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySpecificEntity",
+					"allowedRefsEntityUid": 149,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -2011,7 +2049,15 @@
 							"height": 96,
 							"defUid": 151,
 							"px": [352,96],
-							"fieldInstances": [],
+							"fieldInstances": [{ "__identifier": "Button", "__type": "EntityRef", "__value": {
+								"entityIid": "50297c00-4ce0-11ef-8bf5-fb84cc549bd0",
+								"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
+								"levelIid": "8b012660-25d0-11ef-a820-1369997bd924",
+								"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166"
+							}, "__tile": null, "defUid": 152, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["50297c00-4ce0-11ef-8bf5-fb84cc549bd0"]
+							}] }],
 							"__worldX": 352,
 							"__worldY": 96
 						}

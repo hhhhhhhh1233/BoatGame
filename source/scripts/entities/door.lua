@@ -5,8 +5,9 @@ import "CoreLibs/nineslice"
 
 class('Door').extends(gfx.sprite)
 
-function Door:init(x, y, entity)
+function Door:init(x, y, entity, button)
 	self:moveTo(x, y)
+	self.button = button
 	self:setCenter(0, 0)
 	self.entity = entity
 	local sprite = gfx.image.new(self.entity.size.width, self.entity.size.height)
@@ -15,5 +16,15 @@ function Door:init(x, y, entity)
 	ns:drawInRect(0, 0, self.entity.size.width, self.entity.size.height)
 	gfx.unlockFocus()
 	self:setImage(sprite)
+	self:setGroups(COLLISION_GROUPS.WALL)
+	self:setCollideRect(0, 0, self.entity.size.width, self.entity.size.height)
 	self:add()
+end
+
+function Door:update()
+	if self.button then
+		if self.button.bPressed then
+			self:remove()
+		end
+	end
 end
