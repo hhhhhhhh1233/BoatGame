@@ -10,6 +10,12 @@ function Explosion:init(x, y)
 	local animationImageTable = gfx.imagetable.new("images/Explosion-table-64-64")
 	self.animationLoop = gfx.animation.loop.new(frameTime, animationImageTable, false)
 	self:setImage(gfx.image.new(64, 64))
+	local spritesInExplosion = gfx.sprite.querySpritesInRect(self.x, self.y, 64, 64)
+	for _, value in ipairs(spritesInExplosion) do
+		if value.Damage then
+			value:Damage(1000, 10)
+		end
+	end
 	self:setZIndex(20)
 	self:add()
 end

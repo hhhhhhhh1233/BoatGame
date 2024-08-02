@@ -33,14 +33,13 @@ function Mine:Damage(amount)
 end
 
 function Mine:Explode()
-	Explosion(self.x, self.y)
 	self:remove()
+	Explosion(self.x, self.y)
 end
 
 function Mine:collisionResponse(other)
 	if other:isa(Player) then
 		self:Explode()
-		other:Damage(1000, 10)
 		return "overlap"
 	end
 	return "slide"
