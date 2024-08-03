@@ -32,6 +32,7 @@ function Player:init(x, y, image, speed, gameManager)
 	self.Health = 100
 	self.Invincible = 0
 	self.coins = 0
+	self.explosionMeter = 0
 
 	self.bActive = true
 
@@ -149,17 +150,17 @@ function Player:update()
 	end
 
 	if self.bActive then
-		if pd.buttonJustPressed(pd.kButtonA) then
-			if self.AbilityA then
-				self.AbilityA(self)
-			end
+		-- if pd.buttonJustPressed(pd.kButtonA) then
+		if self.AbilityA then
+			self.AbilityA(self, pd.kButtonA)
 		end
+		-- end
 
-		if pd.buttonJustPressed(pd.kButtonB) then
-			if self.AbilityB then
-				self.AbilityB(self)
-			end
+		-- if pd.buttonJustPressed(pd.kButtonB) then
+		if self.AbilityB then
+			self.AbilityB(self, pd.kButtonB)
 		end
+		-- end
 
 		if self.PassiveAbility then
 			self:PassiveAbility()

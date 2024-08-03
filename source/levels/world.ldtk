@@ -1736,7 +1736,10 @@
 		{ "identifier": "Abilities", "uid": 130, "values": [
 			{ "id": "Jump", "tileRect": null, "color": 12470831 },
 			{ "id": "Shoot", "tileRect": null, "color": 14120515 },
-			{ "id": "Submerge", "tileRect": null, "color": 15389866 }
+			{ "id": "Submerge", "tileRect": null, "color": 15389866 },
+			{ "id": "Dive", "tileRect": null, "color": 14984818 },
+			{ "id": "Interest", "tileRect": null, "color": 7552569 },
+			{ "id": "Overheat", "tileRect": null, "color": 4073265 }
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
 		{ "identifier": "AbilityType", "uid": 133, "values": [
 			{ "id": "AButton", "tileRect": null, "color": 12470831 },
@@ -2078,6 +2081,38 @@
 							}] }],
 							"__worldX": 224,
 							"__worldY": 160
+						},
+						{
+							"__identifier": "AbilityPickup",
+							"__grid": [9,6],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#733E39",
+							"iid": "17141320-4ce0-11ef-adc5-31dc387cf6ee",
+							"width": 32,
+							"height": 32,
+							"defUid": 129,
+							"px": [144,96],
+							"fieldInstances": [
+								{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Dive", "Overheat", "Shoot" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
+									"id": "V_String",
+									"params": ["Dive"]
+								}, {
+									"id": "V_String",
+									"params": ["Overheat"]
+								}, {
+									"id": "V_String",
+									"params": ["Shoot"]
+								} ] },
+								{ "__identifier": "AbilityType", "__type": "LocalEnum.AbilityType", "__value": "AButton", "__tile": null, "defUid": 134, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["AButton"]
+								}] },
+								{ "__identifier": "PickedUp", "__type": "Bool", "__value": false, "__tile": null, "defUid": 135, "realEditorValues": [] }
+							],
+							"__worldX": 144,
+							"__worldY": 96
 						}
 					]
 				},
@@ -2946,6 +2981,22 @@
 							}] }],
 							"__worldX": 256,
 							"__worldY": -96
+						},
+						{
+							"__identifier": "SimpleEnemy",
+							"__grid": [5,13],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#E4A672",
+							"iid": "64a82f90-4ce0-11ef-adc5-a525835e28c8",
+							"width": 32,
+							"height": 32,
+							"defUid": 128,
+							"px": [80,208],
+							"fieldInstances": [],
+							"__worldX": 80,
+							"__worldY": -112
 						}
 					]
 				},
@@ -3308,7 +3359,7 @@
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [34,17],
+							"__grid": [34,18],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -3317,14 +3368,14 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [544,272],
+							"px": [544,288],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": -256,
-							"__worldY": 80
+							"__worldY": 96
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [32,17],
+							"__grid": [32,18],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -3333,14 +3384,14 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [512,272],
+							"px": [512,288],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": -288,
-							"__worldY": 80
+							"__worldY": 96
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [30,17],
+							"__grid": [30,18],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -3349,14 +3400,14 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [480,272],
+							"px": [480,288],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": -320,
-							"__worldY": 80
+							"__worldY": 96
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [28,17],
+							"__grid": [28,18],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -3365,14 +3416,14 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [448,272],
+							"px": [448,288],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": -352,
-							"__worldY": 80
+							"__worldY": 96
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [26,17],
+							"__grid": [26,18],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -3381,14 +3432,14 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [416,272],
+							"px": [416,288],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": -384,
-							"__worldY": 80
+							"__worldY": 96
 						},
 						{
 							"__identifier": "Coin",
-							"__grid": [24,17],
+							"__grid": [24,18],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -3397,10 +3448,10 @@
 							"width": 16,
 							"height": 16,
 							"defUid": 140,
-							"px": [384,272],
+							"px": [384,288],
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": -416,
-							"__worldY": 80
+							"__worldY": 96
 						},
 						{
 							"__identifier": "Coin",
@@ -3473,22 +3524,6 @@
 							"__worldY": 160
 						},
 						{
-							"__identifier": "SpawnPoint",
-							"__grid": [41,17],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "61491660-4ce0-11ef-adc5-b3345b126cdc",
-							"width": 32,
-							"height": 32,
-							"defUid": 127,
-							"px": [656,272],
-							"fieldInstances": [],
-							"__worldX": -144,
-							"__worldY": 80
-						},
-						{
 							"__identifier": "MooredMine",
 							"__grid": [16,21],
 							"__pivot": [0,0],
@@ -3509,6 +3544,22 @@
 							],
 							"__worldX": -544,
 							"__worldY": 144
+						},
+						{
+							"__identifier": "SpawnPoint",
+							"__grid": [38,19],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#EAD4AA",
+							"iid": "61491660-4ce0-11ef-adc5-b3345b126cdc",
+							"width": 32,
+							"height": 32,
+							"defUid": 127,
+							"px": [608,304],
+							"fieldInstances": [],
+							"__worldX": -192,
+							"__worldY": 112
 						}
 					]
 				},

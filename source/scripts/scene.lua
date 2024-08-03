@@ -26,6 +26,8 @@ function Scene:init(spawnX, spawnY)
 	self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
 	self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 1.1)
 	self:goToLevel("Level_0")
+	self.player:moveTo(self.SpawnX, self.SpawnY)
+	self.water.Height = self.SpawnY
 end
 
 function Scene:enterRoom(door, direction)
