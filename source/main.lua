@@ -52,6 +52,7 @@ song:play(0)
 
 function pd.update()
 	gfx.clear(gfx.kColorWhite)
+	gfx.image.new("images/BoatCorpse"):draw(100 + i, 100 - i)
 
 	-- Check the crank and move the water based on input
 	SceneManager.water:Update()
