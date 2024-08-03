@@ -70,7 +70,7 @@ function Player:Respawn()
 
 	self.GameManager:reloadLevel()
 
-	self.GameManager.playerCorpse = PlayerCorpse(self.x, self.y, self.GameManager.currentLevel, self.coins)
+	self.GameManager.playerCorpse = PlayerCorpse(self.x, self.y, self.GameManager, self.coins)
 	self.coins = 0
 
 	self:moveTo(self.GameManager.SpawnX, self.GameManager.SpawnY)

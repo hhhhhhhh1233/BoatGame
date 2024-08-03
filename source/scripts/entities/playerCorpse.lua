@@ -3,9 +3,10 @@ local gfx <const> = pd.graphics
 
 class('PlayerCorpse').extends(gfx.sprite)
 
-function PlayerCorpse:init(x, y, level, coins)
+function PlayerCorpse:init(x, y, GameManager, coins)
 	self:moveTo(x, y)
-	self.level = level
+	self.level = GameManager.currentLevel
+	self.GameManager = GameManager
 	self.coins = coins
 	self:setImage(gfx.image.new("images/BoatCorpse"))
 	self:setCollideRect(0, 0, 32, 32)
@@ -20,5 +21,6 @@ end
 
 function PlayerCorpse:pickup(player)
 	player.coins += self.coins
+	self.GameManager.playerCorpse = nil
 	self:remove()
 end
