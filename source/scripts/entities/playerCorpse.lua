@@ -3,12 +3,15 @@ local gfx <const> = pd.graphics
 
 class('PlayerCorpse').extends(gfx.sprite)
 
-function PlayerCorpse:init(x, y, GameManager, coins)
-	self:moveTo(x, y)
+function PlayerCorpse:init(x, y, GameManager, coins, direction)
+	self:moveTo(x - 16, y - 16)
 	self.level = GameManager.currentLevel
 	self.GameManager = GameManager
 	self.coins = coins
 	self:setImage(gfx.image.new("images/BoatCorpse"))
+	if direction == -1 then
+		self:setImageFlip(gfx.kImageFlippedX)
+	end
 	self:setCollideRect(0, 0, 32, 32)
 	self:setGroups(COLLISION_GROUPS.PICKUPS)
 	self:setCollidesWithGroups(COLLISION_GROUPS.PLAYER)
