@@ -21,7 +21,6 @@ function MooredMine:init(x, y, image, entity)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.WALL, COLLISION_GROUPS.PLAYER})
 	self.AttachmentPoint = pd.geometry.vector2D.new(entity.fields.AttachmentPoint.cx, entity.fields.AttachmentPoint.cy) * 16
 	self.AttachmentPoint.x += 16
-	print(self.AttachmentPoint)
 	self.ChainLength = entity.fields.ChainLength
 	self:add()
 	self.chainImage = gfx.image.new("images/Chain")

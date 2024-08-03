@@ -13,6 +13,7 @@ import "scripts/entities/button"
 import "scripts/entities/door"
 import "scripts/entities/mooredMine"
 import "scripts/entities/playerCorpse"
+import "scripts/entities/savePoint"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -145,6 +146,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Button(entityX, entityY, entity)
 		elseif entityName == "Door" then
 			self.entityInstance[entity.iid] = Door(entityX, entityY, entity, self.entityInstance[entity.fields.Button.entityIid])
+		elseif entityName == "SavePoint" then
+			self.entityInstance[entity.iid] = SavePoint(entityX, entityY, self.currentLevel)
 		end
 	end
 

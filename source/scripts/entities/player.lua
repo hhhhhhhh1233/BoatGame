@@ -68,12 +68,18 @@ function Player:Respawn()
 	self:add()
 	self.Health = 100
 
-	self.GameManager:reloadLevel()
-
 	self.GameManager.playerCorpse = PlayerCorpse(self.x, self.y, self.GameManager, self.coins)
 	self.coins = 0
 
-	self:moveTo(self.GameManager.SpawnX, self.GameManager.SpawnY)
+	if self.savePoint then
+		print(self.savePoint.x, self.savePoint.y)
+		self.GameManager:goToLevel(self.savePoint.level)
+		self:moveTo(self.savePoint.x, self.savePoint.y + 8)
+	else
+		self.GameManager:reloadLevel()
+		self:moveTo(self.GameManager.SpawnX, self.GameManager.SpawnY)
+	end
+
 	self.PhysicsComponent.Position = pd.geometry.vector2D.new(self.x, self.y)
 	self.PhysicsComponent.Velocity = pd.geometry.vector2D.new(0, 0)
 
@@ -100,6 +106,15 @@ function Player:DrawHealthBar()
 	gfx.setColor(gfx.kColorWhite)
 	gfx.fillRect(-aX + 10, -aY + 10, 30, 20)
 	gfx.drawText(self.Health, -aX + 13, -aY + 12)
+
+	-- NOTE: This will draw how many coins you have
+	gfx.setColor(gfx.kColorWhite)
+	gfx.fillRect(-aX + 10 - 3, -aY + 50 - 3, 30 + 3 * 2, 20 + 3 * 2)
+	gfx.setColor(gfx.kColorBlack)
+	gfx.fillRect(-aX + 10 - 2, -aY + 50 - 2, 30 + 2 * 2, 20 + 2 * 2)
+	gfx.setColor(gfx.kColorWhite)
+	gfx.fillRect(-aX + 10, -aY + 50, 30, 20)
+	gfx.drawText(self.coins, -aX + 20, -aY + 52)
 end
 
 function Player:AddForce(Force)
@@ -112,10 +127,17 @@ function Player:collisionResponse(other)
 		return "overlap"
 	end
 
+	if other:isa(SavePoint) then
+		other:save(self)
+		self.savePoint = other
+		return "overlap"
+	end
+
 	if other:isa(AbilityPickup) then
 		other:pickup(self)
 		return "overlap"
 	end
+
 	if other:isa(WaterWheel) then
 		other:pickup(self)
 		return "overlap"
