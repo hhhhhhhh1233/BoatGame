@@ -6,7 +6,7 @@ class('AbilityPickup').extends(gfx.sprite)
 
 function AbilityPickup:init(x, y, entity)
 	self.entity = entity
-	self:moveTo(x, y)
+	self:moveTo(x + 16, y + 16)
 	self:setImage(gfx.image.new("images/AbilityPickup"))
 	self:setCollideRect(0, 0, 32, 32)
 	self:setGroups(COLLISION_GROUPS.PICKUPS)

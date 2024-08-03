@@ -4,9 +4,21 @@ import "scripts/bullet"
 import "scripts/explosion"
 
 function Jump(player, button)
+	-- TODO: Add a cooldown
 	if pd.buttonJustPressed(button) then
-		player:AddForce(pd.geometry.vector2D.new(0, -8))
-		player.bCanJump = false
+		local sprites = gfx.sprite.querySpritesInRect(player.x - 25, player.y - 8, 50, 50)
+		gfx.fillRect(player.x - 25, player.y - 8, 50, 50)
+		for _, sprite in ipairs(sprites) do
+			if not sprite:isa(Player) and sprite.Damage then
+				sprite:Damage(10, 10)
+			end
+			if sprite.PhysicsComponent then
+				local blastDirection = (sprite.PhysicsComponent.Position - pd.geometry.vector2D.new(player.x, player.y + 25)):normalized()
+				sprite.PhysicsComponent:AddForce(blastDirection * 8)
+			end
+		end
+		-- player:AddForce(pd.geometry.vector2D.new(0, -8))
+		-- player.bCanJump = false
 	end
 end
 
@@ -52,7 +64,7 @@ local explosionMeterRateOfDecrease = 1
 function Overheat(player, button)
 	if pd.buttonIsPressed(button) then
 		local sprites = gfx.sprite.querySpritesInRect(player.x - 25, player.y - 25 - 8, 50, 50)
-		-- Visualization of the damage zone
+		-- NOTE: Visualization of the damage zone
 		-- gfx.fillRect(player.x - 25, player.y - 25 - 8, 50, 50)
 		for _, value in ipairs(sprites) do
 			if not value:isa(Player) and value.Damage then
