@@ -2376,6 +2376,28 @@
 							"fieldInstances": [],
 							"__worldX": 728,
 							"__worldY": 104
+						},
+						{
+							"__identifier": "MooredMine",
+							"__grid": [14,10],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#2CE8F5",
+							"iid": "e94c3360-4ce0-11ef-adc5-cfa59177f4c8",
+							"width": 32,
+							"height": 32,
+							"defUid": 153,
+							"px": [224,160],
+							"fieldInstances": [
+								{ "__identifier": "AttachmentPoint", "__type": "Point", "__value": { "cx": 14, "cy": 17 }, "__tile": null, "defUid": 154, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["14,17"]
+								}] },
+								{ "__identifier": "ChainLength", "__type": "Int", "__value": 144, "__tile": null, "defUid": 156, "realEditorValues": [{ "id": "V_Int", "params": [144] }] }
+							],
+							"__worldX": 832,
+							"__worldY": 0
 						}
 					]
 				},

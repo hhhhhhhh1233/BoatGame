@@ -24,6 +24,7 @@ function MooredMine:init(x, y, image, entity)
 	print(self.AttachmentPoint)
 	self.ChainLength = entity.fields.ChainLength
 	self:add()
+	self.chainImage = gfx.image.new("images/Chain")
 
 end
 
@@ -31,12 +32,13 @@ function MooredMine:update()
 	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(0, 0.5))
 	self.PhysicsComponent:Move(self)
 
-	for i = 0, math.ceil(self.ChainLength / 16) + 1 do
-		gfx.image.new("images/Chain"):draw(self.x - 8, self.y + 12 + 16 * i)
+	local chainPixelLength = (self.PhysicsComponent.Position - self.AttachmentPoint):magnitude()
+	local chainChunks = math.ceil(chainPixelLength / 16)
+	for i = 0, chainChunks do
+		self.chainImage:draw(self.x - 8, self.y + 12 + i * 16)
 	end
 
 	if (self.AttachmentPoint - self.PhysicsComponent.Position):magnitude() > self.ChainLength then
-		local s = (self.AttachmentPoint - self.PhysicsComponent.Position):normalized() * self.ChainLength
 		self.PhysicsComponent.Position = self.AttachmentPoint + pd.geometry.vector2D.new(0, -self.ChainLength)
 		self.x, self.y = self.PhysicsComponent.Position.x, self.PhysicsComponent.Position.y
 		self.PhysicsComponent.Velocity = pd.geometry.vector2D.new(0, 0)
