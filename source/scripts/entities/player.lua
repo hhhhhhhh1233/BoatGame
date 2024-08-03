@@ -177,9 +177,9 @@ function Player:update()
 		self.GameManager:enterRoom(self.Door, "NORTH")
 	end
 
-	if self.bUnderwater then
-		self.bCanJump = true
-	end
+	-- if self.bUnderwater then
+	-- 	self.bCanJump = true
+	-- end
 
 	if self.bActive then
 		-- if pd.buttonJustPressed(pd.kButtonA) then

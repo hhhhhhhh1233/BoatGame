@@ -2,10 +2,11 @@ local pd <const> = playdate
 local gfx <const> = pd.graphics
 import "scripts/bullet"
 import "scripts/explosion"
+import "CoreLibs/frameTimer"
 
 function Jump(player, button)
 	-- TODO: Add a cooldown
-	if pd.buttonJustPressed(button) then
+	if pd.buttonJustPressed(button) and player.bCanJump then
 		local sprites = gfx.sprite.querySpritesInRect(player.x - 25, player.y - 8, 50, 50)
 		gfx.fillRect(player.x - 25, player.y - 8, 50, 50)
 		for _, sprite in ipairs(sprites) do
@@ -17,6 +18,10 @@ function Jump(player, button)
 				sprite.PhysicsComponent:AddForce(blastDirection * 8)
 			end
 		end
+		player.bCanJump = false
+		pd.frameTimer.new(30, function ()
+			player.bCanJump = true
+		end)
 		-- player:AddForce(pd.geometry.vector2D.new(0, -8))
 		-- player.bCanJump = false
 	end
