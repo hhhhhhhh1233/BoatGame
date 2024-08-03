@@ -11,6 +11,7 @@ import "scripts/entities/blockedWall"
 import "scripts/entities/oneWayDoor"
 import "scripts/entities/button"
 import "scripts/entities/door"
+import "scripts/entities/mooredMine"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -23,7 +24,7 @@ function Scene:init(spawnX, spawnY)
 	self.player = Player(spawnX, spawnY, gfx.image.new("images/Boat"), 5, self)
 	local level_rect = LDtk.get_rect("Level_0")
 	self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
-	self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1)
+	self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 1.1)
 	self:goToLevel("Level_0")
 end
 
@@ -111,6 +112,10 @@ function Scene:goToLevel(level_name)
 			local MineInstance = Mine(entityX, entityY, gfx.image.new("images/Mine"))
 			table.insert(self.ActivePhysicsComponents, MineInstance.PhysicsComponent)
 			self.entityInstance[entity.iid] = MineInstance
+		elseif entityName == "MooredMine" then
+			local MineInstance = MooredMine(entityX, entityY, gfx.image.new("images/Mine"), entity)
+			table.insert(self.ActivePhysicsComponents, MineInstance.PhysicsComponent)
+			self.entityInstance[entity.iid] = MineInstance
 		elseif entityName == "FloatingEnemy" then
 			local FloaterInstance = FloatingEnemy(entityX, entityY, self.player)
 			table.insert(self.ActivePhysicsComponents, FloaterInstance.PhysicsComponent)
@@ -136,7 +141,6 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Door(entityX, entityY, entity, self.entityInstance[entity.fields.Button.entityIid])
 		end
 	end
-	printTable(self.entityInstance)
 
 	-- NOTE: Keeps the camera in the level bounds
 	local level_rect = LDtk.get_rect(level_name)

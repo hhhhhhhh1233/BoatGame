@@ -125,7 +125,7 @@ function Player:collisionResponse(other)
 		end
 	end
 
-	if other:isa(Mine) then
+	if other:isa(Mine) or other:isa(MooredMine) then
 		return "overlap"
 	else
 		return "slide"

@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 153,
+	"nextUid": 158,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -1575,6 +1575,116 @@
 					"tilesetUid": null
 				}
 			]
+		},
+		{
+			"identifier": "MooredMine",
+			"uid": 153,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 32,
+			"height": 32,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#2CE8F5",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": [
+				{
+					"identifier": "AttachmentPoint",
+					"doc": null,
+					"__type": "Point",
+					"uid": 154,
+					"type": "F_Point",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "PointPath",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "ChainLength",
+					"doc": null,
+					"__type": "Int",
+					"uid": 156,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": 50,
+					"max": 1000,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -1847,25 +1957,6 @@
 							"__worldY": 96
 						},
 						{
-							"__identifier": "BlockedWall",
-							"__grid": [26,8],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#63C74D",
-							"iid": "0ccfa4c0-4ce0-11ef-aa28-05c891e99384",
-							"width": 32,
-							"height": 64,
-							"defUid": 142,
-							"px": [416,128],
-							"fieldInstances": [
-								{ "__identifier": "Cost", "__type": "Int", "__value": 10, "__tile": null, "defUid": 143, "realEditorValues": [null] },
-								{ "__identifier": "Cleared", "__type": "Bool", "__value": false, "__tile": null, "defUid": 144, "realEditorValues": [] }
-							],
-							"__worldX": 416,
-							"__worldY": 128
-						},
-						{
 							"__identifier": "Coin",
 							"__grid": [21,7],
 							"__pivot": [0,0],
@@ -1938,25 +2029,6 @@
 							"__worldY": 96
 						},
 						{
-							"__identifier": "OneWayDoor",
-							"__grid": [14,10],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#3E8948",
-							"iid": "464876f0-4ce0-11ef-85f0-91135f1eea1e",
-							"width": 64,
-							"height": 16,
-							"defUid": 145,
-							"px": [224,160],
-							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "South", "__tile": null, "defUid": 147, "realEditorValues": [{
-								"id": "V_String",
-								"params": ["South"]
-							}] }],
-							"__worldX": 224,
-							"__worldY": 160
-						},
-						{
 							"__identifier": "Coin",
 							"__grid": [3,5],
 							"__pivot": [0,0],
@@ -1987,6 +2059,25 @@
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": 80,
 							"__worldY": 80
+						},
+						{
+							"__identifier": "OneWayDoor",
+							"__grid": [14,10],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#3E8948",
+							"iid": "238e4900-4ce0-11ef-adc5-9fa3091909d7",
+							"width": 64,
+							"height": 16,
+							"defUid": 145,
+							"px": [224,160],
+							"fieldInstances": [{ "__identifier": "Blocking", "__type": "LocalEnum.Direction", "__value": "South", "__tile": null, "defUid": 147, "realEditorValues": [{
+								"id": "V_String",
+								"params": ["South"]
+							}] }],
+							"__worldX": 224,
+							"__worldY": 160
 						}
 					]
 				},
@@ -3336,6 +3427,66 @@
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": -656,
 							"__worldY": -80
+						},
+						{
+							"__identifier": "MooredMine",
+							"__grid": [30,22],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#2CE8F5",
+							"iid": "f7688c70-4ce0-11ef-85f0-49789ed09c38",
+							"width": 32,
+							"height": 32,
+							"defUid": 153,
+							"px": [480,352],
+							"fieldInstances": [
+								{ "__identifier": "AttachmentPoint", "__type": "Point", "__value": { "cx": 30, "cy": 25 }, "__tile": null, "defUid": 154, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["30,25"]
+								}] },
+								{ "__identifier": "ChainLength", "__type": "Int", "__value": 50, "__tile": null, "defUid": 156, "realEditorValues": [null] }
+							],
+							"__worldX": -320,
+							"__worldY": 160
+						},
+						{
+							"__identifier": "SpawnPoint",
+							"__grid": [41,17],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#EAD4AA",
+							"iid": "61491660-4ce0-11ef-adc5-b3345b126cdc",
+							"width": 32,
+							"height": 32,
+							"defUid": 127,
+							"px": [656,272],
+							"fieldInstances": [],
+							"__worldX": -144,
+							"__worldY": 80
+						},
+						{
+							"__identifier": "MooredMine",
+							"__grid": [16,21],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#2CE8F5",
+							"iid": "ca1f2940-4ce0-11ef-adc5-e5f9992b8b43",
+							"width": 32,
+							"height": 32,
+							"defUid": 153,
+							"px": [256,336],
+							"fieldInstances": [
+								{ "__identifier": "AttachmentPoint", "__type": "Point", "__value": { "cx": 16, "cy": 25 }, "__tile": null, "defUid": 154, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["16,25"]
+								}] },
+								{ "__identifier": "ChainLength", "__type": "Int", "__value": 70, "__tile": null, "defUid": 156, "realEditorValues": [{ "id": "V_Int", "params": [70] }] }
+							],
+							"__worldX": -544,
+							"__worldY": 144
 						}
 					]
 				},

@@ -12,11 +12,10 @@ local gfx <const> = pd.graphics
 class('Mine').extends(gfx.sprite)
 
 function Mine:init(x, y, image)
-	self:moveTo(x, y)
-	self:setCenter(0, 0)
+	self:moveTo(x + 16, y + 16)
 	self:setImage(image)
 	self:setCollideRect(0, 0, self:getSize())
-	self.PhysicsComponent = PhysicsComponent(x, y, 10)
+	self.PhysicsComponent = PhysicsComponent(self.x, self.y, 10)
 
 	self:setGroups(COLLISION_GROUPS.EXPLOSIVE)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.ENEMY, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.WALL, COLLISION_GROUPS.PLAYER})
