@@ -15,7 +15,6 @@ end
 
 function Coin:update()
 	self:moveTo(self.x, self.y + 0.1 * math.cos(5 * pd.getElapsedTime()))
-
 end
 
 function Coin:pickup(player)

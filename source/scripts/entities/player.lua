@@ -57,6 +57,7 @@ function Player:Damage(amount, iFrames)
 	if self.Health <= 0 then
 		self:setVisible(false)
 		self.bActive = false
+		self:remove()
 		pd.timer.performAfterDelay(1000, function ()
 			self:Respawn()
 		end)
@@ -64,7 +65,13 @@ function Player:Damage(amount, iFrames)
 end
 
 function Player:Respawn()
+	self:add()
 	self.Health = 100
+
+	self.GameManager:reloadLevel()
+
+	self.GameManager.playerCorpse = PlayerCorpse(self.x, self.y, self.GameManager.currentLevel, self.coins)
+	self.coins = 0
 
 	self:moveTo(self.GameManager.SpawnX, self.GameManager.SpawnY)
 	self.PhysicsComponent.Position = pd.geometry.vector2D.new(self.x, self.y)
@@ -78,7 +85,6 @@ function Player:Respawn()
 	self:setVisible(true)
 	self.bActive = true
 
-	self.GameManager:reloadLevel()
 end
 
 function Player:DrawHealthBar()
@@ -115,6 +121,10 @@ function Player:collisionResponse(other)
 		return "overlap"
 	end
 	if other:isa(Coin) then
+		other:pickup(self)
+		return "overlap"
+	end
+	if other:isa(PlayerCorpse) then
 		other:pickup(self)
 		return "overlap"
 	end

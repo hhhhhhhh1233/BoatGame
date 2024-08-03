@@ -12,6 +12,7 @@ import "scripts/entities/oneWayDoor"
 import "scripts/entities/button"
 import "scripts/entities/door"
 import "scripts/entities/mooredMine"
+import "scripts/entities/playerCorpse"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -75,6 +76,9 @@ function Scene:goToLevel(level_name)
 	self.currentLevel = level_name
 	gfx.sprite.removeAll()
 	self.player:add()
+	if self.playerCorpse and self.playerCorpse.level == level_name then
+		self.playerCorpse:add()
+	end
 
 	self.entityInstance = {}
 
