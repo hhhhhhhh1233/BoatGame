@@ -33,9 +33,9 @@ end
 
 
 function Interest(player)
-	player.coins *= 1.001
-	player.health *= 1.001
-	player.health = Clamp(player.health, 0, 100)
+	player.coins *= 1.0005
+	player.Health *= 1.0005
+	player.Health = Clamp(player.Health, 0, 100)
 end
 
 function Dive(player, button)

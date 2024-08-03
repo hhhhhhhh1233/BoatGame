@@ -105,7 +105,7 @@ function Player:DrawHealthBar()
 	gfx.fillRect(-aX + 10 - 2, -aY + 10 - 2, 30 + 2 * 2, 20 + 2 * 2)
 	gfx.setColor(gfx.kColorWhite)
 	gfx.fillRect(-aX + 10, -aY + 10, 30, 20)
-	gfx.drawText(self.Health, -aX + 13, -aY + 12)
+	gfx.drawText(math.floor(self.Health), -aX + 13, -aY + 12)
 
 	-- NOTE: This will draw how many coins you have
 	gfx.setColor(gfx.kColorWhite)
@@ -114,7 +114,7 @@ function Player:DrawHealthBar()
 	gfx.fillRect(-aX + 10 - 2, -aY + 50 - 2, 30 + 2 * 2, 20 + 2 * 2)
 	gfx.setColor(gfx.kColorWhite)
 	gfx.fillRect(-aX + 10, -aY + 50, 30, 20)
-	gfx.drawText(self.coins, -aX + 20, -aY + 52)
+	gfx.drawText(math.floor(self.coins), -aX + 20, -aY + 52)
 end
 
 function Player:AddForce(Force)

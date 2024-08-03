@@ -50,9 +50,9 @@ function Scene:enterRoom(door, direction)
 	if direction == "NORTH" then
 		self.water.Height = self.LevelHeight - 16
 	elseif direction == "SOUTH" then
-		self.water.Height = 16
-		self.player.y += 16
-		self.player.PhysicsComponent.Position.y += 16
+		self.water.Height = 32
+		self.player.y = 32
+		self.player.PhysicsComponent.Position.y = 32
 	else
 		self.water.Height += yDiff
 	end
