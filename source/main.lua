@@ -19,6 +19,7 @@ import "CoreLibs/ui"
 -- Utilities
 import "scripts/camera"
 import "scripts/buoyancy"
+import "scripts/saves"
 
 -- Game Objects
 import "scripts/entities/player"
@@ -49,6 +50,8 @@ end)
 local song = pd.sound.fileplayer.new("sounds/song")
 song:play(0)
 
+local menu = pd.getSystemMenu()
+local menuItem, error = menu:addMenuItem("Clear Save", ClearSave)
 
 function pd.update()
 	gfx.clear(gfx.kColorWhite)

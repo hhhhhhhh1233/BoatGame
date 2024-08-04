@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+import "scripts/saves"
+
 class('SavePoint').extends(gfx.sprite)
 
 function SavePoint:init(x, y, level)
@@ -12,13 +14,12 @@ function SavePoint:init(x, y, level)
 	self:setCollidesWithGroups(COLLISION_GROUPS.PLAYER)
 	self:setZIndex(-1)
 	self:add()
-	print(self.x, self.y)
 end
 
 function SavePoint:update()
 	self:moveTo(self.x, self.y + 0.2 * math.cos(5 * pd.getElapsedTime()))
 end
 
-function SavePoint:save(player)
-
+function SavePoint:save(GameManager)
+	SaveGame(GameManager)
 end

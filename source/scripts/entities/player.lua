@@ -128,22 +128,25 @@ function Player:collisionResponse(other)
 	end
 
 	if other:isa(SavePoint) then
-		other:save(self)
+		other:save(self.GameManager)
 		self.savePoint = other
 		return "overlap"
 	end
 
 	if other:isa(AbilityPickup) then
 		other:pickup(self)
+		self.GameManager:collect(other.entity.iid)
 		return "overlap"
 	end
 
 	if other:isa(WaterWheel) then
 		other:pickup(self)
+		self.GameManager:collect(other.entity.iid)
 		return "overlap"
 	end
 	if other:isa(Coin) then
 		other:pickup(self)
+		self.GameManager:collect(other.entity.iid)
 		return "overlap"
 	end
 	if other:isa(PlayerCorpse) then
@@ -222,17 +225,20 @@ function Player:update()
 	end
 end
 
-function Player:setAbilityA(func)
+function Player:setAbilityA(func, name)
 	self.AbilityA = func
+	self.AbilityAName = name
 	print(self.AbilityA)
 end
 
-function Player:setAbilityB(func)
+function Player:setAbilityB(func, name)
 	self.AbilityB = func
+	self.AbilityBName = name
 	print(self.AbilityB)
 end
 
-function Player:setPassive(func)
+function Player:setPassive(func, name)
 	self.PassiveAbility = func
+	self.PassiveAbilityName = name
 	print(self.PassiveAbility)
 end

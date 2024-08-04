@@ -23,13 +23,41 @@ LDtk.load("levels/world.ldtk", false)
 class('Scene').extends()
 
 function Scene:init(spawnX, spawnY)
-	self.player = Player(spawnX, spawnY, gfx.image.new("images/Boat"), 5, self)
-	local level_rect = LDtk.get_rect("Level_0")
-	self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
-	self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 1.1)
-	self:goToLevel("Level_0")
-	self.player:moveTo(self.SpawnX, self.SpawnY)
-	self.water.Height = self.SpawnY
+	local SaveData = LoadGame(self)
+	if SaveData then
+		print("LOADING SAVE")
+		self.collectedEntities = SaveData["CollectedEntities"]
+		self.player = Player(SaveData["PlayerX"], SaveData["PlayerY"], gfx.image.new("images/Boat"), 5, self)
+		self.player.coins = SaveData["PlayerCoins"]
+		self.player.AbilityA = Abilities[SaveData["PlayerAbilityAName"]]
+		self.player.AbilityAName = SaveData["PlayerAbilityAName"]
+		self.player.AbilityB = Abilities[SaveData["PlayerAbilityBName"]]
+		self.player.AbilityBName = SaveData["PlayerAbilityBName"]
+		self.player.PassiveAbility = Abilities[SaveData["PlayerPassiveAbilityName"]]
+		self.player.PassiveAbilityName = SaveData["PlayerPassiveAbilityName"]
+		if SaveData["PlayerDirection"] == -1 then
+			self.player:setImageFlip(gfx.kImageFlippedX)
+		end
+		local level_rect = LDtk.get_rect(SaveData["CurrentLevel"])
+		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
+		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 1.1)
+		self.water.bActive = SaveData["WaterWheelCollected"]
+		self:goToLevel(SaveData["CurrentLevel"])
+	else
+		self.collectedEntities = {}
+		self.player = Player(spawnX, spawnY, gfx.image.new("images/Boat"), 5, self)
+		local level_rect = LDtk.get_rect("Level_0")
+		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
+		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 1.1)
+		self:goToLevel("Level_0")
+		self.player:moveTo(self.SpawnX, self.SpawnY)
+		self.water.Height = self.SpawnY
+	end
+end
+
+function Scene:collect(entityIid)
+	self.collectedEntities[entityIid] = true
+	table.insert(self.collectedEntities, entityIid)
 end
 
 function Scene:enterRoom(door, direction)
@@ -132,11 +160,11 @@ function Scene:goToLevel(level_name)
 			self.SpawnY = entityY
 		elseif entityName == "SimpleEnemy" then
 			self.entityInstance[entity.iid] = SimpleEnemy(entityX, entityY, self.player)
-		elseif entityName == "AbilityPickup" and not entity.fields.PickedUp then
+		elseif entityName == "AbilityPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = AbilityPickup(entityX, entityY, entity)
-		elseif entityName == "WaterWheel" and not entity.fields.PickedUp then
+		elseif entityName == "WaterWheel" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = WaterWheel(entityX, entityY, entity, self.water)
-		elseif entityName == "Coin" and not entity.fields.Collected then
+		elseif entityName == "Coin" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = Coin(entityX, entityY, entity)
 		elseif entityName == "BlockedWall" and not entity.fields.Cleared then
 			self.entityInstance[entity.iid] = BlockedWall(entityX, entityY, entity)

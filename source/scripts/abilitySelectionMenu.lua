@@ -51,7 +51,7 @@ function AbilitySelectionMenu:update()
 		self.grid:selectPreviousColumn(false)
 	elseif pd.buttonJustPressed(pd.kButtonA) then
 		local _, _, column = self.grid:getSelection()
-		self.func(self.player, Abilities[self.upgrades[column]])
+		self.func(self.player, Abilities[self.upgrades[column]], self.upgrades[column])
 		self.player.bActive = true
 		self:remove()
 	end
