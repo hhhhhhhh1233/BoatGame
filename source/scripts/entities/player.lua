@@ -128,8 +128,8 @@ function Player:collisionResponse(other)
 	end
 
 	if other:isa(SavePoint) then
-		other:save(self.GameManager)
-		self.savePoint = other
+		-- other:save(self.GameManager)
+		-- self.savePoint = other
 		return "overlap"
 	end
 
