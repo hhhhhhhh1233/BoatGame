@@ -43,6 +43,9 @@ function Scene:init(spawnX, spawnY)
 		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 1.1)
 		self.water.bActive = SaveData["WaterWheelCollected"]
 		self:goToLevel(SaveData["CurrentLevel"])
+		if SaveData["PlayerCorpseX"] then
+			self.playerCorpse = PlayerCorpse(SaveData["PlayerCorpseX"], SaveData["PlayerCorpseY"], self, SaveData["PlayerCorpseCoins"], SaveData["PlayerCorpseDirection"])
+		end
 	else
 		self.collectedEntities = {}
 		self.player = Player(spawnX, spawnY, gfx.image.new("images/Boat"), 5, self)

@@ -38,5 +38,15 @@ function SaveGame(GameManager)
 		-- Collected Entities (Coins, Abilities, and the Water Wheel)
 		["CollectedEntities"] = GameManager.collectedEntities
 	}
+
+	-- Player Corpse
+	if GameManager.playerCorpse then
+		SaveData["PlayerCorpseX"] = GameManager.playerCorpse.x + 16
+		SaveData["PlayerCorpseY"] = GameManager.playerCorpse.y + 16
+		SaveData["PlayerCorpseDirection"] = GameManager.playerCorpse.direction
+		SaveData["PlayerCorpseCoins"] = GameManager.playerCorpse.coins
+		SaveData["PlayerCorpseLevel"] = GameManager.playerCorpse.level
+	end
+
 	ds.write(SaveData)
 end

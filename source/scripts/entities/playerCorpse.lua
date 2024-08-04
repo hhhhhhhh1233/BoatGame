@@ -8,8 +8,9 @@ function PlayerCorpse:init(x, y, GameManager, coins, direction)
 	self.level = GameManager.currentLevel
 	self.GameManager = GameManager
 	self.coins = coins
+	self.direction = direction
 	self:setImage(gfx.image.new("images/BoatCorpse"))
-	if direction == -1 then
+	if self.direction == -1 then
 		self:setImageFlip(gfx.kImageFlippedX)
 	end
 	self:setCollideRect(0, 0, 32, 32)
