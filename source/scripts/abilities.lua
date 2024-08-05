@@ -62,6 +62,28 @@ function Dive(player, button)
 	end
 end
 
+function ChangeSize(player, button)
+	if pd.buttonIsPressed(button) then
+		if pd.buttonJustPressed(pd.kButtonDown) then
+			if player:getScale() == 1 then
+				player:setScale(0.5)
+				player:setCollideRect(4, 6, 13, 11)
+			elseif player:getScale() == 2 then
+				player:setScale(1)
+				player:setCollideRect(4, 10, 26, 22)
+			end
+		elseif pd.buttonJustPressed(pd.kButtonUp) then
+			if player:getScale() == 1 then
+				player:setScale(2 * player:getScale())
+				player:setCollideRect(4, 20, 52, 44)
+			elseif player:getScale() == 0.5 then
+				player:setScale(1)
+				player:setCollideRect(4, 10, 26, 22)
+			end
+		end
+	end
+end
+
 local explosionMeterMax = 100
 local explosionMeterRateOfIncrease = 3
 local explosionMeterRateOfDecrease = 1
@@ -104,5 +126,6 @@ Abilities = {
 	["Submerge"] = Submerge,
 	["Interest"] = Interest,
 	["Dive"] = Dive,
-	["Overheat"] = Overheat
+	["Overheat"] = Overheat,
+	["ChangeSize"] = ChangeSize
 }
