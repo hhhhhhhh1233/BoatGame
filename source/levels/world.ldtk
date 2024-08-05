@@ -1775,7 +1775,8 @@
 			{ "id": "Dive", "tileRect": null, "color": 14984818 },
 			{ "id": "Interest", "tileRect": null, "color": 7552569 },
 			{ "id": "Overheat", "tileRect": null, "color": 4073265 },
-			{ "id": "ChangeSize", "tileRect": null, "color": 16690740 }
+			{ "id": "ChangeSize", "tileRect": null, "color": 16690740 },
+			{ "id": "Invisibility", "tileRect": null, "color": 16705377 }
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
 		{ "identifier": "AbilityType", "uid": 133, "values": [
 			{ "id": "AButton", "tileRect": null, "color": 12470831 },
@@ -2147,12 +2148,15 @@
 							"defUid": 129,
 							"px": [128,192],
 							"fieldInstances": [
-								{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Dive", "ChangeSize" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
+								{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Dive", "ChangeSize", "Invisibility" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
 									"id": "V_String",
 									"params": ["Dive"]
 								}, {
 									"id": "V_String",
 									"params": ["ChangeSize"]
+								}, {
+									"id": "V_String",
+									"params": ["Invisibility"]
 								} ] },
 								{ "__identifier": "AbilityType", "__type": "LocalEnum.AbilityType", "__value": "BButton", "__tile": null, "defUid": 134, "realEditorValues": [{
 									"id": "V_String",

@@ -84,6 +84,23 @@ function ChangeSize(player, button)
 	end
 end
 
+
+function Invisibility(player, button)
+	if pd.buttonIsPressed(button) then
+		player:setImage(gfx.image.new("images/BoatCorpse"))
+		if player.direction == -1 then
+			player:setImageFlip(gfx.kImageFlippedX)
+		end
+		player.invisible = true
+	else
+		player:setImage(gfx.image.new("images/Boat"))
+		if player.direction == -1 then
+			player:setImageFlip(gfx.kImageFlippedX)
+		end
+		player.invisible = false
+	end
+end
+
 local explosionMeterMax = 100
 local explosionMeterRateOfIncrease = 3
 local explosionMeterRateOfDecrease = 1
@@ -127,5 +144,6 @@ Abilities = {
 	["Interest"] = Interest,
 	["Dive"] = Dive,
 	["Overheat"] = Overheat,
-	["ChangeSize"] = ChangeSize
+	["ChangeSize"] = ChangeSize,
+	["Invisibility"] = Invisibility
 }

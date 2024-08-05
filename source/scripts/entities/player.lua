@@ -68,7 +68,7 @@ function Player:Respawn()
 	self:add()
 	self.Health = 100
 
-	self.GameManager.playerCorpse = PlayerCorpse(self.x, self.y, self.GameManager, self.coins, self.direction)
+	self.GameManager.playerCorpse = PlayerCorpse(self.x, self.y, self.GameManager.currentLevel, self.GameManager, self.coins, self.direction)
 	self.coins = 0
 
 	if self.savePoint then

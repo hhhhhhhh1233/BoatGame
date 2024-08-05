@@ -27,7 +27,8 @@ function FloatingEnemy:update()
 	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(0, 0.5))
 	self.PhysicsComponent:Move(self)
 	local toPlayer = self.player.PhysicsComponent.Position - self.PhysicsComponent.Position
-	if toPlayer:magnitude() < 250 and self.cooldown >= 15 then
+	print(self.player.invisible)
+	if toPlayer:magnitude() < 250 and self.cooldown >= 15 and not self.player.invisible then
 		local _, _, _, n = self:checkCollisions(self.player.x, self.player.y)
 		if n < 1 and self.player.bActive then
 			Bullet(self.x + toPlayer:normalized().x * 30, self.y + toPlayer:normalized().y * 30, toPlayer:normalized() * 5)

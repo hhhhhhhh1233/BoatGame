@@ -3,9 +3,9 @@ local gfx <const> = pd.graphics
 
 class('PlayerCorpse').extends(gfx.sprite)
 
-function PlayerCorpse:init(x, y, GameManager, coins, direction)
+function PlayerCorpse:init(x, y, level, GameManager, coins, direction)
 	self:moveTo(x - 16, y - 16)
-	self.level = GameManager.currentLevel
+	self.level = level
 	self.GameManager = GameManager
 	self.coins = coins
 	self.direction = direction

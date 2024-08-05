@@ -44,7 +44,7 @@ function Scene:init(spawnX, spawnY)
 		self.water.bActive = SaveData["WaterWheelCollected"]
 		self:goToLevel(SaveData["CurrentLevel"])
 		if SaveData["PlayerCorpseX"] then
-			self.playerCorpse = PlayerCorpse(SaveData["PlayerCorpseX"], SaveData["PlayerCorpseY"], self, SaveData["PlayerCorpseCoins"], SaveData["PlayerCorpseDirection"])
+			self.playerCorpse = PlayerCorpse(SaveData["PlayerCorpseX"], SaveData["PlayerCorpseY"], SaveData["PlayerCorpseLevel"], self, SaveData["PlayerCorpseCoins"], SaveData["PlayerCorpseDirection"])
 		end
 	else
 		self.collectedEntities = {}
