@@ -128,12 +128,17 @@ function Overheat(player, button)
 			Explosion(player.x, player.y)
 		end
 
+		local img = gfx.image.new(100, 100)
+		local ox, oy = gfx.getDrawOffset()
+		gfx.lockFocus(img)
 		gfx.setColor(gfx.kColorBlack)
-		gfx.fillRect(player.x - 2 - 16, player.y - 42 - 2, 34, 14)
+		gfx.fillRect(0, 0, 34, 14)
 		gfx.setColor(gfx.kColorWhite)
-		gfx.fillRect(player.x - 1 - 16, player.y - 42 - 1, 32, 12)
+		gfx.fillRect(1, 1, 32, 12)
 		gfx.setColor(gfx.kColorBlack)
-		gfx.fillRect(player.x - 16, player.y - 42, (player.explosionMeter/explosionMeterMax) * 30, 10)
+		gfx.fillRect(2, 2, (player.explosionMeter/explosionMeterMax) * 30, 10)
+		gfx.unlockFocus()
+		UISystem:drawImageAt(img, player.x - 17 + ox, player.y + oy - 50)
 	end
 end
 

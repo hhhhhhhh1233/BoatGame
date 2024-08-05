@@ -2011,6 +2011,38 @@
 							"fieldInstances": [],
 							"__worldX": 96,
 							"__worldY": 96
+						},
+						{
+							"__identifier": "AbilityPickup",
+							"__grid": [32,7],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#733E39",
+							"iid": "120c6f80-4ce0-11ef-9276-9dc09070f7a5",
+							"width": 32,
+							"height": 32,
+							"defUid": 129,
+							"px": [512,112],
+							"fieldInstances": [
+								{ "__identifier": "Abilities", "__type": "Array<LocalEnum.Abilities>", "__value": [ "Shoot", "Jump", "Overheat" ], "__tile": null, "defUid": 132, "realEditorValues": [ {
+									"id": "V_String",
+									"params": ["Shoot"]
+								}, {
+									"id": "V_String",
+									"params": ["Jump"]
+								}, {
+									"id": "V_String",
+									"params": ["Overheat"]
+								} ] },
+								{ "__identifier": "AbilityType", "__type": "LocalEnum.AbilityType", "__value": "AButton", "__tile": null, "defUid": 134, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["AButton"]
+								}] },
+								{ "__identifier": "PickedUp", "__type": "Bool", "__value": false, "__tile": null, "defUid": 135, "realEditorValues": [] }
+							],
+							"__worldX": 512,
+							"__worldY": 112
 						}
 					]
 				},

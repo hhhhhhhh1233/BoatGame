@@ -94,27 +94,29 @@ function Player:Respawn()
 end
 
 function Player:DrawHealthBar()
-	local aX, aY = gfx.getDrawOffset()
-
 	-- TODO: This should be used instead of the magic numbers below
 	-- local textWidth = gfx.getSystemFont():getTextWidth(self.Health)
 
+	local img = gfx.image.new(100, 100)
+	gfx.lockFocus(img)
 	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(-aX + 10 - 3, -aY + 10 - 3, 30 + 3 * 2, 20 + 3 * 2)
+	gfx.fillRect(10 - 3,10 - 3, 30 + 3 * 2, 20 + 3 * 2)
 	gfx.setColor(gfx.kColorBlack)
-	gfx.fillRect(-aX + 10 - 2, -aY + 10 - 2, 30 + 2 * 2, 20 + 2 * 2)
+	gfx.fillRect(10 - 2, 10 - 2, 30 + 2 * 2, 20 + 2 * 2)
 	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(-aX + 10, -aY + 10, 30, 20)
-	gfx.drawText(math.floor(self.Health), -aX + 13, -aY + 12)
+	gfx.fillRect(10, 10, 30, 20)
+	gfx.drawText(math.floor(self.Health), 13, 12)
 
 	-- NOTE: This will draw how many coins you have
 	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(-aX + 10 - 3, -aY + 50 - 3, 30 + 3 * 2, 20 + 3 * 2)
+	gfx.fillRect(10 - 3, 50 - 3, 30 + 3 * 2, 20 + 3 * 2)
 	gfx.setColor(gfx.kColorBlack)
-	gfx.fillRect(-aX + 10 - 2, -aY + 50 - 2, 30 + 2 * 2, 20 + 2 * 2)
+	gfx.fillRect(10 - 2, 50 - 2, 30 + 2 * 2, 20 + 2 * 2)
 	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(-aX + 10, -aY + 50, 30, 20)
-	gfx.drawText(math.floor(self.coins), -aX + 20, -aY + 52)
+	gfx.fillRect(10, 50, 30, 20)
+	gfx.drawText(math.floor(self.coins), 20, 52)
+	gfx.unlockFocus()
+	UISystem:drawImageAt(img, 0, 0)
 end
 
 function Player:AddForce(Force)

@@ -14,6 +14,7 @@ import "scripts/entities/door"
 import "scripts/entities/mooredMine"
 import "scripts/entities/playerCorpse"
 import "scripts/entities/savePoint"
+import "scripts/entities/ui"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -23,6 +24,7 @@ LDtk.load("levels/world.ldtk", false)
 class('Scene').extends()
 
 function Scene:init(spawnX, spawnY)
+	self.ui = UISystem
 	local SaveData = LoadGame(self)
 	if SaveData then
 		print("LOADING SAVE")
@@ -113,6 +115,7 @@ function Scene:goToLevel(level_name)
 	self.currentLevel = level_name
 	gfx.sprite.removeAll()
 	self.player:add()
+	self.ui:add()
 	if self.playerCorpse and self.playerCorpse.level == level_name then
 		self.playerCorpse:add()
 	end
