@@ -31,9 +31,9 @@ function SavePoint:update()
 	end
 
 	if self.bCollidingWithPlayer and self.bCanSave then
-		self:save(self.player.GameManager)
 		self.player.savePoint = self
 		self.player.Health = 100
+		self:save(self.player.GameManager)
 		self.bCanSave = false
 	end
 end

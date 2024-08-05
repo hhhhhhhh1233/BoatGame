@@ -21,8 +21,8 @@ function SaveGame(GameManager)
 	local SaveData = {
 		-- Positioning
 		["CurrentLevel"] = GameManager.currentLevel,
-		["PlayerX"] = GameManager.player.x,
-		["PlayerY"] = GameManager.player.y,
+		["PlayerX"] = GameManager.player.savePoint.x,
+		["PlayerY"] = GameManager.player.savePoint.y,
 		["PlayerDirection"] = GameManager.player.direction,
 
 		-- Player Attributes

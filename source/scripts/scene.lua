@@ -39,6 +39,11 @@ function Scene:init(spawnX, spawnY)
 			self.player:setImageFlip(gfx.kImageFlippedX)
 		end
 		local level_rect = LDtk.get_rect(SaveData["CurrentLevel"])
+		if not level_rect then
+			print("INVALID LEVEL IN SAVE FILE")
+			SaveData["CurrentLevel"] = "Level_0"
+			level_rect = LDtk.get_rect(SaveData["CurrentLevel"])
+		end
 		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
 		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 1.1)
 		self.water.bActive = SaveData["WaterWheelCollected"]
