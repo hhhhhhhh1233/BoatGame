@@ -7,7 +7,7 @@ function Explosion:init(x, y)
 	self:setCenter(0, 0)
 	self:moveTo(x - 32, y - 32)
 	local frameTime = 75
-	local animationImageTable = gfx.imagetable.new("images/Explosion-table-64-64")
+	local animationImageTable = gfx.imagetable.new("images/Explosion")
 	self.animationLoop = gfx.animation.loop.new(frameTime, animationImageTable, false)
 	self:setImage(gfx.image.new(64, 64))
 	local spritesInExplosion = gfx.sprite.querySpritesInRect(self.x, self.y, 64, 64)

@@ -10,6 +10,7 @@ import "scripts/entities/coin"
 import "scripts/entities/blockedWall"
 import "scripts/entities/oneWayDoor"
 import "scripts/entities/button"
+import "scripts/entities/projectileButton"
 import "scripts/entities/door"
 import "scripts/entities/mooredMine"
 import "scripts/entities/playerCorpse"
@@ -183,6 +184,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = OneWayDoor(entityX, entityY, entity, 0)
 		elseif entityName == "Button" then
 			self.entityInstance[entity.iid] = Button(entityX, entityY, entity)
+		elseif entityName == "ProjectileButton" then
+			self.entityInstance[entity.iid] = ProjectileButton(entityX, entityY, entity)
 		elseif entityName == "Door" then
 			self.entityInstance[entity.iid] = Door(entityX, entityY, entity, self.entityInstance[entity.fields.Button.entityIid])
 		elseif entityName == "SavePoint" then

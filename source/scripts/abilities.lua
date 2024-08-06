@@ -3,6 +3,7 @@ local gfx <const> = pd.graphics
 import "scripts/bullet"
 import "scripts/explosion"
 import "CoreLibs/frameTimer"
+import "scripts/entities/animatedSprite"
 
 function Jump(player, button)
 	-- TODO: Add a cooldown
@@ -104,9 +105,11 @@ end
 local explosionMeterMax = 100
 local explosionMeterRateOfIncrease = 3
 local explosionMeterRateOfDecrease = 1
+local anim = gfx.animation.loop.new(100, gfx.imagetable.new("images/Fire"), true)
 
 function Overheat(player, button)
 	if pd.buttonIsPressed(button) then
+		anim:draw(player.x - 32, player.y - 32 - 20)
 		local sprites = gfx.sprite.querySpritesInRect(player.x - 25, player.y - 25 - 8, 50, 50)
 		-- NOTE: Visualization of the damage zone
 		-- gfx.fillRect(player.x - 25, player.y - 25 - 8, 50, 50)
@@ -129,7 +132,6 @@ function Overheat(player, button)
 		end
 
 		local img = gfx.image.new(100, 100)
-		local ox, oy = gfx.getDrawOffset()
 		gfx.lockFocus(img)
 		gfx.setColor(gfx.kColorBlack)
 		gfx.fillRect(0, 0, 34, 14)
@@ -138,7 +140,7 @@ function Overheat(player, button)
 		gfx.setColor(gfx.kColorBlack)
 		gfx.fillRect(2, 2, (player.explosionMeter/explosionMeterMax) * 30, 10)
 		gfx.unlockFocus()
-		UISystem:drawImageAt(img, player.x - 17 + ox, player.y + oy - 50)
+		UISystem:drawImageAtWorld(img, player.x - 17, player.y - 50)
 	end
 end
 

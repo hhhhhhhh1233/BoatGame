@@ -18,9 +18,8 @@ function UI:drawImageAt(image, x, y)
 end
 
 function UI:drawImageAtWorld(image, x, y)
-	self:setIgnoresDrawOffset(false)
+	local ox, oy = gfx.getDrawOffset()
 	gfx.lockFocus(self:getImage())
-	image:draw(x, y)
+	image:draw(ox + x, oy + y)
 	gfx.unlockFocus()
-	self:setIgnoresDrawOffset(true)
 end
