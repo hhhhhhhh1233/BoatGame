@@ -17,6 +17,7 @@ import "scripts/entities/playerCorpse"
 import "scripts/entities/savePoint"
 import "scripts/entities/ui"
 import "scripts/entities/foliage"
+import "scripts/entities/detector"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -193,6 +194,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = SavePoint(entityX, entityY, self.currentLevel)
 		elseif entityName == "Foliage" then
 			self.entityInstance[entity.iid] = Foliage(entityX, entityY, self)
+		elseif entityName == "Detector" then
+			self.entityInstance[entity.iid] = Detector(entityX, entityY, entity)
 		end
 	end
 

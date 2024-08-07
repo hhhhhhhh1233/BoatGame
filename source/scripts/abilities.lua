@@ -92,13 +92,13 @@ function Invisibility(player, button)
 		if player.direction == -1 then
 			player:setImageFlip(gfx.kImageFlippedX)
 		end
-		player.invisible = true
+		player.bInvisible = true
 	else
 		player:setImage(gfx.image.new("images/Boat"))
 		if player.direction == -1 then
 			player:setImageFlip(gfx.kImageFlippedX)
 		end
-		player.invisible = false
+		player.bInvisible = false
 	end
 end
 
