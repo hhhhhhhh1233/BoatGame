@@ -11,10 +11,10 @@ function AnimatedSprite:init(x, y, frameTime, anim, loop)
 	self:setImage(self.animationLoop:image())
 	self:add()
 	self:setZIndex(10000)
+	print("Created Animation")
 end
 
 function AnimatedSprite:update()
-	print("HAPPENING")
 	self:setImage(self.animationLoop:image())
 	if not self.animationLoop:isValid() then
 		self:remove()

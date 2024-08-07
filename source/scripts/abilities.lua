@@ -117,6 +117,9 @@ function Overheat(player, button)
 			if not value:isa(Player) and value.Damage then
 				value:Damage(10, 10)
 			end
+			if value.ignite then
+				value:ignite()
+			end
 		end
 		player.explosionMeter += explosionMeterRateOfIncrease
 	else
