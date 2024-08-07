@@ -7,8 +7,8 @@ function ProjectileButton:init(x, y, entity)
 	self:moveTo(x, y)
 	self:setCenter(0, 0)
 	self.entity = entity
-	self:setGroups(COLLISION_GROUPS.WALL)
-	self:setCollideRect(6, 6, 20, 20)
+	-- self:setGroups(COLLISION_GROUPS.WALL)
+	-- self:setCollideRect(6, 6, 20, 20)
 	self:setZIndex(-1)
 	self:release()
 	self:add()
@@ -30,13 +30,10 @@ function ProjectileButton:update()
 	for _, collision in ipairs(collisions) do
 		if collision:isa(Bullet) and not self.bPressed then
 			self:press()
+			collision:remove()
 		elseif collision:isa(Bullet) and self.bPressed then
 			self:release()
+			collision:remove()
 		end
 	end
-	-- if #collisions > 0 and not self.bPressed then
-	-- 	self:press()
-	-- elseif #collisions == 0 and self.bPressed then
-	-- 	self:release()
-	-- end
 end

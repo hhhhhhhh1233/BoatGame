@@ -16,7 +16,7 @@ function Jump(player, button)
 			end
 			if sprite.PhysicsComponent then
 				local blastDirection = (sprite.PhysicsComponent.Position - pd.geometry.vector2D.new(player.x, player.y + 25)):normalized()
-				sprite.PhysicsComponent:AddForce(blastDirection * 8)
+				sprite.PhysicsComponent:AddForce(blastDirection * 12)
 			end
 		end
 		player.bCanJump = false
