@@ -18,6 +18,7 @@ import "scripts/entities/savePoint"
 import "scripts/entities/ui"
 import "scripts/entities/foliage"
 import "scripts/entities/detector"
+import "scripts/entities/block16"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -196,6 +197,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Foliage(entityX, entityY, self)
 		elseif entityName == "Detector" then
 			self.entityInstance[entity.iid] = Detector(entityX, entityY, entity)
+		elseif entityName == "Block16" then
+			self.entityInstance[entity.iid] = Block16(entityX, entityY)
 		end
 	end
 
