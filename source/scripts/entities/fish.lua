@@ -18,7 +18,7 @@ function Fish:init(x, y, water)
 end
 
 function Fish:collisionResponse(other)
-	if other:isa(Mine) then
+	if other:isa(Mine) or other:isa(Player) then
 		return "overlap"
 	else
 		return "slide"
@@ -72,7 +72,7 @@ function Fish:update()
 	for i = 1, n do
 		if c[i].type ~= 2 then
 			if c[i].normal.y == -1 then
-				print("IM DYING")
+				self:Damage()
 			end
 		end
 	end
