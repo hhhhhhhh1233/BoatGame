@@ -54,7 +54,7 @@ function MooredMine:Explode()
 end
 
 function MooredMine:collisionResponse(other)
-	if other:isa(Player) then
+	if other:isa(Player) or other:isa(Fish) then
 		self:Explode()
 		return "overlap"
 	end

@@ -19,6 +19,7 @@ import "scripts/entities/ui"
 import "scripts/entities/foliage"
 import "scripts/entities/detector"
 import "scripts/entities/block16"
+import "scripts/entities/fish"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -199,6 +200,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Detector(entityX, entityY, entity)
 		elseif entityName == "Block16" then
 			self.entityInstance[entity.iid] = Block16(entityX, entityY)
+		elseif entityName == "Fish" then
+			self.entityInstance[entity.iid] = Fish(entityX, entityY, self.water)
 		end
 	end
 

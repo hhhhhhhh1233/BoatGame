@@ -11,8 +11,14 @@ function PhysicsComponent:init(x, y, maxVelocity)
 	self.bBuoyant = true
 end
 
-function PhysicsComponent:AddForce(Force)
-	self.Acceleration += Force
+function PhysicsComponent:AddForce(Force, ForceY)
+	if not ForceY then
+		local Force = Force
+		self.Acceleration += Force
+	else
+		local force = pd.geometry.vector2D.new(Force, ForceY)
+		self.Acceleration += force
+	end
 end
 
 function PhysicsComponent:Move(owner)

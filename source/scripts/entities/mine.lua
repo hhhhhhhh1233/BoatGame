@@ -38,7 +38,7 @@ function Mine:Explode()
 end
 
 function Mine:collisionResponse(other)
-	if other:isa(Player) then
+	if other:isa(Player) or other:isa(Fish) then
 		self:Explode()
 		return "overlap"
 	end
