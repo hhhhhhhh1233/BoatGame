@@ -54,6 +54,12 @@ function Fish:update()
 
 	if player then
 		self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(player.x - self.x, player.y - self.y):normalized())
+		sprites = gfx.sprite.querySpritesInRect(self.x - 16, self.y - 16, 64, 64)
+		for _, sprite in ipairs(sprites) do
+			if sprite:isa(Player) then
+				sprite:Damage(10, 20)
+			end
+		end
 	else
 		self.PhysicsComponent:AddForce(1 * self.direction, 0)
 		self.PhysicsComponent:AddForce(0.4*-self.PhysicsComponent.Velocity.x, 0)

@@ -87,7 +87,6 @@ function Player:Respawn()
 
 	self.GameManager.camera:center(self.x, self.y)
 
-
 	self:setVisible(true)
 	self.bActive = true
 
@@ -130,8 +129,6 @@ function Player:collisionResponse(other)
 	end
 
 	if other:isa(SavePoint) then
-		-- other:save(self.GameManager)
-		-- self.savePoint = other
 		return "overlap"
 	end
 
@@ -187,22 +184,14 @@ function Player:update()
 		self.GameManager:enterRoom(self.Door, "NORTH")
 	end
 
-	-- if self.bUnderwater then
-	-- 	self.bCanJump = true
-	-- end
-
 	if self.bActive then
-		-- if pd.buttonJustPressed(pd.kButtonA) then
 		if self.AbilityA then
 			self.AbilityA(self, pd.kButtonA)
 		end
-		-- end
 
-		-- if pd.buttonJustPressed(pd.kButtonB) then
 		if self.AbilityB then
 			self.AbilityB(self, pd.kButtonB)
 		end
-		-- end
 
 		if self.PassiveAbility then
 			self:PassiveAbility()
@@ -210,14 +199,12 @@ function Player:update()
 
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:setImageFlip(gfx.kImageFlippedX)
-			-- self:AddForce(pd.geometry.vector2D.new(-self.Speed, 0))
 			self.PhysicsComponent.Velocity.x = -self.Speed
 			self.direction = -1
 		end
 
 		if pd.buttonIsPressed(pd.kButtonRight) then
 			self:setImageFlip(gfx.kImageUnflipped)
-			-- self:AddForce(pd.geometry.vector2D.new(self.Speed, 0))
 			self.PhysicsComponent.Velocity.x = self.Speed
 			self.direction = 1
 		end
