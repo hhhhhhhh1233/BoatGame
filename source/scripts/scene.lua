@@ -20,6 +20,7 @@ import "scripts/entities/foliage"
 import "scripts/entities/detector"
 import "scripts/entities/block16"
 import "scripts/entities/fish"
+import "scripts/entities/pondSkater"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -77,6 +78,7 @@ end
 
 function Scene:enterRoom(door, direction)
 	local xDiff, yDiff
+	-- Position the player
 	if direction == "EAST" or direction == "WEST" then
 		xDiff = 0
 		yDiff = door.TargetY - door.y
@@ -87,11 +89,13 @@ function Scene:enterRoom(door, direction)
 		self.player:moveTo(self.player.x + xDiff, door.TargetY)
 	end
 
-	self:goToLevel(door.TargetLevel)
+	-- Set their velocity to zero
 	self.player.PhysicsComponent.Velocity = playdate.geometry.vector2D.new(0, 0)
 
+	-- Set the water height and width
+	local level_rect = LDtk.get_rect(door.TargetLevel)
 	if direction == "NORTH" then
-		self.water.Height = self.LevelHeight - 16
+		self.water.Height = level_rect.height - 16
 	elseif direction == "SOUTH" then
 		self.water.Height = 32
 		self.player.y = 32
@@ -99,7 +103,13 @@ function Scene:enterRoom(door, direction)
 	else
 		self.water.Height += yDiff
 	end
-	self.water.Width = self.LevelWidth
+	self.water.Width = level_rect.width
+
+	-- Set the waters limits
+	self.water.LowerBound = 0 - 20
+	self.water.UpperBound = level_rect.height + 20
+
+	self:goToLevel(door.TargetLevel)
 
 	-- NOTE: Updating the physics component's position so it doesn't get confused and freak out
 	self.player.PhysicsComponent.Position = playdate.geometry.vector2D.new(self.player.x, self.player.y)
@@ -107,9 +117,6 @@ function Scene:enterRoom(door, direction)
 	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
 	self.camera:center(self.player.x, self.player.y)
 
-	local level_rect = LDtk.get_rect(door.TargetLevel)
-	self.water.LowerBound = 0 - 20
-	self.water.UpperBound = level_rect.height + 20
 end
 
 function Scene:reloadLevel()
@@ -120,6 +127,7 @@ function Scene:goToLevel(level_name)
 	self.currentLevel = level_name
 	gfx.sprite.removeAll()
 	self.player:add()
+	self.water:add()
 	self.ui:add()
 	if self.playerCorpse and self.playerCorpse.level == level_name then
 		self.playerCorpse:add()
@@ -202,6 +210,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Block16(entityX, entityY)
 		elseif entityName == "Fish" then
 			self.entityInstance[entity.iid] = Fish(entityX, entityY, self.water)
+		elseif entityName == "PondSkater" then
+			self.entityInstance[entity.iid] = PondSkater(entityX, entityY, self.water)
 		end
 	end
 

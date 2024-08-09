@@ -5,7 +5,8 @@ COLLISION_GROUPS = {
 	WALL = 4,
 	EXPLOSIVE = 5,
 	TRIGGER = 6,
-	PICKUPS = 7
+	PICKUPS = 7,
+	WATER = 8
 }
 
 import "CoreLibs/object"
@@ -49,7 +50,7 @@ pd.timer.keyRepeatTimerWithDelay(0, 800, function ()
 	end
 end)
 
-local song = pd.sound.fileplayer.new("sounds/song")
+local song = pd.sound.fileplayer.new("sounds/songs/Roaming")
 song:play(0)
 
 local menu = pd.getSystemMenu()
@@ -60,7 +61,7 @@ function pd.update()
 	SceneManager.ui:setImage(gfx.image.new(400, 240))
 
 	-- Check the crank and move the water based on input
-	SceneManager.water:Update()
+	-- SceneManager.water:Update()
 
 	-- Player Gravity
 	local Gravity = 0.5
