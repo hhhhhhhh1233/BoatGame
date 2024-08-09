@@ -40,6 +40,8 @@ UISystem = UI()
 local SceneManager = Scene(200, 120)
 local PlayerInstance = SceneManager.player
 
+math.randomseed(playdate.getSecondsSinceEpoch())
+
 gfx.setBackgroundColor(gfx.kColorClear)
 
 local i = 0
@@ -50,8 +52,8 @@ pd.timer.keyRepeatTimerWithDelay(0, 800, function ()
 	end
 end)
 
-local song = pd.sound.fileplayer.new("sounds/songs/Roaming")
-song:play(0)
+-- local song = pd.sound.fileplayer.new("sounds/songs/Roaming")
+-- song:play(0)
 
 local menu = pd.getSystemMenu()
 local menuItem, error = menu:addMenuItem("Clear Save", ClearSave)

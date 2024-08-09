@@ -31,6 +31,8 @@ class('Scene').extends()
 
 function Scene:init(spawnX, spawnY)
 	self.ui = UISystem
+	self.songManager = pd.sound.fileplayer.new("sounds/songs/Roaming")
+	self.songManager:play(0)
 	local SaveData = LoadGame(self)
 	if SaveData then
 		print("LOADING SAVE")
@@ -219,6 +221,17 @@ function Scene:goToLevel(level_name)
 	local level_rect = LDtk.get_rect(level_name)
 	self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
 	self.camera = Camera(self.player.x, self.player.y, 0, 0, self.LevelWidth, self.LevelHeight)
+
+
+	if self.songName ~= LDtk.get_custom_data(level_name, "Song") then
+		self.songName = LDtk.get_custom_data(level_name, "Song")
+		local song = string.sub(self.songName, 4, #self.songName - 4)
+
+		-- TODO: If the song is already playing no need to switch
+		self.songManager:stop()
+		self.songManager = pd.sound.fileplayer.new(song)
+		self.songManager:play(0)
+	end
 end
 
 function Scene:UpdatePhysicsComponentsBuoyancy()

@@ -36,6 +36,7 @@ function PondSkater:update()
 	-- Gravity
 	self.PhysicsComponent:AddForce(0, 2)
 
+	-- TODO: This is probably a dumb way for this to be, fix it PLEASE
 	if self.bOnSurface then
 		self.PhysicsComponent.Acceleration.y = 0
 		self.PhysicsComponent.Velocity.y = 0
@@ -44,8 +45,6 @@ function PondSkater:update()
 		self.PhysicsComponent:AddForce(0, -4)
 		self.PhysicsComponent.Velocity.y = 0
 	end
-	-- print(self.bUnderwater)
-	-- self.PhysicsComponent:AddForce(1, 0)
 
 	-- Sideways Friction
 	self.PhysicsComponent:AddForce(0.06*-self.PhysicsComponent.Velocity.x, 0)
