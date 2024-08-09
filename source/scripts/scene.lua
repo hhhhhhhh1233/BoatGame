@@ -225,12 +225,16 @@ function Scene:goToLevel(level_name)
 
 	if self.songName ~= LDtk.get_custom_data(level_name, "Song") then
 		self.songName = LDtk.get_custom_data(level_name, "Song")
-		local song = string.sub(self.songName, 4, #self.songName - 4)
+		if self.songName then
+			local song = string.sub(self.songName, 4, #self.songName - 4)
 
-		-- TODO: If the song is already playing no need to switch
-		self.songManager:stop()
-		self.songManager = pd.sound.fileplayer.new(song)
-		self.songManager:play(0)
+			self.songManager:stop()
+			self.songManager = pd.sound.fileplayer.new(song)
+			self.songManager:play(0)
+		else
+			-- If there is no song set in ldtk then play nothing
+			self.songManager:stop()
+		end
 	end
 end
 
