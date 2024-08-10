@@ -34,7 +34,7 @@ function PondSkater:update()
 	self.bOnSurface = math.abs(self.y + 16 - self.water.Height) < 2
 
 	-- Gravity
-	self.PhysicsComponent:AddForce(0, 2)
+	self.PhysicsComponent:AddForce(0, 0.5)
 
 	-- TODO: This is probably a dumb way for this to be, fix it PLEASE
 	if self.bOnSurface then
@@ -42,7 +42,11 @@ function PondSkater:update()
 		self.PhysicsComponent.Velocity.y = 0
 	elseif self.bUnderwater then
 		self.PhysicsComponent.Acceleration.y = 0
-		self.PhysicsComponent:AddForce(0, -4)
+		local upwardsForce = Clamp((self.y + 16 - self.water.Height), 0, 10)
+		print(upwardsForce)
+		self.PhysicsComponent:AddForce(0, -upwardsForce)
+		-- Upwards Friction
+		self.PhysicsComponent:AddForce(0, 0.02*-self.PhysicsComponent.Velocity.y)
 		self.PhysicsComponent.Velocity.y = 0
 	end
 
