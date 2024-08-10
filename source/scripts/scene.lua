@@ -21,6 +21,7 @@ import "scripts/entities/detector"
 import "scripts/entities/block16"
 import "scripts/entities/fish"
 import "scripts/entities/pondSkater"
+import "scripts/entities/hive"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -214,6 +215,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Fish(entityX, entityY, self.water)
 		elseif entityName == "PondSkater" then
 			self.entityInstance[entity.iid] = PondSkater(entityX, entityY, self.water)
+		elseif entityName == "Hive" then
+			self.entityInstance[entity.iid] = Hive(entityX, entityY)
 		end
 	end
 
@@ -221,7 +224,6 @@ function Scene:goToLevel(level_name)
 	local level_rect = LDtk.get_rect(level_name)
 	self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
 	self.camera = Camera(self.player.x, self.player.y, 0, 0, self.LevelWidth, self.LevelHeight)
-
 
 	if self.songName ~= LDtk.get_custom_data(level_name, "Song") then
 		self.songName = LDtk.get_custom_data(level_name, "Song")

@@ -136,6 +136,8 @@ function Player:collisionResponse(other)
 		return "overlap"
 	elseif other:isa(PondSkater) then
 		return "overlap"
+	elseif other:isa(FlyingBug) then
+		return "overlap"
 	end
 
 	if other:isa(AbilityPickup) then
