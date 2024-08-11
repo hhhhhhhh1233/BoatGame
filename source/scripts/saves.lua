@@ -13,8 +13,11 @@ function LoadGame(GameManager)
 end
 
 function ClearSave()
+	local emptyMap = playdate.graphics.image.new(1000, 1000)
+	ds.writeImage(emptyMap, "MiniMap/miniMap")
+	ds.writeImage(emptyMap, "MiniMap/displayMiniMap")
+	ds.delete()
 	print("Cleared!")
-	ds.write()
 end
 
 function SaveGame(GameManager)
@@ -47,6 +50,9 @@ function SaveGame(GameManager)
 		SaveData["PlayerCorpseCoins"] = GameManager.playerCorpse.coins
 		SaveData["PlayerCorpseLevel"] = GameManager.playerCorpse.level
 	end
+
+	ds.writeImage(GameManager.miniMap, "MiniMap/miniMap")
+	ds.writeImage(GameManager.miniMapWithHighlight, "MiniMap/displayMiniMap")
 
 	ds.write(SaveData)
 end

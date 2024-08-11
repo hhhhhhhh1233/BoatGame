@@ -15,6 +15,7 @@ function SavePoint:init(x, y, level)
 	self:setZIndex(-1)
 	self:add()
 	self.bCanSave = true
+	self.saveSound = pd.sound.sampleplayer.new("sounds/SaveJingle")
 end
 
 function SavePoint:update()
@@ -40,5 +41,6 @@ end
 
 function SavePoint:save(GameManager)
 	print("Saved")
+	self.saveSound:play()
 	SaveGame(GameManager)
 end

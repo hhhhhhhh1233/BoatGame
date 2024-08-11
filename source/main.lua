@@ -28,6 +28,7 @@ import "scripts/water"
 import "scripts/entities/mine"
 import "scripts/scene"
 import "scripts/entities/ui"
+import "scripts/miniMapViewer"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -57,6 +58,10 @@ end)
 
 local menu = pd.getSystemMenu()
 local menuItem, error = menu:addMenuItem("Clear Save", ClearSave)
+local menuItem2, error = menu:addMenuItem("View Map", function ()
+	SceneManager:DeactivatePhysicsComponents()
+	MiniMapViewer(SceneManager)
+end)
 
 function pd.update()
 	gfx.clear(gfx.kColorWhite)
@@ -66,10 +71,10 @@ function pd.update()
 	-- SceneManager.water:Update()
 
 	-- Player Gravity
-	local Gravity = 0.5
-	if PlayerInstance.PhysicsComponent.bBuoyant or not PlayerInstance.bUnderwater then
-		PlayerInstance:AddForce(vector2D_new(0, Gravity))
-	end
+	-- local Gravity = 0.5
+	-- if PlayerInstance.PhysicsComponent.bBuoyant or not PlayerInstance.bUnderwater then
+	-- 	PlayerInstance:AddForce(vector2D_new(0, Gravity))
+	-- end
 
 	SceneManager:UpdatePhysicsComponentsBuoyancy()
 
@@ -83,7 +88,6 @@ function pd.update()
 	sprite_update()
 	update_timers()
 	pd.frameTimer.updateTimers()
-
 
 	-- NOTE: This blurs the image at the bottom, but I think this might have terrible performance on the actual playdate so keep that in mind if you ever get your hands on one
 	if PlayerInstance.bActive then -- NOTE: This is so the text is still legible when choosing ability, make the water blur per sprite instead of the whole image to solve this better

@@ -22,6 +22,7 @@ import "scripts/entities/block16"
 import "scripts/entities/fish"
 import "scripts/entities/pondSkater"
 import "scripts/entities/hive"
+import "scripts/entities/crabBoss"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -31,6 +32,14 @@ LDtk.load("levels/world.ldtk", false)
 class('Scene').extends()
 
 function Scene:init(spawnX, spawnY)
+	self.miniMap = pd.datastore.readImage("MiniMap/miniMap")
+	if self.miniMap then
+		self.miniMapWithHighlight = pd.datastore.readImage("MiniMap/displayMiniMap")
+	else
+		self.miniMap = gfx.image.new(1000, 1000)
+		self.miniMapWithHighlight = self.miniMap:copy()
+	end
+
 	self.ui = UISystem
 	self.songManager = pd.sound.fileplayer.new("sounds/songs/Roaming")
 	self.songManager:play(0)
@@ -126,7 +135,27 @@ function Scene:reloadLevel()
 	self:goToLevel(self.currentLevel)
 end
 
+local miniMapRatio = 25
+
+function Scene:updateMiniMapHighlight()
+	local levelInfo = LDtk.get_rect(self.currentLevel)
+	self.miniMapWithHighlight = self.miniMap:copy()
+	gfx.lockFocus(self.miniMapWithHighlight)
+	gfx.setColor(gfx.kColorBlack)
+	gfx.fillRect(100 + levelInfo.x/miniMapRatio, 100 + levelInfo.y/miniMapRatio, levelInfo.width/miniMapRatio, levelInfo.height/miniMapRatio - 1)
+	gfx.unlockFocus()
+end
+
+function Scene:updateMiniMap(level_name)
+	gfx.lockFocus(self.miniMap)
+	local levelInfo = LDtk.get_rect(level_name)
+	gfx.setColor(gfx.kColorBlack)
+	gfx.drawRect(100 + levelInfo.x/miniMapRatio, 100 + levelInfo.y/miniMapRatio, levelInfo.width/miniMapRatio, levelInfo.height/miniMapRatio)
+	gfx.unlockFocus(self.miniMap)
+end
+
 function Scene:goToLevel(level_name)
+
 	self.currentLevel = level_name
 	gfx.sprite.removeAll()
 	self.player:add()
@@ -135,6 +164,11 @@ function Scene:goToLevel(level_name)
 	if self.playerCorpse and self.playerCorpse.level == level_name then
 		self.playerCorpse:add()
 	end
+
+	-- Draw data to minimap
+	self:updateMiniMap(level_name)
+	self:updateMiniMapHighlight()
+	-- self:highlightLevelMiniMap(level_name)
 
 	self.entityInstance = {}
 
@@ -217,6 +251,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = PondSkater(entityX, entityY, self.water)
 		elseif entityName == "Hive" then
 			self.entityInstance[entity.iid] = Hive(entityX, entityY)
+		elseif entityName == "CrabBoss" then
+			self.entityInstance[entity.iid] = CrabBoss(entityX, entityY, self)
 		end
 	end
 
@@ -238,6 +274,15 @@ function Scene:goToLevel(level_name)
 			self.songManager:stop()
 		end
 	end
+end
+
+function Scene:DeactivatePhysicsComponents()
+	self.PhysicsComponents = self.ActivePhysicsComponents
+	self.ActivePhysicsComponents = {}
+end
+
+function Scene:ActivatePhysicsComponents()
+	self.ActivePhysicsComponents = self.PhysicsComponents
 end
 
 function Scene:UpdatePhysicsComponentsBuoyancy()

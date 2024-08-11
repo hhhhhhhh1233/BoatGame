@@ -192,6 +192,11 @@ function Player:update()
 		self.GameManager:enterRoom(self.Door, "NORTH")
 	end
 
+	local Gravity = 0.5
+	if self.PhysicsComponent.bBuoyant or not self.bUnderwater then
+		self.PhysicsComponent:AddForce(0, Gravity)
+	end
+
 	if self.bActive then
 		if self.AbilityA then
 			self.AbilityA(self, pd.kButtonA)

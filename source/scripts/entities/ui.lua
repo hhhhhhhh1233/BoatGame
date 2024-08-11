@@ -17,6 +17,14 @@ function UI:drawImageAt(image, x, y)
 	gfx.unlockFocus()
 end
 
+
+function UI:drawAt(func, x, y)
+	gfx.lockFocus(self:getImage())
+	func()
+	gfx.unlockFocus()
+end
+
+
 function UI:drawImageAtWorld(image, x, y)
 	local ox, oy = gfx.getDrawOffset()
 	gfx.lockFocus(self:getImage())
