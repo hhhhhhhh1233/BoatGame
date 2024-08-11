@@ -250,7 +250,7 @@ function Scene:goToLevel(level_name)
 		elseif entityName == "PondSkater" then
 			self.entityInstance[entity.iid] = PondSkater(entityX, entityY, self.water)
 		elseif entityName == "Hive" then
-			self.entityInstance[entity.iid] = Hive(entityX, entityY)
+			self.entityInstance[entity.iid] = Hive(entityX, entityY, self.water)
 		elseif entityName == "CrabBoss" then
 			self.entityInstance[entity.iid] = CrabBoss(entityX, entityY, self)
 		end

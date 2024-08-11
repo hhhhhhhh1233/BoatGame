@@ -5,19 +5,24 @@ import "scripts/entities/flyingBug"
 
 class('Hive').extends(gfx.sprite)
 
-function Hive:init(x, y)
+function Hive:init(x, y, water)
+	self.water = water
 	self:setImage(gfx.image.new("images/Hive"))
 	self:moveTo(x + 16, y + 16)
-	self.bugs = {}
+	self.bugsActive = 0
 	self:add()
 	self.bCanAddBug = true
 end
 
+function Hive:removeBug()
+	self.bugsActive -= 1
+end
+
 function Hive:update()
-	if #self.bugs < 3 and self.bCanAddBug then
+	if self.bugsActive < 3 and self.bCanAddBug then
 		print("Added bug")
-		local bug = FlyingBug(self.x, self.y)
-		table.insert(self.bugs, bug)
+		FlyingBug(self.x, self.y, self, self.water)
+		self.bugsActive += 1
 		self.bCanAddBug = false
 		pd.frameTimer.performAfterDelay(60, function ()
 			self.bCanAddBug = true
