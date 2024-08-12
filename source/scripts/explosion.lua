@@ -18,6 +18,8 @@ function Explosion:init(x, y)
 	end
 	self:setZIndex(20)
 	self:add()
+	self.explosionSound = pd.sound.sampleplayer.new("sounds/Explosion")
+	self.explosionSound:play()
 end
 
 function Explosion:update()

@@ -41,12 +41,16 @@ function Player:init(x, y, image, speed, gameManager)
 	self.AbilityA = nil
 	self.AbilityB = nil
 	self.PassiveAbility = nil
+
+	self.hurtSound = pd.sound.sampleplayer.new("sounds/Hurt")
 end
 
 function Player:Damage(amount, iFrames)
 	if self.Invincible > 0 then
 		return
 	end
+
+	self.hurtSound:play()
 
 	self:getImage():setInverted(true)
 	pd.timer.performAfterDelay(75, function ()

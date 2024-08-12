@@ -11,6 +11,7 @@ function Coin:init(x, y, entity)
 	self:setGroups(COLLISION_GROUPS.PICKUPS)
 	self:setCollidesWithGroups(COLLISION_GROUPS.PLAYER)
 	self:add()
+	self.coinPickupSound = pd.sound.sampleplayer.new("sounds/CoinPickup")
 end
 
 function Coin:update()
@@ -20,5 +21,6 @@ end
 function Coin:pickup(player)
 	player.coins += 1
 	self.entity.fields.Collected = true
+	self.coinPickupSound:play()
 	self:remove()
 end
