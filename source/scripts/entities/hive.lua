@@ -19,8 +19,8 @@ function Hive:removeBug()
 end
 
 function Hive:update()
-	if self.bugsActive < 3 and self.bCanAddBug then
-		print("Added bug")
+	local bUnderwater = self.y > self.water.Height
+	if self.bugsActive < 3 and self.bCanAddBug and not bUnderwater then
 		FlyingBug(self.x, self.y, self, self.water)
 		self.bugsActive += 1
 		self.bCanAddBug = false
