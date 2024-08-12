@@ -27,12 +27,27 @@ function FloatingEnemy:update()
 	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(0, 0.5))
 	self.PhysicsComponent:Move(self)
 	local toPlayer = self.player.PhysicsComponent.Position - self.PhysicsComponent.Position
-	print(self.player.invisible)
-	if toPlayer:magnitude() < 250 and self.cooldown >= 15 and not self.player.invisible then
-		local _, _, _, n = self:checkCollisions(self.player.x, self.player.y)
-		if n < 1 and self.player.bActive then
-			Bullet(self.x + toPlayer:normalized().x * 30, self.y + toPlayer:normalized().y * 30, toPlayer:normalized() * 5)
-			self.cooldown = 0
+	-- if toPlayer:magnitude() < 250 and self.cooldown >= 15 and not self.player.invisible then
+	-- 	local _, _, _, n = self:checkCollisions(self.player.x, self.player.y)
+	-- 	if n < 1 and self.player.bActive then
+	-- 		Bullet(self.x + toPlayer:normalized().x * 30, self.y + toPlayer:normalized().y * 30, toPlayer:normalized() * 5)
+	-- 		self.cooldown = 0
+	-- 	end
+	-- end
+	if toPlayer:magnitude() < 250 then
+		gfx.drawLine(self.x, self.y, self.player.x, self.player.y)
+		if self.cooldown >= 15 and not self.player.invisible then
+			local sprites = gfx.sprite.querySpritesAlongLine(self.x, self.y, self.player.x, self.player.y)
+			local blockingObjects = 0
+			for _, sprite in ipairs(sprites) do
+				if not (sprite:isa(Player) or sprite:isa(Bullet) or sprite:isa(FloatingEnemy)) then
+					blockingObjects += 1
+				end
+			end
+			if blockingObjects == 0 then
+				Bullet(self.x + toPlayer:normalized().x * 30, self.y + toPlayer:normalized().y * 30, toPlayer:normalized() * 5)
+				self.cooldown = 0
+			end
 		end
 	end
 	self.cooldown += 1
