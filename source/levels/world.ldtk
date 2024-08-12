@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 178,
+	"nextUid": 181,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -2036,6 +2036,116 @@
 					"tilesetUid": null
 				}
 			]
+		},
+		{
+			"identifier": "SpikeRail",
+			"uid": 178,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 16,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#181425",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": [
+				{
+					"identifier": "Path",
+					"doc": null,
+					"__type": "Array<Point>",
+					"uid": 179,
+					"type": "F_Point",
+					"isArray": true,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "PointPath",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				},
+				{
+					"identifier": "SpikeBallSpeed",
+					"doc": null,
+					"__type": "Float",
+					"uid": 180,
+					"type": "F_Float",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": 0.1,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Float", "params": [3] },
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		}
 	], "tilesets": [
 		{
@@ -2884,22 +2994,6 @@
 							"__worldY": 416
 						},
 						{
-							"__identifier": "Fish",
-							"__grid": [8,47],
-							"__pivot": [0,0],
-							"__tags": ["Enemy"],
-							"__tile": null,
-							"__smartColor": "#FF0044",
-							"iid": "8f000b10-4ce0-11ef-ac42-1727ad839ab1",
-							"width": 32,
-							"height": 32,
-							"defUid": 169,
-							"px": [128,752],
-							"fieldInstances": [],
-							"__worldX": 736,
-							"__worldY": 400
-						},
-						{
 							"__identifier": "Hive",
 							"__grid": [20,38],
 							"__pivot": [0,0],
@@ -2916,20 +3010,60 @@
 							"__worldY": 256
 						},
 						{
-							"__identifier": "SpinningSpikeBalls",
-							"__grid": [14,30],
+							"__identifier": "SpikeRail",
+							"__grid": [19,32],
 							"__pivot": [0,0],
-							"__tags": ["Hazard"],
+							"__tags": [],
 							"__tile": null,
-							"__smartColor": "#265C42",
-							"iid": "6b55a860-4ce0-11ef-9359-2f2419a32198",
-							"width": 32,
-							"height": 32,
-							"defUid": 176,
-							"px": [224,480],
-							"fieldInstances": [{ "__identifier": "NumberOfSpikes", "__type": "Int", "__value": 7, "__tile": null, "defUid": 177, "realEditorValues": [{ "id": "V_Int", "params": [7] }] }],
-							"__worldX": 832,
-							"__worldY": 128
+							"__smartColor": "#181425",
+							"iid": "0b6f34e0-4ce0-11ef-9359-d1f3518145eb",
+							"width": 16,
+							"height": 16,
+							"defUid": 178,
+							"px": [304,512],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__type": "Array<Point>", "__value": [
+									{ "cx": 19, "cy": 36 },
+									{ "cx": 14, "cy": 36 },
+									{ "cx": 14, "cy": 32 },
+									{ "cx": 4, "cy": 32 },
+									{ "cx": 4, "cy": 38 },
+									{ "cx": 9, "cy": 38 },
+									{ "cx": 9, "cy": 26 }
+								], "__tile": null, "defUid": 179, "realEditorValues": [
+									{
+										"id": "V_String",
+										"params": ["19,36"]
+									},
+									{
+										"id": "V_String",
+										"params": ["14,36"]
+									},
+									{
+										"id": "V_String",
+										"params": ["14,32"]
+									},
+									{
+										"id": "V_String",
+										"params": ["4,32"]
+									},
+									{
+										"id": "V_String",
+										"params": ["4,38"]
+									},
+									{
+										"id": "V_String",
+										"params": ["9,38"]
+									},
+									{
+										"id": "V_String",
+										"params": ["9,26"]
+									}
+								] },
+								{ "__identifier": "SpikeBallSpeed", "__type": "Float", "__value": 3, "__tile": null, "defUid": 180, "realEditorValues": [null] }
+							],
+							"__worldX": 912,
+							"__worldY": 160
 						}
 					]
 				},

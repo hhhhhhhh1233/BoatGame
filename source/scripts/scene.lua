@@ -24,6 +24,7 @@ import "scripts/entities/pondSkater"
 import "scripts/entities/hive"
 import "scripts/entities/crabBoss"
 import "scripts/entities/spinningSpikeBalls"
+import "scripts/entities/spikeRail"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -256,6 +257,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = CrabBoss(entityX, entityY, self)
 		elseif entityName == "SpinningSpikeBalls" then
 			self.entityInstance[entity.iid] = SpinningSpikeBalls(entityX, entityY, entity)
+		elseif entityName == "SpikeRail" then
+			self.entityInstance[entity.iid] = SpikeRail(entityX, entityY, entity)
 		end
 	end
 
