@@ -171,6 +171,10 @@ function Player:collisionResponse(other)
 		return "overlap"
 	end
 
+	if other:isa(SincosEnemy) then
+		return "overlap"
+	end
+
 	if other:isa(BlockedWall) then
 		if other:clear(self) then
 			return "overlap"
