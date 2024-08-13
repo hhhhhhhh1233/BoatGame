@@ -7,30 +7,29 @@ local querySpriteInfoAlongLine <const> = playdate.graphics.sprite.querySpriteInf
 
 function Raycast(sourceX, sourceY, directionX, directionY, ignoreSpritesList, ignoreClassesList)
 	local source = point_new(sourceX, sourceY)
-	local collisions, len = querySpriteInfoAlongLine(sourceX, sourceY, sourceX + directionX, sourceY + directionY)
+	local collisions, _ = querySpriteInfoAlongLine(sourceX, sourceY, sourceX + directionX, sourceY + directionY)
 	local closestCollision, closestCollisionLength, collisionPoint
 	for _, collision in ipairs(collisions) do
-		local ignored = false
-		if ignoreSpritesList then
-			for _, ignoreSprite in ipairs(ignoreSpritesList) do
-				if collision.sprite == ignoreSprite then
-					ignored = true
-					break
+		if not closestCollision or (collision.entryPoint - source):magnitude() < closestCollisionLength then
+			local ignored = false
+			if ignoreSpritesList then
+				for _, ignoreSprite in ipairs(ignoreSpritesList) do
+					if collision.sprite == ignoreSprite then
+						ignored = true
+						break
+					end
 				end
 			end
-		end
-
-		if ignoreClassesList then
-			for _, ignoreClass in ipairs(ignoreClassesList) do
-				if collision.sprite.className == ignoreClass then
-					ignored = true
-					break
+			if not ignored and ignoreClassesList then
+				for _, ignoreClass in ipairs(ignoreClassesList) do
+					if collision.sprite.className == ignoreClass then
+						ignored = true
+						break
+					end
 				end
 			end
-		end
 
-		if not ignored then
-			if not closestCollision or (collision.entryPoint - source):magnitude() < closestCollisionLength then
+			if not ignored then
 				closestCollisionLength = (collision.entryPoint - source):magnitude()
 				closestCollision = collision.sprite
 				collisionPoint = collision.entryPoint
