@@ -11,7 +11,13 @@ function SwayGun:init(x, y, entity)
 	self:moveTo(x + 32, y + 16)
 	self:setImage(gfx.image.new("images/GunBody"))
 	self.mountImage = gfx.image.new("images/GunMount")
-	-- TODO: Implement support for the field FacingLeft
+
+	if not entity.fields.FacingLeft then
+		self:setImageFlip(gfx.kImageFlippedX)
+		self.inverted = -1
+	else
+		self.inverted = 1
+	end
 
 	self.angle = entity.fields.InitialAngle
 	self.angleSpeed = entity.fields.AngleSpeed
@@ -27,18 +33,17 @@ function SwayGun:update()
 	self.mountImage:draw(self.x - 32, self.y - 16)
 
 	local radAngle = self.angle * math.pi/180
-	local hitTarget, hitPoint = Raycast(self.x, self.y, -self.range * Cos(radAngle), -self.range * Sin(radAngle), {self}, {"Bullet"})
+	local hitTarget, hitPoint = Raycast(self.x, self.y, -self.range * Cos(radAngle) * self.inverted, -self.range * Sin(radAngle) * self.inverted, {self}, {"Bullet"})
 	local bSeeingPlayer
 	if hitTarget then
 		bSeeingPlayer = hitTarget:isa(Player)
 		gfx.drawLine(self.x, self.y, hitPoint.x, hitPoint.y)
 	else
-		gfx.drawLine(self.x, self.y, self.x - self.range * Cos(radAngle), self.y - self.range * Sin(radAngle))
+		gfx.drawLine(self.x, self.y, self.x - self.range * Cos(radAngle) * self.inverted, self.y - self.range * Sin(radAngle) * self.inverted)
 	end
 
 	if not bSeeingPlayer then
 		self.angle += self.angleSpeed
-		self:setRotation(self.angle)
 		if math.abs(self.angle) > math.abs(self.maxAngle) then
 			if self.angle < 0 then
 				self.angle = -self.maxAngle
@@ -49,7 +54,7 @@ function SwayGun:update()
 		end
 	else
 		if self.bCanShoot then
-			Bullet(self.x, self.y, vector_new(10 * -Cos(radAngle), 10 * -Sin(radAngle)))
+			Bullet(self.x, self.y, vector_new(10 * -Cos(radAngle) * self.inverted, 10 * -Sin(radAngle) * self.inverted))
 			self.bCanShoot = false
 			PerformAfterDelay(self.shootDelay, function ()
 				self.bCanShoot = true
@@ -58,10 +63,10 @@ function SwayGun:update()
 		local playerCheck, _ = Raycast(self.x, self.y, hitTarget.x - self.x, hitTarget.y - 8 - self.y, {self}, {"Bullet"})
 		if playerCheck and playerCheck:isa(Player) then
 			local toPlayer = vector_new(hitTarget.x - self.x, hitTarget.y - 8 - self.y)
-			local currentDirection = vector_new(self.range*-Cos(radAngle), self.range*-Sin(radAngle))
+			local currentDirection = vector_new(self.range*-Cos(radAngle) * self.inverted, self.range*-Sin(radAngle) * self.inverted)
 			local angleDiff = toPlayer:angleBetween(currentDirection)
 			self.angle -= angleDiff
 		end
-		self:setRotation(self.angle)
 	end
+	self:setRotation(self.angle * self.inverted)
 end

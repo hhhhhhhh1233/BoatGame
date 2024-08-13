@@ -13100,7 +13100,7 @@
 						},
 						{
 							"__identifier": "SwayGun",
-							"__grid": [30,8],
+							"__grid": [29,8],
 							"__pivot": [0,0],
 							"__tags": [],
 							"__tile": null,
@@ -13109,7 +13109,7 @@
 							"width": 64,
 							"height": 32,
 							"defUid": 280,
-							"px": [480,128],
+							"px": [464,128],
 							"fieldInstances": [
 								{ "__identifier": "FacingLeft", "__type": "Bool", "__value": true, "__tile": null, "defUid": 281, "realEditorValues": [{
 									"id": "V_Bool",
@@ -13121,7 +13121,7 @@
 								{ "__identifier": "AngleSpeed", "__type": "Float", "__value": 1.5, "__tile": null, "defUid": 287, "realEditorValues": [] },
 								{ "__identifier": "InitialAngle", "__type": "Float", "__value": 0, "__tile": null, "defUid": 288, "realEditorValues": [] }
 							],
-							"__worldX": 4192,
+							"__worldX": 4176,
 							"__worldY": 960
 						},
 						{
@@ -13256,6 +13256,29 @@
 							"fieldInstances": [],
 							"__worldX": 4096,
 							"__worldY": 944
+						},
+						{
+							"__identifier": "SwayGun",
+							"__grid": [5,12],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#B86F50",
+							"iid": "30b3ef70-4ce0-11ef-b322-83d1d22ceb97",
+							"width": 64,
+							"height": 32,
+							"defUid": 280,
+							"px": [80,192],
+							"fieldInstances": [
+								{ "__identifier": "FacingLeft", "__type": "Bool", "__value": false, "__tile": null, "defUid": 281, "realEditorValues": [] },
+								{ "__identifier": "Range", "__type": "Int", "__value": 500, "__tile": null, "defUid": 283, "realEditorValues": [] },
+								{ "__identifier": "ShootDelay", "__type": "Int", "__value": 10, "__tile": null, "defUid": 284, "realEditorValues": [] },
+								{ "__identifier": "MaxAngle", "__type": "Float", "__value": 40, "__tile": null, "defUid": 286, "realEditorValues": [] },
+								{ "__identifier": "AngleSpeed", "__type": "Float", "__value": 1.5, "__tile": null, "defUid": 287, "realEditorValues": [] },
+								{ "__identifier": "InitialAngle", "__type": "Float", "__value": 0, "__tile": null, "defUid": 288, "realEditorValues": [] }
+							],
+							"__worldX": 3792,
+							"__worldY": 1024
 						}
 					]
 				},
