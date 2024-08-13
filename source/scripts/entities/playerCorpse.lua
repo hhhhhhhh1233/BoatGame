@@ -16,7 +16,6 @@ function PlayerCorpse:init(x, y, level, GameManager, coins, direction)
 	self:setCollideRect(0, 0, 32, 32)
 	self:setGroups(COLLISION_GROUPS.PICKUPS)
 	self:setCollidesWithGroups(COLLISION_GROUPS.PLAYER)
-	self:add()
 	self.corpseCollectedSound = pd.sound.sampleplayer.new("sounds/CorpseCollected")
 end
 

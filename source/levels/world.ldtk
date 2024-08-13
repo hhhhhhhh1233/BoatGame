@@ -11000,6 +11000,52 @@
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": 3536,
 							"__worldY": 1024
+						},
+						{
+							"__identifier": "SpikeRail",
+							"__grid": [41,4],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#181425",
+							"iid": "6e6214a0-4ce0-11ef-b322-193969de0f74",
+							"width": 16,
+							"height": 16,
+							"defUid": 178,
+							"px": [656,64],
+							"fieldInstances": [
+								{ "__identifier": "Path", "__type": "Array<Point>", "__value": [
+									{ "cx": 40, "cy": 13 },
+									{ "cx": 39, "cy": 4 },
+									{ "cx": 38, "cy": 13 },
+									{ "cx": 37, "cy": 4 },
+									{ "cx": 36, "cy": 13 }
+								], "__tile": null, "defUid": 179, "realEditorValues": [
+									{
+										"id": "V_String",
+										"params": ["40,13"]
+									},
+									{
+										"id": "V_String",
+										"params": ["39,4"]
+									},
+									{
+										"id": "V_String",
+										"params": ["38,13"]
+									},
+									{
+										"id": "V_String",
+										"params": ["37,4"]
+									},
+									{
+										"id": "V_String",
+										"params": ["36,13"]
+									}
+								] },
+								{ "__identifier": "SpikeBallSpeed", "__type": "Float", "__value": 3, "__tile": null, "defUid": 180, "realEditorValues": [] }
+							],
+							"__worldX": 3504,
+							"__worldY": 896
 						}
 					]
 				},
