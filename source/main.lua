@@ -67,15 +67,6 @@ function pd.update()
 	gfx.clear(gfx.kColorWhite)
 	SceneManager.ui:setImage(gfx.image.new(400, 240))
 
-	-- Check the crank and move the water based on input
-	-- SceneManager.water:Update()
-
-	-- Player Gravity
-	-- local Gravity = 0.5
-	-- if PlayerInstance.PhysicsComponent.bBuoyant or not PlayerInstance.bUnderwater then
-	-- 	PlayerInstance:AddForce(vector2D_new(0, Gravity))
-	-- end
-
 	SceneManager:UpdatePhysicsComponentsBuoyancy()
 
 	-- NOTE: This sucks
@@ -103,4 +94,5 @@ function pd.update()
 		local xOffset = (ix - width) / 2
 		blurred:drawAnchored(-ox - xOffset, -oy + i, 0, 0)
 	end
+	pd.drawFPS(0, 0)
 end

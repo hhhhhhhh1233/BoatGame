@@ -25,6 +25,8 @@ import "scripts/entities/hive"
 import "scripts/entities/crabBoss"
 import "scripts/entities/spinningSpikeBalls"
 import "scripts/entities/spikeRail"
+import "scripts/entities/SincosEnemy"
+import "scripts/entities/swayGun"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -259,6 +261,10 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = SpinningSpikeBalls(entityX, entityY, entity)
 		elseif entityName == "SpikeRail" then
 			self.entityInstance[entity.iid] = SpikeRail(entityX, entityY, entity)
+		elseif entityName == "SincosEnemy" then
+			self.entityInstance[entity.iid] = SincosEnemy(entityX, entityY)
+		elseif entityName == "SwayGun" then
+			self.entityInstance[entity.iid] = SwayGun(entityX, entityY)
 		end
 	end
 
