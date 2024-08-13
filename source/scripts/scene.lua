@@ -264,7 +264,7 @@ function Scene:goToLevel(level_name)
 		elseif entityName == "SincosEnemy" then
 			self.entityInstance[entity.iid] = SincosEnemy(entityX, entityY)
 		elseif entityName == "SwayGun" then
-			self.entityInstance[entity.iid] = SwayGun(entityX, entityY)
+			self.entityInstance[entity.iid] = SwayGun(entityX, entityY, entity)
 		end
 	end
 
