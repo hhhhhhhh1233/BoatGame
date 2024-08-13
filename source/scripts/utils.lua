@@ -1,16 +1,20 @@
+local Min <const> = math.min
+local Max <const> = math.max
+
 function Clamp(value, min, max)
-	return math.min(math.max(value, min), max)
+	return Min(Max(value, min), max)
 end
 
 local point_new <const> = playdate.geometry.point.new
-local querySpriteInfoAlongLine <const> = playdate.graphics.sprite.querySpriteInfoAlongLine
+local QuerySpriteInfoAlongLine <const> = playdate.graphics.sprite.querySpriteInfoAlongLine
 
 function Raycast(sourceX, sourceY, directionX, directionY, ignoreSpritesList, ignoreClassesList)
 	local source = point_new(sourceX, sourceY)
-	local collisions, _ = querySpriteInfoAlongLine(sourceX, sourceY, sourceX + directionX, sourceY + directionY)
+	local collisions, _ = QuerySpriteInfoAlongLine(sourceX, sourceY, sourceX + directionX, sourceY + directionY)
 	local closestCollision, closestCollisionLength, collisionPoint
 	for _, collision in ipairs(collisions) do
-		if not closestCollision or (collision.entryPoint - source):magnitude() < closestCollisionLength then
+		local distance = (collision.entryPoint - source):magnitude()
+		if not closestCollision or distance < closestCollisionLength then
 			local ignored = false
 			if ignoreSpritesList then
 				for _, ignoreSprite in ipairs(ignoreSpritesList) do
@@ -30,7 +34,7 @@ function Raycast(sourceX, sourceY, directionX, directionY, ignoreSpritesList, ig
 			end
 
 			if not ignored then
-				closestCollisionLength = (collision.entryPoint - source):magnitude()
+				closestCollisionLength = distance
 				closestCollision = collision.sprite
 				collisionPoint = collision.entryPoint
 			end
