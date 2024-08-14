@@ -5,22 +5,33 @@ class('Darkness').extends(gfx.sprite)
 
 function Darkness:init(player)
 	self.player = player
-	self:setImage(gfx.image.new(400, 240, gfx.kColorBlack))
 	self:setIgnoresDrawOffset(true)
 	self:setCenter(0, 0)
 
-	self:setZIndex(500)
+	local ox, oy = gfx.getDrawOffset()
+	local allBlack = gfx.image.new(400, 240)
+	gfx.pushContext(allBlack)
+		gfx.setColor(gfx.kColorBlack)
+		gfx.fillRect(0, 0, 400, 240)
+		gfx.setColor(gfx.kColorClear)
+		gfx.fillCircleAtPoint(self.player.x + ox, self.player.y + oy, self.player.lightRadius)
+	gfx.popContext()
+
+	self:setImage(allBlack)
+
+	self:setZIndex(100)
 	self:add()
 end
 
 function Darkness:update()
-	self:setImage(gfx.image.new(400, 240, gfx.kColorBlack))
-
-	gfx.setColor(gfx.kColorBlack)
-	local stencilImage = gfx.image.new(400, 240, gfx.kColorWhite)
+	local allBlack = gfx.image.new(400, 240)
 	local ox, oy = gfx.getDrawOffset()
-	gfx.lockFocus(stencilImage)
-	gfx.fillCircleAtPoint(ox + self.player.x, oy + self.player.y, 50)
-	gfx.unlockFocus()
-	self:setStencilImage(stencilImage)
+	gfx.pushContext(allBlack)
+		gfx.setColor(gfx.kColorBlack)
+		gfx.fillRect(0, 0, 400, 240)
+		gfx.setColor(gfx.kColorClear)
+		gfx.fillCircleAtPoint(self.player.x + ox, self.player.y + oy, self.player.lightRadius)
+	gfx.popContext()
+
+	self:setImage(allBlack)
 end

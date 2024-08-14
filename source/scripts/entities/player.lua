@@ -43,6 +43,8 @@ function Player:init(x, y, image, speed, gameManager)
 	self.PassiveAbility = nil
 
 	self.hurtSound = pd.sound.sampleplayer.new("sounds/Hurt")
+
+	self.lightRadius = 50
 end
 
 function Player:Damage(amount, iFrames)
@@ -151,6 +153,12 @@ function Player:collisionResponse(other)
 	end
 
 	if other:isa(AbilityPickup) then
+		other:pickup(self)
+		self.GameManager:collect(other.entity.iid)
+		return "overlap"
+	end
+
+	if other:isa(Lantern) then
 		other:pickup(self)
 		self.GameManager:collect(other.entity.iid)
 		return "overlap"

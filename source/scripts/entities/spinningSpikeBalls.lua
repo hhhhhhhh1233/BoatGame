@@ -13,13 +13,13 @@ function SpinningSpikeBalls:init(x, y, entity)
 	for i = 1, entity.fields.NumberOfSpikes do
 		table.insert(self.spikes, SpikeBall(self.x, self.y + 32 * i))
 	end
+	self.angle = 0
 	self:add()
 end
 
-local angle = 0
 function SpinningSpikeBalls:update()
 	for index, spike in ipairs(self.spikes) do
-		spike:moveTo(self.x + 26 * index * math.cos(angle), self.y + 26 * index * math.sin(angle))
+		spike:moveTo(self.x + 26 * index * math.cos(self.angle), self.y + 26 * index * math.sin(self.angle))
 	end
-	angle += 0.05
+	self.angle += 0.05
 end
