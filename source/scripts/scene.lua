@@ -29,6 +29,7 @@ import "scripts/entities/SincosEnemy"
 import "scripts/entities/swayGun"
 import "scripts/entities/laser"
 import "scripts/entities/movingPlatform"
+import "scripts/entities/darkness"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -271,6 +272,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Laser(entityX, entityY, entity)
 		elseif entityName == "MovingPlatform" then
 			self.entityInstance[entity.iid] = MovingPlatform(entityX, entityY, entity)
+		elseif entityName == "Darkness" then
+			self.entityInstance[entity.iid] = Darkness(self.player)
 		end
 	end
 

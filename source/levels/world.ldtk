@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 294,
+	"nextUid": 295,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": "Free",
@@ -2733,6 +2733,41 @@
 					"tilesetUid": null
 				}
 			]
+		},
+		{
+			"identifier": "Darkness",
+			"uid": 294,
+			"tags": [],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 16,
+			"height": 16,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#E43B44",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 1,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -8746,6 +8781,22 @@
 							],
 							"__worldX": 2496,
 							"__worldY": 896
+						},
+						{
+							"__identifier": "Darkness",
+							"__grid": [31,22],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#E43B44",
+							"iid": "5d2ebf50-4ce0-11ef-8879-d95d0a5cf7e0",
+							"width": 16,
+							"height": 16,
+							"defUid": 294,
+							"px": [496,352],
+							"fieldInstances": [],
+							"__worldX": 2640,
+							"__worldY": 896
 						}
 					]
 				},
@@ -11332,6 +11383,22 @@
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": 3536,
 							"__worldY": 1024
+						},
+						{
+							"__identifier": "Darkness",
+							"__grid": [11,10],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#E43B44",
+							"iid": "d5e92920-4ce0-11ef-8879-657aa1becef1",
+							"width": 16,
+							"height": 16,
+							"defUid": 294,
+							"px": [176,160],
+							"fieldInstances": [],
+							"__worldX": 3024,
+							"__worldY": 992
 						}
 					]
 				},
@@ -13039,222 +13106,6 @@
 							"__worldY": 1088
 						},
 						{
-							"__identifier": "Laser",
-							"__grid": [17,13],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "f105d600-4ce0-11ef-b322-29346db6d1b6",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [272,208],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3984,
-							"__worldY": 1040
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [18,13],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "f1e846c0-4ce0-11ef-b322-8fcbcb65473f",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [288,208],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 4000,
-							"__worldY": 1040
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [19,13],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "f228d230-4ce0-11ef-b322-a5b6a1f31c08",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [304,208],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 4016,
-							"__worldY": 1040
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [20,13],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "f26fc640-4ce0-11ef-b322-5b7671aa217f",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [320,208],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 4032,
-							"__worldY": 1040
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [12,13],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "f2ae7cf0-4ce0-11ef-b322-2fe41cca52f5",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [192,208],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3904,
-							"__worldY": 1040
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [13,13],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "f30130d0-4ce0-11ef-b322-216711fbf010",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [208,208],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3920,
-							"__worldY": 1040
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [14,13],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "0512bd70-4ce0-11ef-b322-f9d05076936f",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [224,208],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3936,
-							"__worldY": 1040
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [15,13],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "0576d670-4ce0-11ef-b322-b55783469875",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [240,208],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3952,
-							"__worldY": 1040
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [16,13],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "064941a0-4ce0-11ef-b322-e9328f74cbb5",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [256,208],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3968,
-							"__worldY": 1040
-						},
-						{
 							"__identifier": "SwayGun",
 							"__grid": [29,8],
 							"__pivot": [0,0],
@@ -13295,78 +13146,6 @@
 							"fieldInstances": [],
 							"__worldX": 4032,
 							"__worldY": 944
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [17,8],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "65d4d4d0-4ce0-11ef-b322-f3b1391afb20",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [272,128],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "West", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["West"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3984,
-							"__worldY": 960
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [17,9],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "6842eea0-4ce0-11ef-b322-1d14ad54fe3b",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [272,144],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "South", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["South"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3984,
-							"__worldY": 976
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [26,8],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "6f6d5800-4ce0-11ef-b322-215da3b5bc75",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [416,128],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "East", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["East"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 4128,
-							"__worldY": 960
 						},
 						{
 							"__identifier": "SincosEnemy",
@@ -13414,125 +13193,6 @@
 							"px": [384,112],
 							"fieldInstances": [],
 							"__worldX": 4096,
-							"__worldY": 944
-						},
-						{
-							"__identifier": "SwayGun",
-							"__grid": [5,12],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#B86F50",
-							"iid": "30b3ef70-4ce0-11ef-b322-83d1d22ceb97",
-							"width": 64,
-							"height": 32,
-							"defUid": 280,
-							"px": [80,192],
-							"fieldInstances": [
-								{ "__identifier": "FacingLeft", "__type": "Bool", "__value": false, "__tile": null, "defUid": 281, "realEditorValues": [] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 500, "__tile": null, "defUid": 283, "realEditorValues": [] },
-								{ "__identifier": "ShootDelay", "__type": "Int", "__value": 10, "__tile": null, "defUid": 284, "realEditorValues": [] },
-								{ "__identifier": "MaxAngle", "__type": "Float", "__value": 40, "__tile": null, "defUid": 286, "realEditorValues": [] },
-								{ "__identifier": "AngleSpeed", "__type": "Float", "__value": 1.5, "__tile": null, "defUid": 287, "realEditorValues": [] },
-								{ "__identifier": "InitialAngle", "__type": "Float", "__value": 0, "__tile": null, "defUid": 288, "realEditorValues": [] }
-							],
-							"__worldX": 3792,
-							"__worldY": 1024
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [10,6],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "a4bb4e80-4ce0-11ef-8879-97b2cd4423df",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [160,96],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "North", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["North"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3872,
-							"__worldY": 928
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [11,6],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "a7561da0-4ce0-11ef-8879-d5fe2c0ac6c9",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [176,96],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "East", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["East"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3888,
-							"__worldY": 928
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [11,7],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "a90aab70-4ce0-11ef-8879-6d4804d34a7d",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [176,112],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "South", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["South"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3888,
-							"__worldY": 944
-						},
-						{
-							"__identifier": "Laser",
-							"__grid": [10,7],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#EAD4AA",
-							"iid": "aab80d50-4ce0-11ef-8879-abb558674dbe",
-							"width": 16,
-							"height": 16,
-							"defUid": 277,
-							"px": [160,112],
-							"fieldInstances": [
-								{ "__identifier": "InitialDelay", "__type": "Float", "__value": 0, "__tile": null, "defUid": 278, "realEditorValues": [] },
-								{ "__identifier": "RepeatDelay", "__type": "Float", "__value": 1, "__tile": null, "defUid": 279, "realEditorValues": [] },
-								{ "__identifier": "FacingDirection", "__type": "LocalEnum.Direction", "__value": "West", "__tile": null, "defUid": 282, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["West"]
-								}] },
-								{ "__identifier": "Range", "__type": "Int", "__value": 100, "__tile": null, "defUid": 289, "realEditorValues": [] }
-							],
-							"__worldX": 3872,
 							"__worldY": 944
 						}
 					]
@@ -18599,6 +18259,22 @@
 							}] }],
 							"__worldX": 4928,
 							"__worldY": 288
+						},
+						{
+							"__identifier": "Darkness",
+							"__grid": [30,17],
+							"__pivot": [0,0],
+							"__tags": [],
+							"__tile": null,
+							"__smartColor": "#E43B44",
+							"iid": "a032bb50-4ce0-11ef-8879-59b6d6077e88",
+							"width": 16,
+							"height": 16,
+							"defUid": 294,
+							"px": [480,272],
+							"fieldInstances": [],
+							"__worldX": 4608,
+							"__worldY": 560
 						}
 					]
 				},
@@ -19317,15 +18993,17 @@
 					"optionalRules": [],
 					"intGridCsv": [
 						1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-						1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,
-						0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,
-						0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,
-						1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,
-						1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,
+						1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,1,1,1,
+						0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,
+						1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,0,1,
+						1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,
 						1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 						0,0,1,1,1,1,1
 					],
 					"autoLayerTiles": [
+						{ "px": [320,64], "src": [64,128], "f": 0, "t": 22, "d": [6,66], "a": 1 },
+						{ "px": [352,64], "src": [64,128], "f": 0, "t": 22, "d": [6,67], "a": 1 },
 						{ "px": [384,64], "src": [64,128], "f": 0, "t": 22, "d": [6,68], "a": 1 },
 						{ "px": [416,64], "src": [64,128], "f": 0, "t": 22, "d": [6,69], "a": 1 },
 						{ "px": [448,64], "src": [64,128], "f": 0, "t": 22, "d": [6,70], "a": 1 },
@@ -19342,6 +19020,8 @@
 						{ "px": [800,64], "src": [64,128], "f": 0, "t": 22, "d": [6,81], "a": 1 },
 						{ "px": [832,64], "src": [64,128], "f": 0, "t": 22, "d": [6,82], "a": 1 },
 						{ "px": [864,64], "src": [64,128], "f": 0, "t": 22, "d": [6,83], "a": 1 },
+						{ "px": [224,96], "src": [64,128], "f": 0, "t": 22, "d": [6,91], "a": 1 },
+						{ "px": [256,96], "src": [64,128], "f": 0, "t": 22, "d": [6,92], "a": 1 },
 						{ "px": [288,96], "src": [64,128], "f": 0, "t": 22, "d": [6,93], "a": 1 },
 						{ "px": [320,96], "src": [64,128], "f": 0, "t": 22, "d": [6,94], "a": 1 },
 						{ "px": [352,96], "src": [64,128], "f": 0, "t": 22, "d": [6,95], "a": 1 },
@@ -19352,14 +19032,18 @@
 						{ "px": [800,96], "src": [64,128], "f": 0, "t": 22, "d": [6,109], "a": 1 },
 						{ "px": [832,96], "src": [64,128], "f": 0, "t": 22, "d": [6,110], "a": 1 },
 						{ "px": [864,96], "src": [64,128], "f": 0, "t": 22, "d": [6,111], "a": 1 },
+						{ "px": [160,128], "src": [64,128], "f": 0, "t": 22, "d": [6,117], "a": 1 },
 						{ "px": [192,128], "src": [64,128], "f": 0, "t": 22, "d": [6,118], "a": 1 },
 						{ "px": [224,128], "src": [64,128], "f": 0, "t": 22, "d": [6,119], "a": 1 },
 						{ "px": [256,128], "src": [64,128], "f": 0, "t": 22, "d": [6,120], "a": 1 },
 						{ "px": [704,128], "src": [64,128], "f": 0, "t": 22, "d": [6,134], "a": 1 },
+						{ "px": [160,160], "src": [64,128], "f": 0, "t": 22, "d": [6,145], "a": 1 },
 						{ "px": [192,160], "src": [64,128], "f": 0, "t": 22, "d": [6,146], "a": 1 },
 						{ "px": [704,160], "src": [64,128], "f": 0, "t": 22, "d": [6,162], "a": 1 },
+						{ "px": [128,192], "src": [64,128], "f": 0, "t": 22, "d": [6,172], "a": 1 },
 						{ "px": [160,192], "src": [64,128], "f": 0, "t": 22, "d": [6,173], "a": 1 },
 						{ "px": [704,192], "src": [64,128], "f": 0, "t": 22, "d": [6,190], "a": 1 },
+						{ "px": [128,224], "src": [64,128], "f": 0, "t": 22, "d": [6,200], "a": 1 },
 						{ "px": [160,224], "src": [64,128], "f": 0, "t": 22, "d": [6,201], "a": 1 },
 						{ "px": [704,224], "src": [64,128], "f": 0, "t": 22, "d": [6,218], "a": 1 },
 						{ "px": [128,256], "src": [64,128], "f": 0, "t": 22, "d": [6,228], "a": 1 },
@@ -19403,26 +19087,20 @@
 						{ "px": [192,32], "src": [32,64], "f": 0, "t": 11, "d": [110,34], "a": 1 },
 						{ "px": [224,32], "src": [32,64], "f": 0, "t": 11, "d": [110,35], "a": 1 },
 						{ "px": [256,32], "src": [32,64], "f": 0, "t": 11, "d": [110,36], "a": 1 },
-						{ "px": [288,32], "src": [32,64], "f": 0, "t": 11, "d": [110,37], "a": 1 },
-						{ "px": [320,32], "src": [32,64], "f": 0, "t": 11, "d": [110,38], "a": 1 },
 						{ "px": [0,64], "src": [32,64], "f": 0, "t": 11, "d": [110,56], "a": 1 },
 						{ "px": [32,64], "src": [32,64], "f": 0, "t": 11, "d": [110,57], "a": 1 },
 						{ "px": [64,64], "src": [32,64], "f": 0, "t": 11, "d": [110,58], "a": 1 },
 						{ "px": [96,64], "src": [32,64], "f": 0, "t": 11, "d": [110,59], "a": 1 },
 						{ "px": [128,64], "src": [32,64], "f": 0, "t": 11, "d": [110,60], "a": 1 },
 						{ "px": [160,64], "src": [32,64], "f": 0, "t": 11, "d": [110,61], "a": 1 },
-						{ "px": [192,64], "src": [32,64], "f": 0, "t": 11, "d": [110,62], "a": 1 },
-						{ "px": [224,64], "src": [32,64], "f": 0, "t": 11, "d": [110,63], "a": 1 },
 						{ "px": [0,96], "src": [32,64], "f": 0, "t": 11, "d": [110,84], "a": 1 },
 						{ "px": [32,96], "src": [32,64], "f": 0, "t": 11, "d": [110,85], "a": 1 },
 						{ "px": [64,96], "src": [32,64], "f": 0, "t": 11, "d": [110,86], "a": 1 },
 						{ "px": [96,96], "src": [32,64], "f": 0, "t": 11, "d": [110,87], "a": 1 },
-						{ "px": [128,96], "src": [32,64], "f": 0, "t": 11, "d": [110,88], "a": 1 },
 						{ "px": [0,128], "src": [32,64], "f": 0, "t": 11, "d": [110,112], "a": 1 },
 						{ "px": [32,128], "src": [32,64], "f": 0, "t": 11, "d": [110,113], "a": 1 },
 						{ "px": [64,128], "src": [32,64], "f": 0, "t": 11, "d": [110,114], "a": 1 },
 						{ "px": [96,128], "src": [32,64], "f": 0, "t": 11, "d": [110,115], "a": 1 },
-						{ "px": [128,128], "src": [32,64], "f": 0, "t": 11, "d": [110,116], "a": 1 },
 						{ "px": [416,128], "src": [32,64], "f": 0, "t": 11, "d": [110,125], "a": 1 },
 						{ "px": [448,128], "src": [32,64], "f": 0, "t": 11, "d": [110,126], "a": 1 },
 						{ "px": [480,128], "src": [32,64], "f": 0, "t": 11, "d": [110,127], "a": 1 },
@@ -19433,7 +19111,6 @@
 						{ "px": [0,160], "src": [32,64], "f": 0, "t": 11, "d": [110,140], "a": 1 },
 						{ "px": [32,160], "src": [32,64], "f": 0, "t": 11, "d": [110,141], "a": 1 },
 						{ "px": [64,160], "src": [32,64], "f": 0, "t": 11, "d": [110,142], "a": 1 },
-						{ "px": [96,160], "src": [32,64], "f": 0, "t": 11, "d": [110,143], "a": 1 },
 						{ "px": [320,160], "src": [32,64], "f": 0, "t": 11, "d": [110,150], "a": 1 },
 						{ "px": [352,160], "src": [32,64], "f": 0, "t": 11, "d": [110,151], "a": 1 },
 						{ "px": [384,160], "src": [32,64], "f": 0, "t": 11, "d": [110,152], "a": 1 },
@@ -19452,7 +19129,6 @@
 						{ "px": [0,192], "src": [32,64], "f": 0, "t": 11, "d": [110,168], "a": 1 },
 						{ "px": [32,192], "src": [32,64], "f": 0, "t": 11, "d": [110,169], "a": 1 },
 						{ "px": [64,192], "src": [32,64], "f": 0, "t": 11, "d": [110,170], "a": 1 },
-						{ "px": [96,192], "src": [32,64], "f": 0, "t": 11, "d": [110,171], "a": 1 },
 						{ "px": [256,192], "src": [32,64], "f": 0, "t": 11, "d": [110,176], "a": 1 },
 						{ "px": [288,192], "src": [32,64], "f": 0, "t": 11, "d": [110,177], "a": 1 },
 						{ "px": [320,192], "src": [32,64], "f": 0, "t": 11, "d": [110,178], "a": 1 },
@@ -19510,11 +19186,10 @@
 						{ "px": [800,256], "src": [32,64], "f": 0, "t": 11, "d": [110,249], "a": 1 },
 						{ "px": [832,256], "src": [32,64], "f": 0, "t": 11, "d": [110,250], "a": 1 },
 						{ "px": [864,256], "src": [32,64], "f": 0, "t": 11, "d": [110,251], "a": 1 },
-						{ "px": [352,32], "src": [0,32], "f": 0, "t": 5, "d": [108,39], "a": 1 },
-						{ "px": [256,64], "src": [0,32], "f": 0, "t": 5, "d": [108,64], "a": 1 },
-						{ "px": [160,96], "src": [0,32], "f": 0, "t": 5, "d": [108,89], "a": 1 },
-						{ "px": [128,160], "src": [0,32], "f": 0, "t": 5, "d": [108,144], "a": 1 },
-						{ "px": [96,224], "src": [0,32], "f": 0, "t": 5, "d": [108,199], "a": 1 },
+						{ "px": [288,32], "src": [0,32], "f": 0, "t": 5, "d": [108,37], "a": 1 },
+						{ "px": [192,64], "src": [0,32], "f": 0, "t": 5, "d": [108,62], "a": 1 },
+						{ "px": [128,96], "src": [0,32], "f": 0, "t": 5, "d": [108,88], "a": 1 },
+						{ "px": [96,160], "src": [0,32], "f": 0, "t": 5, "d": [108,143], "a": 1 },
 						{ "px": [640,224], "src": [0,32], "f": 0, "t": 5, "d": [108,216], "a": 1 },
 						{ "px": [640,128], "src": [0,96], "f": 0, "t": 15, "d": [107,132], "a": 1 },
 						{ "px": [384,128], "src": [64,96], "f": 0, "t": 17, "d": [106,124], "a": 1 },
@@ -19526,6 +19201,8 @@
 						{ "px": [736,224], "src": [64,64], "f": 0, "t": 12, "d": [105,219], "a": 1 },
 						{ "px": [192,256], "src": [64,64], "f": 0, "t": 12, "d": [105,230], "a": 1 },
 						{ "px": [736,256], "src": [64,64], "f": 0, "t": 12, "d": [105,247], "a": 1 },
+						{ "px": [320,32], "src": [32,32], "f": 0, "t": 6, "d": [104,38], "a": 1 },
+						{ "px": [352,32], "src": [32,32], "f": 0, "t": 6, "d": [104,39], "a": 1 },
 						{ "px": [384,32], "src": [32,32], "f": 0, "t": 6, "d": [104,40], "a": 1 },
 						{ "px": [416,32], "src": [32,32], "f": 0, "t": 6, "d": [104,41], "a": 1 },
 						{ "px": [448,32], "src": [32,32], "f": 0, "t": 6, "d": [104,42], "a": 1 },
@@ -19542,14 +19219,14 @@
 						{ "px": [800,32], "src": [32,32], "f": 0, "t": 6, "d": [104,53], "a": 1 },
 						{ "px": [832,32], "src": [32,32], "f": 0, "t": 6, "d": [104,54], "a": 1 },
 						{ "px": [864,32], "src": [32,32], "f": 0, "t": 6, "d": [104,55], "a": 1 },
-						{ "px": [288,64], "src": [32,32], "f": 0, "t": 6, "d": [104,65], "a": 1 },
-						{ "px": [320,64], "src": [32,32], "f": 0, "t": 6, "d": [104,66], "a": 1 },
-						{ "px": [192,96], "src": [32,32], "f": 0, "t": 6, "d": [104,90], "a": 1 },
-						{ "px": [224,96], "src": [32,32], "f": 0, "t": 6, "d": [104,91], "a": 1 },
-						{ "px": [160,128], "src": [0,64], "f": 0, "t": 10, "d": [103,117], "a": 1 },
+						{ "px": [224,64], "src": [32,32], "f": 0, "t": 6, "d": [104,63], "a": 1 },
+						{ "px": [256,64], "src": [32,32], "f": 0, "t": 6, "d": [104,64], "a": 1 },
+						{ "px": [160,96], "src": [32,32], "f": 0, "t": 6, "d": [104,89], "a": 1 },
+						{ "px": [128,128], "src": [0,64], "f": 0, "t": 10, "d": [103,116], "a": 1 },
 						{ "px": [672,160], "src": [0,64], "f": 0, "t": 10, "d": [103,161], "a": 1 },
-						{ "px": [128,192], "src": [0,64], "f": 0, "t": 10, "d": [103,172], "a": 1 },
+						{ "px": [96,192], "src": [0,64], "f": 0, "t": 10, "d": [103,171], "a": 1 },
 						{ "px": [672,192], "src": [0,64], "f": 0, "t": 10, "d": [103,189], "a": 1 },
+						{ "px": [96,224], "src": [0,64], "f": 0, "t": 10, "d": [103,199], "a": 1 },
 						{ "px": [96,256], "src": [0,64], "f": 0, "t": 10, "d": [103,227], "a": 1 },
 						{ "px": [640,256], "src": [0,64], "f": 0, "t": 10, "d": [103,244], "a": 1 },
 						{ "px": [416,96], "src": [32,96], "f": 0, "t": 16, "d": [102,97], "a": 1 },
@@ -19566,10 +19243,9 @@
 						{ "px": [832,128], "src": [32,96], "f": 0, "t": 16, "d": [102,138], "a": 1 },
 						{ "px": [864,128], "src": [32,96], "f": 0, "t": 16, "d": [102,139], "a": 1 },
 						{ "px": [256,160], "src": [32,96], "f": 0, "t": 16, "d": [102,148], "a": 1 },
-						{ "px": [352,64], "src": [128,64], "f": 0, "t": 14, "d": [100,67], "a": 1 },
-						{ "px": [256,96], "src": [128,64], "f": 0, "t": 14, "d": [100,92], "a": 1 },
-						{ "px": [160,160], "src": [128,64], "f": 0, "t": 14, "d": [100,145], "a": 1 },
-						{ "px": [128,224], "src": [128,64], "f": 0, "t": 14, "d": [100,200], "a": 1 },
+						{ "px": [288,64], "src": [128,64], "f": 0, "t": 14, "d": [100,65], "a": 1 },
+						{ "px": [192,96], "src": [128,64], "f": 0, "t": 14, "d": [100,90], "a": 1 },
+						{ "px": [128,160], "src": [128,64], "f": 0, "t": 14, "d": [100,144], "a": 1 },
 						{ "px": [672,224], "src": [128,64], "f": 0, "t": 14, "d": [100,217], "a": 1 },
 						{ "px": [640,96], "src": [128,32], "f": 0, "t": 9, "d": [99,104], "a": 1 },
 						{ "px": [672,128], "src": [128,32], "f": 0, "t": 9, "d": [99,133], "a": 1 },
