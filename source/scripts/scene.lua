@@ -27,6 +27,7 @@ import "scripts/entities/spinningSpikeBalls"
 import "scripts/entities/spikeRail"
 import "scripts/entities/SincosEnemy"
 import "scripts/entities/swayGun"
+import "scripts/entities/laser"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -265,6 +266,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = SincosEnemy(entityX, entityY)
 		elseif entityName == "SwayGun" then
 			self.entityInstance[entity.iid] = SwayGun(entityX, entityY, entity)
+		elseif entityName == "Laser" then
+			self.entityInstance[entity.iid] = Laser(entityX, entityY, entity)
 		end
 	end
 

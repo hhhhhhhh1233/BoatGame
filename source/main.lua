@@ -76,8 +76,8 @@ function pd.update()
 	SceneManager.camera:lerp(PlayerInstance.x, PlayerInstance.y, 0.2)
 
 	SceneManager.player:DrawHealthBar()
-	sprite_update()
 	update_timers()
+	sprite_update()
 	pd.frameTimer.updateTimers()
 
 	-- NOTE: This blurs the image at the bottom, but I think this might have terrible performance on the actual playdate so keep that in mind if you ever get your hands on one
