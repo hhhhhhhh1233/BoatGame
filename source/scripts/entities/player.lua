@@ -146,6 +146,10 @@ function Player:collisionResponse(other)
 		return "overlap"
 	end
 
+	if other:isa(MovingPlatform) then
+		return "overlap"
+	end
+
 	if other:isa(AbilityPickup) then
 		other:pickup(self)
 		self.GameManager:collect(other.entity.iid)
