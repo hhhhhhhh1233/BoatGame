@@ -9,14 +9,14 @@ function Companion:init(x, y, player)
 	self:setImage(gfx.image.new("images/Companion"))
 	self:add()
 	self:setZIndex(10)
-	self.searchSize = 100
+	self.searchSize = 250
 end
 
 function Companion:update()
 	-- NOTE: Uncomment to visualise what the companion sees
-	-- gfx.fillRect(self.x - self.searchSize / 2, self.y - self.searchSize / 2, self.searchSize, self.searchSize)
+	-- gfx.fillRect(self.player.x - self.searchSize / 2, self.player.y - self.searchSize / 2, self.searchSize, self.searchSize)
 
-	local inSearchRadius = gfx.sprite.querySpritesInRect(self.x - self.searchSize / 2, self.y - self.searchSize / 2, self.searchSize, self.searchSize)
+	local inSearchRadius = gfx.sprite.querySpritesInRect(self.player.x - self.searchSize / 2, self.player.y - self.searchSize / 2, self.searchSize, self.searchSize)
 	local door
 	for _, sprite in ipairs(inSearchRadius) do
 		if sprite:isa(CompanionDoor) then

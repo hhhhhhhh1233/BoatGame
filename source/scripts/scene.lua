@@ -294,8 +294,6 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = TeleportationDevice(entityX, entityY, entity)
 		elseif entityName == "CompanionDoor" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = CompanionDoor(entityX, entityY, entity)
-		elseif entityName == "Companion" and not self.collectedEntities[entity.iid] then
-			self.entityInstance[entity.iid] = Companion(entityX, entityY, self.player)
 		elseif entityName == "CompanionPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = CompanionPickup(entityX, entityY, entity)
 		end
