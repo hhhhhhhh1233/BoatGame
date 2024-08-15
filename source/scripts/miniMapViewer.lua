@@ -43,7 +43,7 @@ function MiniMapViewer:update()
 	self.mapOffsetX = Clamp(self.mapOffsetX, self.mapPanMinX, self.mapPanMaxX)
 	self.mapOffsetY = Clamp(self.mapOffsetY, self.mapPanMinY, self.mapPanMaxY)
 
-	if pd.buttonIsPressed(pd.kButtonB) then
+	if pd.buttonJustReleased(pd.kButtonB) then
 		local allSprites = gfx.sprite.getAllSprites()
 		for _, sprite in ipairs(allSprites) do
 			self:remove()

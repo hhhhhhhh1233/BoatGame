@@ -15,7 +15,7 @@ function SpikeBall:update()
 	for _, collision in ipairs(collisions) do
 		if collision:isa(Player) then
 			collision:Damage(20, 10)
-			collision.PhysicsComponent:AddForce(collision.x - self.x, collision.y - self.y)
+			-- collision.PhysicsComponent:AddForce(collision.x - self.x, collision.y - self.y)
 		end
 	end
 	-- gfx.fillRect(self.x - 16, self.y - 16, 32, 32)

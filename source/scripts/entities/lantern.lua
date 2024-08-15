@@ -14,6 +14,7 @@ function Lantern:init(x, y, entity)
 end
 
 function Lantern:pickup(player)
+	PopupTextBox("*LANTERN*\nHelps make the dark more bearable", 3000, 20)
 	player.lightRadius = 200
 	self:remove()
 end

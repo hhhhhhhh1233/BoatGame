@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+import "scripts/popupTextBox"
+
 class('Coin').extends(gfx.sprite)
 
 function Coin:init(x, y, entity)
