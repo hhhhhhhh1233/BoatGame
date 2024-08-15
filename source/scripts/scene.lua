@@ -31,6 +31,7 @@ import "scripts/entities/laser"
 import "scripts/entities/movingPlatform"
 import "scripts/entities/darkness"
 import "scripts/entities/lantern"
+import "scripts/entities/teleportationDevice"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -58,6 +59,7 @@ function Scene:init(spawnX, spawnY)
 		self.player = Player(SaveData["PlayerX"], SaveData["PlayerY"], gfx.image.new("images/Boat"), 5, self)
 		self.player.coins = SaveData["PlayerCoins"]
 		self.player.lightRadius = SaveData["PlayerLightRadius"]
+		self.player.bCanTeleport = SaveData["PlayerCanTeleport"]
 		self.player.AbilityA = Abilities[SaveData["PlayerAbilityAName"]]
 		self.player.AbilityAName = SaveData["PlayerAbilityAName"]
 		self.player.AbilityB = Abilities[SaveData["PlayerAbilityBName"]]
@@ -278,6 +280,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Darkness(self.player)
 		elseif entityName == "Lantern" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = Lantern(entityX, entityY, entity)
+		elseif entityName == "TeleportationDevice" and not self.collectedEntities[entity.iid] then
+			self.entityInstance[entity.iid] = TeleportationDevice(entityX, entityY, entity)
 		end
 	end
 

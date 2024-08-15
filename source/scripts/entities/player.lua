@@ -163,6 +163,11 @@ function Player:collisionResponse(other)
 		self.GameManager:collect(other.entity.iid)
 		return "overlap"
 	end
+	if other:isa(TeleportationDevice) then
+		other:pickup(self)
+		self.GameManager:collect(other.entity.iid)
+		return "overlap"
+	end
 
 	if other:isa(WaterWheel) then
 		other:pickup(self)
@@ -230,6 +235,28 @@ function Player:update()
 
 		if self.PassiveAbility then
 			self:PassiveAbility()
+		end
+
+		if self.bCanTeleport then
+			if pd.buttonJustPressed(pd.kButtonLeft) and self.bDoubleLeft then
+				self:moveBy(-64, 0)
+				self.PhysicsComponent.Position = pd.geometry.vector2D.new(self.x, self.y)
+			elseif pd.buttonJustPressed(pd.kButtonLeft) then
+				self.bDoubleLeft = true
+				pd.frameTimer.performAfterDelay(5, function ()
+					self.bDoubleLeft = false
+				end)
+			end
+
+			if pd.buttonJustPressed(pd.kButtonRight) and self.bDoubleRight then
+				self:moveBy(64, 0)
+				self.PhysicsComponent.Position = pd.geometry.vector2D.new(self.x, self.y)
+			elseif pd.buttonJustPressed(pd.kButtonRight) then
+				self.bDoubleRight = true
+				pd.frameTimer.performAfterDelay(5, function ()
+					self.bDoubleRight = false
+				end)
+			end
 		end
 
 		if pd.buttonIsPressed(pd.kButtonLeft) then
