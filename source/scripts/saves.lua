@@ -53,6 +53,10 @@ function SaveGame(GameManager)
 		SaveData["PlayerCorpseLevel"] = GameManager.playerCorpse.level
 	end
 
+	if GameManager.player.companion then
+		SaveData["PlayerHasCompanion"] = true
+	end
+
 	ds.writeImage(GameManager.miniMap, "MiniMap/miniMap")
 	ds.writeImage(GameManager.miniMapWithHighlight, "MiniMap/displayMiniMap")
 

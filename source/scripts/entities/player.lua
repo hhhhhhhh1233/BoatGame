@@ -168,6 +168,11 @@ function Player:collisionResponse(other)
 		self.GameManager:collect(other.entity.iid)
 		return "overlap"
 	end
+	if other:isa(CompanionPickup) then
+		other:pickup(self)
+		self.GameManager:collect(other.entity.iid)
+		return "overlap"
+	end
 
 	if other:isa(WaterWheel) then
 		other:pickup(self)

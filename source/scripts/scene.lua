@@ -32,6 +32,9 @@ import "scripts/entities/movingPlatform"
 import "scripts/entities/darkness"
 import "scripts/entities/lantern"
 import "scripts/entities/teleportationDevice"
+import "scripts/entities/companionDoor"
+import "scripts/entities/companion"
+import "scripts/entities/companionPickup"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -68,6 +71,9 @@ function Scene:init(spawnX, spawnY)
 		self.player.PassiveAbilityName = SaveData["PlayerPassiveAbilityName"]
 		if SaveData["PlayerDirection"] == -1 then
 			self.player:setImageFlip(gfx.kImageFlippedX)
+		end
+		if SaveData["PlayerHasCompanion"] then
+			self.player.companion = Companion(self.player.x, self.player.y, self.player)
 		end
 		local level_rect = LDtk.get_rect(SaveData["CurrentLevel"])
 		if not level_rect then
@@ -174,6 +180,10 @@ function Scene:goToLevel(level_name)
 	self.ui:add()
 	if self.playerCorpse and self.playerCorpse.level == level_name then
 		self.playerCorpse:add()
+	end
+	if self.player.companion then
+		self.player.companion:add()
+		self.player.companion:moveTo(self.player.x, self.player.y)
 	end
 
 	-- Draw data to minimap
@@ -282,6 +292,12 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Lantern(entityX, entityY, entity)
 		elseif entityName == "TeleportationDevice" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = TeleportationDevice(entityX, entityY, entity)
+		elseif entityName == "CompanionDoor" and not self.collectedEntities[entity.iid] then
+			self.entityInstance[entity.iid] = CompanionDoor(entityX, entityY, entity)
+		elseif entityName == "Companion" and not self.collectedEntities[entity.iid] then
+			self.entityInstance[entity.iid] = Companion(entityX, entityY, self.player)
+		elseif entityName == "CompanionPickup" and not self.collectedEntities[entity.iid] then
+			self.entityInstance[entity.iid] = CompanionPickup(entityX, entityY, entity)
 		end
 	end
 
