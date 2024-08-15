@@ -40,7 +40,7 @@ function SavePoint:update()
 end
 
 function SavePoint:save(GameManager)
-	print("Saved")
+	PopupTextBox("*SAVED*", 2000, 10)
 	self.saveSound:play()
 	SaveGame(GameManager)
 end
