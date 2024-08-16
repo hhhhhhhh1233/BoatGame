@@ -65,7 +65,11 @@ function MainMenu:update()
 	gfx.lockFocus(self:getImage())
 	gfx.setColor(gfx.kColorWhite)
 	gfx.fillRect(0, 0, 400 - 60, 240 - 60)
-	self.grid:drawInRect(0, 0, 235 - 60, 240 - 60)
+	if #self.options == 2 then
+		self.grid:drawInRect(0, 0, 235 - 60, 240 - 60)
+	else
+		self.grid:drawInRect(0, 50, 235 - 60, 240 - 60 - 50)
+	end
 	gfx.drawTextInRect("*BOAT GAME*", 200, 80, 100, 100, nil, nil, kTextAlignment.center)
 	local boatImage = gfx.image.new("images/Boat")
 	boatImage:setInverted(true)

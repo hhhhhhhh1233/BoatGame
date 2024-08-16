@@ -151,6 +151,7 @@ end
 
 function Scene:reloadLevel()
 	self:goToLevel(self.currentLevel)
+
 end
 
 local miniMapRatio = 25
@@ -304,6 +305,13 @@ function Scene:goToLevel(level_name)
 	local level_rect = LDtk.get_rect(level_name)
 	self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
 	self.camera = Camera(self.player.x, self.player.y, 0, 0, self.LevelWidth, self.LevelHeight)
+
+	-- Sets the water stuff
+	self.water.Width = level_rect.width
+
+	-- Set the waters limits
+	self.water.LowerBound = 0 - 20
+	self.water.UpperBound = level_rect.height + 20
 
 	if self.songName ~= LDtk.get_custom_data(level_name, "Song") then
 		self.songName = LDtk.get_custom_data(level_name, "Song")
