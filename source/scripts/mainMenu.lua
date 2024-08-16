@@ -8,7 +8,7 @@ class('MainMenu').extends(gfx.sprite)
 
 function MainMenu:init()
 
-	self:setImage(gfx.image.new(400 - 60, 240 - 60))
+	self:setImage(gfx.image.new(400, 240))
 	-- self:setCenter(0, 0)
 	self:moveTo(200, 120)
 
@@ -51,28 +51,38 @@ function MainMenu:init()
 	self:add()
 end
 
+local movingSound = pd.sound.sampleplayer.new("sounds/ChangingSelection")
+local decisionSound = pd.sound.sampleplayer.new("sounds/SelectionMade")
+local mainMenuTrack = pd.sound.fileplayer.new("sounds/songs/MainMenuLoop")
+mainMenuTrack:play(0)
 function MainMenu:update()
 	if pd.buttonJustPressed(pd.kButtonDown) then
 		self.grid:selectNextRow(false)
+		movingSound:play()
 	elseif pd.buttonJustPressed(pd.kButtonUp) then
 		self.grid:selectPreviousRow(false)
+		movingSound:play()
 	elseif pd.buttonJustPressed(pd.kButtonA) then
 		local _, row, column = self.grid:getSelection()
 		self:remove()
+		mainMenuTrack:stop()
+		-- decisionSound:play()
 		self.done = true
 		self.loadGame = self.options[row] == "Continue"
 	end
 	gfx.lockFocus(self:getImage())
 	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(0, 0, 400 - 60, 240 - 60)
+	gfx.fillRect(0, 0, 400, 240)
 	if #self.options == 2 then
 		self.grid:drawInRect(0, 0, 235 - 60, 240 - 60)
 	else
 		self.grid:drawInRect(0, 50, 235 - 60, 240 - 60 - 50)
 	end
-	gfx.drawTextInRect("*BOAT GAME*", 200, 80, 100, 100, nil, nil, kTextAlignment.center)
+	gfx.drawTextInRect("*BOAT GAME*", 220 + 10 * math.sin(pd.getElapsedTime()), 80, 100, 100, nil, nil, kTextAlignment.center)
 	local boatImage = gfx.image.new("images/Boat")
 	boatImage:setInverted(true)
-	boatImage:drawScaled(230, 100, 1)
+	boatImage:drawScaled(230, 160 + 5 * math.sin(1.7 * pd.getElapsedTime()), 1)
+	gfx.setColor(gfx.kColorBlack)
+	gfx.fillRect(0, 190 + 5 * math.sin(1.7 * pd.getElapsedTime()), 400, 240)
 	gfx.unlockFocus()
 end

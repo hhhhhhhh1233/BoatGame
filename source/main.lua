@@ -60,6 +60,7 @@ local menuItem2, error = menu:addMenuItem("View Map", function ()
 	MiniMapViewer(SceneManager)
 end)
 
+
 local mainMenu = MainMenu()
 
 function MainGameLoop()
