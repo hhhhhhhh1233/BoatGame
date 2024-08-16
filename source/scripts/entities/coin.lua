@@ -7,7 +7,7 @@ class('Coin').extends(gfx.sprite)
 
 function Coin:init(x, y, entity)
 	self.entity = entity
-	self:moveTo(x, y)
+	self:moveTo(x + 8, y + 8)
 	self:setImage(gfx.image.new("images/Coin"))
 	self:setCollideRect(0, 0, 16, 16)
 	self:setGroups(COLLISION_GROUPS.PICKUPS)

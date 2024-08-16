@@ -43,7 +43,7 @@ LDtk.load("levels/world.ldtk", false)
 
 class('Scene').extends()
 
-function Scene:init(spawnX, spawnY)
+function Scene:init()
 	self.miniMap = pd.datastore.readImage("MiniMap/miniMap")
 	if self.miniMap then
 		self.miniMapWithHighlight = pd.datastore.readImage("MiniMap/displayMiniMap")
@@ -90,12 +90,13 @@ function Scene:init(spawnX, spawnY)
 		end
 	else
 		self.collectedEntities = {}
-		self.player = Player(spawnX, spawnY, gfx.image.new("images/Boat"), 5, self)
+		self.player = Player(0, 0, gfx.image.new("images/Boat"), 5, self)
 		local level_rect = LDtk.get_rect("Level_0")
 		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
 		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 1.1)
 		self:goToLevel("Level_0")
 		self.player:moveTo(self.SpawnX, self.SpawnY)
+		self.player.PhysicsComponent.Position = pd.geometry.vector2D.new(self.SpawnX, self.SpawnY)
 		self.water.Height = self.SpawnY
 	end
 end
@@ -238,8 +239,8 @@ function Scene:goToLevel(level_name)
 			table.insert(self.ActivePhysicsComponents, FloaterInstance.PhysicsComponent)
 			self.entityInstance[entity.iid] = FloaterInstance
 		elseif entityName == "SpawnPoint" then
-			self.SpawnX = entityX
-			self.SpawnY = entityY
+			self.SpawnX = entityX + 16
+			self.SpawnY = entityY + 32
 		elseif entityName == "SimpleEnemy" then
 			self.entityInstance[entity.iid] = SimpleEnemy(entityX, entityY, self.player)
 		elseif entityName == "AbilityPickup" and not self.collectedEntities[entity.iid] then
