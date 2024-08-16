@@ -22,20 +22,25 @@ function MainMenu:init()
 	self.grid:setNumberOfColumns(1)
 	self.grid:setNumberOfRows(#self.options)
 	self.grid:setCellPadding(2, 2, 2, 2)
-	self.grid.backgroundImage = gfx.nineSlice.new("images/gridBackground", 8, 8, 47, 47)
+	-- self.grid.backgroundImage = gfx.nineSlice.new("images/gridBackground", 8, 8, 47, 47)
 	self.grid:setContentInset(10, 10, 10, 10)
-	local options= self.options
+
+	local options = self.options
+	local ns = gfx.nineSlice.new("images/WallResizable", 5, 5, 6, 6)
+	local nsBlank = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 22, 22)
 	function self.grid:drawCell(section, row, column, selected, x, y, width, height)
 		gfx.setColor(gfx.kColorBlack)
 		if selected then
+			-- gfx.fillRect(x, y, width, height)
+			ns:drawInRect(x, y, width, height)
 			gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
-			gfx.fillRect(x, y, width, height)
 			gfx.setColor(gfx.kColorWhite)
-			gfx.drawTextInRect(options[row], x, y + (height/2) + 3 * math.sin(7 * pd.getElapsedTime()), width, height, nil, nil, kTextAlignment.center)
+			gfx.drawTextInRect(options[row], x, y + (height/2) - 5 + 3 * math.sin(7 * pd.getElapsedTime()), width, height, nil, nil, kTextAlignment.center)
 		else
 			gfx.setImageDrawMode(gfx.kDrawModeCopy)
-			gfx.drawRect(x, y, width, height)
-			gfx.drawTextInRect(options[row], x, y + (height/2), width, height, nil, nil, kTextAlignment.center)
+			nsBlank:drawInRect(x, y, width, height)
+			-- gfx.drawRect(x, y, width, height)
+			gfx.drawTextInRect(options[row], x, y + (height/2) - 5, width, height, nil, nil, kTextAlignment.center)
 		end
 	end
 	self:setZIndex(10)
