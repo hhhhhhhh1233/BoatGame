@@ -233,8 +233,6 @@ function Player:update()
 		self.GameManager:enterRoom(self.Door, "NORTH")
 	end
 
-
-
 	local Gravity = 0.5
 	if self.PhysicsComponent.bBuoyant or not self.bUnderwater then
 		self.PhysicsComponent:AddForce(0, Gravity)
@@ -261,11 +259,11 @@ function Player:update()
 
 	if self.bActive then
 		if self.AbilityA then
-			self.AbilityA(self, pd.kButtonA)
+			self:AbilityA(pd.kButtonA)
 		end
 
 		if self.AbilityB then
-			self.AbilityB(self, pd.kButtonB)
+			self:AbilityB(pd.kButtonB)
 		end
 
 		if self.PassiveAbility then
@@ -294,16 +292,20 @@ function Player:update()
 			end
 		end
 
-		if pd.buttonIsPressed(pd.kButtonLeft) and ((not self.bGrounded) or self.bHasWheels) then
+		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:setImageFlip(gfx.kImageFlippedX)
-			self.PhysicsComponent.Velocity.x = -self.Speed
 			self.direction = -1
+			if ((not self.bGrounded) or self.bHasWheels) then
+				self.PhysicsComponent.Velocity.x = -self.Speed
+			end
 		end
 
-		if pd.buttonIsPressed(pd.kButtonRight) and ((not self.bGrounded) or self.bHasWheels) then
-			self:setImageFlip(gfx.kImageUnflipped)
-			self.PhysicsComponent.Velocity.x = self.Speed
+		if pd.buttonIsPressed(pd.kButtonRight) then
 			self.direction = 1
+			self:setImageFlip(gfx.kImageUnflipped)
+			if ((not self.bGrounded) or self.bHasWheels) then
+				self.PhysicsComponent.Velocity.x = self.Speed
+			end
 		end
 	end
 

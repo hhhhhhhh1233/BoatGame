@@ -27,6 +27,7 @@ import "scripts/entities/spinningSpikeBalls"
 import "scripts/entities/spikeRail"
 import "scripts/entities/SincosEnemy"
 import "scripts/entities/swayGun"
+import "scripts/entities/staticGun"
 import "scripts/entities/laser"
 import "scripts/entities/movingPlatform"
 import "scripts/entities/darkness"
@@ -36,6 +37,7 @@ import "scripts/entities/companionDoor"
 import "scripts/entities/companion"
 import "scripts/entities/companionPickup"
 import "scripts/entities/wheelPickup"
+import "scripts/entities/diagonalEnemy"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -64,6 +66,7 @@ function Scene:init(bLoadGame)
 		self.player.coins = SaveData["PlayerCoins"]
 		self.player.lightRadius = SaveData["PlayerLightRadius"]
 		self.player.bCanTeleport = SaveData["PlayerCanTeleport"]
+		self.player.bHasWheels = SaveData["PlayerHasWheels"]
 		self.player.AbilityA = Abilities[SaveData["PlayerAbilityAName"]]
 		self.player.AbilityAName = SaveData["PlayerAbilityAName"]
 		self.player.AbilityB = Abilities[SaveData["PlayerAbilityBName"]]
@@ -283,8 +286,12 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = SpikeRail(entityX, entityY, entity)
 		elseif entityName == "SincosEnemy" then
 			self.entityInstance[entity.iid] = SincosEnemy(entityX, entityY)
+		elseif entityName == "DiagonalEnemy" then
+			self.entityInstance[entity.iid] = DiagonalEnemy(entityX, entityY, entity)
 		elseif entityName == "SwayGun" then
 			self.entityInstance[entity.iid] = SwayGun(entityX, entityY, entity)
+		elseif entityName == "StaticGun" then
+			self.entityInstance[entity.iid] = StaticGun(entityX, entityY, entity)
 		elseif entityName == "Laser" then
 			self.entityInstance[entity.iid] = Laser(entityX, entityY, entity)
 		elseif entityName == "MovingPlatform" then

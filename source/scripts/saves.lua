@@ -32,6 +32,7 @@ function SaveGame(GameManager)
 		["PlayerCoins"] = GameManager.player.coins,
 		["PlayerLightRadius"] = GameManager.player.lightRadius,
 		["PlayerCanTeleport"] = GameManager.player.bCanTeleport,
+		["PlayerHasWheels"] = GameManager.player.bHasWheels,
 		["PlayerAbilityAName"] = GameManager.player.AbilityAName,
 		["PlayerAbilityBName"] = GameManager.player.AbilityBName,
 		["PlayerPassiveAbilityName"] = GameManager.player.PassiveAbilityName,
