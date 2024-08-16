@@ -61,7 +61,6 @@ local menuItem2, error = menu:addMenuItem("View Map", function ()
 end)
 
 local mainMenu = MainMenu()
-local bLoadSave
 
 function MainGameLoop()
 	gfx.clear(gfx.kColorWhite)
@@ -85,7 +84,6 @@ function MainMenuLoop()
 	pd.frameTimer.updateTimers()
 
 	if mainMenu.done then
-		print(mainMenu.loadGame)
 		SceneManager = Scene(mainMenu.loadGame)
 		pd.update = MainGameLoop
 	end

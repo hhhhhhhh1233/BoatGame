@@ -51,7 +51,7 @@ function MainMenu:update()
 		local _, row, column = self.grid:getSelection()
 		self:remove()
 		self.done = true
-		self.loadGame = row == 1
+		self.loadGame = self.options[row] == "Continue"
 	end
 	gfx.lockFocus(self:getImage())
 	gfx.setColor(gfx.kColorWhite)

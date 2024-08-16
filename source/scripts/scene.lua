@@ -56,7 +56,7 @@ function Scene:init(bLoadGame)
 	self.songManager = pd.sound.fileplayer.new("sounds/songs/Roaming")
 	self.songManager:play(0)
 	local SaveData = LoadGame(self)
-	if bLoadGame and SaveData then
+	if bLoadGame then
 		print("LOADING SAVE")
 		self.collectedEntities = SaveData["CollectedEntities"]
 		self.player = Player(SaveData["PlayerX"], SaveData["PlayerY"], gfx.image.new("images/Boat"), 5, self)
