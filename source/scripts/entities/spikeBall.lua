@@ -7,6 +7,7 @@ function SpikeBall:init(x, y)
 	self:setImage(gfx.image.new("images/SpikeBall"))
 	assert(self:getImage())
 	self:moveTo(x, y)
+	self:setZIndex(5)
 	self:add()
 end
 

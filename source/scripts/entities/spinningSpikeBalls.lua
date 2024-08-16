@@ -14,6 +14,10 @@ function SpinningSpikeBalls:init(x, y, entity)
 		table.insert(self.spikes, SpikeBall(self.x, self.y + 32 * i))
 	end
 	self.angle = 0
+	self.speed = entity.fields.Speed
+	if entity.fields.Direction == "Counter_Clockwise" then
+		self.speed *= -1
+	end
 	self:add()
 end
 
@@ -21,5 +25,5 @@ function SpinningSpikeBalls:update()
 	for index, spike in ipairs(self.spikes) do
 		spike:moveTo(self.x + 26 * index * math.cos(self.angle), self.y + 26 * index * math.sin(self.angle))
 	end
-	self.angle += 0.05
+	self.angle += self.speed
 end
