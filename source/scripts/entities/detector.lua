@@ -28,5 +28,4 @@ function Detector:update()
 			self.bDetectedPlayer = true
 		end
 	end
-	print(self.bDetectedPlayer)
 end

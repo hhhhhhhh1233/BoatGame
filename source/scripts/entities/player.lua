@@ -61,6 +61,7 @@ function Player:Damage(amount, iFrames)
 	self.Health -= amount
 	self.Invincible = iFrames
 	if self.Health <= 0 then
+		Explosion(self.x, self.y)
 		self:setVisible(false)
 		self.bActive = false
 		self:remove()
@@ -207,9 +208,9 @@ function Player:collisionResponse(other)
 
 	if other:isa(Mine) or other:isa(MooredMine) then
 		return "overlap"
-	else
-		return "slide"
 	end
+
+	return "slide"
 end
 
 function Player:update()
@@ -264,13 +265,13 @@ function Player:update()
 			end
 		end
 
-		if pd.buttonIsPressed(pd.kButtonLeft) then
+		if pd.buttonIsPressed(pd.kButtonLeft) and not self.bGrounded then
 			self:setImageFlip(gfx.kImageFlippedX)
 			self.PhysicsComponent.Velocity.x = -self.Speed
 			self.direction = -1
 		end
 
-		if pd.buttonIsPressed(pd.kButtonRight) then
+		if pd.buttonIsPressed(pd.kButtonRight) and not self.bGrounded then
 			self:setImageFlip(gfx.kImageUnflipped)
 			self.PhysicsComponent.Velocity.x = self.Speed
 			self.direction = 1
@@ -279,7 +280,17 @@ function Player:update()
 
 	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(-self.PhysicsComponent.Velocity.x * 0.2, 0))
 
-	self.PhysicsComponent:Move(self)
+	self.bGrounded = false
+	local collisions, _ = self.PhysicsComponent:Move(self)
+	for i = 1, #collisions do
+		print(collisions[i].other:getGroupMask())
+		if collisions[i].normal.y == 1 and self.y - 32 > self.GameManager.water.Height and self.PhysicsComponent.Velocity.y == 0 then
+			self:Damage(30, 10)
+		end
+		if collisions[i].normal.y == -1 and collisions[i].other:getGroupMask() == 8 then
+			self.bGrounded = true
+		end
+	end
 
 	if self.Invincible > 0 then
 		self.Invincible -= 1
