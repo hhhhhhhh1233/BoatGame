@@ -104,13 +104,13 @@ function Player:DrawHealthBar()
 	-- TODO: This should be used instead of the magic numbers below
 	-- local textWidth = gfx.getSystemFont():getTextWidth(self.Health)
 
-	local img = gfx.image.new(100, 100)
+	local img = gfx.image.new(150, 100)
 	gfx.lockFocus(img)
 	local ns = gfx.nineSlice.new("images/WallResizable", 5, 5, 6, 6)
 	local nsBlank = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 22, 22)
-	nsBlank:drawInRect(10, 10, 60, 20)
+	nsBlank:drawInRect(10, 10, 100, 20)
 	if self.Health > 0 then
-		ns:drawInRect(10, 10, 60 * (self.Health / 100), 20)
+		ns:drawInRect(10, 10, 100 * (self.Health / 100), 20)
 	end
 	gfx.unlockFocus()
 	UISystem:drawImageAt(img, 0, 0)
@@ -123,7 +123,7 @@ function Player:DrawHealthBar()
 	gfx.drawText(math.floor(self.coins).." x", 20, 55)
 	gfx.image.new("images/Coin"):draw(30 + width, 56)
 	gfx.unlockFocus()
-	UISystem:drawImageAt(img, 320, -40)
+	UISystem:drawImageAt(img, 300, -40)
 end
 
 function Player:AddForce(Force)
