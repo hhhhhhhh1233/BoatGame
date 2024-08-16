@@ -45,6 +45,10 @@ function Player:init(x, y, image, speed, gameManager)
 	self.hurtSound = pd.sound.sampleplayer.new("sounds/Hurt")
 
 	self.lightRadius = 50
+
+	self.boatImage = gfx.image.new("images/Boat")
+	self.wheelBoatImage = gfx.image.new("images/WheelBoat")
+	self.currentImage = self.boatImage
 end
 
 function Player:Damage(amount, iFrames)
@@ -173,6 +177,11 @@ function Player:collisionResponse(other)
 		self.GameManager:collect(other.entity.iid)
 		return "overlap"
 	end
+	if other:isa(WheelPickup) then
+		other:pickup(self)
+		self.GameManager:collect(other.entity.iid)
+		return "overlap"
+	end
 
 	if other:isa(WaterWheel) then
 		other:pickup(self)
@@ -231,6 +240,25 @@ function Player:update()
 		self.PhysicsComponent:AddForce(0, Gravity)
 	end
 
+	-- NOTE: This whole chunk just determines which sprite the player should be, it kind of disgusts me but I can't really think of anything better. Maybe implement a state machine and let that sort out sprite changing?
+	if self.bHasWheels and self.bGrounded then
+		if self.currentImage ~= self.wheelBoatImage then
+			self:setImage(self.wheelBoatImage)
+			self.currentImage = self.wheelBoatImage
+			if self.direction == -1 then
+				self:setImageFlip(gfx.kImageFlippedX)
+			end
+		end
+	else
+		if self.currentImage ~= self.boatImage then
+			self:setImage(self.boatImage)
+			self.currentImage = self.boatImage
+			if self.direction == -1 then
+				self:setImageFlip(gfx.kImageFlippedX)
+			end
+		end
+	end
+
 	if self.bActive then
 		if self.AbilityA then
 			self.AbilityA(self, pd.kButtonA)
@@ -266,13 +294,13 @@ function Player:update()
 			end
 		end
 
-		if pd.buttonIsPressed(pd.kButtonLeft) and not self.bGrounded then
+		if pd.buttonIsPressed(pd.kButtonLeft) and ((not self.bGrounded) or self.bHasWheels) then
 			self:setImageFlip(gfx.kImageFlippedX)
 			self.PhysicsComponent.Velocity.x = -self.Speed
 			self.direction = -1
 		end
 
-		if pd.buttonIsPressed(pd.kButtonRight) and not self.bGrounded then
+		if pd.buttonIsPressed(pd.kButtonRight) and ((not self.bGrounded) or self.bHasWheels) then
 			self:setImageFlip(gfx.kImageUnflipped)
 			self.PhysicsComponent.Velocity.x = self.Speed
 			self.direction = 1

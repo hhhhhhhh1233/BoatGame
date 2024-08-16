@@ -35,6 +35,7 @@ import "scripts/entities/teleportationDevice"
 import "scripts/entities/companionDoor"
 import "scripts/entities/companion"
 import "scripts/entities/companionPickup"
+import "scripts/entities/wheelPickup"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -298,6 +299,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = CompanionDoor(entityX, entityY, entity)
 		elseif entityName == "CompanionPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = CompanionPickup(entityX, entityY, entity)
+		elseif entityName == "WheelPickup" and not self.collectedEntities[entity.iid] then
+			self.entityInstance[entity.iid] = WheelPickup(entityX, entityY, entity)
 		end
 	end
 
