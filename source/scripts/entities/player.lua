@@ -225,6 +225,8 @@ function Player:update()
 		self.GameManager:enterRoom(self.Door, "NORTH")
 	end
 
+
+
 	local Gravity = 0.5
 	if self.PhysicsComponent.bBuoyant or not self.bUnderwater then
 		self.PhysicsComponent:AddForce(0, Gravity)
@@ -282,8 +284,8 @@ function Player:update()
 
 	self.bGrounded = false
 	local collisions, _ = self.PhysicsComponent:Move(self)
+	self.bUnderwater = self.y > self.GameManager.water.Height
 	for i = 1, #collisions do
-		print(collisions[i].other:getGroupMask())
 		if collisions[i].normal.y == 1 and self.y - 32 > self.GameManager.water.Height and self.PhysicsComponent.Velocity.y == 0 then
 			self:Damage(30, 10)
 		end
@@ -291,6 +293,10 @@ function Player:update()
 			self.bGrounded = true
 		end
 	end
+
+	self.GameManager.camera:lerp(self.x, self.y, 0.2)
+
+	self:DrawHealthBar()
 
 	if self.Invincible > 0 then
 		self.Invincible -= 1

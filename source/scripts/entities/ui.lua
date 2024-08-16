@@ -24,6 +24,10 @@ function UI:drawAt(func, x, y)
 	gfx.unlockFocus()
 end
 
+function UI:clear()
+	self:setImage(gfx.image.new(400, 240))
+end
+
 
 function UI:drawImageAtWorld(image, x, y)
 	local ox, oy = gfx.getDrawOffset()

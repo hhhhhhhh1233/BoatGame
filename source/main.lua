@@ -29,17 +29,17 @@ import "scripts/entities/mine"
 import "scripts/scene"
 import "scripts/entities/ui"
 import "scripts/miniMapViewer"
+import "scripts/mainMenu"
+
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-local vector2D_new <const> = pd.geometry.vector2D.new
 local sprite_update <const> = gfx.sprite.update
 local update_timers <const> = pd.timer.updateTimers
 
 UISystem = UI()
-local SceneManager = Scene()
-local PlayerInstance = SceneManager.player
+local SceneManager
 
 math.randomseed(playdate.getSecondsSinceEpoch())
 
@@ -53,9 +53,6 @@ pd.timer.keyRepeatTimerWithDelay(0, 800, function ()
 	end
 end)
 
--- local song = pd.sound.fileplayer.new("sounds/songs/Roaming")
--- song:play(0)
-
 local menu = pd.getSystemMenu()
 local menuItem, error = menu:addMenuItem("Clear Save", ClearSave)
 local menuItem2, error = menu:addMenuItem("View Map", function ()
@@ -63,36 +60,36 @@ local menuItem2, error = menu:addMenuItem("View Map", function ()
 	MiniMapViewer(SceneManager)
 end)
 
-function pd.update()
+local mainMenu = MainMenu()
+local bLoadSave
+
+function MainGameLoop()
 	gfx.clear(gfx.kColorWhite)
-	SceneManager.ui:setImage(gfx.image.new(400, 240))
+
+	UISystem:clear()
 
 	SceneManager:UpdatePhysicsComponentsBuoyancy()
 
-	-- NOTE: This sucks
-	PlayerInstance.bUnderwater = (PlayerInstance.PhysicsComponent.Position.y) > SceneManager.water.Height
-
-	-- Make the camera track the boat
-	SceneManager.camera:lerp(PlayerInstance.x, PlayerInstance.y, 0.2)
-
-	SceneManager.player:DrawHealthBar()
 	update_timers()
 	sprite_update()
 	pd.frameTimer.updateTimers()
 
-	-- NOTE: This blurs the image at the bottom, but I think this might have terrible performance on the actual playdate so keep that in mind if you ever get your hands on one
-	if PlayerInstance.bActive then -- NOTE: This is so the text is still legible when choosing ability, make the water blur per sprite instead of the whole image to solve this better
-		local ox, oy = gfx.getDrawOffset()
-		local blurred = gfx.getWorkingImage():blurredImage(1, 1, gfx.image.kDitherTypeBayer4x4, true)
-		local ix, iy = blurred:getSize()
-		local waterMask = gfx.image.new(ix, iy)
-		gfx.pushContext(waterMask)
-		gfx.fillRect(2, SceneManager.water.Height + oy + 2 - i, 400 - 2, 400)
-		gfx.popContext()
-		blurred:setMaskImage(waterMask)
-		local width = pd.display.getWidth()
-		local xOffset = (ix - width) / 2
-		blurred:drawAnchored(-ox - xOffset, -oy + i, 0, 0)
-	end
 	pd.drawFPS(0, 0)
 end
+
+function MainMenuLoop()
+	gfx.clear(gfx.kColorWhite)
+
+	update_timers()
+	sprite_update()
+	pd.frameTimer.updateTimers()
+
+	if mainMenu.done then
+		print(mainMenu.loadGame)
+		SceneManager = Scene(mainMenu.loadGame)
+		pd.update = MainGameLoop
+	end
+end
+
+pd.update = MainMenuLoop
+

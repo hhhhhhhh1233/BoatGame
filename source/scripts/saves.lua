@@ -1,6 +1,6 @@
 local ds <const> = playdate.datastore
 
-function LoadGame(GameManager)
+function LoadGame()
 	return ds.read()
 	-- local SaveData = ds.read()
 	-- if SaveData then

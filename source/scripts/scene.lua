@@ -43,7 +43,7 @@ LDtk.load("levels/world.ldtk", false)
 
 class('Scene').extends()
 
-function Scene:init()
+function Scene:init(bLoadGame)
 	self.miniMap = pd.datastore.readImage("MiniMap/miniMap")
 	if self.miniMap then
 		self.miniMapWithHighlight = pd.datastore.readImage("MiniMap/displayMiniMap")
@@ -56,7 +56,7 @@ function Scene:init()
 	self.songManager = pd.sound.fileplayer.new("sounds/songs/Roaming")
 	self.songManager:play(0)
 	local SaveData = LoadGame(self)
-	if SaveData then
+	if bLoadGame and SaveData then
 		print("LOADING SAVE")
 		self.collectedEntities = SaveData["CollectedEntities"]
 		self.player = Player(SaveData["PlayerX"], SaveData["PlayerY"], gfx.image.new("images/Boat"), 5, self)
