@@ -92,7 +92,6 @@ function Player:Respawn()
 	self.PhysicsComponent.Acceleration = pd.geometry.vector2D.new(0, 0)
 
 	self.GameManager.water.Height = self.y
-	self.GameManager.water.Width = self.GameManager.LevelWidth
 
 	self.GameManager.camera:center(self.x, self.y)
 
