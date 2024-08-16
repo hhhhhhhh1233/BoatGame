@@ -106,24 +106,24 @@ function Player:DrawHealthBar()
 
 	local img = gfx.image.new(100, 100)
 	gfx.lockFocus(img)
-	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(10 - 3,10 - 3, 30 + 3 * 2, 20 + 3 * 2)
-	gfx.setColor(gfx.kColorBlack)
-	gfx.fillRect(10 - 2, 10 - 2, 30 + 2 * 2, 20 + 2 * 2)
-	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(10, 10, 30, 20)
-	gfx.drawText(math.floor(self.Health), 13, 12)
-
-	-- NOTE: This will draw how many coins you have
-	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(10 - 3, 50 - 3, 30 + 3 * 2, 20 + 3 * 2)
-	gfx.setColor(gfx.kColorBlack)
-	gfx.fillRect(10 - 2, 50 - 2, 30 + 2 * 2, 20 + 2 * 2)
-	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(10, 50, 30, 20)
-	gfx.drawText(math.floor(self.coins), 20, 52)
+	local ns = gfx.nineSlice.new("images/WallResizable", 5, 5, 6, 6)
+	local nsBlank = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 22, 22)
+	nsBlank:drawInRect(10, 10, 60, 20)
+	if self.Health > 0 then
+		ns:drawInRect(10, 10, 60 * (self.Health / 100), 20)
+	end
 	gfx.unlockFocus()
 	UISystem:drawImageAt(img, 0, 0)
+
+	img = gfx.image.new(100, 100)
+	gfx.lockFocus(img)
+	local nsCoins = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 22, 22)
+	local width, _ = gfx.getTextSize(math.floor(self.coins).."x")
+	nsCoins:drawInRect(10, 50, width + 40, 30)
+	gfx.drawText(math.floor(self.coins).." x", 20, 55)
+	gfx.image.new("images/Coin"):draw(30 + width, 56)
+	gfx.unlockFocus()
+	UISystem:drawImageAt(img, 320, -40)
 end
 
 function Player:AddForce(Force)
