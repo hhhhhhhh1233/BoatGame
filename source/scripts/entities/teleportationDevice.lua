@@ -15,6 +15,7 @@ end
 
 function TeleportationDevice:pickup(player)
 	PopupTextBox("*TELEPORTATION DEVICE*\nDouble tap left or right to warp", 3000, 20)
+	player.GameManager:collect(self.entity.iid)
 	player.bCanTeleport = true
 	self:remove()
 end

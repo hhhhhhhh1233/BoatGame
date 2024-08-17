@@ -19,5 +19,6 @@ function WaterWheel:pickup(player)
 	PopupTextBox("*WATER WHEEL*\nCrank to change the water level", 3000, 20)
 	self.water.bActive = true
 	self.entity.fields.PickedUp = true
+	player.GameManager:collect(self.entity.iid)
 	self:remove()
 end

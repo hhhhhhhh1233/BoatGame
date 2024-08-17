@@ -7,6 +7,7 @@ import "scripts/entities/floatingEnemy"
 import "scripts/entities/abilityPickup"
 import "scripts/entities/waterWheel"
 import "scripts/entities/coin"
+import "scripts/entities/bigCoin"
 import "scripts/entities/blockedWall"
 import "scripts/entities/oneWayDoor"
 import "scripts/entities/button"
@@ -97,7 +98,7 @@ function Scene:init(bLoadGame)
 		self.player = Player(0, 0, gfx.image.new("images/Boat"), 5, self)
 		local level_rect = LDtk.get_rect("Level_0")
 		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
-		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 1.1)
+		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1)
 		self:goToLevel("Level_0")
 		self.player:moveTo(self.SpawnX, self.SpawnY)
 		self.player.PhysicsComponent.Position = pd.geometry.vector2D.new(self.SpawnX, self.SpawnY)
@@ -254,7 +255,9 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = WaterWheel(entityX, entityY, entity, self.water)
 		elseif entityName == "Coin" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = Coin(entityX, entityY, entity)
-		elseif entityName == "BlockedWall" and not entity.fields.Cleared then
+		elseif entityName == "BigCoin" and not self.collectedEntities[entity.iid] then
+			self.entityInstance[entity.iid] = BigCoin(entityX, entityY, entity)
+		elseif entityName == "BlockedWall" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = BlockedWall(entityX, entityY, entity)
 		elseif entityName == "OneWayDoor" then
 			self.entityInstance[entity.iid] = OneWayDoor(entityX, entityY, entity, 0)

@@ -17,5 +17,6 @@ end
 function WheelPickup:pickup(player)
 	PopupTextBox("*WHEELS*\nLet's you drive around out of the water", 3000, 20)
 	player.bHasWheels = true
+	player.GameManager:collect(self.entity.iid)
 	self:remove()
 end

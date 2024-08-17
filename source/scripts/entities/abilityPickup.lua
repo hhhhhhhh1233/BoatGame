@@ -16,6 +16,7 @@ end
 
 function AbilityPickup:pickup(player)
 	player.bActive = false
+	player.GameManager:collect(self.entity.iid)
 	self.entity.fields.PickedUp = true
 
 	AbilitySelectionMenu(player, self.entity)

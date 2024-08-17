@@ -31,6 +31,7 @@ function BlockedWall:clear(player)
 	if player.coins >= self.entity.fields.Cost then
 		player.coins -= self.entity.fields.Cost
 		self.entity.fields.Cleared = true
+		player.GameManager:collect(self.entity.iid)
 		self:remove()
 		return true
 	else

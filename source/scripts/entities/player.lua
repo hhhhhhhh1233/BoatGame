@@ -105,8 +105,7 @@ function Player:Respawn()
 end
 
 function Player:DrawHealthBar()
-	-- TODO: This should be used instead of the magic numbers below
-	-- local textWidth = gfx.getSystemFont():getTextWidth(self.Health)
+	-- TODO: Don't make the nineslice every frame, cache this somewhere
 
 	local img = gfx.image.new(150, 100)
 	gfx.lockFocus(img)
@@ -134,91 +133,35 @@ function Player:AddForce(Force)
 	self.PhysicsComponent:AddForce(Force)
 end
 
+function EntityIsCollisionGroup(object, group)
+	return (((2^(group - 1)) & object:getGroupMask()) ~= 0)
+end
+
 function Player:collisionResponse(other)
-	if other:isa(DoorTrigger) then
-		self.Door = other
-		return "overlap"
-	end
-
-	if other:isa(SavePoint) then
-		return "overlap"
-	end
-
-	if other:isa(Fish) then
-		return "overlap"
-	elseif other:isa(PondSkater) then
-		return "overlap"
-	elseif other:isa(FlyingBug) then
-		return "overlap"
-	end
-
-	if other:isa(MovingPlatform) then
-		return "overlap"
-	end
-
-	if other:isa(AbilityPickup) then
-		other:pickup(self)
-		self.GameManager:collect(other.entity.iid)
-		return "overlap"
-	end
-
-	if other:isa(Lantern) then
-		other:pickup(self)
-		self.GameManager:collect(other.entity.iid)
-		return "overlap"
-	end
-	if other:isa(TeleportationDevice) then
-		other:pickup(self)
-		self.GameManager:collect(other.entity.iid)
-		return "overlap"
-	end
-	if other:isa(CompanionPickup) then
-		other:pickup(self)
-		self.GameManager:collect(other.entity.iid)
-		return "overlap"
-	end
-	if other:isa(WheelPickup) then
-		other:pickup(self)
-		self.GameManager:collect(other.entity.iid)
-		return "overlap"
-	end
-
-	if other:isa(WaterWheel) then
-		other:pickup(self)
-		self.GameManager:collect(other.entity.iid)
-		return "overlap"
-	end
-	if other:isa(Coin) then
-		other:pickup(self)
-		self.GameManager:collect(other.entity.iid)
-		return "overlap"
-	end
-	if other:isa(PlayerCorpse) then
-		other:pickup(self)
-		return "overlap"
-	end
-
-	if other:isa(Detector) then
-		return "overlap"
-	end
-
-	if other:isa(SincosEnemy) then
-		return "overlap"
-	end
-
-	if other:isa(BlockedWall) then
-		if other:clear(self) then
+	if EntityIsCollisionGroup(other, COLLISION_GROUPS.WALL) then
+		if other:isa(BlockedWall) and other:clear(self) then
 			return "overlap"
-		else
-			return "slide"
 		end
-	end
-
-	if other:isa(Mine) or other:isa(MooredMine) then
+		return "slide"
+	elseif EntityIsCollisionGroup(other, COLLISION_GROUPS.PICKUPS) then
+		if other.pickup then
+			other:pickup(self)
+		end
+		return "overlap"
+	elseif EntityIsCollisionGroup(other, COLLISION_GROUPS.ENEMY) then
+		return "overlap"
+	elseif EntityIsCollisionGroup(other, COLLISION_GROUPS.TRIGGER) then
+		if other:isa(DoorTrigger) then
+			self.Door = other
+		end
+		return "overlap"
+	elseif EntityIsCollisionGroup(other, COLLISION_GROUPS.PROJECTILE) then
+		return "overlap"
+	elseif EntityIsCollisionGroup(other, COLLISION_GROUPS.EXPLOSIVE) then
 		return "overlap"
 	end
 
-	return "slide"
+	assert(false, "Couldn't figure out how we wanted to respond to the collision")
 end
 
 function Player:update()

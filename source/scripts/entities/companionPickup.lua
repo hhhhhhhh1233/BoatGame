@@ -16,5 +16,6 @@ end
 function CompanionPickup:pickup(player)
 	PopupTextBox("*COMPANION*\nHelps you feel less lonely in these trying times", 3000, 20)
 	player.companion = Companion(player.x, player.y, player)
+	player.GameManager:collect(self.entity.iid)
 	self:remove()
 end

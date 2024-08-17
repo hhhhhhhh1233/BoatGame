@@ -22,6 +22,7 @@ end
 
 function Coin:pickup(player)
 	player.coins += 1
+	player.GameManager:collect(self.entity.iid)
 	self.entity.fields.Collected = true
 	self.coinPickupSound:play()
 	self:remove()
