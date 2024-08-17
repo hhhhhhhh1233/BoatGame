@@ -86,7 +86,7 @@ function Scene:init(bLoadGame)
 			level_rect = LDtk.get_rect(SaveData["CurrentLevel"])
 		end
 		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
-		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 1.1)
+		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 0.1)
 		self.water.bActive = SaveData["WaterWheelCollected"]
 		self:goToLevel(SaveData["CurrentLevel"])
 		if SaveData["PlayerCorpseX"] then

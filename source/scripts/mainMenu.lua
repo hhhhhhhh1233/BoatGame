@@ -55,6 +55,7 @@ local movingSound = pd.sound.sampleplayer.new("sounds/ChangingSelection")
 local decisionSound = pd.sound.sampleplayer.new("sounds/SelectionMade")
 local mainMenuTrack = pd.sound.fileplayer.new("sounds/songs/MainMenuLoop")
 mainMenuTrack:play(0)
+local waterHeightDiff = 0
 function MainMenu:update()
 	if pd.buttonJustPressed(pd.kButtonDown) then
 		self.grid:selectNextRow(false)
@@ -80,9 +81,12 @@ function MainMenu:update()
 	end
 	gfx.drawTextInRect("*BOAT GAME*", 220 + 10 * math.sin(pd.getElapsedTime()), 80, 100, 100, nil, nil, kTextAlignment.center)
 	local boatImage = gfx.image.new("images/Boat")
+	local change, _ = pd.getCrankChange()
+	waterHeightDiff -= change/10
+	waterHeightDiff = Clamp(waterHeightDiff, -20, 20)
 	boatImage:setInverted(true)
-	boatImage:drawScaled(230, 160 + 5 * math.sin(1.7 * pd.getElapsedTime()), 1)
+	boatImage:drawScaled(230 + 30 * math.sin(0.3*pd.getElapsedTime()), waterHeightDiff + 160 + 5 * math.sin(1.7 * pd.getElapsedTime()), 1)
 	gfx.setColor(gfx.kColorBlack)
-	gfx.fillRect(0, 190 + 5 * math.sin(1.7 * pd.getElapsedTime()), 400, 240)
+	gfx.fillRect(0, waterHeightDiff + 190 + 5 * math.sin(1.7 * pd.getElapsedTime()), 400, 240)
 	gfx.unlockFocus()
 end
