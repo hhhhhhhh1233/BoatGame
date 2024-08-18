@@ -13,28 +13,42 @@ function OptionBox:init(prompt, options, callback)
 	self:setIgnoresDrawOffset(true)
 	self:moveTo(200, 120)
 
-	local lengthOfLongestString = string.len(options[1])
+	local promptWidth, promptHeight = gfx.getTextSize(prompt)
+	print(self.width, self.height)
 
+	local widthOfLongestString, heightOfLongestString = gfx.getTextSize(options[1])
 	for i = 2, #options do
-		if string.len(options[i]) > lengthOfLongestString then
-			lengthOfLongestString = string.len(options[i])
+		local width, height = gfx.getTextSize(options[i])
+
+		if width > widthOfLongestString then
+			widthOfLongestString = width
+		end
+
+		if height > widthOfLongestString then
+			widthOfLongestString = height
 		end
 	end
-	print(lengthOfLongestString)
+
+	local cellPadding = 2
+	local contentInset = 10
+
+	self.gridWidth = math.max((cellPadding * 2 + contentInset * 2 + widthOfLongestString) * #options, promptWidth)
+	self.gridHeight = math.max((cellPadding * 2 + contentInset * 2 + heightOfLongestString), promptHeight)
+	self.gridWidth = Clamp(self.gridWidth, 200, 360)
+	self.gridHeight = Clamp(self.gridHeight, 100, 180)
 
 	self.options = options
 	self.prompt = prompt
 	self.callback = callback
 
-	self:setImage(gfx.image.new(340, 180))
+	self:setImage(gfx.image.new(self.gridWidth, self.gridHeight))
 
-	-- NOTE: FULLSCREEN - PADDING * 2 - CONTENT INSET * 2 - CELL PADDING * 2 * NUMBER OF CELLS
-	self.grid = pd.ui.gridview.new((400 - 60 - 20 - 4 * #options)/#options, 60)
+	self.grid = pd.ui.gridview.new((self.gridWidth - contentInset * 2 - cellPadding * 2 * #options)/#options, self.gridHeight - contentInset * 6 - cellPadding * 2)
 
 	self.grid:setNumberOfColumns(#options)
 	self.grid:setNumberOfRows(1)
-	self.grid:setCellPadding(2, 2, 2, 2)
-	self.grid:setContentInset(10, 10, 10, 10)
+	self.grid:setCellPadding(cellPadding, cellPadding, cellPadding, cellPadding)
+	self.grid:setContentInset(contentInset, contentInset, contentInset*5, contentInset)
 
 	self.grid.backgroundImage = gfx.nineSlice.new("images/WallResizable", 5, 5, 6, 6)
 
@@ -45,14 +59,14 @@ function OptionBox:init(prompt, options, callback)
 	function self.grid:drawCell(section, row, column, selected, x, y, width, height)
 		gfx.setColor(gfx.kColorBlack)
 		if selected then
-			ns:drawInRect(x, y + 50, width, height)
+			ns:drawInRect(x, y, width, height)
 			gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
 			gfx.setColor(gfx.kColorWhite)
-			gfx.drawTextInRect(option[column], x, y + (height/2) - 10 + 50 + 3 * math.sin(7 * pd.getElapsedTime()), width, height, nil, nil, kTextAlignment.center)
+			gfx.drawTextInRect(option[column], x, y + (height/2) - 10 + 2 * math.sin(7 * pd.getElapsedTime()), width, height, nil, nil, kTextAlignment.center)
 		else
-			nsBlank:drawInRect(x, y + 50, width, height)
+			nsBlank:drawInRect(x, y, width, height)
 			gfx.setImageDrawMode(gfx.kDrawModeCopy)
-			gfx.drawTextInRect(option[column], x, y + (height/2) - 10 + 50, width, height, nil, nil, kTextAlignment.center)
+			gfx.drawTextInRect(option[column], x, y + (height/2) - 10, width, height, nil, nil, kTextAlignment.center)
 		end
 	end
 	self:setZIndex(10)
@@ -74,9 +88,9 @@ function OptionBox:update()
 	end
 
 	gfx.lockFocus(self:getImage())
-	self.grid:drawInRect(0, 0, 400 - 60, 240 - 60)
+	self.grid:drawInRect(0, 0, self.gridWidth, self.gridHeight)
 	gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
-	gfx.drawTextAligned(self.prompt, (400 - 60)/2, 20, kTextAlignment.center)
+	gfx.drawTextAligned(self.prompt, (self.gridWidth)/2, 20, kTextAlignment.center)
 	-- self.grid:drawInRect(30 - offsetX, 30 - offsetY, 400 - 60, 240 - 60)
 	gfx.unlockFocus()
 end

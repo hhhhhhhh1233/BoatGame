@@ -24,7 +24,7 @@ end
 
 function Coin:pickup(player)
 	player.coins += 1
-	OptionBox("Accept coin?", {"Yes", "No", "IDK", "I HATE YOU"}, function (index, selectionString)
+	OptionBox("Accept coin?", {"Yes", "No", "IDK"}, function (index, selectionString)
 		TextBox("Huh. So you're the type of person to\n like "..selectionString.."? A number "..index.." kinda guy?", 10)
 	end)
 	player.GameManager:collect(self.entity.iid)
