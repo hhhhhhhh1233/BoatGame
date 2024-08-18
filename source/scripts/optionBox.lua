@@ -13,13 +13,24 @@ function OptionBox:init(prompt, options, callback)
 	self:setIgnoresDrawOffset(true)
 	self:moveTo(200, 120)
 
+	local lengthOfLongestString = string.len(options[1])
+
+	for i = 2, #options do
+		if string.len(options[i]) > lengthOfLongestString then
+			lengthOfLongestString = string.len(options[i])
+		end
+	end
+	print(lengthOfLongestString)
+
 	self.options = options
 	self.prompt = prompt
 	self.callback = callback
 
 	self:setImage(gfx.image.new(340, 180))
 
+	-- NOTE: FULLSCREEN - PADDING * 2 - CONTENT INSET * 2 - CELL PADDING * 2 * NUMBER OF CELLS
 	self.grid = pd.ui.gridview.new((400 - 60 - 20 - 4 * #options)/#options, 60)
+
 	self.grid:setNumberOfColumns(#options)
 	self.grid:setNumberOfRows(1)
 	self.grid:setCellPadding(2, 2, 2, 2)
