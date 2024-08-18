@@ -197,6 +197,16 @@ function Player:update()
 	end
 
 	if self.bActive then
+
+		if pd.buttonIsPressed(pd.kButtonUp) then
+			local CollidingWithSprites = self:overlappingSprites()
+			for _, sprite in ipairs(CollidingWithSprites) do
+				if sprite.interact then
+					sprite:interact(self)
+				end
+			end
+		end
+
 		if self.AbilityA then
 			self:AbilityA(pd.kButtonA)
 		end

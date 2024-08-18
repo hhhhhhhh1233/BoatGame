@@ -39,6 +39,7 @@ import "scripts/entities/companion"
 import "scripts/entities/companionPickup"
 import "scripts/entities/wheelPickup"
 import "scripts/entities/diagonalEnemy"
+import "scripts/entities/theUpgrader"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -314,6 +315,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = CompanionPickup(entityX, entityY, entity)
 		elseif entityName == "WheelPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = WheelPickup(entityX, entityY, entity)
+		elseif entityName == "TheUpgrader" then
+			self.entityInstance[entity.iid] = TheUpgrader(entityX, entityY)
 		end
 	end
 

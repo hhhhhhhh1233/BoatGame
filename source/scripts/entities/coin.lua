@@ -3,6 +3,7 @@ local gfx <const> = pd.graphics
 
 import "scripts/popupTextBox"
 import "scripts/textBox"
+import "scripts/optionBox"
 
 class('Coin').extends(gfx.sprite)
 
@@ -23,6 +24,9 @@ end
 
 function Coin:pickup(player)
 	player.coins += 1
+	OptionBox("Accept coin?", {"Yes", "No", "IDK", "I HATE YOU"}, function (index, selectionString)
+		TextBox("Huh. So you're the type of person to\n like "..selectionString.."? A number "..index.." kinda guy?", 10)
+	end)
 	player.GameManager:collect(self.entity.iid)
 	self.entity.fields.Collected = true
 	self.coinPickupSound:play()
