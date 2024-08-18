@@ -38,7 +38,7 @@ function SaveGame(GameManager)
 		["PlayerPassiveAbilityName"] = GameManager.player.PassiveAbilityName,
 
 		-- Water
-		["WaterHeight"] = GameManager.water.Height,
+		["WaterHeight"] = GameManager.water.height,
 		["WaterWheelCollected"] = GameManager.water.bActive,
 
 		-- Collected Entities (Coins, Abilities, and the Water Wheel)

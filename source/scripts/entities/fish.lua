@@ -44,7 +44,7 @@ function Fish:update()
 		end
 	end
 	self.PhysicsComponent:addForce(0, 5)
-	if self.y > self.water.Height then
+	if self.y > self.water.height then
 		self.PhysicsComponent:addForce(0, -5)
 		if math.abs(self.desiredHeight - self.y) > 10 then
 			self.PhysicsComponent:addForce(0, 0.2*(self.desiredHeight - self.y)/math.abs(self.desiredHeight - self.y))
