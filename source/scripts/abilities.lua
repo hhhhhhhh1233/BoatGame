@@ -5,6 +5,8 @@ import "scripts/explosion"
 import "CoreLibs/frameTimer"
 import "scripts/entities/animatedSprite"
 
+local jumpTierValues = {8, 12, 30, 50}
+
 function Jump(player, button)
 	-- TODO: Add a cooldown
 	if pd.buttonJustPressed(button) and player.bCanJump then
@@ -16,7 +18,7 @@ function Jump(player, button)
 			end
 			if sprite.PhysicsComponent then
 				local blastDirection = (sprite.PhysicsComponent.position - pd.geometry.vector2D.new(player.x, player.y + 25)):normalized()
-				sprite.PhysicsComponent:addForce(blastDirection * 12)
+				sprite.PhysicsComponent:addForce(blastDirection * jumpTierValues[player.weaponTier])
 			end
 		end
 		player.bCanJump = false
@@ -28,12 +30,60 @@ function Jump(player, button)
 	end
 end
 
+local shootTierValues = {5, 15, 25, 40}
+
 function Shoot(player, button)
 	if pd.buttonJustPressed(button) then
-		Bullet(player.PhysicsComponent.position.x + player.direction * 40, player.PhysicsComponent.position.y - 5, pd.geometry.vector2D.new(player.direction * 15, 0))
+		Bullet(player.PhysicsComponent.position.x + player.direction * 40, player.PhysicsComponent.position.y - 5, pd.geometry.vector2D.new(player.direction * shootTierValues[player.weaponTier], 0))
 	end
 end
 
+local explosionMeterMax = 100
+local explosionMeterRateOfIncrease = 3
+local explosionMeterRateOfDecrease = 1
+local anim = gfx.animation.loop.new(100, gfx.imagetable.new("images/Fire"), true)
+
+local overheatTierValues = {5, 15, 30, 60}
+
+function Overheat(player, button)
+	if pd.buttonIsPressed(button) then
+		anim:draw(player.x - 32, player.y - 32 - 20)
+		local sprites = gfx.sprite.querySpritesInRect(player.x - 25, player.y - 25 - 8, 50, 50)
+		-- NOTE: Visualization of the damage zone
+		-- gfx.fillRect(player.x - 25, player.y - 25 - 8, 50, 50)
+		for _, value in ipairs(sprites) do
+			if not value:isa(Player) and value.Damage then
+				value:Damage(overheatTierValues[player.weaponTier], 10)
+			end
+			if value.ignite then
+				value:ignite()
+			end
+		end
+		player.explosionMeter += explosionMeterRateOfIncrease
+	else
+		player.explosionMeter -= explosionMeterRateOfDecrease
+	end
+
+	player.explosionMeter = Clamp(player.explosionMeter, 0, explosionMeterMax)
+
+	if player.explosionMeter > 0 then
+		if player.explosionMeter == explosionMeterMax then
+			player.explosionMeter = 0
+			Explosion(player.x, player.y)
+		end
+
+		local img = gfx.image.new(100, 100)
+		gfx.lockFocus(img)
+		gfx.setColor(gfx.kColorBlack)
+		gfx.fillRect(0, 0, 34, 14)
+		gfx.setColor(gfx.kColorWhite)
+		gfx.fillRect(1, 1, 32, 12)
+		gfx.setColor(gfx.kColorBlack)
+		gfx.fillRect(2, 2, (player.explosionMeter/explosionMeterMax) * 30, 10)
+		gfx.unlockFocus()
+		UISystem:drawImageAtWorld(img, player.x - 17, player.y - 50)
+	end
+end
 function Submerge(player)
 	if player.bUnderwater then
 		player.PhysicsComponent.bBuoyant = false
@@ -102,50 +152,6 @@ function Invisibility(player, button)
 	end
 end
 
-local explosionMeterMax = 100
-local explosionMeterRateOfIncrease = 3
-local explosionMeterRateOfDecrease = 1
-local anim = gfx.animation.loop.new(100, gfx.imagetable.new("images/Fire"), true)
-
-function Overheat(player, button)
-	if pd.buttonIsPressed(button) then
-		anim:draw(player.x - 32, player.y - 32 - 20)
-		local sprites = gfx.sprite.querySpritesInRect(player.x - 25, player.y - 25 - 8, 50, 50)
-		-- NOTE: Visualization of the damage zone
-		-- gfx.fillRect(player.x - 25, player.y - 25 - 8, 50, 50)
-		for _, value in ipairs(sprites) do
-			if not value:isa(Player) and value.Damage then
-				value:Damage(10, 10)
-			end
-			if value.ignite then
-				value:ignite()
-			end
-		end
-		player.explosionMeter += explosionMeterRateOfIncrease
-	else
-		player.explosionMeter -= explosionMeterRateOfDecrease
-	end
-
-	player.explosionMeter = Clamp(player.explosionMeter, 0, explosionMeterMax)
-
-	if player.explosionMeter > 0 then
-		if player.explosionMeter == explosionMeterMax then
-			player.explosionMeter = 0
-			Explosion(player.x, player.y)
-		end
-
-		local img = gfx.image.new(100, 100)
-		gfx.lockFocus(img)
-		gfx.setColor(gfx.kColorBlack)
-		gfx.fillRect(0, 0, 34, 14)
-		gfx.setColor(gfx.kColorWhite)
-		gfx.fillRect(1, 1, 32, 12)
-		gfx.setColor(gfx.kColorBlack)
-		gfx.fillRect(2, 2, (player.explosionMeter/explosionMeterMax) * 30, 10)
-		gfx.unlockFocus()
-		UISystem:drawImageAtWorld(img, player.x - 17, player.y - 50)
-	end
-end
 
 Abilities = {
 	["Jump"] = Jump,

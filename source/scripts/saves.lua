@@ -36,6 +36,7 @@ function SaveGame(GameManager)
 		["PlayerAbilityAName"] = GameManager.player.AbilityAName,
 		["PlayerAbilityBName"] = GameManager.player.AbilityBName,
 		["PlayerPassiveAbilityName"] = GameManager.player.PassiveAbilityName,
+		["PlayerWeaponTier"] = GameManager.player.weaponTier,
 
 		-- Water
 		["WaterHeight"] = GameManager.water.height,

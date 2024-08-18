@@ -26,7 +26,25 @@ function TheUpgrader:update()
 end
 
 function TheUpgrader:interact(player)
-	player.coins += 100
-	TextBox("*UPGRADER*\nHere, take some cash", 10)
+	local upgradeCost = 5 ^ (player.weaponTier + 1)
 	self.coinPickupSound:play()
+	if player.weaponTier == 4 then
+		TextBox("*UPGRADER*\nYou've already reached your full potential\n_sorry_", 10)
+	else
+		TextBox("*UPGRADER*\nI can upgrade your weapon for only "..upgradeCost.."g", 10, function ()
+			OptionBox("Upgrade weapon?", {"Yes ("..upgradeCost.."g)", "No"}, function (index, selectionString)
+				if selectionString == "No" then
+					TextBox("*UPGRADER*\nAlright then, I'll still be here.", 10)
+				else
+					if player.coins >= upgradeCost then
+						TextBox("*UPGRADER*\nYour weapon is more powerful now,\n careful not to hurt yourself", 10)
+						player.coins -= upgradeCost
+						player.weaponTier += 1
+					else
+						TextBox("You don't have enough money,\n _come back when you're a little richer_", 10)
+					end
+				end
+			end)
+		end)
+	end
 end

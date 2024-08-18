@@ -66,6 +66,7 @@ function Scene:init(bLoadGame)
 		self.collectedEntities = SaveData["CollectedEntities"]
 		self.player = Player(SaveData["PlayerX"], SaveData["PlayerY"], gfx.image.new("images/Boat"), 5, self)
 		self.player.coins = SaveData["PlayerCoins"]
+		self.player.weaponTier = SaveData["PlayerWeaponTier"]
 		self.player.lightRadius = SaveData["PlayerLightRadius"]
 		self.player.bCanTeleport = SaveData["PlayerCanTeleport"]
 		self.player.bHasWheels = SaveData["PlayerHasWheels"]

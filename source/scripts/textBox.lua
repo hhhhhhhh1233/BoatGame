@@ -3,9 +3,10 @@ local gfx <const> = playdate.graphics
 
 class('TextBox').extends(gfx.sprite)
 
-function TextBox:init(message, padding)
+function TextBox:init(message, padding, callback)
 	SceneManager.player.bActive = false
 	SceneManager.water.bActive = false
+	self.callback = callback
 
 	self.width, self.height = gfx.getTextSize(message)
 	local sprite = gfx.image.new(self.width + 2 * padding + 20, self.height + 2 * padding + 20)
@@ -61,5 +62,8 @@ function TextBox:update()
 		SceneManager.player.bActive = true
 		SceneManager.water.bActive = true
 		self:remove()
+		if self.callback then
+			self.callback()
+		end
 	end
 end

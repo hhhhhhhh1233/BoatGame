@@ -38,6 +38,7 @@ function Player:init(x, y, image, speed, gameManager)
 
 	self.direction = 1
 
+	self.weaponTier = 1
 	self.AbilityA = nil
 	self.AbilityB = nil
 	self.PassiveAbility = nil
@@ -45,6 +46,7 @@ function Player:init(x, y, image, speed, gameManager)
 	self.hurtSound = pd.sound.sampleplayer.new("sounds/Hurt")
 
 	self.lightRadius = 50
+
 
 	self.boatImage = gfx.image.new("images/Boat")
 	self.wheelBoatImage = gfx.image.new("images/WheelBoat")

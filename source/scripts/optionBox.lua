@@ -33,7 +33,7 @@ function OptionBox:init(prompt, options, callback)
 	local contentInset = 10
 
 	self.gridWidth = math.max((cellPadding * 2 + contentInset * 2 + widthOfLongestString) * #options, promptWidth)
-	self.gridHeight = math.max((cellPadding * 2 + contentInset * 2 + heightOfLongestString), promptHeight)
+	self.gridHeight = (cellPadding * 2 + contentInset * 2 + heightOfLongestString) +  promptHeight * 1.7
 	self.gridWidth = Clamp(self.gridWidth, 200, 360)
 	self.gridHeight = Clamp(self.gridHeight, 100, 180)
 
@@ -43,12 +43,13 @@ function OptionBox:init(prompt, options, callback)
 
 	self:setImage(gfx.image.new(self.gridWidth, self.gridHeight))
 
-	self.grid = pd.ui.gridview.new((self.gridWidth - contentInset * 2 - cellPadding * 2 * #options)/#options, self.gridHeight - contentInset * 6 - cellPadding * 2)
+	-- NOTE: This is the size of each cell
+	self.grid = pd.ui.gridview.new((self.gridWidth - contentInset * 2 - cellPadding * 2 * #options)/#options, self.gridHeight - contentInset * 2 - (promptHeight + 15) - cellPadding * 2)
 
 	self.grid:setNumberOfColumns(#options)
 	self.grid:setNumberOfRows(1)
 	self.grid:setCellPadding(cellPadding, cellPadding, cellPadding, cellPadding)
-	self.grid:setContentInset(contentInset, contentInset, contentInset*5, contentInset)
+	self.grid:setContentInset(contentInset, contentInset, contentInset + promptHeight + 15, contentInset)
 
 	self.grid.backgroundImage = gfx.nineSlice.new("images/WallResizable", 5, 5, 6, 6)
 
@@ -59,13 +60,13 @@ function OptionBox:init(prompt, options, callback)
 	function self.grid:drawCell(section, row, column, selected, x, y, width, height)
 		gfx.setColor(gfx.kColorBlack)
 		if selected then
-			ns:drawInRect(x, y, width, height)
-			gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
+			nsBlank:drawInRect(x, y, width, height)
+			gfx.setImageDrawMode(gfx.kDrawModeCopy)
 			gfx.setColor(gfx.kColorWhite)
 			gfx.drawTextInRect(option[column], x, y + (height/2) - 10 + 2 * math.sin(7 * pd.getElapsedTime()), width, height, nil, nil, kTextAlignment.center)
 		else
-			nsBlank:drawInRect(x, y, width, height)
-			gfx.setImageDrawMode(gfx.kDrawModeCopy)
+			ns:drawInRect(x, y, width, height)
+			gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
 			gfx.drawTextInRect(option[column], x, y + (height/2) - 10, width, height, nil, nil, kTextAlignment.center)
 		end
 	end

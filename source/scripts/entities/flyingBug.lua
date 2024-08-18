@@ -34,7 +34,7 @@ end
 function FlyingBug:update()
 	self:setImage(self.animationLoop:image())
 
-	local bUnderwater = self.y > self.water.Height
+	local bUnderwater = self.y > self.water.height
 	if bUnderwater then
 		self.hive:removeBug()
 		self:remove()
