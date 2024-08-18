@@ -356,7 +356,6 @@ end
 function Scene:UpdatePhysicsComponentsBuoyancy()
 	for i = 1, #self.ActivePhysicsComponents do
 		if self.ActivePhysicsComponents[i].bBuoyant then
-			printTable(self.water)
 			local buoyancyForces = CalculateBuoyancy(self.water.height, self.ActivePhysicsComponents[i].position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
 			self.ActivePhysicsComponents[i]:addForce(buoyancyForces)
 		end

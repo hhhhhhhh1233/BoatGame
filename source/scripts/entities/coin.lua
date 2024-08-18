@@ -2,6 +2,7 @@ local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 import "scripts/popupTextBox"
+import "scripts/textBox"
 
 class('Coin').extends(gfx.sprite)
 

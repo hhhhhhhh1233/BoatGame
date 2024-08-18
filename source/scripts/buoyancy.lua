@@ -26,3 +26,8 @@ function CalculateBuoyancy(WaterHeight, ObjectHeight, WaterPixelDepth, WaterDrag
 	-- Applies buoyancy forces and water drag
 	return vector2D_new(0, -DirectionToWaterNormalized * buoyantForce * displacementNum + -physicsObject.velocity.y * WaterDrag)
 end
+
+function EntityIsCollisionGroup(object, group)
+	return (((2^(group - 1)) & object:getGroupMask()) ~= 0)
+end
+

@@ -39,7 +39,7 @@ local sprite_update <const> = gfx.sprite.update
 local update_timers <const> = pd.timer.updateTimers
 
 UISystem = UI()
-local SceneManager
+SceneManager = nil
 
 math.randomseed(playdate.getSecondsSinceEpoch())
 

@@ -133,10 +133,6 @@ function Player:addForce(Force)
 	self.PhysicsComponent:addForce(Force)
 end
 
-function EntityIsCollisionGroup(object, group)
-	return (((2^(group - 1)) & object:getGroupMask()) ~= 0)
-end
-
 function Player:collisionResponse(other)
 	if EntityIsCollisionGroup(other, COLLISION_GROUPS.WALL) then
 		if other:isa(BlockedWall) and other:clear(self) then
