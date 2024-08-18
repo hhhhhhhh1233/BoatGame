@@ -4,45 +4,59 @@ local gfx <const> = pd.graphics
 class('PhysicsComponent').extends()
 
 function PhysicsComponent:init(x, y, maxVelocity)
-	self.Position = pd.geometry.vector2D.new(x, y)
-	self.Velocity = pd.geometry.vector2D.new(0, 0)
-	self.Acceleration = pd.geometry.vector2D.new(0, 0)
+	self.position = pd.geometry.vector2D.new(x, y)
+	self.velocity = pd.geometry.vector2D.new(0, 0)
+	self.acceleration = pd.geometry.vector2D.new(0, 0)
 	self.maxVelocity = maxVelocity
 	self.bBuoyant = true
 end
 
-function PhysicsComponent:AddForce(Force, ForceY)
+function PhysicsComponent:addForce(Force, ForceY)
 	if not ForceY then
 		local Force = Force
-		self.Acceleration += Force
+		self.acceleration += Force
 	else
 		local force = pd.geometry.vector2D.new(Force, ForceY)
-		self.Acceleration += force
+		self.acceleration += force
 	end
 end
 
-function PhysicsComponent:Move(owner)
+function PhysicsComponent:setPosition(x, y)
+	self.x = x
+	self.y = y
+	self.position = pd.geometry.vector2D.new(x, y)
+end
+
+function PhysicsComponent:setVelocity(x, y)
+	self.velocity = pd.geometry.vector2D.new(x, y)
+end
+
+function PhysicsComponent:setAcceleration(x, y)
+	self.velocity = pd.geometry.vector2D.new(x, y)
+end
+
+function PhysicsComponent:move(owner)
 	-- Updates all of the info before moving it
-	self.Velocity += self.Acceleration
-	self.Position += self.Velocity
-	self.Acceleration = pd.geometry.vector2D.new(0, 0)
+	self.velocity += self.acceleration
+	self.position += self.velocity
+	self.acceleration = pd.geometry.vector2D.new(0, 0)
 
 	-- Limits the velocity of the object
-	if self.Velocity:magnitude() > self.maxVelocity then
-		self.Velocity = self.Velocity:normalized() * self.maxVelocity
+	if self.velocity:magnitude() > self.maxVelocity then
+		self.velocity = self.velocity:normalized() * self.maxVelocity
 	end
 
 	-- Actual moving
 	local collisions, length
-	self.Position.x, self.Position.y, collisions, length = owner:moveWithCollisions(self.Position.x, self.Position.y)
+	self.position.x, self.position.y, collisions, length = owner:moveWithCollisions(self.position.x, self.position.y)
 
 	-- If we hit a surface set our velocity in that direction to zero 
 	-- NOTE: Kinda hacky, this only works so long as there are no slanted normals, feel free to be more cleverer
 	for i = 1, length, 1 do
 		-- NOTE: So that it allows the player to go through overlap collisions
 		if collisions[i].type ~= 2 then
-			self.Velocity.x *= math.abs(collisions[i].normal.y)
-			self.Velocity.y *= math.abs(collisions[i].normal.x)
+			self.velocity.x *= math.abs(collisions[i].normal.y)
+			self.velocity.y *= math.abs(collisions[i].normal.x)
 		end
 	end
 

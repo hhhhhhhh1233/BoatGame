@@ -24,5 +24,5 @@ function CalculateBuoyancy(WaterHeight, ObjectHeight, WaterPixelDepth, WaterDrag
 	local displacementNum = Clamp(abs(DirectionToWater), 0, WaterPixelDepth) / WaterPixelDepth
 
 	-- Applies buoyancy forces and water drag
-	return vector2D_new(0, -DirectionToWaterNormalized * buoyantForce * displacementNum + -physicsObject.Velocity.y * WaterDrag)
+	return vector2D_new(0, -DirectionToWaterNormalized * buoyantForce * displacementNum + -physicsObject.velocity.y * WaterDrag)
 end

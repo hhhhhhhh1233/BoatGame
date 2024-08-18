@@ -101,7 +101,8 @@ function Scene:init(bLoadGame)
 		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1)
 		self:goToLevel("Level_0")
 		self.player:moveTo(self.SpawnX, self.SpawnY)
-		self.player.PhysicsComponent.Position = pd.geometry.vector2D.new(self.SpawnX, self.SpawnY)
+		-- self.player.PhysicsComponent.Position = pd.geometry.vector2D.new(self.SpawnX, self.SpawnY)
+		self.player.PhysicsComponent:setPosition(self.SpawnX, self.SpawnY)
 		self.water.Height = self.SpawnY
 	end
 end
@@ -125,7 +126,8 @@ function Scene:enterRoom(door, direction)
 	end
 
 	-- Set their velocity to zero
-	self.player.PhysicsComponent.Velocity = playdate.geometry.vector2D.new(0, 0)
+	self.player.PhysicsComponent:setVelocity(0, 0)
+	-- self.player.PhysicsComponent.Velocity = playdate.geometry.vector2D.new(0, 0)
 
 	-- Set the water height and width
 	local level_rect = LDtk.get_rect(door.TargetLevel)
@@ -134,7 +136,7 @@ function Scene:enterRoom(door, direction)
 	elseif direction == "SOUTH" then
 		self.water.Height = 32
 		self.player.y = 32
-		self.player.PhysicsComponent.Position.y = 32
+		self.player.PhysicsComponent.position.y = 32
 	else
 		self.water.Height += yDiff
 	end
@@ -147,7 +149,8 @@ function Scene:enterRoom(door, direction)
 	self:goToLevel(door.TargetLevel)
 
 	-- NOTE: Updating the physics component's position so it doesn't get confused and freak out
-	self.player.PhysicsComponent.Position = playdate.geometry.vector2D.new(self.player.x, self.player.y)
+	-- self.player.PhysicsComponent.position = playdate.geometry.vector2D.new(self.player.x, self.player.y)
+	self.player.PhysicsComponent:setPosition(self.player.x, self.player.y)
 
 	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
 	self.camera:center(self.player.x, self.player.y)
@@ -353,8 +356,9 @@ end
 function Scene:UpdatePhysicsComponentsBuoyancy()
 	for i = 1, #self.ActivePhysicsComponents do
 		if self.ActivePhysicsComponents[i].bBuoyant then
-			local buoyancyForces = CalculateBuoyancy(self.water.Height, self.ActivePhysicsComponents[i].Position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
-			self.ActivePhysicsComponents[i]:AddForce(buoyancyForces)
+			local buoyancyForces = CalculateBuoyancy(self.water.Height, self.ActivePhysicsComponents[i].position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
+			print(buoyancyForces)
+			self.ActivePhysicsComponents[i]:addForce(buoyancyForces)
 		end
 	end
 end

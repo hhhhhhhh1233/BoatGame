@@ -15,22 +15,22 @@ function Jump(player, button)
 				sprite:Damage(10, 10)
 			end
 			if sprite.PhysicsComponent then
-				local blastDirection = (sprite.PhysicsComponent.Position - pd.geometry.vector2D.new(player.x, player.y + 25)):normalized()
-				sprite.PhysicsComponent:AddForce(blastDirection * 12)
+				local blastDirection = (sprite.PhysicsComponent.position - pd.geometry.vector2D.new(player.x, player.y + 25)):normalized()
+				sprite.PhysicsComponent:addForce(blastDirection * 12)
 			end
 		end
 		player.bCanJump = false
 		pd.frameTimer.new(30, function ()
 			player.bCanJump = true
 		end)
-		-- player:AddForce(pd.geometry.vector2D.new(0, -8))
+		-- player:addForce(pd.geometry.vector2D.new(0, -8))
 		-- player.bCanJump = false
 	end
 end
 
 function Shoot(player, button)
 	if pd.buttonJustPressed(button) then
-		Bullet(player.PhysicsComponent.Position.x + player.direction * 40, player.PhysicsComponent.Position.y - 5, pd.geometry.vector2D.new(player.direction * 15, 0))
+		Bullet(player.PhysicsComponent.position.x + player.direction * 40, player.PhysicsComponent.position.y - 5, pd.geometry.vector2D.new(player.direction * 15, 0))
 	end
 end
 
@@ -39,12 +39,12 @@ function Submerge(player)
 		player.PhysicsComponent.bBuoyant = false
 		if playdate.buttonIsPressed(playdate.kButtonDown) then
 			-- player:AddForce(playdate.geometry.vector2D.new(0, 0.5 * player.Speed))
-			player.PhysicsComponent.Velocity.y = player.Speed
+			player.PhysicsComponent.velocity.y = player.Speed
 		elseif playdate.buttonIsPressed(playdate.kButtonUp) then
 			-- player:AddForce(playdate.geometry.vector2D.new(0, -0.5 * player.Speed))
-			player.PhysicsComponent.Velocity.y = -player.Speed
+			player.PhysicsComponent.velocity.y = -player.Speed
 		else
-			player.PhysicsComponent.Velocity.y = 0
+			player.PhysicsComponent.velocity.y = 0
 		end
 	end
 end
@@ -58,7 +58,7 @@ end
 
 function Dive(player, button)
 	if pd.buttonJustPressed(button) then
-		player.PhysicsComponent.Velocity = pd.geometry.vector2D.new(0, 300)
+		player.PhysicsComponent.velocity = pd.geometry.vector2D.new(0, 300)
 		player.bCanDive = false
 	end
 end

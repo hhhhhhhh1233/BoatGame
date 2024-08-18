@@ -43,17 +43,17 @@ function Fish:update()
 			player = sprite
 		end
 	end
-	self.PhysicsComponent:AddForce(0, 5)
+	self.PhysicsComponent:addForce(0, 5)
 	if self.y > self.water.Height then
-		self.PhysicsComponent:AddForce(0, -5)
+		self.PhysicsComponent:addForce(0, -5)
 		if math.abs(self.desiredHeight - self.y) > 10 then
-			self.PhysicsComponent:AddForce(0, 0.2*(self.desiredHeight - self.y)/math.abs(self.desiredHeight - self.y))
+			self.PhysicsComponent:addForce(0, 0.2*(self.desiredHeight - self.y)/math.abs(self.desiredHeight - self.y))
 		end
-		self.PhysicsComponent:AddForce(0, 0.4*-self.PhysicsComponent.Velocity.y)
+		self.PhysicsComponent:addForce(0, 0.4*-self.PhysicsComponent.velocity.y)
 	end
 
 	if player then
-		self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(player.x - self.x, player.y - self.y):normalized())
+		self.PhysicsComponent:addForce(pd.geometry.vector2D.new(player.x - self.x, player.y - self.y):normalized())
 		sprites = gfx.sprite.querySpritesInRect(self.x - 16, self.y - 16, 64, 64)
 		for _, sprite in ipairs(sprites) do
 			if sprite:isa(Player) then
@@ -61,14 +61,14 @@ function Fish:update()
 			end
 		end
 	else
-		self.PhysicsComponent:AddForce(1 * self.direction, 0)
-		self.PhysicsComponent:AddForce(0.4*-self.PhysicsComponent.Velocity.x, 0)
+		self.PhysicsComponent:addForce(1 * self.direction, 0)
+		self.PhysicsComponent:addForce(0.4*-self.PhysicsComponent.velocity.x, 0)
 		local col = gfx.sprite.querySpritesAlongLine(self.x, self.y, self.x + self.direction*50, self.y)
 		if #col > 1 then
 			self.direction *= -1
 		end
 	end
-	local c, n = self.PhysicsComponent:Move(self)
+	local c, n = self.PhysicsComponent:move(self)
 	for i = 1, n do
 		if c[i].type ~= 2 then
 			if c[i].normal.y == -1 then

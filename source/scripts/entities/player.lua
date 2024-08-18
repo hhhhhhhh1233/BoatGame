@@ -91,9 +91,9 @@ function Player:Respawn()
 		self:moveTo(self.GameManager.SpawnX, self.GameManager.SpawnY)
 	end
 
-	self.PhysicsComponent.Position = pd.geometry.vector2D.new(self.x, self.y)
-	self.PhysicsComponent.Velocity = pd.geometry.vector2D.new(0, 0)
-	self.PhysicsComponent.Acceleration = pd.geometry.vector2D.new(0, 0)
+	self.PhysicsComponent.position = pd.geometry.vector2D.new(self.x, self.y)
+	self.PhysicsComponent.velocity = pd.geometry.vector2D.new(0, 0)
+	self.PhysicsComponent.acceleration = pd.geometry.vector2D.new(0, 0)
 
 	self.GameManager.water.Height = self.y
 
@@ -129,8 +129,8 @@ function Player:DrawHealthBar()
 	UISystem:drawImageAt(img, 300, -40)
 end
 
-function Player:AddForce(Force)
-	self.PhysicsComponent:AddForce(Force)
+function Player:addForce(Force)
+	self.PhysicsComponent:addForce(Force)
 end
 
 function EntityIsCollisionGroup(object, group)
@@ -166,19 +166,19 @@ end
 
 function Player:update()
 	-- NOTE: Since I moved the center of the player it checks from the bottom of the sprite, should probably check from center
-	if self.x > self.GameManager.LevelWidth and self.PhysicsComponent.Velocity.x > 0 then
+	if self.x > self.GameManager.LevelWidth and self.PhysicsComponent.velocity.x > 0 then
 		self.GameManager:enterRoom(self.Door, "EAST")
-	elseif self.x < 0 and self.PhysicsComponent.Velocity.x < 0 then
+	elseif self.x < 0 and self.PhysicsComponent.velocity.x < 0 then
 		self.GameManager:enterRoom(self.Door, "WEST")
-	elseif self.y - 16 > self.GameManager.LevelHeight and self.PhysicsComponent.Velocity.y > 0 then
+	elseif self.y - 16 > self.GameManager.LevelHeight and self.PhysicsComponent.velocity.y > 0 then
 		self.GameManager:enterRoom(self.Door, "SOUTH")
-	elseif self.y - 16 < 0 and self.PhysicsComponent.Velocity.y < 0 then
+	elseif self.y - 16 < 0 and self.PhysicsComponent.velocity.y < 0 then
 		self.GameManager:enterRoom(self.Door, "NORTH")
 	end
 
 	local Gravity = 0.5
 	if self.PhysicsComponent.bBuoyant or not self.bUnderwater then
-		self.PhysicsComponent:AddForce(0, Gravity)
+		self.PhysicsComponent:addForce(0, Gravity)
 	end
 
 	-- NOTE: This whole chunk just determines which sprite the player should be, it kind of disgusts me but I can't really think of anything better. Maybe implement a state machine and let that sort out sprite changing?
@@ -216,7 +216,7 @@ function Player:update()
 		if self.bCanTeleport then
 			if pd.buttonJustPressed(pd.kButtonLeft) and self.bDoubleLeft then
 				self:moveBy(-64, 0)
-				self.PhysicsComponent.Position = pd.geometry.vector2D.new(self.x, self.y)
+				self.PhysicsComponent.position = pd.geometry.vector2D.new(self.x, self.y)
 			elseif pd.buttonJustPressed(pd.kButtonLeft) then
 				self.bDoubleLeft = true
 				pd.frameTimer.performAfterDelay(5, function ()
@@ -226,7 +226,7 @@ function Player:update()
 
 			if pd.buttonJustPressed(pd.kButtonRight) and self.bDoubleRight then
 				self:moveBy(64, 0)
-				self.PhysicsComponent.Position = pd.geometry.vector2D.new(self.x, self.y)
+				self.PhysicsComponent.position = pd.geometry.vector2D.new(self.x, self.y)
 			elseif pd.buttonJustPressed(pd.kButtonRight) then
 				self.bDoubleRight = true
 				pd.frameTimer.performAfterDelay(5, function ()
@@ -239,7 +239,7 @@ function Player:update()
 			self:setImageFlip(gfx.kImageFlippedX)
 			self.direction = -1
 			if ((not self.bGrounded) or self.bHasWheels) then
-				self.PhysicsComponent.Velocity.x = -self.Speed
+				self.PhysicsComponent.velocity.x = -self.Speed
 			end
 		end
 
@@ -247,18 +247,18 @@ function Player:update()
 			self.direction = 1
 			self:setImageFlip(gfx.kImageUnflipped)
 			if ((not self.bGrounded) or self.bHasWheels) then
-				self.PhysicsComponent.Velocity.x = self.Speed
+				self.PhysicsComponent.velocity.x = self.Speed
 			end
 		end
 	end
 
-	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(-self.PhysicsComponent.Velocity.x * 0.2, 0))
+	self.PhysicsComponent:addForce(-self.PhysicsComponent.velocity.x * 0.2, 0)
 
 	self.bGrounded = false
-	local collisions, _ = self.PhysicsComponent:Move(self)
+	local collisions, _ = self.PhysicsComponent:move(self)
 	self.bUnderwater = self.y > self.GameManager.water.Height
 	for i = 1, #collisions do
-		if collisions[i].normal.y == 1 and self.y - 32 > self.GameManager.water.Height and self.PhysicsComponent.Velocity.y == 0 then
+		if collisions[i].normal.y == 1 and self.y - 32 > self.GameManager.water.Height and self.PhysicsComponent.velocity.y == 0 then
 			self:Damage(30, 10)
 		end
 		if collisions[i].normal.y == -1 and collisions[i].other:getGroupMask() == 8 then

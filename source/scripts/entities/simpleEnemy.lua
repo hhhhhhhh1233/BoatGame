@@ -23,7 +23,7 @@ end
 
 function SimpleEnemy:update()
 	self.position = pd.geometry.vector2D.new(self.x, self.y)
-	local toPlayer = self.player.PhysicsComponent.Position - self.position
+	local toPlayer = self.player.PhysicsComponent.position - self.position
 	if toPlayer:magnitude() < 250 then
 		gfx.drawLine(self.x, self.y, self.player.x, self.player.y)
 		if self.cooldown >= 15 and not self.player.invisible then

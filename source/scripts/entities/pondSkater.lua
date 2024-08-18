@@ -20,7 +20,7 @@ function PondSkater:init(x, y, water)
 		if i == 0 then
 			i += 1
 		end
-		self.PhysicsComponent:AddForce(-i*math.random(3, 8), 0)
+		self.PhysicsComponent:addForce(-i*math.random(3, 8), 0)
 		self:setImage(self.kickImage)
 		pd.frameTimer.performAfterDelay(5, function()
 			self:setImage(self.stillImage)
@@ -34,25 +34,25 @@ function PondSkater:update()
 	self.bOnSurface = math.abs(self.y + 16 - self.water.Height) < 2
 
 	-- Gravity
-	self.PhysicsComponent:AddForce(0, 0.5)
+	self.PhysicsComponent:addForce(0, 0.5)
 
 	-- TODO: This is probably a dumb way for this to be, fix it PLEASE
 	if self.bOnSurface then
 		self.PhysicsComponent.Acceleration.y = 0
-		self.PhysicsComponent.Velocity.y = 0
+		self.PhysicsComponent.velocity.y = 0
 	elseif self.bUnderwater then
 		self.PhysicsComponent.Acceleration.y = 0
 		local upwardsForce = Clamp((self.y + 16 - self.water.Height), 0, 10)
 		print(upwardsForce)
-		self.PhysicsComponent:AddForce(0, -upwardsForce)
+		self.PhysicsComponent:addForce(0, -upwardsForce)
 		-- Upwards Friction
-		self.PhysicsComponent:AddForce(0, 0.02*-self.PhysicsComponent.Velocity.y)
-		self.PhysicsComponent.Velocity.y = 0
+		self.PhysicsComponent:addForce(0, 0.02*-self.PhysicsComponent.velocity.y)
+		self.PhysicsComponent.velocity.y = 0
 	end
 
 	-- Sideways Friction
-	self.PhysicsComponent:AddForce(0.06*-self.PhysicsComponent.Velocity.x, 0)
-	self.PhysicsComponent:Move(self)
+	self.PhysicsComponent:addForce(0.06*-self.PhysicsComponent.velocity.x, 0)
+	self.PhysicsComponent:move(self)
 
 	local collisions = gfx.sprite.querySpritesInRect(self.x - 10, self.y - 10, 30, 30)
 	gfx.fillRect(self.x - 16, self.y - 10, 30, 30)
@@ -60,7 +60,7 @@ function PondSkater:update()
 	for _, collision in ipairs(collisions) do
 		if collision:isa(Player) then
 			collision:Damage(10, 10)
-			collision.PhysicsComponent:AddForce((collision.x - self.x), (collision.y - self.y - 16))
+			collision.PhysicsComponent:addForce((collision.x - self.x), (collision.y - self.y - 16))
 		end
 	end
 end

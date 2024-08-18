@@ -24,8 +24,8 @@ function Mine:init(x, y, image)
 end
 
 function Mine:update()
-	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(0, 0.5))
-	self.PhysicsComponent:Move(self)
+	self.PhysicsComponent:addForce(0, 0.5)
+	self.PhysicsComponent:move(self)
 end
 
 function Mine:Damage(amount)

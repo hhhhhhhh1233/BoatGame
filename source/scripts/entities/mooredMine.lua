@@ -28,19 +28,19 @@ function MooredMine:init(x, y, image, entity)
 end
 
 function MooredMine:update()
-	self.PhysicsComponent:AddForce(pd.geometry.vector2D.new(0, 0.5))
-	self.PhysicsComponent:Move(self)
+	self.PhysicsComponent:addForce(pd.geometry.vector2D.new(0, 0.5))
+	self.PhysicsComponent:move(self)
 
-	local chainPixelLength = (self.PhysicsComponent.Position - self.AttachmentPoint):magnitude()
+	local chainPixelLength = (self.PhysicsComponent.position - self.AttachmentPoint):magnitude()
 	local chainChunks = math.ceil(chainPixelLength / 16)
 	for i = 0, chainChunks do
 		self.chainImage:draw(self.x - 8, self.y + 12 + i * 16)
 	end
 
-	if (self.AttachmentPoint - self.PhysicsComponent.Position):magnitude() > self.ChainLength then
-		self.PhysicsComponent.Position = self.AttachmentPoint + pd.geometry.vector2D.new(0, -self.ChainLength)
-		self.x, self.y = self.PhysicsComponent.Position.x, self.PhysicsComponent.Position.y
-		self.PhysicsComponent.Velocity = pd.geometry.vector2D.new(0, 0)
+	if (self.AttachmentPoint - self.PhysicsComponent.position):magnitude() > self.ChainLength then
+		self.PhysicsComponent.position = self.AttachmentPoint + pd.geometry.vector2D.new(0, -self.ChainLength)
+		self.x, self.y = self.PhysicsComponent.position.x, self.PhysicsComponent.position.y
+		self.PhysicsComponent.velocity = pd.geometry.vector2D.new(0, 0)
 	end
 end
 
