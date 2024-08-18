@@ -95,7 +95,7 @@ function Player:Respawn()
 	self.PhysicsComponent.velocity = pd.geometry.vector2D.new(0, 0)
 	self.PhysicsComponent.acceleration = pd.geometry.vector2D.new(0, 0)
 
-	self.GameManager.water.Height = self.y
+	self.GameManager.water.height = self.y
 
 	self.GameManager.camera:center(self.x, self.y)
 
@@ -256,9 +256,9 @@ function Player:update()
 
 	self.bGrounded = false
 	local collisions, _ = self.PhysicsComponent:move(self)
-	self.bUnderwater = self.y > self.GameManager.water.Height
+	self.bUnderwater = self.y > self.GameManager.water.height
 	for i = 1, #collisions do
-		if collisions[i].normal.y == 1 and self.y - 32 > self.GameManager.water.Height and self.PhysicsComponent.velocity.y == 0 then
+		if collisions[i].normal.y == 1 and self.y - 22 > self.GameManager.water.height and self.PhysicsComponent.velocity.y == 0 then
 			self:Damage(30, 10)
 		end
 		if collisions[i].normal.y == -1 and collisions[i].other:getGroupMask() == 8 then
