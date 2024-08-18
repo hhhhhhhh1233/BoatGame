@@ -13,12 +13,10 @@ function BlockedWall:init(x, y, entity)
 	local cWidth, cHeight = coinImage:getSize()
 	coinImage:draw(self.entity.size.width / 2 - cWidth / 2 + 1, self.entity.size.height / 2 - cHeight / 2 + 1)
 	gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
-	-- gfx.drawText(self.entity.fields.Cost, 10, 10)
-	gfx.drawTextInRect(tostring(self.entity.fields.Cost), 1, self.entity.size.height / 2 + 8, self.entity.size.width, self.entity.size.height, nil, nil, kTextAlignment.center)
+	gfx.drawTextInRect(tostring(self.entity.fields.Cost), 0, self.entity.size.height / 2 + 16, self.entity.size.width, self.entity.size.height, nil, nil, kTextAlignment.center)
 	gfx.unlockFocus()
 	self:moveTo(x, y)
 	self:setCenter(0, 0)
-	-- self:setImage(gfx.image.new("images/BlockedWall"))
 	self:setImage(sprite)
 	self:setCollideRect(0, 0, self.entity.size.width, self.entity.size.height)
 	self:setGroups(COLLISION_GROUPS.WALL)
@@ -35,7 +33,7 @@ function BlockedWall:clear(player)
 		self:remove()
 		return true
 	else
-		print("Come back when you're a little, mmm... richer")
+		TextBox("Insufficient funds, needs "..self.entity.fields.Cost, 10)
 		return false
 	end
 end
