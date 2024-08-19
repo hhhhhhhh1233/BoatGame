@@ -43,6 +43,7 @@ import "scripts/entities/wheelPickup"
 import "scripts/entities/diagonalEnemy"
 import "scripts/entities/theUpgrader"
 import "scripts/entities/theTall"
+import "scripts/entities/sightDoor"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -277,6 +278,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = ProjectileButton(entityX, entityY, entity)
 		elseif entityName == "Door" then
 			self.entityInstance[entity.iid] = Door(entityX, entityY, entity, self.entityInstance[entity.fields.Button.entityIid])
+		elseif entityName == "SightDoor" then
+			self.entityInstance[entity.iid] = SightDoor(entityX, entityY, entity, self.entityInstance[entity.fields.Detector.entityIid])
 		elseif entityName == "SavePoint" then
 			self.entityInstance[entity.iid] = SavePoint(entityX, entityY, self.currentLevel)
 		elseif entityName == "Foliage" then
