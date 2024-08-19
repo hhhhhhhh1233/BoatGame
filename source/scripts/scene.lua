@@ -33,6 +33,8 @@ import "scripts/entities/laser"
 import "scripts/entities/movingPlatform"
 import "scripts/entities/darkness"
 import "scripts/entities/lantern"
+import "scripts/entities/interest"
+import "scripts/entities/submerge"
 import "scripts/entities/teleportationDevice"
 import "scripts/entities/companionDoor"
 import "scripts/entities/companion"
@@ -40,6 +42,7 @@ import "scripts/entities/companionPickup"
 import "scripts/entities/wheelPickup"
 import "scripts/entities/diagonalEnemy"
 import "scripts/entities/theUpgrader"
+import "scripts/entities/theTall"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -69,6 +72,8 @@ function Scene:init(bLoadGame)
 		self.player.weaponTier = SaveData["PlayerWeaponTier"]
 		self.player.lightRadius = SaveData["PlayerLightRadius"]
 		self.player.bCanTeleport = SaveData["PlayerCanTeleport"]
+		self.player.bHasInterest = SaveData["PlayerHasInterest"]
+		self.player.bHasSubmerge = SaveData["PlayerHasSubmerge"]
 		self.player.bHasWheels = SaveData["PlayerHasWheels"]
 		self.player.AbilityA = Abilities[SaveData["PlayerAbilityAName"]]
 		self.player.AbilityAName = SaveData["PlayerAbilityAName"]
@@ -308,6 +313,10 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Darkness(self.player)
 		elseif entityName == "Lantern" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = Lantern(entityX, entityY, entity)
+		elseif entityName == "Interest" and not self.collectedEntities[entity.iid] then
+			self.entityInstance[entity.iid] = Interest(entityX, entityY, entity)
+		elseif entityName == "Submerge" and not self.collectedEntities[entity.iid] then
+			self.entityInstance[entity.iid] = Submerge(entityX, entityY, entity)
 		elseif entityName == "TeleportationDevice" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = TeleportationDevice(entityX, entityY, entity)
 		elseif entityName == "CompanionDoor" and not self.collectedEntities[entity.iid] then
@@ -318,6 +327,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = WheelPickup(entityX, entityY, entity)
 		elseif entityName == "TheUpgrader" then
 			self.entityInstance[entity.iid] = TheUpgrader(entityX, entityY)
+		elseif entityName == "TheTall" then
+			self.entityInstance[entity.iid] = TheTall(entityX, entityY)
 		end
 	end
 

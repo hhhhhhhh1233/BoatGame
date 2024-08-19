@@ -32,7 +32,7 @@ function OptionBox:init(prompt, options, callback)
 	local cellPadding = 2
 	local contentInset = 10
 
-	self.gridWidth = math.max((cellPadding * 2 + contentInset * 2 + widthOfLongestString) * #options, promptWidth)
+	self.gridWidth = math.max((cellPadding * 2 + contentInset * 2 + (widthOfLongestString + 30)) * #options, promptWidth)
 	self.gridHeight = (cellPadding * 2 + contentInset * 2 + heightOfLongestString) +  promptHeight * 1.7
 	self.gridWidth = Clamp(self.gridWidth, 200, 360)
 	self.gridHeight = Clamp(self.gridHeight, 100, 180)

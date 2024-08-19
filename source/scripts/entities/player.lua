@@ -198,6 +198,11 @@ function Player:update()
 		end
 	end
 
+
+	if self.bHasInterest then
+		DoInterest(self)
+	end
+
 	if self.bActive then
 
 		if pd.buttonIsPressed(pd.kButtonUp) then
@@ -257,6 +262,10 @@ function Player:update()
 			if ((not self.bGrounded) or self.bHasWheels) then
 				self.PhysicsComponent.velocity.x = self.Speed
 			end
+		end
+
+		if self.bHasSubmerge then
+			DoSubmerge(self)
 		end
 	end
 

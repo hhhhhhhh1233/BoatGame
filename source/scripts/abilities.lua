@@ -84,7 +84,7 @@ function Overheat(player, button)
 		UISystem:drawImageAtWorld(img, player.x - 17, player.y - 50)
 	end
 end
-function Submerge(player)
+function DoSubmerge(player)
 	if player.bUnderwater then
 		player.PhysicsComponent.bBuoyant = false
 		if playdate.buttonIsPressed(playdate.kButtonDown) then
@@ -100,7 +100,7 @@ function Submerge(player)
 end
 
 
-function Interest(player)
+function DoInterest(player)
 	player.coins *= 1.0005
 	player.Health *= 1.0005
 	player.Health = Clamp(player.Health, 0, 100)
@@ -156,8 +156,6 @@ end
 Abilities = {
 	["Jump"] = Jump,
 	["Shoot"] = Shoot,
-	["Submerge"] = Submerge,
-	["Interest"] = Interest,
 	["Dive"] = Dive,
 	["Overheat"] = Overheat,
 	["ChangeSize"] = ChangeSize,

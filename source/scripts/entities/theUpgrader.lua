@@ -31,8 +31,8 @@ function TheUpgrader:interact(player)
 	if player.weaponTier == 4 then
 		TextBox("*UPGRADER*\nYou've already reached your full potential\n_sorry_", 10)
 	else
-		TextBox("*UPGRADER*\nI can upgrade your weapon for only "..upgradeCost.."g", 10, function ()
-			OptionBox("Upgrade weapon?", {"Yes ("..upgradeCost.."g)", "No"}, function (index, selectionString)
+		TextBox("*UPGRADER*\nI can upgrade your weapon for only "..math.floor(upgradeCost).."g", 10, function ()
+			OptionBox("Upgrade weapon?", {"Yes ("..math.floor(upgradeCost).."g)", "No"}, function (index, selectionString)
 				if selectionString == "No" then
 					TextBox("*UPGRADER*\nAlright then, I'll still be here.", 10)
 				else

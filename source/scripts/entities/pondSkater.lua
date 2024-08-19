@@ -13,7 +13,7 @@ function PondSkater:init(x, y, water)
 	self:setGroups(COLLISION_GROUPS.ENEMY)
 	self:setCollidesWithGroups(COLLISION_GROUPS.WALL, COLLISION_GROUPS.WATER)
 	self:add()
-	self:moveWithCollisions(x, self.water.Height - 30)
+	self:moveWithCollisions(x, self.water.height - 30)
 	self.PhysicsComponent = PhysicsComponent(self.x, self.y, 20)
 	self.moveTimer = pd.frameTimer.performAfterDelay(150, function ()
 		local i = math.random(-1, 1)
@@ -30,19 +30,19 @@ function PondSkater:init(x, y, water)
 end
 
 function PondSkater:update()
-	self.bUnderwater = self.y + 16 > self.water.Height
-	self.bOnSurface = math.abs(self.y + 16 - self.water.Height) < 2
+	self.bUnderwater = self.y + 16 > self.water.height
+	self.bOnSurface = math.abs(self.y + 16 - self.water.height) < 2
 
 	-- Gravity
 	self.PhysicsComponent:addForce(0, 0.5)
 
 	-- TODO: This is probably a dumb way for this to be, fix it PLEASE
 	if self.bOnSurface then
-		self.PhysicsComponent.Acceleration.y = 0
+		self.PhysicsComponent.acceleration.y = 0
 		self.PhysicsComponent.velocity.y = 0
 	elseif self.bUnderwater then
-		self.PhysicsComponent.Acceleration.y = 0
-		local upwardsForce = Clamp((self.y + 16 - self.water.Height), 0, 10)
+		self.PhysicsComponent.acceleration.y = 0
+		local upwardsForce = Clamp((self.y + 16 - self.water.height), 0, 10)
 		print(upwardsForce)
 		self.PhysicsComponent:addForce(0, -upwardsForce)
 		-- Upwards Friction
