@@ -14,7 +14,6 @@ function OptionBox:init(prompt, options, callback)
 	self:moveTo(200, 120)
 
 	local promptWidth, promptHeight = gfx.getTextSize(prompt)
-	print(self.width, self.height)
 
 	local widthOfLongestString, heightOfLongestString = gfx.getTextSize(options[1])
 	for i = 2, #options do

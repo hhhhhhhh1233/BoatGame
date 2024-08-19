@@ -10,7 +10,7 @@ function TextBox:init(message, padding, callback)
 
 	self.width, self.height = gfx.getTextSize(message)
 	local sprite = gfx.image.new(self.width + 2 * padding + 20, self.height + 2 * padding + 20)
-	local sprite2
+	local sprite2 = sprite:copy()
 
 	self:setZIndex(100)
 	self:setIgnoresDrawOffset(true)
@@ -20,8 +20,6 @@ function TextBox:init(message, padding, callback)
 	gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
 	gfx.drawTextAligned(message, self.width / 2 + padding, padding, kTextAlignment.center)
 	gfx.unlockFocus()
-
-	sprite2 = sprite:copy()
 
 	-- DRAW BUTTON UP ON FIRST SPRITE
 	gfx.lockFocus(sprite)

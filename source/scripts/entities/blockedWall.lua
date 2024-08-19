@@ -27,11 +27,15 @@ end
 
 function BlockedWall:clear(player)
 	if player.coins >= self.entity.fields.Cost then
-		player.coins -= self.entity.fields.Cost
-		self.entity.fields.Cleared = true
-		player.GameManager:collect(self.entity.iid)
-		self:remove()
-		return true
+		OptionBox("Delete block for "..self.entity.fields.Cost.."g", {"Yes ("..self.entity.fields.Cost..")", "No"}, function (index, option)
+			if index == 1 then
+				player.coins -= self.entity.fields.Cost
+				self.entity.fields.Cleared = true
+				player.GameManager:collect(self.entity.iid)
+				self:remove()
+			end
+		end)
+		return false
 	else
 		TextBox("Insufficient funds, needs "..self.entity.fields.Cost, 10)
 		return false
