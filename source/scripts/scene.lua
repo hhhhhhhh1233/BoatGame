@@ -39,11 +39,14 @@ import "scripts/entities/teleportationDevice"
 import "scripts/entities/companionDoor"
 import "scripts/entities/companion"
 import "scripts/entities/companionPickup"
+import "scripts/entities/invisibilityDevice"
 import "scripts/entities/wheelPickup"
 import "scripts/entities/diagonalEnemy"
 import "scripts/entities/theUpgrader"
 import "scripts/entities/theTall"
+import "scripts/entities/bigMan"
 import "scripts/entities/sightDoor"
+import "scripts/entities/bouncingSpike"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -75,6 +78,7 @@ function Scene:init(bLoadGame)
 		self.player.bCanTeleport = SaveData["PlayerCanTeleport"]
 		self.player.bHasInterest = SaveData["PlayerHasInterest"]
 		self.player.bHasSubmerge = SaveData["PlayerHasSubmerge"]
+		self.player.bHasInvisibilityDevice = SaveData["PlayerHasInvisibilityDevice"]
 		self.player.bHasWheels = SaveData["PlayerHasWheels"]
 		self.player.AbilityA = Abilities[SaveData["PlayerAbilityAName"]]
 		self.player.AbilityAName = SaveData["PlayerAbilityAName"]
@@ -240,6 +244,7 @@ function Scene:goToLevel(level_name)
 	for _, entity in ipairs(LDtk.get_entities(level_name)) do
 		local entityX, entityY = entity.position.x, entity.position.y
 		local entityName = entity.name
+		print(entityName)
 
 		if entityName == "RoomTransition" then
 			self.entityInstance[entity.iid] = DoorTrigger(entityX, entityY, entity)
@@ -326,12 +331,19 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = CompanionDoor(entityX, entityY, entity)
 		elseif entityName == "CompanionPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = CompanionPickup(entityX, entityY, entity)
+		elseif entityName == "InvisibilityDevice" and not self.collectedEntities[entity.iid] then
+			print("Here")
+			self.entityInstance[entity.iid] = InvisibilityDevice(entityX, entityY, entity)
 		elseif entityName == "WheelPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = WheelPickup(entityX, entityY, entity)
 		elseif entityName == "TheUpgrader" then
 			self.entityInstance[entity.iid] = TheUpgrader(entityX, entityY)
 		elseif entityName == "TheTall" then
 			self.entityInstance[entity.iid] = TheTall(entityX, entityY)
+		elseif entityName == "BigMan" then
+			self.entityInstance[entity.iid] = BigMan(entityX, entityY)
+		elseif entityName == "BouncingSpike" then
+			self.entityInstance[entity.iid] = BouncingSpike(entityX, entityY, entity)
 		end
 	end
 

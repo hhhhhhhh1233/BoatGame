@@ -67,6 +67,7 @@ function OptionBox:init(prompt, options, callback)
 			ns:drawInRect(x, y, width, height)
 			gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
 			gfx.drawTextInRect(option[column], x, y + (height/2) - 10, width, height, nil, nil, kTextAlignment.center)
+			gfx.setImageDrawMode(gfx.kDrawModeCopy)
 		end
 	end
 	self:setZIndex(10)

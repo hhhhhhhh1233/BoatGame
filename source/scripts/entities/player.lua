@@ -203,6 +203,10 @@ function Player:update()
 		DoInterest(self)
 	end
 
+	if self.bHasInvisibilityDevice then
+		Invisibility(self, pd.kButtonB)
+	end
+
 	if self.bActive then
 
 		if pd.buttonIsPressed(pd.kButtonUp) then
@@ -218,13 +222,14 @@ function Player:update()
 			self:AbilityA(pd.kButtonA)
 		end
 
-		if self.AbilityB then
-			self:AbilityB(pd.kButtonB)
-		end
+		-- NOTE: I've decided that only the weapon will be an optionable upgrade, otherwise there is just too much world to make, I still sort of like the idea but it would need more work than I'm willing to implement
+		-- if self.AbilityB then
+		-- 	self:AbilityB(pd.kButtonB)
+		-- end
 
-		if self.PassiveAbility then
-			self:PassiveAbility()
-		end
+		-- if self.PassiveAbility then
+		-- 	self:PassiveAbility()
+		-- end
 
 		if self.bCanTeleport then
 			if pd.buttonJustPressed(pd.kButtonLeft) and self.bDoubleLeft then
