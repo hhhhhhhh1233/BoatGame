@@ -9,8 +9,13 @@ function BouncingSpike:init(x, y, entity)
 	self:setCollideRect(0, 0, 32, 32)
 	self:setGroups(COLLISION_GROUPS.ENEMY)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.WALL, COLLISION_GROUPS.TRIGGER, COLLISION_GROUPS.PLAYER})
-	self:setImageFlip(gfx.kImageFlippedX)
-	self.flipped = 1
+	if self.entity.fields.Facing == "Left" then
+		self:setImageFlip(gfx.kImageFlippedX)
+		self.flipped = 1
+	else
+		self:setImageFlip(gfx.kImageUnflipped)
+		self.flipped = -1
+	end
 	self.yVel = 2
 	self.xVel = 5
 	self.range = 700
@@ -21,7 +26,7 @@ function BouncingSpike:collisionResponse(other)
 	if other:isa(DoorTrigger) then
 		return "slide"
 	elseif other:isa(Player) then
-		other:Damage(20, 10)
+		other:Damage(30, 10)
 		return "overlap"
 	elseif EntityIsCollisionGroup(other, COLLISION_GROUPS.WALL) then
 		return "slide"

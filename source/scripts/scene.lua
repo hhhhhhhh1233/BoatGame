@@ -65,11 +65,9 @@ function Scene:init(bLoadGame)
 	end
 
 	self.ui = UISystem
-	self.songManager = pd.sound.fileplayer.new("sounds/songs/Roaming")
-	self.songManager:play(0)
+	self.songManager = pd.sound.fileplayer.new()
 	local SaveData = LoadGame(self)
 	if bLoadGame then
-		print("LOADING SAVE")
 		self.collectedEntities = SaveData["CollectedEntities"]
 		self.player = Player(SaveData["PlayerX"], SaveData["PlayerY"], gfx.image.new("images/Boat"), 5, self)
 		self.player.coins = SaveData["PlayerCoins"]
@@ -113,7 +111,6 @@ function Scene:init(bLoadGame)
 		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1)
 		self:goToLevel("Level_0")
 		self.player:moveTo(self.SpawnX, self.SpawnY)
-		-- self.player.PhysicsComponent.Position = pd.geometry.vector2D.new(self.SpawnX, self.SpawnY)
 		self.player.PhysicsComponent:setPosition(self.SpawnX, self.SpawnY)
 		self.water.height = self.SpawnY
 	end
@@ -160,8 +157,6 @@ function Scene:enterRoom(door, direction)
 
 	self:goToLevel(door.TargetLevel)
 
-	-- NOTE: Updating the physics component's position so it doesn't get confused and freak out
-	-- self.player.PhysicsComponent.position = playdate.geometry.vector2D.new(self.player.x, self.player.y)
 	self.player.PhysicsComponent:setPosition(self.player.x, self.player.y)
 
 	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
@@ -196,6 +191,13 @@ end
 function Scene:goToLevel(level_name)
 
 	self.currentLevel = level_name
+	if self.entityInstance then
+		for _, entity in pairs(self.entityInstance) do
+			if entity.destructor then
+				entity:destructor()
+			end
+		end
+	end
 	gfx.sprite.removeAll()
 	self.player:add()
 	self.water:add()
@@ -241,10 +243,10 @@ function Scene:goToLevel(level_name)
 
 	-- NOTE: Spawns in all of the entities in the level
 	-- TODO: THE DOOR RELIES ON THE BUTTON BEING ALREADY SPAWNED IN; MAKE IT SO THAT THE ORDER DOESN'T MATTER
+	local lateEntities = {}
 	for _, entity in ipairs(LDtk.get_entities(level_name)) do
 		local entityX, entityY = entity.position.x, entity.position.y
 		local entityName = entity.name
-		print(entityName)
 
 		if entityName == "RoomTransition" then
 			self.entityInstance[entity.iid] = DoorTrigger(entityX, entityY, entity)
@@ -282,9 +284,9 @@ function Scene:goToLevel(level_name)
 		elseif entityName == "ProjectileButton" then
 			self.entityInstance[entity.iid] = ProjectileButton(entityX, entityY, entity)
 		elseif entityName == "Door" then
-			self.entityInstance[entity.iid] = Door(entityX, entityY, entity, self.entityInstance[entity.fields.Button.entityIid])
+			table.insert(lateEntities, entity)
 		elseif entityName == "SightDoor" then
-			self.entityInstance[entity.iid] = SightDoor(entityX, entityY, entity, self.entityInstance[entity.fields.Detector.entityIid])
+			table.insert(lateEntities, entity)
 		elseif entityName == "SavePoint" then
 			self.entityInstance[entity.iid] = SavePoint(entityX, entityY, self.currentLevel)
 		elseif entityName == "Foliage" then
@@ -332,7 +334,6 @@ function Scene:goToLevel(level_name)
 		elseif entityName == "CompanionPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = CompanionPickup(entityX, entityY, entity)
 		elseif entityName == "InvisibilityDevice" and not self.collectedEntities[entity.iid] then
-			print("Here")
 			self.entityInstance[entity.iid] = InvisibilityDevice(entityX, entityY, entity)
 		elseif entityName == "WheelPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = WheelPickup(entityX, entityY, entity)
@@ -344,6 +345,17 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = BigMan(entityX, entityY)
 		elseif entityName == "BouncingSpike" then
 			self.entityInstance[entity.iid] = BouncingSpike(entityX, entityY, entity)
+		end
+	end
+
+	-- NOTE: This processes the entities that are dependent on other entities, so that those entities really exist by this point
+	for _, entity in ipairs(lateEntities) do
+		local entityX, entityY = entity.position.x, entity.position.y
+		local entityName = entity.name
+		if entityName == "Door" then
+			self.entityInstance[entity.iid] = Door(entityX, entityY, entity, self.entityInstance[entity.fields.Button.entityIid])
+		elseif entityName == "SightDoor" then
+			self.entityInstance[entity.iid] = SightDoor(entityX, entityY, entity, self.entityInstance[entity.fields.Detector.entityIid])
 		end
 	end
 

@@ -16,7 +16,8 @@ function SightDoor:init(x, y, entity, detector)
 	gfx.unlockFocus()
 	self:setImage(sprite)
 	self:setGroups(COLLISION_GROUPS.WALL)
-	self:setCollideRect(0, 0, self.entity.size.width, self.entity.size.height)
+	self:setVisible(false)
+	self:clearCollideRect()
 	self:add()
 end
 

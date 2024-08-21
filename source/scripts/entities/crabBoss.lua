@@ -41,3 +41,8 @@ end
 function CrabBoss:update()
 	print("Here")
 end
+
+function CrabBoss:destructor()
+	self.songManager:setFinishCallback()
+	self.songManager:stop()
+end

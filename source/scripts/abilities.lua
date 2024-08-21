@@ -6,15 +6,17 @@ import "CoreLibs/frameTimer"
 import "scripts/entities/animatedSprite"
 
 local jumpTierValues = {8, 12, 30, 50}
+local jumpDamageValues = {10, 20, 40, 60}
 
 function Jump(player, button)
 	-- TODO: Add a cooldown
 	if pd.buttonJustPressed(button) and player.bCanJump then
 		local sprites = gfx.sprite.querySpritesInRect(player.x - 25, player.y - 8, 50, 50)
+		-- TODO: Add a poof animation
 		gfx.fillRect(player.x - 25, player.y - 8, 50, 50)
 		for _, sprite in ipairs(sprites) do
 			if not sprite:isa(Player) and sprite.Damage then
-				sprite:Damage(10, 10)
+				sprite:Damage(jumpDamageValues[player.weaponTier], 10)
 			end
 			if sprite.PhysicsComponent then
 				local blastDirection = (sprite.PhysicsComponent.position - pd.geometry.vector2D.new(player.x, player.y + 25)):normalized()
@@ -31,19 +33,20 @@ function Jump(player, button)
 end
 
 local shootTierValues = {5, 15, 25, 40}
+local shootDamageValues = {10, 20, 40, 60}
 
 function Shoot(player, button)
 	if pd.buttonJustPressed(button) then
-		Bullet(player.PhysicsComponent.position.x + player.direction * 40, player.PhysicsComponent.position.y - 5, pd.geometry.vector2D.new(player.direction * shootTierValues[player.weaponTier], 0))
+		Bullet(player.PhysicsComponent.position.x + player.direction * 40, player.PhysicsComponent.position.y - 5, pd.geometry.vector2D.new(player.direction * shootTierValues[player.weaponTier], 0), shootDamageValues[player.weaponTier])
 	end
 end
 
 local explosionMeterMax = 100
-local explosionMeterRateOfIncrease = 3
-local explosionMeterRateOfDecrease = 1
 local anim = gfx.animation.loop.new(100, gfx.imagetable.new("images/Fire"), true)
 
 local overheatTierValues = {5, 15, 30, 60}
+local overheatIncreaseValues = {3, 2, 1, 0.5}
+local overheatDecreaseValues = {1, 2, 3, 4}
 
 function Overheat(player, button)
 	if pd.buttonIsPressed(button) then
@@ -59,9 +62,9 @@ function Overheat(player, button)
 				value:ignite()
 			end
 		end
-		player.explosionMeter += explosionMeterRateOfIncrease
+		player.explosionMeter += overheatIncreaseValues[player.weaponTier]
 	else
-		player.explosionMeter -= explosionMeterRateOfDecrease
+		player.explosionMeter -= overheatDecreaseValues[player.weaponTier]
 	end
 
 	player.explosionMeter = Clamp(player.explosionMeter, 0, explosionMeterMax)
@@ -160,4 +163,13 @@ Abilities = {
 	["Overheat"] = Overheat,
 	["ChangeSize"] = ChangeSize,
 	["Invisibility"] = Invisibility
+}
+
+AbilityExplanation = {
+	["Jump"] = "Press A to set off an\nexplosion beneath yourself",
+	["Shoot"] = "Press A to shoot a bullet that can\nflip switches or do damage",
+	["Dive"] = "Dive beneath the tide",
+	["Overheat"] = "Hold A to momentarily make\nyour vessel extremely hot",
+	["ChangeSize"] = "Hold B and tap up or down to alter your size",
+	["Invisibility"] = "Hold B to turn yourself\ninvisble to enemies and others"
 }

@@ -12,7 +12,7 @@ function SwayGun:init(x, y, entity)
 	self:setImage(gfx.image.new("images/GunBody"))
 	self.mountImage = gfx.image.new("images/GunMount")
 
-	if not entity.fields.FacingLeft then
+	if entity.fields.Facing == "Right" then
 		self:setImageFlip(gfx.kImageFlippedX)
 		self.inverted = -1
 	else

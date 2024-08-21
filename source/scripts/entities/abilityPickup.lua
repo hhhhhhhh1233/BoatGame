@@ -19,7 +19,11 @@ function AbilityPickup:pickup(player)
 	player.GameManager:collect(self.entity.iid)
 	self.entity.fields.PickedUp = true
 
-	AbilitySelectionMenu(player, self.entity)
+	OptionBox("Pick a weapon", self.entity.fields.Abilities, function (index, string)
+		PopupTextBox(AbilityExplanation[string], 4000, 10)
+		player.setAbilityA(player, Abilities[string], string)
+	end)
+	-- AbilitySelectionMenu(player, self.entity)
 
 	self:remove()
 end
