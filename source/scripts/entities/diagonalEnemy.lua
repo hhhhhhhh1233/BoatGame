@@ -9,8 +9,10 @@ function DiagonalEnemy:init(x, y, entity)
 	self:setCollideRect(0, 0, 16, 16)
 	self:setGroups(COLLISION_GROUPS.ENEMY)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.WALL, COLLISION_GROUPS.TRIGGER, COLLISION_GROUPS.PLAYER})
-	self.xVel = entity.fields.xVelocity
-	self.yVel = entity.fields.yVelocity
+	local velocity = pd.geometry.vector2D.new(entity.fields.Direction.cx * 16 - x, entity.fields.Direction.cy * 16 - y)
+	velocity:normalize()
+	self.xVel = velocity.x * entity.fields.Speed
+	self.yVel = velocity.y * entity.fields.Speed
 	self:add()
 end
 
@@ -18,7 +20,7 @@ function DiagonalEnemy:collisionResponse(other)
 	if other:isa(DoorTrigger) then
 		return "slide"
 	elseif other:isa(Player) then
-		other:Damage(20, 10)
+		other:Damage(20, 30)
 		return "overlap"
 	else
 		return "slide"
