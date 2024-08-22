@@ -8,8 +8,12 @@ function HealthComponent:init(owner, maxHealth, iframes)
 	self.health = maxHealth
 	self.iframes = iframes
 
+	self.hurtSound = pd.sound.sampleplayer.new("sounds/EnemyHurt")
+
 	self.damageCallback = (function ()
 		self.owner:getImage():setInverted(true)
+		self.hurtSound:setRate(math.random(7, 13)/10)
+		self.hurtSound:play()
 		pd.frameTimer.performAfterDelay(5, function ()
 			self.owner:getImage():setInverted(false)
 		end)
@@ -20,6 +24,7 @@ function HealthComponent:init(owner, maxHealth, iframes)
 	end)
 
 	self.invincible = false
+
 end
 
 function HealthComponent:damage(amount)
