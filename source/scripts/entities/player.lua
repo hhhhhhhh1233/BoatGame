@@ -252,6 +252,20 @@ function Player:update()
 			end
 		end
 
+		if self.bGrounded and not self.bHasWheels then
+			if pd.buttonJustPressed(pd.kButtonLeft) then
+				self:setImageFlip(gfx.kImageFlippedX)
+				self.direction = -1
+				self.PhysicsComponent:addForce(-1, 0)
+			end
+
+			if pd.buttonJustPressed(pd.kButtonRight) then
+				self:setImageFlip(gfx.kImageUnflipped)
+				self.direction = 1
+				self.PhysicsComponent:addForce(1, 0)
+			end
+		end
+
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:setImageFlip(gfx.kImageFlippedX)
 			self.direction = -1
