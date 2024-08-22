@@ -294,7 +294,7 @@ function Player:update()
 	self.bUnderwater = self.y > self.GameManager.water.height
 	for i = 1, #collisions do
 		if collisions[i].normal.y == 1 and self.y - 22 > self.GameManager.water.height and self.PhysicsComponent.velocity.y == 0 then
-			self:Damage(30, 10)
+			self:Damage(10, 15)
 		end
 		if collisions[i].normal.y == -1 and collisions[i].other:getGroupMask() == 8 then
 			self.bGrounded = true
