@@ -39,7 +39,7 @@ function Laser:update()
 	if point then
 		gfx.drawLine(self.x, self.y, point.x, point.y)
 		if hit:isa(Player) then
-			hit:Damage(50, 10)
+			hit:damage(50, 10)
 		end
 	else
 		gfx.drawLine(self.x, self.y, self.x + self.targetX, self.y + self.targetY)

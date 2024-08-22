@@ -24,7 +24,7 @@ end
 
 function FlyingBug:collisionResponse(other)
 	if other:isa(Player) then
-		other:Damage(20, 10)
+		other:damage(20, 10)
 		return "overlap"
 	else
 		return "slide"

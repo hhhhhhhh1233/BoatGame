@@ -43,6 +43,6 @@ function SimpleEnemy:update()
 	self.cooldown += 1
 end
 
-function SimpleEnemy:Damage(amount, iFrame)
+function SimpleEnemy:damage(amount, iFrame)
 	self:remove()
 end

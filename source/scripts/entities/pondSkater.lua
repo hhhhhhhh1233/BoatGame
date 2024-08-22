@@ -58,13 +58,13 @@ function PondSkater:update()
 
 	for _, collision in ipairs(collisions) do
 		if collision:isa(Player) then
-			collision:Damage(10, 10)
+			collision:damage(10, 10)
 			collision.PhysicsComponent:addForce((collision.x - self.x), (collision.y - self.y - 16))
 		end
 	end
 end
 
-function PondSkater:Damage(amount)
+function PondSkater:damage(amount)
 	self:remove()
 end
 

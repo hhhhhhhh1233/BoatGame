@@ -53,6 +53,6 @@ function FloatingEnemy:update()
 	self.cooldown += 1
 end
 
-function FloatingEnemy:Damage(amount, iFrame)
+function FloatingEnemy:damage(amount, iFrame)
 	self:remove()
 end

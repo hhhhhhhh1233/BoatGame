@@ -26,7 +26,7 @@ function BouncingSpike:collisionResponse(other)
 	if other:isa(DoorTrigger) then
 		return "slide"
 	elseif other:isa(Player) then
-		other:Damage(30, 10)
+		other:damage(30, 10)
 		return "overlap"
 	elseif EntityIsCollisionGroup(other, COLLISION_GROUPS.WALL) then
 		return "slide"

@@ -44,7 +44,7 @@ function MooredMine:update()
 	end
 end
 
-function MooredMine:Damage(amount)
+function MooredMine:damage(amount)
 	self:Explode()
 end
 

@@ -28,7 +28,7 @@ function Mine:update()
 	self.PhysicsComponent:move(self)
 end
 
-function Mine:Damage(amount)
+function Mine:damage(amount)
 	self:Explode()
 end
 
