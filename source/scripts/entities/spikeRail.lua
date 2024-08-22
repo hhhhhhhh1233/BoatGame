@@ -22,7 +22,6 @@ end
 function SpikeRail:update()
 	-- local toTarget = pd.geometry.vector2D.new(self.path[self.target].x - self.path[self.target - 1].x, self.path[self.target].y - self.path[self.target - 1].y)
 	local toTarget = pd.geometry.vector2D.new(self.path[self.target].x - self.spikeBall.x, self.path[self.target].y - self.spikeBall.y)
-	-- print(toTarget:magnitude())
 	if toTarget:magnitude() > self.spikeBallSpeed then
 		toTarget = toTarget:normalized() * self.spikeBallSpeed
 	elseif toTarget:magnitude() == 0 then

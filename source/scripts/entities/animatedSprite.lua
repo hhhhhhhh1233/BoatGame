@@ -11,7 +11,6 @@ function AnimatedSprite:init(x, y, frameTime, anim, loop)
 	self:setImage(self.animationLoop:image())
 	self:add()
 	self:setZIndex(10000)
-	print("Created Animation")
 end
 
 function AnimatedSprite:update()

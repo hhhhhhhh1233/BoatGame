@@ -35,11 +35,6 @@ function CrabBoss:Damage(amount)
 			end)
 		end
 	end
-	print(self.health)
-end
-
-function CrabBoss:update()
-	print("Here")
 end
 
 function CrabBoss:destructor()

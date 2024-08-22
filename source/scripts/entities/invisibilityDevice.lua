@@ -4,7 +4,6 @@ local gfx <const> = pd.graphics
 class('InvisibilityDevice').extends(gfx.sprite)
 
 function InvisibilityDevice:init(x, y, entity)
-	print("Here")
 	self:moveTo(x + 16, y + 16)
 	self.entity = entity
 	self:setImage(gfx.image.new("images/InvisibilityDevice"))

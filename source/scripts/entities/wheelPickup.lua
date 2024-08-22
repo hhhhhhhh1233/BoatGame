@@ -11,7 +11,6 @@ function WheelPickup:init(x, y, entity)
 	self:setGroups(COLLISION_GROUPS.PICKUPS)
 	self:setCollidesWithGroups(COLLISION_GROUPS.PLAYER)
 	self:add()
-	print("HERE")
 end
 
 function WheelPickup:pickup(player)

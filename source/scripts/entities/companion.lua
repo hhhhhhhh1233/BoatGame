@@ -30,7 +30,6 @@ function Companion:update()
 		self:moveTo(xTar, yTar)
 		if math.abs(self.x - (door.x)) < 0.1 and math.abs(self.y - (door.y)) < 0.1 and not self.bDeletionStarted then
 			self.bDeletionStarted = true
-			print("Here")
 			pd.frameTimer.performAfterDelay(15, function ()
 				door:clear()
 				self.bDeletionStarted = false

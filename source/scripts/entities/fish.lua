@@ -6,7 +6,6 @@ class('Fish').extends(gfx.sprite)
 function Fish:init(x, y, water)
 	self:moveTo(x, y)
 	self.water = water
-	printTable(self.water)
 	self:setImage(gfx.image.new("images/Fish"))
 	self:setGroups(COLLISION_GROUPS.ENEMY)
 	self:setCollidesWithGroups(COLLISION_GROUPS.WALL)

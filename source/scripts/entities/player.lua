@@ -85,7 +85,6 @@ function Player:Respawn()
 	self.coins = 0
 
 	if self.savePoint then
-		print(self.savePoint.x, self.savePoint.y)
 		self.GameManager:goToLevel(self.savePoint.level)
 		self:moveTo(self.savePoint.x, self.savePoint.y + 8)
 	else
@@ -300,17 +299,14 @@ end
 function Player:setAbilityA(func, name)
 	self.AbilityA = func
 	self.AbilityAName = name
-	print(self.AbilityA)
 end
 
 function Player:setAbilityB(func, name)
 	self.AbilityB = func
 	self.AbilityBName = name
-	print(self.AbilityB)
 end
 
 function Player:setPassive(func, name)
 	self.PassiveAbility = func
 	self.PassiveAbilityName = name
-	print(self.PassiveAbility)
 end

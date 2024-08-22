@@ -43,7 +43,6 @@ function PondSkater:update()
 	elseif self.bUnderwater then
 		self.PhysicsComponent.acceleration.y = 0
 		local upwardsForce = Clamp((self.y + 16 - self.water.height), 0, 10)
-		print(upwardsForce)
 		self.PhysicsComponent:addForce(0, -upwardsForce)
 		-- Upwards Friction
 		self.PhysicsComponent:addForce(0, 0.02*-self.PhysicsComponent.velocity.y)

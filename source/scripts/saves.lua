@@ -17,7 +17,6 @@ function ClearSave()
 	ds.writeImage(emptyMap, "MiniMap/miniMap")
 	ds.writeImage(emptyMap, "MiniMap/displayMiniMap")
 	ds.delete()
-	print("Cleared!")
 end
 
 function SaveGame(GameManager)

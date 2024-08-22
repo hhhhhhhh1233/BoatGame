@@ -8,7 +8,6 @@ local gfx <const> = pd.graphics
 class('Water').extends(gfx.sprite)
 
 function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange)
-	print(Height)
 	self.height = Height
 	self.width = Width
 	self.lowerBound = LowerBound
