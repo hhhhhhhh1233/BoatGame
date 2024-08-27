@@ -53,6 +53,11 @@ function PhysicsComponent:move(owner)
 	-- If we hit a surface set our velocity in that direction to zero 
 	-- NOTE: Kinda hacky, this only works so long as there are no slanted normals, feel free to be more cleverer
 	for i = 1, length, 1 do
+		if collisions[i].other:isa(MovingPlatform) then
+			print(collisions[i].other.velocity)
+			self.velocity += collisions[i].other.velocity * 0.25
+		end
+
 		-- NOTE: So that it allows the player to go through overlap collisions
 		if collisions[i].type ~= 2 then
 			self.velocity.x *= math.abs(collisions[i].normal.y)

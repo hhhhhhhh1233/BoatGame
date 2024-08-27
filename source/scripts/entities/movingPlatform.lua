@@ -37,6 +37,12 @@ function MovingPlatform:update()
 	-- NOTE: This doesn't do anything, but the thinking is if the player is allowed to stand on the platform then when we collide we want to give the player our velocity
 	self.velocity = direction
 	self:moveBy(direction.x, direction.y)
+	-- local spritesOverlapping = self:overlappingSprites()
+	-- for _, sprite in spritesOverlapping do
+	-- 	if sprite.PhysicsComponent then
+	-- 		sprite.PhysicsComponent.velocity += self.velocity
+	-- 	end
+	-- end
 	if (pd.geometry.vector2D.new(self.x, self.y) - self.target):magnitude() == 0 then
 		if self.target == self.endPoint then
 			self.target = self.startPoint
@@ -44,5 +50,4 @@ function MovingPlatform:update()
 			self.target = self.endPoint
 		end
 	end
-
 end

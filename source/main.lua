@@ -59,6 +59,9 @@ local menuItem2, error = menu:addMenuItem("View Map", function ()
 	SceneManager:DeactivatePhysicsComponents()
 	MiniMapViewer(SceneManager)
 end)
+local menuItem3, error = menu:addMenuItem("Debug Rooms", function ()
+	SceneManager:goToLevel("DebugRoom_MPlatform")
+end)
 
 
 local mainMenu = MainMenu()
