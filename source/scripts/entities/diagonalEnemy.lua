@@ -20,7 +20,7 @@ function DiagonalEnemy:collisionResponse(other)
 	if other:isa(DoorTrigger) then
 		return "slide"
 	elseif other:isa(Player) then
-		other:Damage(20, 30)
+		other:damage(20, 30)
 		return "overlap"
 	else
 		return "slide"

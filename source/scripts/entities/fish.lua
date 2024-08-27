@@ -24,7 +24,7 @@ function Fish:collisionResponse(other)
 	end
 end
 
-function Fish:Damage(amount)
+function Fish:damage(amount)
 	self:remove()
 end
 
@@ -56,7 +56,7 @@ function Fish:update()
 		sprites = gfx.sprite.querySpritesInRect(self.x - 16, self.y - 16, 64, 64)
 		for _, sprite in ipairs(sprites) do
 			if sprite:isa(Player) then
-				sprite:Damage(10, 20)
+				sprite:damage(10, 20)
 			end
 		end
 	else
@@ -71,7 +71,7 @@ function Fish:update()
 	for i = 1, n do
 		if c[i].type ~= 2 then
 			if c[i].normal.y == -1 then
-				self:Damage()
+				self:damage()
 			end
 		end
 	end

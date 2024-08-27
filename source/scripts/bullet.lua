@@ -27,8 +27,8 @@ function Bullet:update()
 
 	if n >= 1 then
 		for i = 1, #c do
-			if c[i].other.Damage ~= nil then
-				c[i].other:Damage(self.damage, 5)
+			if c[i].other.damage ~= nil then
+				c[i].other:damage(self.damage, 5)
 			end
 		end
 		self:remove()

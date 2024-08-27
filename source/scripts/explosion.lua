@@ -12,8 +12,8 @@ function Explosion:init(x, y)
 	self:setImage(gfx.image.new(64, 64))
 	local spritesInExplosion = gfx.sprite.querySpritesInRect(self.x, self.y, 64, 64)
 	for _, value in ipairs(spritesInExplosion) do
-		if value.Damage then
-			value:Damage(1000, 10)
+		if value.damage then
+			value:damage(1000, 10)
 		end
 	end
 	self:setZIndex(20)

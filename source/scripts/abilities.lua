@@ -15,8 +15,8 @@ function Jump(player, button)
 		-- TODO: Add a poof animation
 		gfx.fillRect(player.x - 25, player.y - 8, 50, 50)
 		for _, sprite in ipairs(sprites) do
-			if not sprite:isa(Player) and sprite.Damage then
-				sprite:Damage(jumpDamageValues[player.weaponTier], 10)
+			if not sprite:isa(Player) and sprite.damage then
+				sprite:damage(jumpDamageValues[player.weaponTier], 10)
 			end
 			if sprite.PhysicsComponent then
 				local blastDirection = (sprite.PhysicsComponent.position - pd.geometry.vector2D.new(player.x, player.y + 25)):normalized()
@@ -55,8 +55,8 @@ function Overheat(player, button)
 		-- NOTE: Visualization of the damage zone
 		-- gfx.fillRect(player.x - 25, player.y - 25 - 8, 50, 50)
 		for _, value in ipairs(sprites) do
-			if not value:isa(Player) and value.Damage then
-				value:Damage(overheatTierValues[player.weaponTier], 10)
+			if not value:isa(Player) and value.damage then
+				value:damage(overheatTierValues[player.weaponTier], 10)
 			end
 			if value.ignite then
 				value:ignite()

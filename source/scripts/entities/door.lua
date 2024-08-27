@@ -30,8 +30,8 @@ function Door:update()
 			-- NOTE: Kills the player if they bring back the door that they're on, find a more elegant way to do this though
 			local hitting = gfx.sprite.querySpritesInRect(self.x, self.y, self.entity.size.width, self.entity.size.height)
 			for _, value in ipairs(hitting) do
-				if value.Damage then
-					value:Damage(1000, 10)
+				if value.damage then
+					value:damage(1000, 10)
 				end
 			end
 			self:setVisible(true)

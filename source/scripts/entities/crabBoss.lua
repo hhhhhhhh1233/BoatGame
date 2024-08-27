@@ -22,7 +22,7 @@ function CrabBoss:init(x, y, gameManager)
 	self.bActive = true
 end
 
-function CrabBoss:Damage(amount)
+function CrabBoss:damage(amount)
 	self.health -= amount
 	if self.health <= 0 then
 		if self.bActive then

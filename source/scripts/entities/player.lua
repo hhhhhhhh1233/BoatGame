@@ -53,7 +53,7 @@ function Player:init(x, y, image, speed, gameManager)
 	self.currentImage = self.boatImage
 end
 
-function Player:Damage(amount, iFrames)
+function Player:damage(amount, iFrames)
 	if self.Invincible > 0 then
 		return
 	end
@@ -252,6 +252,20 @@ function Player:update()
 			end
 		end
 
+		if self.bGrounded and not self.bHasWheels then
+			if pd.buttonJustPressed(pd.kButtonLeft) then
+				self:setImageFlip(gfx.kImageFlippedX)
+				self.direction = -1
+				self.PhysicsComponent:addForce(-1, 0)
+			end
+
+			if pd.buttonJustPressed(pd.kButtonRight) then
+				self:setImageFlip(gfx.kImageUnflipped)
+				self.direction = 1
+				self.PhysicsComponent:addForce(1, 0)
+			end
+		end
+
 		if pd.buttonIsPressed(pd.kButtonLeft) then
 			self:setImageFlip(gfx.kImageFlippedX)
 			self.direction = -1
@@ -280,7 +294,7 @@ function Player:update()
 	self.bUnderwater = self.y > self.GameManager.water.height
 	for i = 1, #collisions do
 		if collisions[i].normal.y == 1 and self.y - 22 > self.GameManager.water.height and self.PhysicsComponent.velocity.y == 0 then
-			self:Damage(30, 10)
+			self:damage(10, 15)
 		end
 		if collisions[i].normal.y == -1 and collisions[i].other:getGroupMask() == 8 then
 			self.bGrounded = true
