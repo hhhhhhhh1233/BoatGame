@@ -14,7 +14,11 @@ function Bullet:init(x, y, direction, damage)
 	self.x = x
 	self.y = y
 	self.direction = direction
-	self.damage = damage
+	if damage then
+		self.damage = damage
+	else
+		self.damage = 1
+	end
 
 	self:setGroups(COLLISION_GROUPS.PROJECTILE)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PLAYER, COLLISION_GROUPS.WALL, COLLISION_GROUPS.EXPLOSIVE, COLLISION_GROUPS.ENEMY})
@@ -27,7 +31,7 @@ function Bullet:update()
 
 	if n >= 1 then
 		for i = 1, #c do
-			if c[i].other.damage ~= nil then
+			if c[i].other.damage then
 				c[i].other:damage(self.damage, 5)
 			end
 		end
