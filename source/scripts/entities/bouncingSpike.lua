@@ -5,6 +5,7 @@ class('BouncingSpike').extends(gfx.sprite)
 
 function BouncingSpike:init(x, y, entity)
 	self:moveTo(x + 16, y + 16)
+	self.entity = entity
 	self:setImage(gfx.image.new("images/BouncingSpike"))
 	self:setCollideRect(0, 0, 32, 32)
 	self:setGroups(COLLISION_GROUPS.ENEMY)
