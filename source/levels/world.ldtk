@@ -460,7 +460,7 @@
 	"imageExportMode": "None",
 	"exportLevelBg": true,
 	"pngFilePattern": null,
-	"backupOnSave": true,
+	"backupOnSave": false,
 	"backupLimit": 10,
 	"backupRelPath": null,
 	"levelNamePattern": "Level_%idx",
@@ -6172,7 +6172,7 @@
 									"id": "V_String",
 									"params": ["15,6"]
 								}] },
-								{ "__identifier": "Speed", "__type": "Int", "__value": 4, "__tile": null, "defUid": 469, "realEditorValues": [{ "id": "V_Int", "params": [4] }] }
+								{ "__identifier": "Speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 469, "realEditorValues": [{ "id": "V_Int", "params": [1] }] }
 							],
 							"__worldX": 240,
 							"__worldY": 112
@@ -6194,7 +6194,7 @@
 									"id": "V_String",
 									"params": ["17,11"]
 								}] },
-								{ "__identifier": "Speed", "__type": "Int", "__value": 3, "__tile": null, "defUid": 469, "realEditorValues": [{ "id": "V_Int", "params": [3] }] }
+								{ "__identifier": "Speed", "__type": "Int", "__value": 1, "__tile": null, "defUid": 469, "realEditorValues": [{ "id": "V_Int", "params": [1] }] }
 							],
 							"__worldX": 272,
 							"__worldY": 112

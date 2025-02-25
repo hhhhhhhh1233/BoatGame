@@ -99,6 +99,11 @@ function MainGameLoop()
 
 end
 
+-- NOTE: In the simulator load the ldtk instantly so that the lua files exist without having to do anything
+if pd.isSimulator then
+	LDtk.load("levels/world.ldtk", false)
+	LDtk.export_to_lua_files()
+end
 
 function MainMenuLoop()
 	gfx.clear(gfx.kColorWhite)
@@ -108,7 +113,10 @@ function MainMenuLoop()
 	pd.frameTimer.updateTimers()
 
 	if mainMenu.done then
-		LDtk.load("levels/world.ldtk", true)
+		-- NOTE: On real hardware don't bother loading until someone starts the game
+		if not pd.isSimulator then
+			LDtk.load("levels/world.ldtk", true)
+		end
 		SceneManager = Scene(mainMenu.loadGame)
 		pd.update = MainGameLoop
 	end
