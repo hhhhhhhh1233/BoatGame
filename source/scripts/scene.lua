@@ -51,7 +51,6 @@ import "scripts/entities/bouncingSpike"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-LDtk.load("levels/world.ldtk", false)
 
 class('Scene').extends()
 

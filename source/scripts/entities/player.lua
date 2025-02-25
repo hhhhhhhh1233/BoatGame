@@ -105,29 +105,41 @@ function Player:Respawn()
 
 end
 
+local OldHealth = nil
+local HealthImage = nil
+local OldCoin = nil
+local CoinImage = nil
+
 function Player:DrawHealthBar()
-	-- TODO: Don't make the nineslice every frame, cache this somewhere
-
-	local img = gfx.image.new(150, 100)
-	gfx.lockFocus(img)
-	local ns = gfx.nineSlice.new("images/WallResizable", 5, 5, 6, 6)
-	local nsBlank = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 22, 22)
-	nsBlank:drawInRect(10, 10, 100, 20)
-	if self.Health > 0 then
-		ns:drawInRect(10, 10, 100 * (self.Health / 100), 20)
+	if (OldHealth ~= self.Health) then
+		HealthImage = gfx.image.new(150, 100)
+		gfx.lockFocus(HealthImage)
+		local ns = gfx.nineSlice.new("images/WallResizable", 5, 5, 6, 6)
+		local nsBlank = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 22, 22)
+		nsBlank:drawInRect(10, 10, 100, 20)
+		if self.Health > 0 then
+			ns:drawInRect(10, 10, 100 * (self.Health / 100), 20)
+		end
+		gfx.unlockFocus()
 	end
-	gfx.unlockFocus()
-	UISystem:drawImageAt(img, 0, 0)
 
-	img = gfx.image.new(100, 100)
-	gfx.lockFocus(img)
-	local nsCoins = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 22, 22)
-	local width, _ = gfx.getTextSize(math.floor(self.coins).."x")
-	nsCoins:drawInRect(10, 50, width + 45, 28)
-	gfx.drawText(math.floor(self.coins).." x", 20, 55)
-	gfx.image.new("images/Coin"):draw(30 + width, 56)
-	gfx.unlockFocus()
-	UISystem:drawImageAt(img, 300, -40)
+	UISystem:drawImageAt(HealthImage, 0, 0)
+
+	if (OldCoin ~= self.coins) then
+		CoinImage = gfx.image.new(100, 100)
+		gfx.lockFocus(CoinImage)
+		local nsCoins = gfx.nineSlice.new("images/OneWayDoor", 5, 5, 22, 22)
+		local width, _ = gfx.getTextSize(math.floor(self.coins).."x")
+		nsCoins:drawInRect(10, 50, width + 45, 28)
+		gfx.drawText(math.floor(self.coins).." x", 20, 55)
+		gfx.image.new("images/Coin"):draw(30 + width, 56)
+		gfx.unlockFocus()
+	end
+
+	OldCoin = self.coins
+	OldHealth = self.Health
+
+	UISystem:drawImageAt(CoinImage, 300, -40)
 end
 
 function Player:addForce(Force)

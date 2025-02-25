@@ -67,7 +67,7 @@ function MainMenu:update()
 		local _, row, column = self.grid:getSelection()
 		self:remove()
 		mainMenuTrack:stop()
-		-- decisionSound:play()
+		decisionSound:play()
 		self.done = true
 		self.loadGame = self.options[row] == "Continue"
 	end

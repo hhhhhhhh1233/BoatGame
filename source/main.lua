@@ -79,23 +79,26 @@ function MainGameLoop()
 
 	pd.drawFPS(0, 0)
 
-	local ox, oy = gfx.getDrawOffset()
-	if SceneManager.player.bActive then -- NOTE: This is so the text is still legible when choosing ability, make the water blur per sprite instead of the whole image to solve this better
-		local blurred = gfx.getWorkingImage():blurredImage(1, 1, gfx.image.kDitherTypeBayer4x4, true)
-		local ix, iy = blurred:getSize()
-		local waterMask = gfx.image.new(ix, iy)
-		gfx.pushContext(waterMask)
-		gfx.setColor(gfx.kColorWhite)
-		gfx.fillRect(2, SceneManager.water.height + oy + 2 - i, 400 - 2, 400)
-		gfx.popContext()
-		blurred:setMaskImage(waterMask)
-		local width = pd.display.getWidth()
-		local xOffset = (ix - width) / 2
-		blurred:drawAnchored(-ox - xOffset, -oy + i, 0, 0)
-	end
+	-- local ox, oy = gfx.getDrawOffset()
+	-- if SceneManager.player.bActive then -- NOTE: This is so the text is still legible when choosing ability, make the water blur per sprite instead of the whole image to solve this better
+	-- 	local blurred = gfx.getWorkingImage():blurredImage(1, 1, gfx.image.kDitherTypeBayer4x4, true)
+	-- 	local ix, iy = blurred:getSize()
+	-- 	local waterMask = gfx.image.new(ix, iy)
+	-- 	gfx.pushContext(waterMask)
+	-- 	gfx.setColor(gfx.kColorWhite)
+	-- 	gfx.fillRect(2, SceneManager.water.height + oy + 2 - i, 400 - 2, 400)
+	-- 	gfx.popContext()
+	-- 	blurred:setMaskImage(waterMask)
+	-- 	local width = pd.display.getWidth()
+	-- 	local xOffset = (ix - width) / 2
+	-- 	blurred:drawAnchored(-ox - xOffset, -oy + i, 0, 0)
+	-- end
+
+	-- UISystem:update()
 	-- gfx.fillRect(2, SceneManager.water.height + oy + 2 - i, 400 - 2, 400)
 
 end
+
 
 function MainMenuLoop()
 	gfx.clear(gfx.kColorWhite)
@@ -105,6 +108,7 @@ function MainMenuLoop()
 	pd.frameTimer.updateTimers()
 
 	if mainMenu.done then
+		LDtk.load("levels/world.ldtk", true)
 		SceneManager = Scene(mainMenu.loadGame)
 		pd.update = MainGameLoop
 	end
