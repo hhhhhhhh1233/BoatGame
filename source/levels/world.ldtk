@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 479,
+	"nextUid": 480,
 	"identifierStyle": "Capitalize",
 	"toc": [
 		{ "identifier": "AbilityPickup", "instances": [], "instancesData": [] },
@@ -580,20 +580,12 @@
 		{
 			"identifier": "Lantern",
 			"instances": [],
-			"instancesData": [
-				{ "iids": {
-					"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166",
-					"levelIid": "8b012660-25d0-11ef-a820-1369997bd924",
-					"layerIid": "8b012661-25d0-11ef-a820-dbdd042cff3d",
-					"entityIid": "47008810-e920-11ef-85c9-5f9e6d429098"
-				}, "worldX": 480, "worldY": 96, "widPx": 32, "heiPx": 32, "fields" : {} },
-				{ "iids": {
-					"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166",
-					"levelIid": "4c5f7b30-4ce0-11ef-8dcb-51a1c10ea77f",
-					"layerIid": "4c5f7b31-4ce0-11ef-8dcb-897e87730164",
-					"entityIid": "d5d47390-4ce0-11ef-8879-516e1b82e03d"
-				}, "worldX": 544, "worldY": 1152, "widPx": 32, "heiPx": 32, "fields" : {} }
-			]
+			"instancesData": [{ "iids": {
+				"worldIid": "a5e121b0-25d0-11ef-a85a-732f9850a166",
+				"levelIid": "4c5f7b30-4ce0-11ef-8dcb-51a1c10ea77f",
+				"layerIid": "4c5f7b31-4ce0-11ef-8dcb-897e87730164",
+				"entityIid": "d5d47390-4ce0-11ef-8879-516e1b82e03d"
+			}, "worldX": 544, "worldY": 1152, "widPx": 32, "heiPx": 32, "fields" : {} }]
 		}
 	],
 	"worldLayout": "Free",
@@ -5952,6 +5944,41 @@
 			"pivotX": 0,
 			"pivotY": 0,
 			"fieldDefs": []
+		},
+		{
+			"identifier": "Plant",
+			"uid": 479,
+			"tags": ["Pickup"],
+			"exportToToc": false,
+			"allowOutOfBounds": false,
+			"doc": null,
+			"width": 32,
+			"height": 32,
+			"resizableX": false,
+			"resizableY": false,
+			"minWidth": null,
+			"maxWidth": null,
+			"minHeight": null,
+			"maxHeight": null,
+			"keepAspectRatio": false,
+			"tileOpacity": 1,
+			"fillOpacity": 1,
+			"lineOpacity": 1,
+			"hollow": false,
+			"color": "#3E8948",
+			"renderMode": "Rectangle",
+			"showName": true,
+			"tilesetId": null,
+			"tileRenderMode": "FitInside",
+			"tileRect": null,
+			"uiTileRect": null,
+			"nineSliceBorders": [],
+			"maxCount": 0,
+			"limitScope": "PerLevel",
+			"limitBehavior": "MoveLastOne",
+			"pivotX": 0,
+			"pivotY": 0,
+			"fieldDefs": []
 		}
 	], "tilesets": [
 		{
@@ -6390,20 +6417,20 @@
 							"__worldY": 112
 						},
 						{
-							"__identifier": "Lantern",
-							"__grid": [30,7],
+							"__identifier": "Plant",
+							"__grid": [13,10],
 							"__pivot": [0,0],
 							"__tags": ["Pickup"],
-							"__tile": { "tilesetUid": 404, "x": 0, "y": 64, "w": 32, "h": 32 },
-							"__smartColor": "#FEAE34",
-							"iid": "47008810-e920-11ef-85c9-5f9e6d429098",
+							"__tile": null,
+							"__smartColor": "#3E8948",
+							"iid": "edca8260-e920-11ef-9799-7bef26c3d36f",
 							"width": 32,
 							"height": 32,
-							"defUid": 295,
-							"px": [480,112],
+							"defUid": 479,
+							"px": [208,160],
 							"fieldInstances": [],
-							"__worldX": 480,
-							"__worldY": 96
+							"__worldX": 208,
+							"__worldY": 144
 						}
 					]
 				},
@@ -9780,22 +9807,6 @@
 							"fieldInstances": [{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 141, "realEditorValues": [] }],
 							"__worldX": 1056,
 							"__worldY": 208
-						},
-						{
-							"__identifier": "Darkness",
-							"__grid": [7,13],
-							"__pivot": [0,0],
-							"__tags": ["Hazard"],
-							"__tile": null,
-							"__smartColor": "#E43B44",
-							"iid": "4c659ac0-e920-11ef-85c9-4ff8eadeec1f",
-							"width": 16,
-							"height": 16,
-							"defUid": 294,
-							"px": [112,208],
-							"fieldInstances": [],
-							"__worldX": 720,
-							"__worldY": 80
 						}
 					]
 				},

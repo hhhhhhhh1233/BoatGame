@@ -48,6 +48,7 @@ import "scripts/entities/theTall"
 import "scripts/entities/bigMan"
 import "scripts/entities/sightDoor"
 import "scripts/entities/bouncingSpike"
+import "scripts/entities/plant"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -348,6 +349,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = BigMan(entityX, entityY)
 		elseif entityName == "BouncingSpike" then
 			self.entityInstance[entity.iid] = BouncingSpike(entityX, entityY, entity)
+		elseif entityName == "Plant" then
+			self.entityInstance[entity.iid] = Plant(entityX, entityY)
 		end
 	end
 
