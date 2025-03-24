@@ -25,7 +25,6 @@ import "scripts/saves"
 -- Game Objects
 import "scripts/entities/player"
 import "scripts/water"
-import "scripts/entities/mine"
 import "scripts/scene"
 import "scripts/entities/ui"
 import "scripts/miniMapViewer"

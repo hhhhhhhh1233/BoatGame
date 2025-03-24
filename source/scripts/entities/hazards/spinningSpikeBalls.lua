@@ -1,7 +1,7 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-import "scripts/entities/spikeBall"
+import "scripts/entities/hazards/spikeBall"
 
 class('SpinningSpikeBalls').extends(gfx.sprite)
 

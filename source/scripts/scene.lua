@@ -1,58 +1,60 @@
-import "scripts/entities/player"
 import "libraries/LDtk"
-import "scripts/entities/DoorTrigger"
-import "scripts/entities/mine"
-import "scripts/entities/simpleEnemy"
-import "scripts/entities/floatingEnemy"
-import "scripts/entities/abilityPickup"
-import "scripts/entities/waterWheel"
+
+-- NOTE: Abilities
+import "scripts/entities/abilities/abilityPickup"
+import "scripts/entities/abilities/changeSizeDevice"
+import "scripts/entities/abilities/companionPickup"
+import "scripts/entities/abilities/interest"
+import "scripts/entities/abilities/invisibilityDevice"
+import "scripts/entities/abilities/lantern"
+import "scripts/entities/abilities/submerge"
+import "scripts/entities/abilities/teleportationDevice"
+import "scripts/entities/abilities/waterWheel"
+import "scripts/entities/abilities/wheelPickup"
+
+-- NOTE: Hazards
+import "scripts/entities/hazards/bouncingSpike"
+import "scripts/entities/hazards/diagonalEnemy"
+import "scripts/entities/hazards/laser"
+import "scripts/entities/hazards/mine"
+import "scripts/entities/hazards/mooredMine"
+import "scripts/entities/hazards/spikeRail"
+import "scripts/entities/hazards/spinningSpikeBalls"
+import "scripts/entities/hazards/staticGun"
+import "scripts/entities/hazards/swayGun"
+
+-- NOTE: Mechanics
+import "scripts/entities/mechanics/block16"
+import "scripts/entities/mechanics/blockedWall"
+import "scripts/entities/mechanics/button"
+import "scripts/entities/mechanics/companionDoor"
+import "scripts/entities/mechanics/darkness"
+import "scripts/entities/mechanics/detector"
+import "scripts/entities/mechanics/door"
+import "scripts/entities/mechanics/DoorTrigger"
+import "scripts/entities/mechanics/foliage"
+import "scripts/entities/mechanics/movingPlatform"
+import "scripts/entities/mechanics/oneWayDoor"
+import "scripts/entities/mechanics/projectileButton"
+import "scripts/entities/mechanics/sightDoor"
+
+-- NOTE: NPCs
+import "scripts/entities/npcs/bigMan"
+import "scripts/entities/npcs/theTall"
+import "scripts/entities/npcs/theUpgrader"
+
+-- NOTE: Misc
+import "scripts/entities/player"
 import "scripts/entities/coin"
 import "scripts/entities/bigCoin"
-import "scripts/entities/blockedWall"
-import "scripts/entities/oneWayDoor"
-import "scripts/entities/button"
-import "scripts/entities/projectileButton"
-import "scripts/entities/door"
-import "scripts/entities/mooredMine"
 import "scripts/entities/playerCorpse"
 import "scripts/entities/savePoint"
 import "scripts/entities/ui"
-import "scripts/entities/foliage"
-import "scripts/entities/detector"
-import "scripts/entities/block16"
-import "scripts/entities/fish"
-import "scripts/entities/pondSkater"
-import "scripts/entities/hive"
-import "scripts/entities/crabBoss"
-import "scripts/entities/spinningSpikeBalls"
-import "scripts/entities/spikeRail"
-import "scripts/entities/SincosEnemy"
-import "scripts/entities/swayGun"
-import "scripts/entities/staticGun"
-import "scripts/entities/laser"
-import "scripts/entities/movingPlatform"
-import "scripts/entities/darkness"
-import "scripts/entities/lantern"
-import "scripts/entities/interest"
-import "scripts/entities/submerge"
-import "scripts/entities/teleportationDevice"
-import "scripts/entities/companionDoor"
 import "scripts/entities/companion"
-import "scripts/entities/companionPickup"
-import "scripts/entities/invisibilityDevice"
-import "scripts/entities/changeSizeDevice"
-import "scripts/entities/wheelPickup"
-import "scripts/entities/diagonalEnemy"
-import "scripts/entities/theUpgrader"
-import "scripts/entities/theTall"
-import "scripts/entities/bigMan"
-import "scripts/entities/sightDoor"
-import "scripts/entities/bouncingSpike"
 import "scripts/entities/plant"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
-
 
 class('Scene').extends()
 
@@ -260,15 +262,9 @@ function Scene:goToLevel(level_name)
 			local MineInstance = MooredMine(entityX, entityY, gfx.image.new("images/Mine"), entity)
 			table.insert(self.ActivePhysicsComponents, MineInstance.PhysicsComponent)
 			self.entityInstance[entity.iid] = MineInstance
-		elseif entityName == "FloatingEnemy" then
-			local FloaterInstance = FloatingEnemy(entityX, entityY, self.player)
-			table.insert(self.ActivePhysicsComponents, FloaterInstance.PhysicsComponent)
-			self.entityInstance[entity.iid] = FloaterInstance
 		elseif entityName == "SpawnPoint" then
 			self.SpawnX = entityX + 16
 			self.SpawnY = entityY + 32
-		elseif entityName == "SimpleEnemy" then
-			self.entityInstance[entity.iid] = SimpleEnemy(entityX, entityY, self.player)
 		elseif entityName == "AbilityPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = AbilityPickup(entityX, entityY, entity)
 		elseif entityName == "WaterWheel" and not self.collectedEntities[entity.iid] then
@@ -297,20 +293,10 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Detector(entityX, entityY, entity)
 		elseif entityName == "Block16" then
 			self.entityInstance[entity.iid] = Block16(entityX, entityY)
-		elseif entityName == "Fish" then
-			self.entityInstance[entity.iid] = Fish(entityX, entityY, self.water)
-		elseif entityName == "PondSkater" then
-			self.entityInstance[entity.iid] = PondSkater(entityX, entityY, self.water)
-		elseif entityName == "Hive" then
-			self.entityInstance[entity.iid] = Hive(entityX, entityY, self.water)
-		elseif entityName == "CrabBoss" then
-			self.entityInstance[entity.iid] = CrabBoss(entityX, entityY, self)
 		elseif entityName == "SpinningSpikeBalls" then
 			self.entityInstance[entity.iid] = SpinningSpikeBalls(entityX, entityY, entity)
 		elseif entityName == "SpikeRail" then
 			self.entityInstance[entity.iid] = SpikeRail(entityX, entityY, entity)
-		elseif entityName == "SincosEnemy" then
-			self.entityInstance[entity.iid] = SincosEnemy(entityX, entityY)
 		elseif entityName == "DiagonalEnemy" then
 			self.entityInstance[entity.iid] = DiagonalEnemy(entityX, entityY, entity)
 		elseif entityName == "SwayGun" then
