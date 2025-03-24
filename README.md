@@ -1,6 +1,9 @@
-# BoatGame
-This is the start of a game that I intend to be a boat metroidvania for the playdate console.
+# Boat Game Overview
 
-Right now all it does is move a boat around and change the water level but we call that a promising start.
+This is an early version of a game that I intend to be a boat metroidvania for the [playdate](https://play.date) console. Using the playdate's crank to change the water level and abilities you find along the way you explore a water world to collect research samples of the local fauna and whatever else you might stumble upon.
 
-![playdate-20240606-225218](https://github.com/hhhhhhhh1233/BoatGame/assets/58606478/632e6e04-0227-4a16-b0c2-9b82b338cf64)
+![playdate-20250324-232326](https://github.com/user-attachments/assets/e3700318-72d8-4608-af6b-3a519f11150d)
+![playdate-20250324-233219](https://github.com/user-attachments/assets/bced42c4-0219-45a5-9f01-40e7620e3c4d)
+![playdate-20250324-233320](https://github.com/user-attachments/assets/b566d3c1-5717-4ee0-ba99-01cba54ea824)
+![playdate-20250324-233419](https://github.com/user-attachments/assets/8fcbf801-6504-4e0d-99e3-57958533df71)
+
