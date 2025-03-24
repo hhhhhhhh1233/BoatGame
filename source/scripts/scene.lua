@@ -40,6 +40,7 @@ import "scripts/entities/companionDoor"
 import "scripts/entities/companion"
 import "scripts/entities/companionPickup"
 import "scripts/entities/invisibilityDevice"
+import "scripts/entities/changeSizeDevice"
 import "scripts/entities/wheelPickup"
 import "scripts/entities/diagonalEnemy"
 import "scripts/entities/theUpgrader"
@@ -76,6 +77,7 @@ function Scene:init(bLoadGame)
 		self.player.bHasInterest = SaveData["PlayerHasInterest"]
 		self.player.bHasSubmerge = SaveData["PlayerHasSubmerge"]
 		self.player.bHasInvisibilityDevice = SaveData["PlayerHasInvisibilityDevice"]
+		self.player.bHasChangeSizeDevice = SaveData["PlayerHasChangeSizeDevice"]
 		self.player.bHasWheels = SaveData["PlayerHasWheels"]
 		self.player.AbilityA = Abilities[SaveData["PlayerAbilityAName"]]
 		self.player.AbilityAName = SaveData["PlayerAbilityAName"]
@@ -96,7 +98,7 @@ function Scene:init(bLoadGame)
 			level_rect = LDtk.get_rect(SaveData["CurrentLevel"])
 		end
 		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
-		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 0.1)
+		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 0.2)
 		self.water.bActive = SaveData["WaterWheelCollected"]
 		self:goToLevel(SaveData["CurrentLevel"])
 		if SaveData["PlayerCorpseX"] then
@@ -334,6 +336,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = CompanionPickup(entityX, entityY, entity)
 		elseif entityName == "InvisibilityDevice" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = InvisibilityDevice(entityX, entityY, entity)
+		elseif entityName == "ChangeSizeDevice" and not self.collectedEntities[entity.iid] then
+			self.entityInstance[entity.iid] = ChangeSizeDevice(entityX, entityY, entity)
 		elseif entityName == "WheelPickup" and not self.collectedEntities[entity.iid] then
 			self.entityInstance[entity.iid] = WheelPickup(entityX, entityY, entity)
 		elseif entityName == "TheUpgrader" then

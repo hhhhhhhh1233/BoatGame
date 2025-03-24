@@ -218,6 +218,10 @@ function Player:update()
 		Invisibility(self, pd.kButtonB)
 	end
 
+	if self.bHasChangeSizeDevice then
+		ChangeSize(self, pd.kButtonA)
+	end
+
 	if self.bActive then
 
 		if pd.buttonIsPressed(pd.kButtonUp) then

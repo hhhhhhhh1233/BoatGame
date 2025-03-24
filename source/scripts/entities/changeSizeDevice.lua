@@ -1,0 +1,21 @@
+local pd <const> = playdate
+local gfx <const> = pd.graphics
+
+class('ChangeSizeDevice').extends(gfx.sprite)
+
+function ChangeSizeDevice:init(x, y, entity)
+	self:moveTo(x + 16, y + 16)
+	self.entity = entity
+	self:setImage(gfx.image.new("images/ChangeSizeDevice"))
+	self:setCollideRect(0, 0, 32, 32)
+	self:setGroups(COLLISION_GROUPS.PICKUPS)
+	self:setCollidesWithGroups(COLLISION_GROUPS.PLAYER)
+	self:add()
+end
+
+function ChangeSizeDevice:pickup(player)
+	PopupTextBox("*SIZE CHANGING DEVICE*\nHold A to and up or down to change size", 3000, 20)
+	player.bHasChangeSizeDevice = true
+	player.GameManager:collect(self.entity.iid)
+	self:remove()
+end

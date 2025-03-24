@@ -34,6 +34,7 @@ function SaveGame(GameManager)
 		["PlayerHasInterest"] = GameManager.player.bHasInterest,
 		["PlayerHasSubmerge"] = GameManager.player.bHasSubmerge,
 		["PlayerHasInvisibilityDevice"] = GameManager.player.bHasInvisibilityDevice,
+		["PlayerHasChangeSizeDevice"] = GameManager.player.bHasChangeSizeDevice,
 		["PlayerHasWheels"] = GameManager.player.bHasWheels,
 		["PlayerAbilityAName"] = GameManager.player.AbilityAName,
 		["PlayerAbilityBName"] = GameManager.player.AbilityBName,

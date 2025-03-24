@@ -34,7 +34,7 @@ function StaticGun:update()
 		gfx.drawLine(self.x, self.y, self.x - self.range * self.inverted, self.y)
 	end
 
-	if self.bCanShoot and hitTarget:isa(Player) then
+	if self.bCanShoot and hitTarget and hitTarget:isa(Player) then
 		Bullet(self.x - self.inverted * 20, self.y, vector_new(10 * -self.inverted, 0))
 		self.bCanShoot = false
 		PerformAfterDelay(self.shootDelay, function ()

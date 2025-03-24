@@ -78,25 +78,6 @@ function MainGameLoop()
 	pd.frameTimer.updateTimers()
 
 	pd.drawFPS(0, 0)
-
-	-- local ox, oy = gfx.getDrawOffset()
-	-- if SceneManager.player.bActive then -- NOTE: This is so the text is still legible when choosing ability, make the water blur per sprite instead of the whole image to solve this better
-	-- 	local blurred = gfx.getWorkingImage():blurredImage(1, 1, gfx.image.kDitherTypeBayer4x4, true)
-	-- 	local ix, iy = blurred:getSize()
-	-- 	local waterMask = gfx.image.new(ix, iy)
-	-- 	gfx.pushContext(waterMask)
-	-- 	gfx.setColor(gfx.kColorWhite)
-	-- 	gfx.fillRect(2, SceneManager.water.height + oy + 2 - i, 400 - 2, 400)
-	-- 	gfx.popContext()
-	-- 	blurred:setMaskImage(waterMask)
-	-- 	local width = pd.display.getWidth()
-	-- 	local xOffset = (ix - width) / 2
-	-- 	blurred:drawAnchored(-ox - xOffset, -oy + i, 0, 0)
-	-- end
-
-	-- UISystem:update()
-	-- gfx.fillRect(2, SceneManager.water.height + oy + 2 - i, 400 - 2, 400)
-
 end
 
 -- NOTE: In the simulator load the ldtk instantly so that the lua files exist without having to do anything
