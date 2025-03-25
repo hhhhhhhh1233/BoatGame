@@ -174,17 +174,6 @@ function Player:collisionResponse(other)
 end
 
 function Player:update()
-	-- NOTE: Since I moved the center of the player it checks from the bottom of the sprite, should probably check from center
-	if self.x > self.GameManager.LevelWidth and self.PhysicsComponent.velocity.x > 0 then
-		self.GameManager:enterRoom(self.Door, "EAST")
-	elseif self.x < 0 and self.PhysicsComponent.velocity.x < 0 then
-		self.GameManager:enterRoom(self.Door, "WEST")
-	elseif self.y - 16 > self.GameManager.LevelHeight and self.PhysicsComponent.velocity.y > 0 then
-		self.GameManager:enterRoom(self.Door, "SOUTH")
-	elseif self.y - 16 < 0 and self.PhysicsComponent.velocity.y < 0 then
-		self.GameManager:enterRoom(self.Door, "NORTH")
-	end
-
 	local Gravity = 0.5
 	if self.PhysicsComponent.bBuoyant or not self.bUnderwater then
 		self.PhysicsComponent:addForce(0, Gravity)

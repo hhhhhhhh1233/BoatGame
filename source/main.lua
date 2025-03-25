@@ -70,6 +70,20 @@ function MainGameLoop()
 
 	UISystem:clear()
 
+	-- NOTE: Moves the player to a new room if they leave the bounds
+	-- This used to be in the player but lead to some weird behavior 
+	-- with other sprites having one more frame to update even though 
+	-- they should have been deleted
+	if SceneManager.player.x > SceneManager.LevelWidth and SceneManager.player.PhysicsComponent.velocity.x > 0 then
+		SceneManager:enterRoom(SceneManager.player.Door, "EAST")
+	elseif SceneManager.player.x < 0 and SceneManager.player.PhysicsComponent.velocity.x < 0 then
+		SceneManager:enterRoom(SceneManager.player.Door, "WEST")
+	elseif SceneManager.player.y - 16 > SceneManager.LevelHeight and SceneManager.player.PhysicsComponent.velocity.y > 0 then
+		SceneManager:enterRoom(SceneManager.player.Door, "SOUTH")
+	elseif SceneManager.player.y - 16 < 0 and SceneManager.player.PhysicsComponent.velocity.y < 0 then
+		SceneManager:enterRoom(SceneManager.player.Door, "NORTH")
+	end
+
 	SceneManager:UpdatePhysicsComponentsBuoyancy()
 
 	update_timers()

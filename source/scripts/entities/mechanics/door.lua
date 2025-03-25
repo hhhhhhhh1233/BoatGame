@@ -21,14 +21,7 @@ function Door:init(x, y, entity, button)
 	self:add()
 end
 
-function Door:destructor()
-	self.bDead = true
-end
-
 function Door:update()
-	if self.bDead then
-		return
-	end
 	if self.button then
 		if self.button.bPressed then
 			self:setVisible(false)
