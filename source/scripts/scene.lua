@@ -56,7 +56,7 @@ import "scripts/entities/plant"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-local NumberOfPoints = 90
+local WaterParticleDensity = 30
 
 class('Scene').extends()
 
@@ -105,7 +105,7 @@ function Scene:init(bLoadGame)
 			level_rect = LDtk.get_rect(SaveData["CurrentLevel"])
 		end
 		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
-		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 0.2, NumberOfPoints)
+		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 0.2, WaterParticleDensity)
 		self.water.bActive = SaveData["WaterWheelCollected"]
 		self:goToLevel(SaveData["CurrentLevel"])
 		if SaveData["PlayerCorpseX"] then
@@ -116,7 +116,7 @@ function Scene:init(bLoadGame)
 		self.player = Player(0, 0, gfx.image.new("images/Boat"), 5, self)
 		local level_rect = LDtk.get_rect("Level_0")
 		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
-		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1, NumberOfPoints)
+		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1, WaterParticleDensity)
 		self:goToLevel("Level_0")
 		self.player:moveTo(self.SpawnX, self.SpawnY)
 		self.player.PhysicsComponent:setPosition(self.SpawnX, self.SpawnY)

@@ -7,7 +7,7 @@ local gfx <const> = pd.graphics
 
 class('Water').extends(gfx.sprite)
 
-function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange, NumberOfPoints)
+function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange, DistanceBetweenParticles)
 	self.height = Height
 	self.width = Width
 	self.lowerBound = LowerBound
@@ -19,8 +19,10 @@ function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange, NumberO
 	self.pointVelocity = {}
 	self.pointAcceleration = {}
 
-	for i = 1, NumberOfPoints do
-		table.insert(self.pointPositions, {(i - 1) * (self.width / NumberOfPoints), self.height})
+	self.distanceBetweenParticles = DistanceBetweenParticles
+
+	for i = 1, self.width / DistanceBetweenParticles + 2 do
+		table.insert(self.pointPositions, {(i - 1) * DistanceBetweenParticles, self.height})
 		table.insert(self.pointVelocity, {0, 0})
 		table.insert(self.pointAcceleration, {0, 0})
 	end
@@ -39,14 +41,14 @@ end
 function Water:SetWidth(newWidth)
 	self.width = newWidth
 
-	local NumberOfPoints = #self.pointPositions
-
 	self.pointPositions = {}
 	self.pointVelocity = {}
 	self.pointAcceleration = {}
 
-	for i = 1, NumberOfPoints + 1 do
-		table.insert(self.pointPositions, {(i - 1) * (self.width / NumberOfPoints), self.height})
+	-- NOTE: This +2 thing is just so that I have enough points to cover the width of the map
+	-- It should probably not be this way, but +1 probably makes since since lua is 1-indexed
+	for i = 1, self.width / self.distanceBetweenParticles + 2 do
+		table.insert(self.pointPositions, {(i - 1) * self.distanceBetweenParticles, self.height})
 		table.insert(self.pointVelocity, {0, 0})
 		table.insert(self.pointAcceleration, {0, 0})
 	end
@@ -163,12 +165,12 @@ function Water:update()
 		end
 	end
 
-	-- if pd.buttonIsPressed(pd.kButtonB) then
-	-- 	self:Poke(40, 1)
-	-- end
-	-- if pd.buttonIsPressed(pd.kButtonA) then
-	-- 	self:Poke(40, -1)
-	-- end
+	if pd.buttonIsPressed(pd.kButtonB) then
+		self:Poke(40, 1)
+	end
+	if pd.buttonIsPressed(pd.kButtonA) then
+		self:Poke(40, -1)
+	end
 	self:Spring()
 	self:UpdateWaves()
 
