@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+import "dpad-notif"
+
 class("Plant").extends(gfx.sprite)
 
 function Plant:init(x, y)
@@ -20,6 +22,8 @@ function Plant:init(x, y)
 	self:setImage(gfx.image.new("images/Plant"))
 	self:add()
 
+	self.notif = DpadNotif(x, y)
+
 	self.bCollected = false
 end
 
@@ -38,5 +42,6 @@ function Plant:interact(player)
 		self.bCollected = true
 		PopupTextBox("*SAMPLE COLLECTED*", 2000, 10)
 		self:setImage(self.image)
+		self.notif:remove()
 	end
 end
