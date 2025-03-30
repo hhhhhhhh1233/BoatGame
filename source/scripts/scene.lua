@@ -56,6 +56,8 @@ import "scripts/entities/plant"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local NumberOfPoints = 90
+
 class('Scene').extends()
 
 function Scene:init(bLoadGame)
@@ -66,6 +68,8 @@ function Scene:init(bLoadGame)
 		self.miniMap = gfx.image.new(1000, 1000)
 		self.miniMapWithHighlight = self.miniMap:copy()
 	end
+
+	self.ActivePhysicsComponents = {}
 
 	self.ui = UISystem
 	self.songManager = pd.sound.fileplayer.new()
@@ -101,7 +105,7 @@ function Scene:init(bLoadGame)
 			level_rect = LDtk.get_rect(SaveData["CurrentLevel"])
 		end
 		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
-		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 0.2)
+		self.water = Water(SaveData["WaterHeight"], self.LevelWidth, 0, self.LevelHeight, 0.2, NumberOfPoints)
 		self.water.bActive = SaveData["WaterWheelCollected"]
 		self:goToLevel(SaveData["CurrentLevel"])
 		if SaveData["PlayerCorpseX"] then
@@ -112,11 +116,12 @@ function Scene:init(bLoadGame)
 		self.player = Player(0, 0, gfx.image.new("images/Boat"), 5, self)
 		local level_rect = LDtk.get_rect("Level_0")
 		self.LevelWidth, self.LevelHeight = level_rect.width, level_rect.height
-		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1)
+		self.water = Water(100, self.LevelWidth, 0, self.LevelHeight, 0.1, NumberOfPoints)
 		self:goToLevel("Level_0")
 		self.player:moveTo(self.SpawnX, self.SpawnY)
 		self.player.PhysicsComponent:setPosition(self.SpawnX, self.SpawnY)
-		self.water.height = self.SpawnY
+		-- self.water.height = self.SpawnY
+		self.water:SetHeight(self.SpawnY)
 	end
 end
 
@@ -145,15 +150,19 @@ function Scene:enterRoom(door, direction)
 	-- Set the water height and width
 	local level_rect = LDtk.get_rect(door.TargetLevel)
 	if direction == "NORTH" then
-		self.water.height = level_rect.height - 16
+		-- self.water.height = level_rect.height - 16
+		self.water:SetHeight(level_rect.height - 16)
 	elseif direction == "SOUTH" then
-		self.water.height = 32
+		-- self.water.height = 32
+		self.water:SetHeight(32)
 		self.player.y = 32
 		self.player.PhysicsComponent.position.y = 32
 	else
-		self.water.height += yDiff
+		-- self.water.height += yDiff
+		self.water:SetHeight(self.water.height + yDiff)
 	end
-	self.water.width = level_rect.width
+	-- self.water.width = level_rect.width
+	self.water:SetWidth(level_rect.width)
 
 	-- Set the waters limits
 	self.water.lowerBound = 0 - 20
@@ -162,6 +171,7 @@ function Scene:enterRoom(door, direction)
 	self:goToLevel(door.TargetLevel)
 
 	self.player.PhysicsComponent:setPosition(self.player.x, self.player.y)
+	self:SetPhysicsComponentsPosition()
 
 	-- NOTE: Bypass the lerp so the camera snaps to place when going to new level
 	self.camera:center(self.player.x, self.player.y)
@@ -357,7 +367,8 @@ function Scene:goToLevel(level_name)
 	self.camera = Camera(self.player.x, self.player.y, 0, 0, self.LevelWidth, self.LevelHeight)
 
 	-- Sets the water stuff
-	self.water.width = level_rect.width
+	-- self.water.width = level_rect.width
+	self.water:SetWidth(level_rect.width)
 
 	-- Set the waters limits
 	self.water.lowerBound = 0 - 20
@@ -390,8 +401,31 @@ end
 function Scene:UpdatePhysicsComponentsBuoyancy()
 	for i = 1, #self.ActivePhysicsComponents do
 		if self.ActivePhysicsComponents[i].bBuoyant then
-			local buoyancyForces = CalculateBuoyancy(self.water.height, self.ActivePhysicsComponents[i].position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
+			-- local buoyancyForces = CalculateBuoyancy(self.water.height, self.ActivePhysicsComponents[i].position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
+			local buoyancyForces = CalculateBuoyancy(self.water:getHeight(self.ActivePhysicsComponents[i].position.x), self.ActivePhysicsComponents[i].position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
 			self.ActivePhysicsComponents[i]:addForce(buoyancyForces)
+
+			if buoyancyForces and buoyancyForces.y ~= 0 and self.ActivePhysicsComponents[i].velocity.y ~= 0 then
+				self.water:Poke(self.ActivePhysicsComponents[i].position.x, buoyancyForces.y * 0.3)
+			end
 		end
 	end
+end
+
+function Scene:SetPhysicsComponentsPosition()
+	-- for i = 1, #self.ActivePhysicsComponents do
+	-- 	if self.ActivePhysicsComponents[i].bBuoyant then
+	-- 		self.ActivePhysicsComponents[i]:setVelocity(0, 0)
+	--
+	-- 		local Component = self.ActivePhysicsComponents[i]
+	-- 		local _, point = Raycast(Component.position.x, Component.position.y, 0, self.water.height - Component.position.y)
+	-- 		if point then
+	-- 			print("Ray hit")
+	-- 			self.ActivePhysicsComponents[i]:setPosition(self.ActivePhysicsComponents[i].position.x, point.y)
+	-- 		else
+	-- 			print("Ray missed")
+	-- 			self.ActivePhysicsComponents[i]:setPosition(self.ActivePhysicsComponents[i].position.x, self.water.height)
+	-- 		end
+	-- 	end
+	-- end
 end
