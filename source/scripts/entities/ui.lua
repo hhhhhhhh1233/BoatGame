@@ -24,8 +24,10 @@ function UI:drawAt(func, x, y)
 	gfx.unlockFocus()
 end
 
+local EmptyImage = gfx.image.new(400, 240)
+
 function UI:clear()
-	self:setImage(gfx.image.new(400, 240))
+	self:setImage(EmptyImage)
 end
 
 

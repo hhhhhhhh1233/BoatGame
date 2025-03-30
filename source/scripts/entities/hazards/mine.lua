@@ -11,9 +11,11 @@ local gfx <const> = pd.graphics
 
 class('Mine').extends(gfx.sprite)
 
-function Mine:init(x, y, image)
+local MineImage = gfx.image.new("images/Mine")
+
+function Mine:init(x, y)
 	self:moveTo(x + 16, y + 16)
-	self:setImage(image)
+	self:setImage(MineImage)
 	self:setCollideRect(0, 0, self:getSize())
 	self.PhysicsComponent = PhysicsComponent(self.x, self.y, 10)
 

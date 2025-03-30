@@ -1,15 +1,19 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
+local imageNew <const> = gfx.image.new
+local vector2DNew <const> = pd.geometry.vector2D.new
 
 class('DiagonalEnemy').extends(gfx.sprite)
 
+local DiagonalEnemyImage = imageNew("images/DiagonalEnemy")
+
 function DiagonalEnemy:init(x, y, entity)
 	self:moveTo(x + 8, y + 8)
-	self:setImage(gfx.image.new("images/DiagonalEnemy"))
+	self:setImage(DiagonalEnemyImage)
 	self:setCollideRect(0, 0, 16, 16)
 	self:setGroups(COLLISION_GROUPS.ENEMY)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.WALL, COLLISION_GROUPS.TRIGGER, COLLISION_GROUPS.PLAYER})
-	local velocity = pd.geometry.vector2D.new(entity.fields.Direction.cx * 16 - x, entity.fields.Direction.cy * 16 - y)
+	local velocity = vector2DNew(entity.fields.Direction.cx * 16 - x, entity.fields.Direction.cy * 16 - y)
 	velocity:normalize()
 	self.xVel = velocity.x * entity.fields.Speed
 	self.yVel = velocity.y * entity.fields.Speed

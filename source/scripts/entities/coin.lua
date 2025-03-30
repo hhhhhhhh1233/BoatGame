@@ -1,5 +1,6 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
+local sampleplayerNew <const> = pd.sound.sampleplayer.new
 
 import "scripts/popupTextBox"
 import "scripts/textBox"
@@ -7,15 +8,18 @@ import "scripts/optionBox"
 
 class('Coin').extends(gfx.sprite)
 
+local CoinImage = gfx.image.new("images/Coin")
+local CoinPickupSound = sampleplayerNew("sounds/CoinPickup")
+
 function Coin:init(x, y, entity)
 	self.entity = entity
 	self:moveTo(x + 8, y + 8)
-	self:setImage(gfx.image.new("images/Coin"))
+	self:setImage(CoinImage)
 	self:setCollideRect(0, 0, 16, 16)
 	self:setGroups(COLLISION_GROUPS.PICKUPS)
 	self:setCollidesWithGroups(COLLISION_GROUPS.PLAYER)
 	self:add()
-	self.coinPickupSound = pd.sound.sampleplayer.new("sounds/CoinPickup")
+	self.coinPickupSound = CoinPickupSound
 end
 
 function Coin:update()

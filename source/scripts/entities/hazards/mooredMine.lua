@@ -11,9 +11,12 @@ local gfx <const> = pd.graphics
 
 class('MooredMine').extends(gfx.sprite)
 
-function MooredMine:init(x, y, image, entity)
+local ChainImage = gfx.image.new("images/Chain")
+local MineImage = gfx.image.new("images/Mine")
+
+function MooredMine:init(x, y, entity)
 	self:moveTo(x + 16, y + 16)
-	self:setImage(image)
+	self:setImage(MineImage)
 	self:setCollideRect(0, 0, self:getSize())
 	self.PhysicsComponent = PhysicsComponent(self.x, self.y, 10)
 
@@ -23,12 +26,12 @@ function MooredMine:init(x, y, image, entity)
 	self.AttachmentPoint.x += 16
 	self.ChainLength = self.AttachmentPoint.y - self.y--entity.fields.ChainLength
 	self:add()
-	self.chainImage = gfx.image.new("images/Chain")
+	self.chainImage = ChainImage
 
 end
 
 function MooredMine:update()
-	self.PhysicsComponent:addForce(pd.geometry.vector2D.new(0, 0.5))
+	self.PhysicsComponent:addForce(0, 0.5)
 	self.PhysicsComponent:move(self)
 
 	local chainPixelLength = (self.PhysicsComponent.position - self.AttachmentPoint):magnitude()
@@ -38,9 +41,11 @@ function MooredMine:update()
 	end
 
 	if (self.AttachmentPoint - self.PhysicsComponent.position):magnitude() > self.ChainLength then
-		self.PhysicsComponent.position = self.AttachmentPoint + pd.geometry.vector2D.new(0, -self.ChainLength)
+		self.PhysicsComponent.position.x = self.AttachmentPoint.x
+		self.PhysicsComponent.position.y = self.AttachmentPoint.y + -self.ChainLength
 		self.x, self.y = self.PhysicsComponent.position.x, self.PhysicsComponent.position.y
-		self.PhysicsComponent.velocity = pd.geometry.vector2D.new(0, 0)
+		self.PhysicsComponent.velocity.x = 0
+		self.PhysicsComponent.velocity.y = 0
 	end
 end
 

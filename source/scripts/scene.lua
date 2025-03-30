@@ -56,7 +56,7 @@ import "scripts/entities/plant"
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-local WaterParticleDensity = 30
+local WaterParticleDensity = 50
 
 class('Scene').extends()
 
@@ -265,11 +265,11 @@ function Scene:goToLevel(level_name)
 		if entityName == "RoomTransition" then
 			self.entityInstance[entity.iid] = DoorTrigger(entityX, entityY, entity)
 		elseif entityName == "Mine" then
-			local MineInstance = Mine(entityX, entityY, gfx.image.new("images/Mine"))
+			local MineInstance = Mine(entityX, entityY)
 			table.insert(self.ActivePhysicsComponents, MineInstance.PhysicsComponent)
 			self.entityInstance[entity.iid] = MineInstance
 		elseif entityName == "MooredMine" then
-			local MineInstance = MooredMine(entityX, entityY, gfx.image.new("images/Mine"), entity)
+			local MineInstance = MooredMine(entityX, entityY, entity)
 			table.insert(self.ActivePhysicsComponents, MineInstance.PhysicsComponent)
 			self.entityInstance[entity.iid] = MineInstance
 		elseif entityName == "SpawnPoint" then

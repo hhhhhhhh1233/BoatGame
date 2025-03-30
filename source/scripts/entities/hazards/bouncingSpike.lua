@@ -1,12 +1,14 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local BouncingSpikeImage = gfx.image.new("images/BouncingSpike")
+
 class('BouncingSpike').extends(gfx.sprite)
 
 function BouncingSpike:init(x, y, entity)
 	self:moveTo(x + 16, y + 16)
 	self.entity = entity
-	self:setImage(gfx.image.new("images/BouncingSpike"))
+	self:setImage(BouncingSpikeImage)
 	self:setCollideRect(0, 0, 32, 32)
 	self:setGroups(COLLISION_GROUPS.ENEMY)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PROJECTILE, COLLISION_GROUPS.WALL, COLLISION_GROUPS.TRIGGER, COLLISION_GROUPS.PLAYER})
