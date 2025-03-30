@@ -27,6 +27,22 @@ function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange, Distanc
 		table.insert(self.pointAcceleration, {0, 0})
 	end
 
+	self.waterImage = gfx.image.new(400, 400)
+	gfx.pushContext(self.waterImage)
+	-- TODO: MAKE THIS THE SHAPE OF THE WATER INSTEAD OF JUST A RECT
+		gfx.fillRect(0, self.lowerBound, self.width, self.upperBound - self.height)
+	gfx.popContext()
+
+	local ditherMask = self.waterImage:getMaskImage():copy()
+
+	gfx.pushContext(ditherMask)
+		gfx.setColor(gfx.kColorBlack)
+		gfx.setDitherPattern(0.1, gfx.image.kDitherTypeBayer8x8)
+		gfx.fillRect(0, 0, ditherMask:getSize())
+	gfx.popContext()
+
+	self.waterImage:setMaskImage(ditherMask)
+
 	self:add()
 end
 
@@ -181,21 +197,6 @@ function Water:update()
 		gfx.drawLine(self.pointPositions[i][1], self.pointPositions[i][2] + 1, self.pointPositions[i + 1][1], self.pointPositions[i + 1][2] + 1)
 	end
 
-	local waterImage = gfx.image.new(self.width, 400)
-	gfx.pushContext(waterImage)
-	-- TODO: MAKE THIS THE SHAPE OF THE WATER INSTEAD OF JUST A RECT
-		gfx.fillRect(0, self.lowerBound, self.width, self.upperBound - self.height)
-	gfx.popContext()
-
-	local waterMask = waterImage:getMaskImage():copy()
-	local ditherMask = waterMask:copy()
-
-	gfx.pushContext(ditherMask)
-		gfx.setColor(gfx.kColorBlack)
-		gfx.setDitherPattern(0.1, gfx.image.kDitherTypeBayer8x8)
-		gfx.fillRect(0, 0, ditherMask:getSize())
-	gfx.popContext()
-
-	waterImage:setMaskImage(ditherMask)
-	waterImage:draw(0, self.height)
+	local _, yOffset = gfx.getDrawOffset()
+	self.waterImage:drawIgnoringOffset(0, self.height + yOffset)
 end
