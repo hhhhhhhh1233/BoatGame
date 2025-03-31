@@ -53,15 +53,15 @@ pd.timer.keyRepeatTimerWithDelay(0, 800, function ()
 	end
 end)
 
-local menu = pd.getSystemMenu()
-local menuItem, error = menu:addMenuItem("Clear Save", ClearSave)
-local menuItem2, error = menu:addMenuItem("View Map", function ()
-	SceneManager:DeactivatePhysicsComponents()
-	MiniMapViewer(SceneManager)
-end)
-local menuItem3, error = menu:addMenuItem("Debug Rooms", function ()
-	SceneManager:goToLevel("DebugRoom_MPlatform")
-end)
+-- local menu = pd.getSystemMenu()
+-- local menuItem, error = menu:addMenuItem("Clear Save", ClearSave)
+
+-- TODO: I commented out the map because I don't like how it looks,
+-- Try to come up with a new look so it can be brought back
+-- local menuItem2, error = menu:addMenuItem("View Map", function ()
+-- 	SceneManager:DeactivatePhysicsComponents()
+-- 	MiniMapViewer(SceneManager)
+-- end)
 
 
 local mainMenu = MainMenu()
