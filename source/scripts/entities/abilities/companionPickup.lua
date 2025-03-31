@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local PickupSound = pd.sound.sampleplayer.new("sounds/ImportantCollectible")
+
 class('CompanionPickup').extends(gfx.sprite)
 
 function CompanionPickup:init(x, y, entity)
@@ -15,6 +17,7 @@ end
 
 function CompanionPickup:pickup(player)
 	PopupTextBox("*COMPANION*\nHelps you feel less lonely in these trying times", 3000, 20)
+	PickupSound:play()
 	player.companion = Companion(player.x, player.y, player)
 	player.GameManager:collect(self.entity.iid)
 	self:remove()

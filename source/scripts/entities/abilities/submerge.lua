@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local PickupSound = pd.sound.sampleplayer.new("sounds/ImportantCollectible")
+
 class('Submerge').extends(gfx.sprite)
 
 function Submerge:init(x, y, entity)
@@ -15,6 +17,7 @@ end
 
 function Submerge:pickup(player)
 	PopupTextBox("*SUBMERGE*\nCan now dive underwater with the d-pad", 3000, 20)
+	PickupSound:play()
 	player.bHasSubmerge = true
 	player.GameManager:collect(self.entity.iid)
 	self:remove()

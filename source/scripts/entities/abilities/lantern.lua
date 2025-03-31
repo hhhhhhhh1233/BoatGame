@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local PickupSound = pd.sound.sampleplayer.new("sounds/ImportantCollectible")
+
 class('Lantern').extends(gfx.sprite)
 
 function Lantern:init(x, y, entity)
@@ -15,6 +17,7 @@ end
 
 function Lantern:pickup(player)
 	PopupTextBox("*LANTERN*\nHelps make the dark more bearable", 3000, 20)
+	PickupSound:play()
 	player.lightRadius = 200
 	player.GameManager:collect(self.entity.iid)
 	self:remove()

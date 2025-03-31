@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local PickupSound = pd.sound.sampleplayer.new("sounds/ImportantCollectible")
+
 class('ChangeSizeDevice').extends(gfx.sprite)
 
 function ChangeSizeDevice:init(x, y, entity)
@@ -15,6 +17,7 @@ end
 
 function ChangeSizeDevice:pickup(player)
 	PopupTextBox("*SIZE CHANGING DEVICE*\nHold A to and up or down to change size", 3000, 20)
+	PickupSound:play()
 	player.bHasChangeSizeDevice = true
 	player.GameManager:collect(self.entity.iid)
 	self:remove()

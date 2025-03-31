@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local PickupSound = pd.sound.sampleplayer.new("sounds/ImportantCollectible")
+
 class('WaterWheel').extends(gfx.sprite)
 
 function WaterWheel:init(x, y, entity, water)
@@ -17,6 +19,7 @@ end
 
 function WaterWheel:pickup(player)
 	PopupTextBox("*WATER WHEEL*\nCrank to change the water level", 3000, 20)
+	PickupSound:play()
 	self.water.bActive = true
 	self.entity.fields.PickedUp = true
 	player.GameManager:collect(self.entity.iid)

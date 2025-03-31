@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local PickupSound = pd.sound.sampleplayer.new("sounds/ImportantCollectible")
+
 class('Interest').extends(gfx.sprite)
 
 function Interest:init(x, y, entity)
@@ -15,6 +17,7 @@ end
 
 function Interest:pickup(player)
 	PopupTextBox("*INTEREST*\nAccrue both health and wealth over time", 3000, 20)
+	PickupSound:play()
 	player.bHasInterest = true
 	player.GameManager:collect(self.entity.iid)
 	self:remove()

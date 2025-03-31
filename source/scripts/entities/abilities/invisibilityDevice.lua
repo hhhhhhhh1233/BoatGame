@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local PickupSound = pd.sound.sampleplayer.new("sounds/ImportantCollectible")
+
 class('InvisibilityDevice').extends(gfx.sprite)
 
 function InvisibilityDevice:init(x, y, entity)
@@ -15,6 +17,7 @@ end
 
 function InvisibilityDevice:pickup(player)
 	PopupTextBox("*INVISIBILITY DEVICE*\nHold B to turn invisible", 3000, 20)
+	PickupSound:play()
 	player.bHasInvisibilityDevice = true
 	player.GameManager:collect(self.entity.iid)
 	self:remove()

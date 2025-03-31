@@ -1,6 +1,8 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
+local PickupSound = pd.sound.sampleplayer.new("sounds/ImportantCollectible")
+
 class('WheelPickup').extends(gfx.sprite)
 
 function WheelPickup:init(x, y, entity)
@@ -15,6 +17,7 @@ end
 
 function WheelPickup:pickup(player)
 	PopupTextBox("*WHEELS*\nLet's you drive around out of the water", 3000, 20)
+	PickupSound:play()
 	player.bHasWheels = true
 	player.GameManager:collect(self.entity.iid)
 	self:remove()
