@@ -24,10 +24,10 @@ function Intro:init()
 	gfx.unlockFocus()
 	local planetSurfaceImage = gfx.image.new("images/PlanetSurface")
 
-	self.slideShow = {	{planetSpaceImage, {"", "In the year 202X, a rogue planet\nsuddenly appears in the solar system", "The Planet's sudden appearance\n sparked our curiosity"}, 50},
-						{allBlackImage, {"It was no larger than the moon,\nbut the interesting aspect of it..."}, 0},
-						{planetSurfaceImage, {"The planet was coated\nin oceans and mountains", "An environment\nplenty suitable to life"}, 50},
-						{allBlackImage, {"So we created you, a rover that can maneuver\nthese oceans and collect samples for us", "We name you Gumption,\nwe believe in you, don't let us down"}, 0}}
+	self.slideShow = {	{planetSpaceImage, {"", "In the year 202X, a rogue planet\nsuddenly appears in the solar system", "The Planet's sudden appearance\ndemanded our curiosity"}, 50},
+						{allBlackImage, {"It was no larger than the moon,\nbut the interloper had a secret..."}, 0},
+						{planetSurfaceImage, {"The planet was coated\nin oceans and mountains", "An environment\nplenty suitable for life"}, 50},
+						{allBlackImage, {"So we created you, a rover that can maneuver\nthese oceans and collect samples for us", "We call you Brave,\nwe believe in you, don't let us down"}, 0}}
 	self.currentSlide = 1
 	self.currentString = 1
 

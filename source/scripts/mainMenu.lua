@@ -45,7 +45,7 @@ function MainMenu:init()
 	end
 	self:setZIndex(-1000)
 	self:add()
-	self.water = Water(210, 400, 150, 220, 0.2, 30)
+	self.water = Water(180, 400, 150, 220, 0.2, 30)
 	self.water.bActive = true
 
 	local delay = 500
@@ -55,7 +55,7 @@ function MainMenu:init()
 	end)
 	tm.repeats = true
 
-	self.player = DummyPlayer(270, 130, gfx.image.new("images/Boat"), 5)
+	self.player = DummyPlayer(270, 140, gfx.image.new("images/Boat"), 5)
 	self.player:add()
 end
 
@@ -87,7 +87,11 @@ function MainMenu:update()
 		self.grid:drawInRect(0, 50, 235 - 60, 240 - 60 - 50)
 	end
 
-	gfx.drawTextInRect("*BOAT GAME*", 220 + 10 * math.sin(pd.getElapsedTime()), 80, 100, 100, nil, nil, kTextAlignment.center)
+	local TitleImage = gfx.image.new(100, 100)
+	gfx.pushContext(TitleImage)
+	gfx.drawTextInRect("*BRAVE THE INTERLOPER*", 0, 0, 100, 100, nil, nil, kTextAlignment.center)
+	gfx.popContext()
+	TitleImage:drawScaled(180, 40 + 5 * math.sin(pd.getElapsedTime() * 3), 2)
 
 	local buoyancyForces = CalculateBuoyancy(self.water:getHeight(self.player.PhysicsComponent.position.x), self.player.PhysicsComponent.position.y, 50, 0.3, 5.5, self.player.PhysicsComponent)
 	self.player.PhysicsComponent:addForce(buoyancyForces)
