@@ -29,6 +29,7 @@ import "scripts/scene"
 import "scripts/entities/ui"
 import "scripts/miniMapViewer"
 import "scripts/mainMenu"
+import "scripts/intro"
 
 
 local pd <const> = playdate
@@ -90,6 +91,9 @@ function MainGameLoop()
 	sprite_update()
 	pd.frameTimer.updateTimers()
 
+	-- NOTE: Update camera, moved out of the player
+	SceneManager.camera:lerp(SceneManager.player.x, SceneManager.player.y, 0.2)
+
 	pd.drawFPS(0, 0)
 end
 
@@ -99,6 +103,8 @@ if pd.isSimulator then
 	LDtk.export_to_lua_files()
 end
 
+local intro
+
 function MainMenuLoop()
 	gfx.clear(gfx.kColorWhite)
 
@@ -107,7 +113,29 @@ function MainMenuLoop()
 	pd.frameTimer.updateTimers()
 
 	if mainMenu.done then
+		if not mainMenu.loadGame then
+			intro = Intro()
+			pd.update = IntroLoop
+		else
+			if not pd.isSimulator then
+				LDtk.load("levels/world.ldtk", true)
+			end
+			SceneManager = Scene(mainMenu.loadGame)
+			pd.update = MainGameLoop
+		end
+	end
+end
+
+function IntroLoop()
+	gfx.clear(gfx.kColorWhite)
+
+	update_timers()
+	sprite_update()
+	pd.frameTimer.updateTimers()
+
+	if intro.done then
 		-- NOTE: On real hardware don't bother loading until someone starts the game
+
 		if not pd.isSimulator then
 			LDtk.load("levels/world.ldtk", true)
 		end

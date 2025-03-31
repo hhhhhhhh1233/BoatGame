@@ -307,8 +307,6 @@ function Player:update()
 		end
 	end
 
-	self.GameManager.camera:lerp(self.x, self.y, 0.2)
-
 	self:DrawHealthBar()
 
 	if self.Invincible > 0 then
