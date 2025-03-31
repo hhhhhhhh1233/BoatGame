@@ -29,8 +29,9 @@ function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange, Distanc
 
 	self.waterImage = gfx.image.new(400, 400)
 	gfx.pushContext(self.waterImage)
+		gfx.setColor(gfx.kColorBlack)
 	-- TODO: MAKE THIS THE SHAPE OF THE WATER INSTEAD OF JUST A RECT
-		gfx.fillRect(0, self.lowerBound, self.width, self.upperBound - self.height)
+		gfx.fillRect(0, 0, self.width, 240)
 	gfx.popContext()
 
 	local ditherMask = self.waterImage:getMaskImage():copy()

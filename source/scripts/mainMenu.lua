@@ -3,6 +3,7 @@ local gfx <const> = pd.graphics
 
 import "CoreLibs/nineslice"
 import "scripts/saves"
+import "scripts/water"
 
 class('MainMenu').extends(gfx.sprite)
 
@@ -31,31 +32,35 @@ function MainMenu:init()
 	function self.grid:drawCell(section, row, column, selected, x, y, width, height)
 		gfx.setColor(gfx.kColorBlack)
 		if selected then
-			-- gfx.fillRect(x, y, width, height)
 			ns:drawInRect(x, y, width, height)
-			-- TODO: This looks sort of cool but it's too big
-			-- local boatImage = gfx.image.new("images/Boat")
-			-- boatImage:setInverted(true)
-			-- boatImage:draw(x + 10, y + height / 2 - 16)
 			gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
 			gfx.setColor(gfx.kColorWhite)
 			gfx.drawTextInRect("*"..options[row].."*", x, y + (height/2) - 5 + 3 * math.sin(7 * pd.getElapsedTime()), width, height, nil, nil, kTextAlignment.center)
 		else
 			gfx.setImageDrawMode(gfx.kDrawModeCopy)
 			nsBlank:drawInRect(x, y, width, height)
-			-- gfx.drawRect(x, y, width, height)
 			gfx.drawTextInRect(options[row], x, y + (height/2) - 5, width, height, nil, nil, kTextAlignment.center)
 		end
 	end
-	self:setZIndex(10)
+	self:setZIndex(-1000)
 	self:add()
+	self.water = Water(210, 400, 150, 220, 0.2, 30)
+	self.water.bActive = true
+
+	local delay = 500
+	local magnitude = 2
+	local tm = pd.timer.performAfterDelay(delay, function ()
+		self.water:Poke(math.random(0, 400), math.random(-magnitude, magnitude))
+	end)
+	tm.repeats = true
 end
 
 local movingSound = pd.sound.sampleplayer.new("sounds/ChangingSelection")
 local decisionSound = pd.sound.sampleplayer.new("sounds/SelectionMade")
 local mainMenuTrack = pd.sound.fileplayer.new("sounds/songs/MainMenuLoop")
 mainMenuTrack:play(0)
-local waterHeightDiff = 0
+
+
 function MainMenu:update()
 	if pd.buttonJustPressed(pd.kButtonDown) then
 		self.grid:selectNextRow(false)
@@ -71,22 +76,24 @@ function MainMenu:update()
 		self.done = true
 		self.loadGame = self.options[row] == "Continue"
 	end
-	gfx.lockFocus(self:getImage())
-	gfx.setColor(gfx.kColorWhite)
-	gfx.fillRect(0, 0, 400, 240)
+
 	if #self.options == 2 then
 		self.grid:drawInRect(0, 0, 235 - 60, 240 - 60)
 	else
 		self.grid:drawInRect(0, 50, 235 - 60, 240 - 60 - 50)
 	end
+
 	gfx.drawTextInRect("*BOAT GAME*", 220 + 10 * math.sin(pd.getElapsedTime()), 80, 100, 100, nil, nil, kTextAlignment.center)
+
 	local boatImage = gfx.image.new("images/Boat")
-	local change, _ = pd.getCrankChange()
-	waterHeightDiff -= change/10
-	waterHeightDiff = Clamp(waterHeightDiff, -20, 20)
 	boatImage:setInverted(true)
-	boatImage:drawScaled(230 + 30 * math.sin(0.3*pd.getElapsedTime()), waterHeightDiff + 160 + 5 * math.sin(1.7 * pd.getElapsedTime()), 1)
+
+
+	local xPoint = 230 + 30 * math.sin(0.3*pd.getElapsedTime())
+
+	if pd.buttonJustPressed(pd.kButtonB) then
+		self.water:Poke(math.random(0, 400), 10)
+	end
+	boatImage:drawScaled(xPoint, self.water:getHeight(xPoint) - 32, 1)
 	gfx.setColor(gfx.kColorBlack)
-	gfx.fillRect(0, waterHeightDiff + 190 + 5 * math.sin(1.7 * pd.getElapsedTime()), 400, 240)
-	gfx.unlockFocus()
 end
