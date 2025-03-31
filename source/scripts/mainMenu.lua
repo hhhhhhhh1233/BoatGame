@@ -4,6 +4,7 @@ local gfx <const> = pd.graphics
 import "CoreLibs/nineslice"
 import "scripts/saves"
 import "scripts/water"
+import "scripts/entities/dummyPlayer"
 
 class('MainMenu').extends(gfx.sprite)
 
@@ -53,6 +54,9 @@ function MainMenu:init()
 		self.water:Poke(math.random(0, 400), math.random(-magnitude, magnitude))
 	end)
 	tm.repeats = true
+
+	self.player = DummyPlayer(270, 130, gfx.image.new("images/Boat"), 5)
+	self.player:add()
 end
 
 local movingSound = pd.sound.sampleplayer.new("sounds/ChangingSelection")
@@ -85,15 +89,14 @@ function MainMenu:update()
 
 	gfx.drawTextInRect("*BOAT GAME*", 220 + 10 * math.sin(pd.getElapsedTime()), 80, 100, 100, nil, nil, kTextAlignment.center)
 
-	local boatImage = gfx.image.new("images/Boat")
-	boatImage:setInverted(true)
+	local buoyancyForces = CalculateBuoyancy(self.water:getHeight(self.player.PhysicsComponent.position.x), self.player.PhysicsComponent.position.y, 50, 0.3, 5.5, self.player.PhysicsComponent)
+	self.player.PhysicsComponent:addForce(buoyancyForces)
 
-
-	local xPoint = 230 + 30 * math.sin(0.3*pd.getElapsedTime())
+	-- NOTE: Limits the player to the main menu range, disallowing them from going too far left or right
+	self.player.PhysicsComponent.position.x = Clamp(self.player.PhysicsComponent.position.x, -32, 432)
 
 	if pd.buttonJustPressed(pd.kButtonB) then
 		self.water:Poke(math.random(0, 400), 10)
 	end
-	boatImage:drawScaled(xPoint, self.water:getHeight(xPoint) - 32, 1)
 	gfx.setColor(gfx.kColorBlack)
 end

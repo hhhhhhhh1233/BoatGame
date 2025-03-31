@@ -98,15 +98,9 @@ function Water:getHeight(x)
 	-- what percentage of the force each point should have.
 	local diffRatio = affectedIndex - lowerAffected
 
-	if lowerAffected > #self.pointPositions then
-		lowerAffected = #self.pointPositions
-	end
-	if higherAffected > #self.pointPositions then
-		higherAffected = #self.pointPositions
-	end
-	if affectedIndex > #self.pointPositions then
-		affectedIndex = #self.pointPositions
-	end
+	lowerAffected = Clamp(lowerAffected, 1, #self.pointPositions)
+	higherAffected = Clamp(higherAffected, 1, #self.pointPositions)
+	affectedIndex = Clamp(affectedIndex, 1, #self.pointPositions)
 
 	if lowerAffected ~= higherAffected then
 		return self.pointPositions[lowerAffected][2] + (self.pointPositions[higherAffected][2] - self.pointPositions[lowerAffected][2]) * diffRatio
