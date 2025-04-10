@@ -3,7 +3,7 @@ local gfx <const> = playdate.graphics
 
 class('TextBox').extends(gfx.sprite)
 
-function TextBox:init(message, padding, callback, heightOffset)
+function TextBox:init(message, padding, callback, heightOffset, zIndex)
 	if SceneManager then
 		SceneManager.player.bActive = false
 		SceneManager.water.bActive = false
@@ -14,7 +14,11 @@ function TextBox:init(message, padding, callback, heightOffset)
 	local sprite = gfx.image.new(self.width + 2 * padding + 20, self.height + 2 * padding + 20)
 	local sprite2
 
-	self:setZIndex(100)
+	if zIndex then
+		self:setZIndex(zIndex)
+	else
+		self:setZIndex(100)
+	end
 	self:setIgnoresDrawOffset(true)
 	gfx.lockFocus(sprite)
 	local ns = gfx.nineSlice.new("images/WallResizable", 5, 5, 6, 6)

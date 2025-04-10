@@ -39,6 +39,7 @@ end
 
 function Plant:interact(player)
 	if not self.bCollected then
+		player.sampleCollection[1] = {name = "Plant", description = "Grows in places", iconPath = "images/Plant", worldImagePath = "images/Plant"}
 		self.bCollected = true
 		PopupTextBox("*SAMPLE COLLECTED*", 2000, 10)
 		self:setImage(self.image)

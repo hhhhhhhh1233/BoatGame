@@ -47,10 +47,14 @@ function Player:init(x, y, image, speed, gameManager)
 
 	self.lightRadius = 50
 
-
 	self.boatImage = gfx.image.new("images/Boat")
 	self.wheelBoatImage = gfx.image.new("images/WheelBoat")
 	self.currentImage = self.boatImage
+
+	self.sampleCollection = {}
+	for i = 1, 21 do
+		table.insert(self.sampleCollection, {name = "???", description = "Undiscovered", iconPath = "images/QuestionMark", worldImagePath = "images/QuestionMark"})
+	end
 end
 
 function Player:damage(amount, iFrames)

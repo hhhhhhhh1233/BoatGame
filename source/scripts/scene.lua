@@ -52,6 +52,7 @@ import "scripts/entities/savePoint"
 import "scripts/entities/ui"
 import "scripts/entities/companion"
 import "scripts/entities/plant"
+import "scripts/entities/sample"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -68,6 +69,16 @@ function Scene:init(bLoadGame)
 		self.miniMap = gfx.image.new(1000, 1000)
 		self.miniMapWithHighlight = self.miniMap:copy()
 	end
+
+	self.menu = pd.getSystemMenu()
+	self.menuItem, self.error = self.menu:addMenuItem("Swap Crank", function()
+		self.water.bOldSystem = not self.water.bOldSystem
+	end)
+
+	self.menuItem2, error = self.menu:addMenuItem("View Samples", function ()
+		self:DeactivatePhysicsComponents()
+		CollectionMenu(self)
+	end)
 
 	self.ActivePhysicsComponents = {}
 
@@ -347,6 +358,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = BouncingSpike(entityX, entityY, entity)
 		elseif entityName == "Plant" then
 			self.entityInstance[entity.iid] = Plant(entityX, entityY)
+		elseif entityName == "Sample" then
+			self.entityInstance[entity.iid] = Sample(entityX, entityY, entity)
 		end
 	end
 

@@ -8,6 +8,7 @@ local gfx <const> = pd.graphics
 class('Water').extends(gfx.sprite)
 
 function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange, DistanceBetweenParticles)
+	self.bOldSystem = true
 	self.height = Height
 	self.width = Width
 	self.lowerBound = LowerBound
@@ -166,13 +167,32 @@ end
 
 function Water:update()
 	if self.bActive then
-		local change, _ = pd.getCrankChange()
-		local oldHeight = self.height
-		self.height -= change * self.rateOfChange
-		self.height = Clamp(self.height, self.lowerBound, self.upperBound)
-		local changeInHeight = self.height - oldHeight
-		for i = 1, #self.pointPositions do
-			self.pointPositions[i][2] += changeInHeight
+		if self.bOldSystem then
+			local change, _ = pd.getCrankChange()
+			local oldHeight = self.height
+			self.height -= change * self.rateOfChange
+			self.height = Clamp(self.height, self.lowerBound, self.upperBound)
+			local changeInHeight = self.height - oldHeight
+			for i = 1, #self.pointPositions do
+				self.pointPositions[i][2] += changeInHeight
+			end
+		else
+			local change = 0
+			local CrankPosition = pd.getCrankPosition()
+			if 5 < CrankPosition and CrankPosition < 180 then
+				change = CrankPosition - 5
+			elseif 180 < CrankPosition and CrankPosition < 355 then
+				change = -(355 - CrankPosition)
+			end
+			change *= 0.6
+
+			local oldHeight = self.height
+			self.height -= change * self.rateOfChange
+			self.height = Clamp(self.height, self.lowerBound, self.upperBound)
+			local changeInHeight = self.height - oldHeight
+			for i = 1, #self.pointPositions do
+				self.pointPositions[i][2] += changeInHeight
+			end
 		end
 	end
 

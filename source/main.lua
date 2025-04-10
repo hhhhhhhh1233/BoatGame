@@ -28,6 +28,7 @@ import "scripts/water"
 import "scripts/scene"
 import "scripts/entities/ui"
 import "scripts/miniMapViewer"
+import "scripts/collectionMenu"
 import "scripts/mainMenu"
 import "scripts/intro"
 
@@ -53,16 +54,11 @@ pd.timer.keyRepeatTimerWithDelay(0, 800, function ()
 	end
 end)
 
--- local menu = pd.getSystemMenu()
--- local menuItem, error = menu:addMenuItem("Clear Save", ClearSave)
+local menu = pd.getSystemMenu()
+local menuItem, error = menu:addMenuItem("Clear Save", ClearSave)
 
 -- TODO: I commented out the map because I don't like how it looks,
 -- Try to come up with a new look so it can be brought back
--- local menuItem2, error = menu:addMenuItem("View Map", function ()
--- 	SceneManager:DeactivatePhysicsComponents()
--- 	MiniMapViewer(SceneManager)
--- end)
-
 
 local mainMenu = MainMenu()
 
