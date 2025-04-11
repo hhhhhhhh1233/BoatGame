@@ -20,6 +20,8 @@ function SavePoint:init(x, y, level)
 	self:add()
 	self.bCanSave = true
 	self.saveSound = pd.sound.sampleplayer.new("sounds/SaveJingle")
+
+	self.notif = DpadNotif(x, y, 32, 32)
 end
 
 function SavePoint:update()
@@ -27,27 +29,22 @@ function SavePoint:update()
 
 	-- NOTE: This is kinda a hacky way to make the collision not move around while the save point bounces
 	self:setCollideRect(0, self.originalY - self.y, 32, 32)
-
-	self.bCanSave = not self.bCollidingWithPlayer
-	self.bCollidingWithPlayer = false
-	local collisions = self:overlappingSprites()
-	for _, sprite in ipairs(collisions) do
-		if sprite:isa(Player) then
-			self.bCollidingWithPlayer = true
-			self.player = sprite
-		end
-	end
-
-	if self.bCollidingWithPlayer and self.bCanSave then
-		self.player.savePoint = self
-		self.player.Health = 100
-		self:save(self.player.GameManager)
-		self.bCanSave = false
-	end
 end
 
 function SavePoint:save(GameManager)
 	PopupTextBox("*SAVED*", 2000, 10)
 	self.saveSound:play()
 	SaveGame(GameManager)
+end
+
+function SavePoint:interact(player)
+	if self.bCanSave then
+		player.savePoint = self
+		player.Health = 100
+		self:save(player.GameManager)
+		self.bCanSave = false
+		pd.frameTimer.performAfterDelay(30, function()
+			self.bCanSave = true
+		end)
+	end
 end
