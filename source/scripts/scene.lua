@@ -122,6 +122,11 @@ function Scene:init(bLoadGame)
 		if SaveData["PlayerCorpseX"] then
 			self.playerCorpse = PlayerCorpse(SaveData["PlayerCorpseX"], SaveData["PlayerCorpseY"], SaveData["PlayerCorpseLevel"], self, SaveData["PlayerCorpseCoins"], SaveData["PlayerCorpseDirection"])
 		end
+
+		-- If the data exists then put it on the player
+		if SaveData["SampleCollection"] then
+			self.player.sampleCollection = SaveData["SampleCollection"]
+		end
 	else
 		self.collectedEntities = {}
 		self.player = Player(0, 0, gfx.image.new("images/Boat"), 5, self)
@@ -359,7 +364,7 @@ function Scene:goToLevel(level_name)
 		elseif entityName == "Plant" then
 			self.entityInstance[entity.iid] = Plant(entityX, entityY)
 		elseif entityName == "Sample" then
-			self.entityInstance[entity.iid] = Sample(entityX, entityY, entity)
+			self.entityInstance[entity.iid] = Sample(entityX, entityY, entity, self.collectedEntities[entity.iid])
 		end
 	end
 

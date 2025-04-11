@@ -5,7 +5,7 @@ import "dpad-notif"
 
 class("Sample").extends(gfx.sprite)
 
-function Sample:init(x, y, entity)
+function Sample:init(x, y, entity, collected)
 	self:setCollideRect(0, 0, entity.size.width, entity.size.height)
 
 	self:setZIndex(-1)
@@ -48,7 +48,7 @@ function Sample:init(x, y, entity)
 	self.iconPath = IconPath
 	self.worldImagePath = WorldImagePath
 
-	self.bCollected = self.entity.fields.Collected
+	self.bCollected = self.entity.fields.Collected or collected
 	if not self.bCollected then
 		self.notif = DpadNotif(x, y, entity.size.width, entity.size.height)
 	end
@@ -72,6 +72,7 @@ function Sample:interact(player)
 		self.entity.fields.Collected = true
 		player.sampleCollection[self.id] = {name = self.name, description = self.description, iconPath = self.iconPath, worldImagePath = self.worldImagePath}
 		self.bCollected = true
+		player.GameManager:collect(self.entity.iid)
 		PopupTextBox("*"..self.name.." Collected*", 2000, 10)
 		self:setImage(self.image)
 		self.notif:remove()

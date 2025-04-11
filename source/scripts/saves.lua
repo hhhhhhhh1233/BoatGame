@@ -58,6 +58,8 @@ function SaveGame(GameManager)
 		SaveData["PlayerCorpseLevel"] = GameManager.playerCorpse.level
 	end
 
+	SaveData["SampleCollection"] = GameManager.player.sampleCollection
+
 	if GameManager.player.companion then
 		SaveData["PlayerHasCompanion"] = true
 	end
