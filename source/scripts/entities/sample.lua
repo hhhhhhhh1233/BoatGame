@@ -25,7 +25,22 @@ function Sample:init(x, y, entity)
 	self:setImage(gfx.image.new(WorldImagePath))
 	self:add()
 
+	self.sparklePoints = {}
 	self.width, self.height = self.image:getSize()
+	local numberOfTiles = (self.width / 32) * (self.height / 32)
+	local tilesToAdd = numberOfTiles / 2
+	if self.width > 32 or self.height > 32 then
+		-- NOTE: This draws the sparkles all over the image, doesn't look great though
+		for x = 0, self.width / 32 do
+			for y = 0, self.height / 32 do
+				if math.random(2) > 1 then
+					table.insert(self.sparklePoints, {x * 32, y * 32})
+				end
+			end
+		end
+	else
+		self.sparklePoints = {{0, 0}}
+	end
 
 	self.name = entity.fields.Name
 	self.id = entity.fields.ID
@@ -44,11 +59,8 @@ function Sample:update()
 		gfx.lockFocus(self:getImage())
 		self.image:draw(0,0)
 
-		-- NOTE: This draws the sparkles all over the image, doesn't look great though
-		for x = 0, self.width / 32 do
-			for y = 0, self.height / 32 do
-				self.animationLoop:draw(x * 32, y * 32)
-			end
+		for i = 1, #self.sparklePoints do
+			self.animationLoop:draw(self.sparklePoints[i][1], self.sparklePoints[i][2])
 		end
 
 		gfx.unlockFocus()

@@ -6434,41 +6434,6 @@
 							],
 							"__worldX": 272,
 							"__worldY": 112
-						},
-						{
-							"__identifier": "Sample",
-							"__grid": [10,10],
-							"__pivot": [0,0],
-							"__tags": [],
-							"__tile": null,
-							"__smartColor": "#F6757A",
-							"iid": "94874170-1030-11f0-80bf-05910402e6d5",
-							"width": 32,
-							"height": 32,
-							"defUid": 480,
-							"px": [160,160],
-							"fieldInstances": [
-								{ "__identifier": "Name", "__type": "String", "__value": "Curly Plant", "__tile": null, "defUid": 481, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["Curly Plant"]
-								}] },
-								{ "__identifier": "Description", "__type": "String", "__value": "Seems to grow from the ground in a curious manner", "__tile": null, "defUid": 482, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["Seems to grow from the ground in a curious manner"]
-								}] },
-								{ "__identifier": "ID", "__type": "Int", "__value": 1, "__tile": null, "defUid": 485, "realEditorValues": [] },
-								{ "__identifier": "Collected", "__type": "Bool", "__value": false, "__tile": null, "defUid": 486, "realEditorValues": [] },
-								{ "__identifier": "IconPath", "__type": "FilePath", "__value": "../images/Plant.png", "__tile": null, "defUid": 487, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["../images/Plant.png"]
-								}] },
-								{ "__identifier": "WorldImagePath", "__type": "FilePath", "__value": "../images/Plant.png", "__tile": null, "defUid": 488, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["../images/Plant.png"]
-								}] }
-							],
-							"__worldX": 160,
-							"__worldY": 144
 						}
 					]
 				},

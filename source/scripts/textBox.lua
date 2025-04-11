@@ -11,6 +11,25 @@ function TextBox:init(message, padding, callback, heightOffset, zIndex)
 	self.callback = callback
 
 	self.width, self.height = gfx.getTextSize(message)
+	local MaxTextWidth = 365
+	if self.width > MaxTextWidth then
+		-- NOTE: This works but will only ever split it in two, and if the message is too long for that then this one won't do
+		-- message = message:sub(1, #message//2) .. message:sub(#message//2 + 1, #message):gsub(" ", "\n", 1)
+		-- self.width, self.height = gfx.getTextSize(message)
+
+		local numberOfLines = math.ceil(self.width/MaxTextWidth)
+		local newMessage = message:sub(1, #message//numberOfLines)
+		for i = 2, numberOfLines do
+			newMessage = newMessage .. message:sub(#message//numberOfLines * (i - 1) + 1, #message/numberOfLines * i):gsub(" ", "\n", 1)
+			-- print("Does "..#message.." equal "..#message/numberOfLines * i.."?")
+		end
+		-- print(newMessage)
+
+		message = newMessage
+		self.width, self.height = gfx.getTextSize(message)
+	end
+	-- print("message length "..#message)
+	-- print("width is "..self.width)
 	local sprite = gfx.image.new(self.width + 2 * padding + 20, self.height + 2 * padding + 20)
 	local sprite2
 
