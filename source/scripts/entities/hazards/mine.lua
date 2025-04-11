@@ -16,7 +16,7 @@ local MineImage = gfx.image.new("images/Mine")
 function Mine:init(x, y)
 	self:moveTo(x + 16, y + 16)
 	self:setImage(MineImage)
-	self:setCollideRect(0, 0, self:getSize())
+	self:setCollideRect(4, 4, 24, 24)
 	self.PhysicsComponent = PhysicsComponent(self.x, self.y, 10)
 
 	self:setGroups(COLLISION_GROUPS.EXPLOSIVE)
