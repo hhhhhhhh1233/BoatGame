@@ -11,6 +11,7 @@ function DoorTrigger:init(x, y, entity)
 	self:setCollidesWithGroups({COLLISION_GROUPS.PLAYER})
 	self:add()
 	local fields = entity.fields
+	self.bTransitionOnEnter = fields.TransitionOnEnter
 	self.TargetLevel = LDtk.get_level_name(fields.Target.levelIid)
 
 	for _, e in ipairs(LDtk.get_entities(self.TargetLevel)) do

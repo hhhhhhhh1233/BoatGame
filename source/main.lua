@@ -85,14 +85,22 @@ function MainGameLoop()
 	elseif SceneManager.player.y - 16 < 0 and SceneManager.player.PhysicsComponent.velocity.y < 0 then
 		SceneManager:enterRoom(SceneManager.player.Door, "NORTH")
 	end
-	-- local OverlappingPlayerSprites = SceneManager.player:overlappingSprites()
 
-	-- for i = 1, #OverlappingPlayerSprites do
-	-- 	if OverlappingPlayerSprites[i]:isa(DoorTrigger) then
-	-- 		-- NOTE: This just puts the player in EAST transition, doesn't always make sense
-	-- 		SceneManager:enterRoom(OverlappingPlayerSprites[i], "EAST")
-	-- 	end
-	-- end
+	local OverlappingPlayerSprites = SceneManager.player:overlappingSprites()
+
+	for i = 1, #OverlappingPlayerSprites do
+		if OverlappingPlayerSprites[i]:isa(DoorTrigger) and OverlappingPlayerSprites[i].bTransitionOnEnter then
+			-- NOTE: This just puts the player in EAST transition, doesn't always make sense
+			local PlayerVelocityX = SceneManager.player.PhysicsComponent.velocity.x
+			local PlayerToDoorX = OverlappingPlayerSprites[i].x - SceneManager.player.PhysicsComponent.position.x
+			PlayerVelocityX = PlayerVelocityX / abs(PlayerVelocityX)
+			PlayerToDoorX = PlayerToDoorX / abs(PlayerToDoorX)
+
+			if PlayerVelocityX == PlayerToDoorX then
+				SceneManager:enterRoom(OverlappingPlayerSprites[i], "EAST")
+			end
+		end
+	end
 
 	SceneManager:UpdatePhysicsComponentsBuoyancy()
 

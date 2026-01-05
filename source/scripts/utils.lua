@@ -5,6 +5,14 @@ function Clamp(value, min, max)
 	return Min(Max(value, min), max)
 end
 
+function abs(value)
+	if value >= 0 then
+		return value
+	else
+		return -value
+	end
+end
+
 local point_new <const> = playdate.geometry.point.new
 local QuerySpriteInfoAlongLine <const> = playdate.graphics.sprite.querySpriteInfoAlongLine
 
