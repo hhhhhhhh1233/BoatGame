@@ -89,7 +89,9 @@ function MainMenu:update()
 
 	local TitleImage = gfx.image.new(100, 100)
 	gfx.pushContext(TitleImage)
-	gfx.drawTextInRect("*BRAVE THE INTERLOPER*", 0, 0, 100, 100, nil, nil, kTextAlignment.center)
+	gfx.setColor(gfx.kColorWhite)
+	gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
+	gfx.drawTextInRect("*Stubbhorn*", 0, 0, 100, 100, nil, nil, kTextAlignment.center)
 	gfx.popContext()
 	TitleImage:drawScaled(180, 40 + 5 * math.sin(pd.getElapsedTime() * 3), 2)
 

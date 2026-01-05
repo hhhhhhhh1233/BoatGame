@@ -30,7 +30,7 @@ function Water:init(Height, Width, LowerBound, UpperBound, RateOfChange, Distanc
 
 	self.waterImage = gfx.image.new(400, 400)
 	gfx.pushContext(self.waterImage)
-		gfx.setColor(gfx.kColorBlack)
+		gfx.setColor(gfx.kColorWhite)
 	-- TODO: MAKE THIS THE SHAPE OF THE WATER INSTEAD OF JUST A RECT
 		gfx.fillRect(0, 0, self.width, 240)
 	gfx.popContext()
@@ -205,7 +205,7 @@ function Water:update()
 	self:Spring()
 	self:UpdateWaves()
 
-	gfx.setColor(gfx.kColorBlack)
+	gfx.setColor(gfx.kColorWhite)
 	for i = 1, #self.pointPositions - 1 do
 		-- gfx.drawCircleAtPoint(self.pointPositions[i][1], self.pointPositions[i][2], 3)
 		gfx.drawLine(self.pointPositions[i][1], self.pointPositions[i][2], self.pointPositions[i + 1][1], self.pointPositions[i + 1][2])

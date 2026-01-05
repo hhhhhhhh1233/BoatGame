@@ -8,7 +8,6 @@ COLLISION_GROUPS = {
 	PICKUPS = 7,
 	WATER = 8
 }
-
 import "CoreLibs/object"
 import "CoreLibs/graphics"
 import "CoreLibs/sprites"
@@ -65,12 +64,18 @@ local mainMenu = MainMenu()
 function MainGameLoop()
 	gfx.clear(gfx.kColorWhite)
 
+	-- Draws a black background 
+	oX, oY = gfx.getDrawOffset()
+	gfx.setColor(gfx.kColorBlack)
+	gfx.fillRect(-oX, -oY, 400, 320)
+
 	UISystem:clear()
 
 	-- NOTE: Moves the player to a new room if they leave the bounds
 	-- This used to be in the player but lead to some weird behavior 
 	-- with other sprites having one more frame to update even though 
 	-- they should have been deleted
+
 	if SceneManager.player.x > SceneManager.LevelWidth and SceneManager.player.PhysicsComponent.velocity.x > 0 then
 		SceneManager:enterRoom(SceneManager.player.Door, "EAST")
 	elseif SceneManager.player.x < 0 and SceneManager.player.PhysicsComponent.velocity.x < 0 then
@@ -80,6 +85,14 @@ function MainGameLoop()
 	elseif SceneManager.player.y - 16 < 0 and SceneManager.player.PhysicsComponent.velocity.y < 0 then
 		SceneManager:enterRoom(SceneManager.player.Door, "NORTH")
 	end
+	-- local OverlappingPlayerSprites = SceneManager.player:overlappingSprites()
+
+	-- for i = 1, #OverlappingPlayerSprites do
+	-- 	if OverlappingPlayerSprites[i]:isa(DoorTrigger) then
+	-- 		-- NOTE: This just puts the player in EAST transition, doesn't always make sense
+	-- 		SceneManager:enterRoom(OverlappingPlayerSprites[i], "EAST")
+	-- 	end
+	-- end
 
 	SceneManager:UpdatePhysicsComponentsBuoyancy()
 
@@ -102,7 +115,7 @@ end
 local intro
 
 function MainMenuLoop()
-	gfx.clear(gfx.kColorWhite)
+	gfx.clear(gfx.kColorBlack)
 
 	update_timers()
 	sprite_update()
