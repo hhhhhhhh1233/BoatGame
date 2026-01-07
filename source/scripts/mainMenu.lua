@@ -93,7 +93,7 @@ function MainMenu:update()
 	gfx.setImageDrawMode(gfx.kDrawModeFillWhite)
 	gfx.drawTextInRect("*Stubbhorn*", 0, 0, 100, 100, nil, nil, kTextAlignment.center)
 	gfx.popContext()
-	TitleImage:drawScaled(180, 40 + 5 * math.sin(pd.getElapsedTime() * 3), 2)
+	TitleImage:drawScaled(180, 80 + 5 * math.sin(pd.getElapsedTime() * 3), 2)
 
 	local buoyancyForces = CalculateBuoyancy(self.water:getHeight(self.player.PhysicsComponent.position.x), self.player.PhysicsComponent.position.y, 50, 0.3, 5.5, self.player.PhysicsComponent)
 	self.player.PhysicsComponent:addForce(buoyancyForces)
