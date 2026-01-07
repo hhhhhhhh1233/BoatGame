@@ -136,6 +136,7 @@ function Scene:init(bLoadGame)
 		self:goToLevel("Level_0")
 		self.player:moveTo(self.SpawnX, self.SpawnY)
 		self.player.PhysicsComponent:setPosition(self.SpawnX, self.SpawnY)
+		self.camera:center(self.player.x, self.player.y)
 		-- self.water.height = self.SpawnY
 		self.water:SetHeight(self.SpawnY)
 	end
