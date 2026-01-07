@@ -53,16 +53,15 @@ import "scripts/entities/ui"
 import "scripts/entities/companion"
 import "scripts/entities/plant"
 import "scripts/entities/sample"
-import "scripts/WaterLevelChanger"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
 local WaterParticleDensity = 50
 
-class('Scene').extends()
+class('SceneManager').extends()
 
-function Scene:init(bLoadGame)
+function SceneManager:init(bLoadGame)
 	self.miniMap = pd.datastore.readImage("MiniMap/miniMap")
 	if self.miniMap then
 		self.miniMapWithHighlight = pd.datastore.readImage("MiniMap/displayMiniMap")
@@ -143,12 +142,12 @@ function Scene:init(bLoadGame)
 	end
 end
 
-function Scene:collect(entityIid)
+function SceneManager:collect(entityIid)
 	self.collectedEntities[entityIid] = true
 	table.insert(self.collectedEntities, entityIid)
 end
 
-function Scene:enterRoom(door, direction)
+function SceneManager:enterRoom(door, direction)
 	local xDiff, yDiff
 	-- Position the player
 	if direction == "EAST" or direction == "WEST" then
@@ -196,14 +195,14 @@ function Scene:enterRoom(door, direction)
 
 end
 
-function Scene:reloadLevel()
+function SceneManager:reloadLevel()
 	self:goToLevel(self.currentLevel)
 
 end
 
 local miniMapRatio = 25
 
-function Scene:updateMiniMapHighlight()
+function SceneManager:updateMiniMapHighlight()
 	local levelInfo = LDtk.get_rect(self.currentLevel)
 	self.miniMapWithHighlight = self.miniMap:copy()
 	gfx.lockFocus(self.miniMapWithHighlight)
@@ -212,7 +211,7 @@ function Scene:updateMiniMapHighlight()
 	gfx.unlockFocus()
 end
 
-function Scene:updateMiniMap(level_name)
+function SceneManager:updateMiniMap(level_name)
 	gfx.lockFocus(self.miniMap)
 	local levelInfo = LDtk.get_rect(level_name)
 	gfx.setColor(gfx.kColorBlack)
@@ -220,7 +219,7 @@ function Scene:updateMiniMap(level_name)
 	gfx.unlockFocus(self.miniMap)
 end
 
-function Scene:goToLevel(level_name)
+function SceneManager:goToLevel(level_name)
 
 	self.currentLevel = level_name
 	if self.entityInstance then
@@ -367,8 +366,6 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Plant(entityX, entityY)
 		elseif entityName == "Sample" then
 			self.entityInstance[entity.iid] = Sample(entityX, entityY, entity, self.collectedEntities[entity.iid])
-		elseif entityName == "WaterLevelChanger" then
-			self.entityInstance[entity.iid] = WaterLevelChanger(entityX, entityY, entity)
 		end
 	end
 
@@ -411,16 +408,16 @@ function Scene:goToLevel(level_name)
 	end
 end
 
-function Scene:DeactivatePhysicsComponents()
+function SceneManager:DeactivatePhysicsComponents()
 	self.PhysicsComponents = self.ActivePhysicsComponents
 	self.ActivePhysicsComponents = {}
 end
 
-function Scene:ActivatePhysicsComponents()
+function SceneManager:ActivatePhysicsComponents()
 	self.ActivePhysicsComponents = self.PhysicsComponents
 end
 
-function Scene:UpdatePhysicsComponentsBuoyancy()
+function SceneManager:UpdatePhysicsComponentsBuoyancy()
 	for i = 1, #self.ActivePhysicsComponents do
 		if self.ActivePhysicsComponents[i].bBuoyant then
 			-- local buoyancyForces = CalculateBuoyancy(self.water.height, self.ActivePhysicsComponents[i].position.y, 50, 0.3, 5.5, self.ActivePhysicsComponents[i])
@@ -434,7 +431,7 @@ function Scene:UpdatePhysicsComponentsBuoyancy()
 	end
 end
 
-function Scene:SetPhysicsComponentsPosition()
+function SceneManager:SetPhysicsComponentsPosition()
 	-- for i = 1, #self.ActivePhysicsComponents do
 	-- 	if self.ActivePhysicsComponents[i].bBuoyant then
 	-- 		self.ActivePhysicsComponents[i]:setVelocity(0, 0)
