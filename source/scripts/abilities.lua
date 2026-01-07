@@ -3,7 +3,6 @@ local gfx <const> = pd.graphics
 import "scripts/bullet"
 import "scripts/explosion"
 import "CoreLibs/frameTimer"
-import "scripts/entities/animatedSprite"
 
 local jumpTierValues = {8, 12, 30, 50}
 local jumpDamageValues = {10, 20, 40, 60}
