@@ -26,6 +26,10 @@ function WaterLevelChanger:init(x, y, Entity)
 end
 
 function WaterLevelChanger:update()
+    if SceneManager.water.bActive then
+        return
+    end
+
     SceneManager.water.height += self.rateOfChange
     
     if SceneManager.water.height > self.minHeight or SceneManager.water.height < self.maxHeight then
