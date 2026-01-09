@@ -369,6 +369,8 @@ function Scene:goToLevel(level_name)
 			self.entityInstance[entity.iid] = Sample(entityX, entityY, entity, self.collectedEntities[entity.iid])
 		elseif entityName == "WaterLevelChanger" then
 			self.entityInstance[entity.iid] = WaterLevelChanger(entityX, entityY, entity)
+		elseif entityName == "SpikeBall" then
+			self.entityInstance[entity.iid] = SpikeBall(entityX + 16, entityY + 16)
 		end
 	end
 
