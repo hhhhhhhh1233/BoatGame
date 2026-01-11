@@ -78,8 +78,10 @@ function MainGameLoop()
 
 	if SceneManager.player.x > SceneManager.LevelWidth and SceneManager.player.PhysicsComponent.velocity.x > 0 then
 		SceneManager:enterRoom(SceneManager.player.Door, "EAST")
+		print("Went EAST!")
 	elseif SceneManager.player.x < 0 and SceneManager.player.PhysicsComponent.velocity.x < 0 then
 		SceneManager:enterRoom(SceneManager.player.Door, "WEST")
+		print("Went WEST!")
 	elseif SceneManager.player.y - 16 > SceneManager.LevelHeight and SceneManager.player.PhysicsComponent.velocity.y > 0 then
 		SceneManager:enterRoom(SceneManager.player.Door, "SOUTH")
 	elseif SceneManager.player.y - 16 < 0 and SceneManager.player.PhysicsComponent.velocity.y < 0 then
@@ -97,7 +99,13 @@ function MainGameLoop()
 			PlayerToDoorX = PlayerToDoorX / abs(PlayerToDoorX)
 
 			if PlayerVelocityX == PlayerToDoorX then
-				SceneManager:enterRoom(OverlappingPlayerSprites[i], "EAST")
+				if PlayerVelocityX > 0 then
+					SceneManager:enterRoom(OverlappingPlayerSprites[i], "EAST")
+					print("Went EAST!")
+				else
+					SceneManager:enterRoom(OverlappingPlayerSprites[i], "WEST")
+					print("Went WEST!")
+				end
 			end
 		end
 	end

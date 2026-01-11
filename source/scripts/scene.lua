@@ -149,12 +149,17 @@ function Scene:collect(entityIid)
 end
 
 function Scene:enterRoom(door, direction)
+	print("Entering room: "..door.TargetLevel)
 	local xDiff, yDiff
 	-- Position the player
 	if direction == "EAST" or direction == "WEST" then
 		xDiff = 0
 		yDiff = door.TargetY - door.y
-		self.player:moveTo(door.TargetX, self.player.y + yDiff)
+		if direction == "WEST" then
+			self.player:moveTo(door.TargetX, self.player.y + yDiff)
+		else
+			self.player:moveTo(door.TargetX + 16, self.player.y + yDiff)
+		end
 	elseif direction == "NORTH" or direction == "SOUTH" then
 		xDiff = door.TargetX - door.x
 		yDiff = 0
