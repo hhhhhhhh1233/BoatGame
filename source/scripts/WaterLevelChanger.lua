@@ -31,6 +31,9 @@ function WaterLevelChanger:update()
     end
 
     SceneManager.water.height += self.rateOfChange
+    for i = 1, #SceneManager.water.pointPositions do
+        SceneManager.water.pointPositions[i][2] += self.rateOfChange
+    end
     
     if SceneManager.water.height > self.minHeight or SceneManager.water.height < self.maxHeight then
         print(SceneManager.water.height.." "..self.minHeight.." "..self.maxHeight)
