@@ -400,7 +400,8 @@ function Scene:goToLevel(level_name)
 	self.water:SetWidth(level_rect.width)
 
 	-- Set the waters limits
-	self.water.lowerBound = 0 - 20
+	local WaterMaxHeight = LDtk.get_custom_data(level_name, "WaterMaxHeight")
+	self.water.lowerBound = WaterMaxHeight - 20
 	self.water.upperBound = level_rect.height + 20
 
 	if self.songName ~= LDtk.get_custom_data(level_name, "Song") then

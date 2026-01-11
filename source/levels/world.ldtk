@@ -11,7 +11,7 @@
 	"iid": "a5e0faa0-25d0-11ef-a85a-69c27ce57690",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 511,
+	"nextUid": 512,
 	"identifierStyle": "Capitalize",
 	"toc": [
 		{ "identifier": "AbilityPickup", "instances": [], "instancesData": [] },
@@ -5962,6 +5962,43 @@
 			"allowedRefsEntityUid": null,
 			"allowedRefTags": [],
 			"tilesetUid": null
+		},
+		{
+			"identifier": "WaterMaxHeight",
+			"doc": null,
+			"__type": "Int",
+			"uid": 511,
+			"type": "F_Int",
+			"isArray": false,
+			"canBeNull": false,
+			"arrayMinLength": null,
+			"arrayMaxLength": null,
+			"editorDisplayMode": "Hidden",
+			"editorDisplayScale": 1,
+			"editorDisplayPos": "Above",
+			"editorLinkStyle": "StraightArrow",
+			"editorDisplayColor": null,
+			"editorAlwaysShow": false,
+			"editorShowInWorld": true,
+			"editorCutLongValues": true,
+			"editorTextSuffix": null,
+			"editorTextPrefix": null,
+			"useForSmartColor": false,
+			"exportToToc": false,
+			"searchable": false,
+			"min": null,
+			"max": null,
+			"regex": null,
+			"acceptFileTypes": null,
+			"defaultOverride": null,
+			"textLanguageMode": null,
+			"symmetricalRef": false,
+			"autoChainRef": true,
+			"allowOutOfLevelRef": true,
+			"allowedRefs": "OnlySame",
+			"allowedRefsEntityUid": null,
+			"allowedRefTags": [],
+			"tilesetUid": null
 		}
 	] },
 	"levels": [
@@ -5984,10 +6021,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": "../sounds/songs/Roaming.wav", "__tile": null, "defUid": 172, "realEditorValues": [{
-				"id": "V_String",
-				"params": ["../sounds/songs/Roaming.wav"]
-			}] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": "../sounds/songs/Roaming.wav", "__tile": null, "defUid": 172, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["../sounds/songs/Roaming.wav"]
+				}] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 450, "__tile": null, "defUid": 511, "realEditorValues": [{ "id": "V_Int", "params": [450] }] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -23794,7 +23834,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -25400,7 +25443,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -26374,7 +26420,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -27944,7 +27993,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -29663,7 +29715,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -30581,7 +30636,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -31502,7 +31560,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -43372,7 +43433,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -44588,7 +44652,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -45185,10 +45252,13 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": "../sounds/songs/SaveRoomLoop.wav", "__tile": null, "defUid": 172, "realEditorValues": [{
-				"id": "V_String",
-				"params": ["../sounds/songs/SaveRoomLoop.wav"]
-			}] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": "../sounds/songs/SaveRoomLoop.wav", "__tile": null, "defUid": 172, "realEditorValues": [{
+					"id": "V_String",
+					"params": ["../sounds/songs/SaveRoomLoop.wav"]
+				}] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
@@ -45781,7 +45851,10 @@
 			"__smartColor": "#ADADB5",
 			"__bgPos": null,
 			"externalRelPath": null,
-			"fieldInstances": [{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] }],
+			"fieldInstances": [
+				{ "__identifier": "Song", "__type": "FilePath", "__value": null, "__tile": null, "defUid": 172, "realEditorValues": [] },
+				{ "__identifier": "WaterMaxHeight", "__type": "Int", "__value": 0, "__tile": null, "defUid": 511, "realEditorValues": [] }
+			],
 			"layerInstances": [
 				{
 					"__identifier": "Entities",
